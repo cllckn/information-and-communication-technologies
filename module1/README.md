@@ -1,13 +1,13 @@
 ***
 
 ---
-# Foundations of Information and Communication Technologies (ICT)
+# Foundations of Information and Communication Technologies(ICT)
 ***
 
 ---
 
 <!-- TOC -->
-* [Foundations of ICT](#foundations-of-ict)
+* [Foundations of Information and Communication Technologies(ICT)](#foundations-of-information-and-communication-technologiesict)
   * [Overview of ICT](#overview-of-ict)
     * [What is ICT?](#what-is-ict)
     * [Why is ICT Important?](#why-is-ict-important)
@@ -23,7 +23,7 @@
   * [Hardware Components](#hardware-components)
     * [Central Processing Unit (CPU)](#central-processing-unit-cpu)
     * [Memory](#memory)
-    * [Storage](#storage)
+    * [Storage (Secondary Memory)](#storage-secondary-memory)
     * [Input and Output (I/O) Devices](#input-and-output-io-devices)
     * [Motherboard](#motherboard)
   * [Software Types](#software-types)
@@ -40,7 +40,8 @@
   * [Setting Up the Development Environment](#setting-up-the-development-environment)
     * [1. IntelliJ IDEA (for Java Development)](#1-intellij-idea-for-java-development)
     * [2. Node.js (for Web Development)](#2-nodejs-for-web-development)
-    * [3. PostgreSQL (for DB Operations)](#3-postgresql-for-db-operations)
+    * [3. HTTP Client (for testing web services)](#3-http-client-for-testing-web-services)
+    * [4. PostgreSQL (for DB Operations)](#4-postgresql-for-db-operations)
 <!-- TOC -->
 
 ---
@@ -162,7 +163,7 @@ ICT systems enable us to:
 - Example: Intel Core i7, AMD Ryzen.
 
 ### Memory
-- **RAM (Random Access Memory)**
+- **RAM (Random Access Memory) - Main Memory**
   - Volatile (data lost when power is off).
   - Stores temporary data for active programs.
   - Faster than storage.
@@ -170,7 +171,7 @@ ICT systems enable us to:
   - Non-volatile (keeps data without power).
   - Stores firmware or permanent instructions.
 
-### Storage
+### Storage (Secondary Memory)
 - **HDD (Hard Disk Drive)**
   - Magnetic storage, larger capacity, cheaper, slower.
 - **SSD (Solid State Drive)**
@@ -190,7 +191,6 @@ It connects and allows communication between all the different hardware componen
 - **Connects components**: Uses buses and circuits to let the CPU, memory, storage, and peripherals communicate.
 - **Distributes power**: Supplies electrical power to different parts of the computer.
 - **Hosts firmware**: Stores the BIOS/UEFI, which starts up the computer and manages low-level hardware settings.
-
 
 ---
 ## Software Types
@@ -263,6 +263,7 @@ To practice throughout this course, install and configure the following tools:
 
 ### 1. IntelliJ IDEA (for Java Development)
 - Popular IDE for Java based development. 
+- For accessing a free IDE, you can visit (https://www.jetbrains.com/shop/eform/students)
 - Download Link: [IntelliJ](https://www.jetbrains.com/idea/download)
 - File -> New -> Java
   - name, location
@@ -303,30 +304,60 @@ Hello World
 
 
 ### 2. Node.js (for Web Development)
-- JavaScript runtime environment for server-side development.
+- JavaScript runtime environment for server-side(backend) development.
 - Used for building web applications and services(APIs).
 - Download Link: [Node.js](https://nodejs.org/en/download)
 
     * Setting up Intellij for Node.js based development
       - IntelliJ IDEA -> Preferences -> Plugins -> Node.js
       - IntelliJ IDEA -> File -> Settings -> Plugins -> Node.js
-    
-    
-    Initialize a new Node.js project
-      - IntelliJ IDEA -> File -> New -> Project -> Empty Project (Give the project an appropriate name.)
-      - Open the terminal in IntelliJ
-      - npm init -y
-      - Make a /src folder for the source code of the project
 
-    * Make an hello-world.js file and write the following code:
-      - console.log('Hello world.');
-        
-    * Run the app:
+    * Initialize a new Node.js project
+      - IntelliJ IDEA -> File -> New -> Project -> Empty Project (Give the project an appropriate name.)
+      - Open a terminal in IntelliJ
+      - npm init -y
+      - Make a /src folder to hold the source code of the project
+
+    * Make a /src/hello-world.js file and write the following code:
+      
+~~~javascript
+console.log('Hello world.');
+~~~
+
+  * Run the app:
       - node hello-world.js
 
+  * Make a /src/server.js file and write the following code:
 
+~~~javascript
+const express = require("express");
+const app = express();
+const PORT = 3000;
 
-### 3. PostgreSQL (for DB Operations)
+app.get("/", (req, res) => {
+  res.send("Hello World.");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+~~~ 
+   * Run the app:
+      - node server.js
+
+### 3. HTTP Client (for testing web services)
+- Provides the ability to compose and execute HTTP requests from the code editor.
+
+* Setting up Intellij for http client
+  - IntelliJ IDEA -> Preferences -> Plugins -> HTTP Client
+
+* Make a rest-api-test.http file and write the following code:
+
+~~~http request
+GET localhost:3000/
+~~~
+
+### 4. PostgreSQL (for DB Operations)
 - PostgreSQL is an open-source and powerful relational database management system.
 - Complies with SQL standards and supports Linux, macOS, and Windows.
 - Download Link: [Download PostgreSQL](https://www.postgresql.org/download/)
