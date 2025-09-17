@@ -214,19 +214,17 @@ It connects and allows communication between all the different hardware componen
 ## The Internet and World Wide Web
 
 ### Internet
-- A global network of interconnected nodes (computers, servers, and devices) 
-that communicate using standard protocols to exchange data and services.
+- The Internet is a global network that connects devices and people, allowing them to share data and services.
 - Uses TCP/IP protocols for communication.
-- Provides services: www, email, file transfer, remote access.
+- Provides services: www, email, file transfer, remote access,etc.
 
 ### World Wide Web (WWW)
 - A **service** that runs on top of the Internet.
 - Uses **HTTP/HTTPS** protocols to access web pages.
 - Components:
-  - Web servers (host pages)
-  - Browsers (access and display content)
-  - URLs (addresses of web resources)
-
+  - **Web servers** → host and deliver web pages.
+  - **Browsers & Applications** → access, display, or use content to trigger actions.
+  - **Devices** → desktops, laptops, mobile devices, tablets, and IoT systems.
 
 ---
 ## Introduction to Programming, Databases, and Networking
@@ -268,7 +266,7 @@ To practice throughout this course, install and configure the following tools:
 - File -> New -> Java
   - name, location
   - JDK -> download if not exist
-  - check add sample code option
+  - check "add sample code" option
   - write the following code snippet
 
 ~~~java
