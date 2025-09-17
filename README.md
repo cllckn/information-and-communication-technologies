@@ -1,6 +1,6 @@
 # Information and Communication Technologies
 
-This course provides a comprehensive and practical introduction to the fundamental concepts of Information and Communication Technologies. Students will explore the core components of modern computing, including hardware and software, and gain hands-on experience with foundational programming concepts, database management, computer networking, and web development. By the end of the course, students are expected to gain the foundational experience necessary for future studies across multiple computing disciplines.
+This course provides a practical introduction to the fundamentals of Information and Communication Technologies (ICT). Students will learn about the main building blocks of modern computing, including hardware, software, programming, databases, networking, and web development. Through hands-on activities, they will develop the essential skills needed to understand and work with ICT systems. By the end of the course, students will have a solid foundation to continue their studies in various areas of computing.
 
 ## Course Objectives
 Upon successful completion of this course, students will be able to:
@@ -9,6 +9,8 @@ Upon successful completion of this course, students will be able to:
 * Use databases and SQL effectively.
 * Understand the basic concepts of computer networking.
 * Build and deploy simple web applications.
+* Describe and explain new ICT technologies like IoT, AI, Blockchain, and Decision Support Systems.
+
 
 ## Course Content
 The course will cover the following topics:
@@ -73,6 +75,12 @@ The course will cover the following topics:
 * Developing RESTful APIs
 * Providing database support for the modules
 * Hands-on exercises
+
+### Module 8: Cutting-Edge Technologies in ICT
+* Internet of Things (IoT): Definition, components, and applications of interconnected smart devices.
+* Artificial Intelligence (AI) and Machine Learning (ML): Basic concepts and applications of intelligent systems that learn from data.
+* Decision Support Systems (DSS): Overview of ICT systems that support decision-making through data analysis, modeling, and reporting.
+* Blockchain: Introduction to blockchain as a decentralized, secure, and transparent data management technology.
 
 
 ### Evaluation Method
