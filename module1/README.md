@@ -12,7 +12,6 @@
     * [What is ICT?](#what-is-ict)
     * [Why is ICT Important?](#why-is-ict-important)
     * [Key Elements of ICT](#key-elements-of-ict)
-* [6 Key Elements of ICT](#6-key-elements-of-ict)
       * [1. Hardware](#1-hardware)
       * [2. Software](#2-software)
       * [3. Networks & Infrastructure](#3-networks--infrastructure)
@@ -20,7 +19,7 @@
       * [5. People & Procedures: The Human Element and Governance](#5-people--procedures-the-human-element-and-governance)
       * [6. Data: The Information Itself](#6-data-the-information-itself)
     * [Functions of ICT](#functions-of-ict)
-  * [Hardware Components](#hardware-components)
+  * [Computer Hardware Components](#computer-hardware-components)
     * [Central Processing Unit (CPU)](#central-processing-unit-cpu)
     * [Memory](#memory)
     * [Storage (Secondary Memory)](#storage-secondary-memory)
@@ -74,9 +73,6 @@ These technological tools and resources include computers, the Internet (website
 
 ### Key Elements of ICT
 
-# 6 Key Elements of ICT
-
- 
 >  | 1.Hardware | 2.Software | 3.Networks & Infrastructure | 4.Communication Technologies | 5.People & Procedures | 6.Data (Information) |
 >  |------------|------------|-----------------------------|------------------------------|-----------------------|----------------------|
 
@@ -93,7 +89,7 @@ Physical devices that support information handling and communication.
 Programs and instructions that control hardware and perform tasks.
 - **System software**: operating systems (Windows, Linux, macOS), drivers
 - **Application software**: browsers, office tools, media players, collaboration platforms
-- **Database software**: PostgreSQL, MySQL, Oracle
+- **Database software**: PostgreSQL, MySQL, Oracle, MSSQL, MongoDB, Redis, Cassandra, etc.
 - **Middleware**: software that links applications and databases or facilitates communication
 
 #### 3. Networks & Infrastructure
@@ -148,24 +144,24 @@ ICT systems enable us to:
 
 
 ---
-## Hardware Components
+## Computer Hardware Components
 
 ![computer-architecture.png](../resources/computer-architecture.png)
 
 [A sample motherboard](https://freebloet.click/product_details/60960180.html)
 
 ### Central Processing Unit (CPU)
-- The **“brain”** of the computer.
+
 - Executes instructions using the **fetch–decode–execute** cycle.
 - Performance factors:
   - **Clock speed** (GHz) → how fast it processes instructions.
   - **Cores** → multiple cores allow parallel processing.
-- Example: Intel Core i7, AMD Ryzen.
+- Example: Intel Core i7, AMD Ryzen, M1/M2/M3 ...
 
 ### Memory
 - **RAM (Random Access Memory) - Main Memory**
   - Volatile (data lost when power is off).
-  - Stores temporary data for active programs.
+  - Stores program code and temporary data for active programs.
   - Faster than storage.
 - **ROM (Read Only Memory)**
   - Non-volatile (keeps data without power).
@@ -233,8 +229,10 @@ It connects and allows communication between all the different hardware componen
 
 ### Programming
 - Writing instructions for a computer using programming languages.
-- **Compiled languages**: Java, C, C++ → need compilation before execution.
-- **Interpreted languages**: Python, JavaScript → executed line by line.
+- Programming languages are divided into two main classes based on their execution method:
+  - **Compiled languages**: C, C++, Rust, Go → need compilation before execution.
+  - **Interpreted languages**: Python, JavaScript, Ruby, PHP → executed line by line.
+  - **Hybrid Approach (JIT Compilation)**: Java, C#, Python (with PyPy) - Source code → Bytecode → Just-In-Time Compiler → Native Machine Code
 - Programming paradigms:
   - Procedural (step-by-step)
   - Object-Oriented Programming (OOP)
@@ -263,7 +261,7 @@ To practice throughout this course, install and configure the following tools:
 - Popular IDE for Java based development. 
 - For accessing a free IDE, you can visit (https://www.jetbrains.com/shop/eform/students)
 - Download Link: [IntelliJ](https://www.jetbrains.com/idea/download)
-- File -> New -> Java
+- File -> New -> Project -> Java
   - name, location
   - JDK -> download if not exist
   - check "add sample code" option
