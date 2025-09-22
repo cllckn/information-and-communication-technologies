@@ -90,15 +90,22 @@ software rather than hardware. It simulates a physical machine so programs can r
 > in contrast to using simple tests and jumps such as the goto statement which could lead to "spaghetti code" which is 
 > difficult both to follow and to maintain.
 > (https://en.wikipedia.org/wiki/Structured_programming)
+>
+> - A **function** is the smallest piece of the program.
+> - Programs are composed of multiple functions.
+> - The **main function** serves as the entry point of the program.
+>   - Execution starts in the main function.
+>   - From there, related functions are called in sequence as needed.
+> - The focus is directly on the **problem**, and methods are developed to solve it (**control-centric** approach).
+> - If a function requires data to perform a task, the necessary data is passed as **parameters**.
 
 
 #### Object-Oriented Programming (OOP)
 
->In structured programming, the focus is directly on the problem, and methods are developed to solve the problem (control-centric). 
-> In object-oriented programming, however, the fundamental component is the object (data-centric), and programs are 
-> composed of interactions between objects. An object contains both data and the methods that process that data. 
-> Software developers concentrate on designing and developing the classes that construct these objects.
-> ***This way, the program's logic is distributed across all modules in a data-centric manner.***
+> - The fundamental component is the object (data-centric), and programs are composed of interactions between objects. 
+> - An object contains both data and the methods that process that data. 
+> - Developers concentrate on designing and developing the classes that construct these objects.
+> - ***This way, the program's logic is distributed across all modules in a data-centric manner.***
 
 
 #### Structured (Procedural) Programming vs. Object-Oriented Programming (OOP)
@@ -106,9 +113,8 @@ software rather than hardware. It simulates a physical machine so programs can r
 > - In software development, ***change is mandatory, not an option, when developing software.*** — requirements evolve, errors must be fixed, and new features are added.
 > - As systems grow larger, **relationships between components become more complex**, and making changes becomes difficult and error-prone.
 >
-> **Structured (Procedural) Programming**
-> - Focuses on dividing problems into functions (procedures).
-> - **Limitation**: Functions have unrestricted access to data, making it harder to control changes.
+> **Structured Programming**
+> - Functions have unrestricted access to data, making it harder to control changes.
 > - This lack of control can lead to **unexpected side effects** when modifying or extending the program.
 >
 > **Object-Oriented Programming (OOP)**
@@ -206,20 +212,20 @@ Directly store values and are simple with defined boundaries.
 * For the exam score, we can choose byte since its range (0 to 127) covers 0-100.
 * For the world population, we can choose long since the value exceeds 8 billion.
 
-| **Variable Type**    | **Description**                                     | **Example**              | **Range**                |
-|----------------------|-----------------------------------------------------|--------------------------|--------------------------|
-| **Integer Types**    | Stores whole numbers.                              |                          |                          |
-| - `int`              | 32-bit signed integer.                             | `int age = 30;`          | -2,147,483,648 to 2,147,483,647 |
-| - `byte`             | 8-bit signed integer.                              | `byte b = 127;`          | -128 to 127              |
-| - `short`            | 16-bit signed integer.                             | `short s = 1000;`        | -32,768 to 32,767        |
-| - `long`             | 64-bit signed integer.                             | `long l = 100000L;`      | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
-| **Floating-Point Types** | Stores numbers with decimal points.             | `float`, `double`        |                          |
-| - `float`            | Single-precision 32-bit floating point.            | `float f = 3.14f;`       | Approx. ±3.40282347E+38 (7 decimal digits) |
-| - `double`           | Double-precision 64-bit floating point.            | `double d = 3.14159;`    | Approx. ±1.79769313486231570E+308 (15 decimal digits) |
-| **Character Type**   | Stores single characters.                          | `char`                   |                          |
-| - `char`             | 16-bit Unicode character.                          | `char c = 'A';`          | 0 to 65,535              |
-| **Boolean Type**     | Stores true or false values.                       | `boolean`                |                          |
-| - `boolean`          | Represents true or false.                          | `boolean isValid = true;`| `true` or `false`        |
+| **Variable Type**    | **Description**                          | **Example**              | **Range**                |
+|----------------------|------------------------------------------|--------------------------|--------------------------|
+| **Integer Types**    | Stores whole numbers.                    |                          |                          |
+| - `int`              | 32-bits signed integer.                  | `int age = 30;`          | -2,147,483,648 to 2,147,483,647 |
+| - `byte`             | 8-bits signed integer.                   | `byte b = 127;`          | -128 to 127              |
+| - `short`            | 16-bits signed integer.                  | `short s = 1000;`        | -32,768 to 32,767        |
+| - `long`             | 64-bits signed integer.                  | `long l = 100000L;`      | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
+| **Floating-Point Types** | Stores numbers with decimal points.      | `float`, `double`        |                          |
+| - `float`            | Single-precision 32-bits floating point. | `float f = 3.14f;`       | Approx. ±3.40282347E+38 (7 decimal digits) |
+| - `double`           | Double-precision 64-bits floating point. | `double d = 3.14159;`    | Approx. ±1.79769313486231570E+308 (15 decimal digits) |
+| **Character Type**   | Stores single characters.                | `char`                   |                          |
+| - `char`             | 16-bits Unicode character.               | `char c = 'A';`          | 0 to 65,535              |
+| **Boolean Type**     | Stores true or false values.             | `boolean`                |                          |
+| - `boolean`          | Represents true or false.                | `boolean isValid = true;`| `true` or `false`        |
 
 **Reference Types**
 
@@ -478,8 +484,8 @@ Anything you can do with a switch/case statement can also be done with if/else, 
 * Instead of writing the same lines of code again and again, a loop automates the repetition.
 * Loops help us write shorter, cleaner, and more efficient programs.
 * Java has three main types of loops: `for`, `while`, `do-while`. 
-* Each loop structure is used for different scenarios, but they are interchangeable.
-* For instance: Anything that can be written with a `for` loop can also be written with a `while` or a `do-while` loop, and vice versa.
+* Each loop structure is used for different scenarios, but they are interchangeable. For instance: Anything 
+that can be written with a `for` loop can also be written with a `while` or a `do-while` loop, and vice versa.
 
 
 
@@ -604,6 +610,13 @@ for (int i = 0; i < numbers.length; i++) {
 }
 // This loop will print each element from index 0 to the last index.
 // The condition 'i < numbers.length' ensures the loop runs for every element.
+
+// for-each loop - cleaner than for loop 
+//  Better for iterating over every element in an array or collection when you don't need the index.
+for (int number : numbers) {
+        System.out.println(number);
+}
+
 
 ~~~
 
