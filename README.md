@@ -87,19 +87,22 @@ The course will cover the following topics:
 
 Students will be evaluated based on the following components:
 
-| **Component**                  | **Weight** |
-|--------------------------------|-----------|
-| TBA |       |
-| TBA |       |
-| TBA |       |
-
+| **Component**                 | **Weight** |
+|-------------------------------|-----------|
+| Assignment 1                  |   TBA    |
+| Assignment 1 Oral Examination |   TBA    |
+| Assignment 2                  |   TBA    |
+| Assignment 2 Oral Examination |  TBA     |
+| Midterm Exam                  |  TBA     |
+| Final Exam                    |  TBA     |
 ## Assignments and Exams Schedule
 
-| **Assignment**   | **Oral Exam Date**     | **Due Date**       |
-|-----------------|------------------------|--------------------|
-| TBA  | TBA                    | TBA            |
-| TBA  | TBA                    | TBA            |
-| TBA  | TBA                    | TBA |
+| **Assignment**                | **Oral Exam Date**     | **Due Date**       |
+|-------------------------------|------------------------|--------------------|
+| Assignment 1                  | TBA                    | TBA            |
+| Assignment 1 Oral Examination | TBA                    | TBA            |
+| Assignment 2                  | TBA                    | TBA            |
+| Assignment 2 Oral Examination | TBA                    | TBA            |
 
 
 ### Course Policies
