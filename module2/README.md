@@ -91,34 +91,44 @@ software rather than hardware. It simulates a physical machine so programs can r
 > difficult both to follow and to maintain.
 > (https://en.wikipedia.org/wiki/Structured_programming)
 >
+> - Programs are collections of functions operating on shared data.
 > - A **function** is the smallest piece of the program.
-> - Programs are composed of multiple functions.
 > - The **main function** serves as the entry point of the program.
 >   - Execution starts in the main function.
 >   - From there, related functions are called in sequence as needed.
 > - The focus is directly on the **problem**, and methods are developed to solve it (**control-centric** approach).
 > - If a function requires data to perform a task, the necessary data is passed as **parameters**.
 
+![](../resources/structured-programming.png "Structured Programming")
+
+
+
+
 
 #### Object-Oriented Programming (OOP)
 
-> - The fundamental component is the object (data-centric), and programs are composed of interactions between objects. 
+> - The fundamental component is the object (data-centric), and programs are composed of objects and interactions among objects. 
 > - An object contains both data and the methods that process that data. 
 > - Developers concentrate on designing and developing the classes that construct these objects.
 > - ***This way, the program's logic is distributed across all modules in a data-centric manner.***
+
+![](../resources/object-oriented-programming.png "Object Oriented Programming")
 
 
 #### Structured (Procedural) Programming vs. Object-Oriented Programming (OOP)
 >
 > - In software development, ***change is mandatory, not an option, when developing software.*** — requirements evolve, errors must be fixed, and new features are added.
-> - As systems grow larger, **relationships between components become more complex**, and making changes becomes difficult and error-prone.
+> - As systems grow larger, **relationships among components become more complex**, and making changes becomes difficult and error-prone.
 >
 > **Structured Programming**
 > - Functions have unrestricted access to data, making it harder to control changes.
+> - When we are required to change data, it is difficult to track which functions use it, and this makes handling the change difficult.
 > - This lack of control can lead to **unexpected side effects** when modifying or extending the program.
 >
 > **Object-Oriented Programming (OOP)**
 > - Provides mechanisms that make change more manageable and less risky.
+> - When we need to change data, encapsulation makes it easy to track which functions use it. Mechanisms that ensure 
+low coupling (such as abstraction in SOLID) also prevent change requests from affecting dependent modules.ny chang requests from affecting the depended modules.
 > - Key features:
 >  - **Access specifiers** (public, private, protected) → control how data can be accessed.
 >  - **Encapsulation** → bundle data and behavior together.
@@ -126,6 +136,8 @@ software rather than hardware. It simulates a physical machine so programs can r
 >  - **Polymorphism** → design flexible and extensible systems.
 >  - **Abstraction** → hide complexity, expose only essentials.
 >- These features allow OOP systems to **adapt to change more effectively** than purely procedural systems.
+
+![](../resources/modules-interactions.png "Object Oriented Programming vs StructuredProgramming")
 
 
 #### Functional Programming
@@ -208,7 +220,8 @@ int x = 5;
 
 Directly store values and are simple with defined boundaries.
 
-* As a best practice, we should select the smallest type that has a sufficient range to represent the values we expect.
+* As a best practice, we should select the smallest possible type that covers the expected value to improve performance 
+and optimize resource utilization.
 * For the exam score, we can choose byte since its range (0 to 127) covers 0-100.
 * For the world population, we can choose long since the value exceeds 8 billion.
 
@@ -291,6 +304,7 @@ Operator precedence determines the order in which operators are evaluated in an 
 | **9**          | `=` `+=` `-=` `*=` `/=` `%=` | Assignment                | Right to left    | `a = 5`, `a += 2`         |
 
 
+**Java Operator Examples**
 ~~~java
 int y = x + 2;
 // x + 2 is calculated first since `+` has higher precedence than =,
@@ -301,6 +315,36 @@ int result = 22 - 8 / 2 * 5 + 6;
 // Step 2: 4 * 5 = 20
 // Step 3: 22 - 20 = 2
 // Step 4: 2 + 6 = 8
+
+
+// Post-increment "Return first, then increase"
+int a = 5;
+int b = a++;   // b = 5, then a = 6
+System.out.println("a = " + a); // 6
+System.out.println("b = " + b); // 5
+
+// Pre-increment (++a) "first increase, then return"
+int x = 5;
+int y = ++x;   // x = 6 first, then y = 6
+System.out.println("x = " + x); // 6
+System.out.println("y = " + y); // 6
+
+
+// Pre-decrement (--a) "first decrease, then return"
+int x = 5;
+int y = --x;   // x = 6 first, then y = 6
+System.out.println("x = " + x); // 6
+System.out.println("y = " + y); // 6
+
+// Compound Assignment (+=)
+int n = 10;
+n += 5;   // same as n = n + 5
+System.out.println("n = " + n); // 15
+
+
+// Example with mixed arithmetic, modulus, parentheses, and unary operators:
+int value = 10 + 20 * 3 % 7 - (4 + 6) / 2 * -3 + ++x;
+
 ~~~
 
 
@@ -389,6 +433,11 @@ public class VariablesMain {
 ***
 ## Hands-on Exercise 2
 ***
+
+
+
+**Type Conversion**
+
 
 
 ### Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)
