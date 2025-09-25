@@ -228,7 +228,7 @@ It connects and allows communication between all the different hardware componen
 ![software-development.png](../resources/software-development.png)
 
 ### Programming
-- Writing instructions for a computer using programming languages.
+- Writing instructions for a computer using programming languages to perform tasks.
 - Programming languages are divided into two main classes based on their execution method:
   - **Compiled languages**: C, C++, Rust, Go → need compilation before execution.
   - **Interpreted languages**: Python, JavaScript, Ruby, PHP → executed line by line.
@@ -262,8 +262,9 @@ To practice throughout this course, install and configure the following tools:
 - For accessing a free IDE, you can visit (https://www.jetbrains.com/shop/eform/students)
 - Download Link: [IntelliJ](https://www.jetbrains.com/idea/download)
 - File -> New -> Project -> Java
-  - name, location
-  - JDK -> download if not exist
+  - give a name, choose a location
+  - Build system: IntelliJ
+  - JDK -> choose a proper JDK, download if not exist
   - check "add sample code" option
   - write the following code snippet
 
