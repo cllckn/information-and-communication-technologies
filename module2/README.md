@@ -85,12 +85,7 @@ software rather than hardware. It simulates a physical machine so programs can r
 
 
 #### Structured (Procedural) Programming
-> Structured programming is a programming paradigm aimed at improving the clarity, quality, and development 
-> time of a computer program by making extensive use of subroutines, block structures and for and while loops 
-> in contrast to using simple tests and jumps such as the goto statement which could lead to "spaghetti code" which is 
-> difficult both to follow and to maintain.
-> (https://en.wikipedia.org/wiki/Structured_programming)
->
+
 > - Programs are collections of functions operating on shared data.
 > - A **function** is the smallest piece of the program.
 > - The **main function** serves as the entry point of the program.
@@ -100,8 +95,6 @@ software rather than hardware. It simulates a physical machine so programs can r
 > - If a function requires data to perform a task, the necessary data is passed as **parameters**.
 
 ![](../resources/structured-programming.png "Structured Programming")
-
-
 
 
 
@@ -128,7 +121,7 @@ software rather than hardware. It simulates a physical machine so programs can r
 > **Object-Oriented Programming (OOP)**
 > - Provides mechanisms that make change more manageable and less risky.
 > - When we need to change data, encapsulation makes it easy to track which functions use it. Mechanisms that ensure 
-low coupling (such as abstraction in SOLID) also prevent change requests from affecting dependent modules.ny chang requests from affecting the depended modules.
+low coupling (such as abstraction in SOLID) also prevent any change requests from affecting dependent modules.
 > - Key features:
 >  - **Access specifiers** (public, private, protected) → control how data can be accessed.
 >  - **Encapsulation** → bundle data and behavior together.
@@ -150,6 +143,31 @@ thanks to its immutability and support for parallelism.
 > - **Immutability**: the state of objects passed as parameters cannot be modified.
 > - **No iterative loops** (for, while); instead, recursion and higher-order functions are used.
 > - Because **state changes are not allowed**, functional programming naturally supports **parallelism and stream processing**.
+
+
+~~~java
+
+List<Customer> customers = Arrays.asList(
+        new Customer("Alice", 30, "Astana"),
+        new Customer("Bob", 25, "Almaty"),
+        new Customer("Charlie", 35, "New York"),
+        new Customer("Diana", 28, "Petropavlovsk"),
+        new Customer("Ethan", 40, "London")
+);
+// One pipeline: filter, map, sort, collect — in parallel
+List<String> result = customers.parallelStream()
+    .filter(c -> c.getAge() > 25)           // filter
+    .map(c -> c.getName().toUpperCase())    // map
+    .sorted()                               // sort
+    .collect(Collectors.toList());          // collect
+
+System.out.println("Result: " + result);
+// Output
+// Result: [ALICE, CHARLIE, DIANA, ETHAN]
+
+
+
+~~~
 
 
 
@@ -436,8 +454,6 @@ public class VariablesMain {
 
 
 
-**Type Conversion**
-
 
 
 ### Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)
@@ -530,15 +546,13 @@ Anything you can do with a switch/case statement can also be done with if/else, 
 ### Loops
 
 * A loop is a fundamental programming structure that are used to repeatedly execute a block of code. 
-* Instead of writing the same lines of code again and again, a loop automates the repetition.
+* Instead of writing the same lines of code again and again, a loop automates the repetition (iteration).
 * Loops help us write shorter, cleaner, and more efficient programs.
 * Java has three main types of loops: `for`, `while`, `do-while`. 
 * Each loop structure is used for different scenarios, but they are interchangeable. For instance: Anything 
 that can be written with a `for` loop can also be written with a `while` or a `do-while` loop, and vice versa.
 
-
-
-
+  
 #### for loop
 
 Used when the number of repetitions is known in advance.
