@@ -100,10 +100,10 @@ software rather than hardware. It simulates a physical machine so programs can r
 
 #### Object-Oriented Programming (OOP)
 
-> - The fundamental component is the object (data-centric), and programs are composed of objects and interactions among objects. 
-> - An object contains both data and the methods that process that data. 
-> - Developers concentrate on designing and developing the classes that construct these objects.
-> - ***This way, the program's logic is distributed across all modules in a data-centric manner.***
+> - The fundamental building blocks in OOP are **objects**, and programs are composed of objects and their interactions.
+> - An object contains both **data** and the **methods** that operate on that data.
+> - Developers focus on designing and implementing **classes**, which serve as blueprints for making (instantiating) objects.
+> - ***This way, the program's logic is distributed across all modules in a object-centric manner.***
 
 ![](../resources/object-oriented-programming.png "Object Oriented Programming")
 
@@ -146,7 +146,6 @@ thanks to its immutability and support for parallelism.
 
 
 ~~~java
-
 List<Customer> customers = Arrays.asList(
         new Customer("Alice", 30, "Astana"),
         new Customer("Bob", 25, "Almaty"),
@@ -164,11 +163,7 @@ List<String> result = customers.parallelStream()
 System.out.println("Result: " + result);
 // Output
 // Result: [ALICE, CHARLIE, DIANA, ETHAN]
-
-
-
 ~~~
-
 
 
 ### Writing and running programs in Java
@@ -449,7 +444,7 @@ public class VariablesMain {
 
 
 ***
-## Hands-on Exercise 2
+## [Hands-on Exercise 2](./exercises/README.md)
 ***
 
 
@@ -736,7 +731,7 @@ public class Calculator {
 
 
 ***
-## Hands-on Exercise 3
+## [Hands-on Exercise 3](./exercises/README.md)
 ***
 
 
