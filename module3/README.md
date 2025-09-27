@@ -1,0 +1,241 @@
+***
+# Module 3: Object-Oriented Programming (OOP) I
+***
+
+<!-- TOC -->
+* [Module 3: Object-Oriented Programming (OOP) I](#module-3-object-oriented-programming-oop-i)
+  * [Software Development Life Cycle (SDLC)](#software-development-life-cycle-sdlc)
+  * [The Core Concepts of OOP: Classes and Objects](#the-core-concepts-of-oop-classes-and-objects)
+    * [Modeling Real-World Entities as Objects](#modeling-real-world-entities-as-objects)
+    * [Identifying Objects from Requirements](#identifying-objects-from-requirements)
+    * [Object Candidates (Craig Larman)](#object-candidates-craig-larman)
+    * [Classes and Objects](#classes-and-objects)
+  * [Hands-on Exercise 1](#hands-on-exercise-1)
+  * [Hands-on Exercise 2](#hands-on-exercise-2)
+  * [Constructors](#constructors)
+  * [Encapsulation](#encapsulation)
+  * [Access Modifiers: Public, Private, Protected](#access-modifiers-public-private-protected)
+  * [Getters and Setters](#getters-and-setters)
+  * [Hands-on Exercise 3](#hands-on-exercise-3)
+  * [Hands-on Exercise 4](#hands-on-exercise-4)
+<!-- TOC -->
+
+---
+
+## Software Development Life Cycle (SDLC)
+The SDLC is a structured process used to develop high-quality software in a systematic and efficient way. 
+It breaks software development into distinct phases, each with specific goals and deliverables.
+
+The Software Development Life Cycle (SDLC) consists of five fundamental phases.
+
+Today, there are different software development process models such as
+Waterfall, Spiral, Iterative/Incremental, Agile, and Unified Process. 
+All of these models, in one way or another, include these fundamental phases.
+
+
+![](../resources/sdlc.png "Software Development Life Cycle (SDLC)")
+
+
+## The Core Concepts of OOP: Classes and Objects
+
+### Modeling Real-World Entities as Objects
+
+- **Object-Oriented Programming (OOP)** was developed to model real-world entities more naturally and accurately.
+- In real life, almost everything can be considered as an **object** (e.g., human, product, order, invoice, student, 
+screen, TV, desk, bicycle, car, dog, etc.).
+- Objects have **states** and **behaviors**:
+  - Example (Human):
+    - States → name, age, height
+    - Behaviors → learn, understand, sleep, talk, run
+  - Example (Bicycle):
+    - States → color, current gear, speed, number of wheels, number of gears
+    - Behaviors → brake, accelerate, decelerate, change gear
+- Similarly, **software objects** also have states and behaviors:
+  - **States** (also called **attributes** or **properties**) are represented using **member variables**.
+  - **Behaviors** are represented using **member functions/methods**.
+
+
+- The fundamental building blocks in OOP are **objects**, and programs are composed of objects and their interactions.
+- An object contains both **data** and the **methods** that operate on that data.
+- Developers focus on designing and implementing **classes**, which serve as blueprints for making (instantiating) objects.
+- ***This way, the program's logic is distributed across all modules in a object-centric manner.***
+
+![](../resources/object-oriented-programming.png "Object Oriented Programming")
+
+
+### Identifying Objects from Requirements
+
+- To identify objects, we use  **object modeling**.
+- A textual analysis of the requirement list (such as use case descriptions) can be performed 
+during the analysis phase, following **Abbott’s technique**.
+- **Nouns and noun phrases** in the requirements often suggest potential **classes or objects**.
+- Nouns or noun phrases that have **attributes (data)** or **behaviors (functions)** are strong candidates for **classes**.
+- **Verbs** in the requirements often correspond to potential **methods** of objects.
+
+### Object Candidates (Craig Larman)
+
+- **Physical or tangible objects:** product, human, computer, keyboard, screen, etc.
+- **Abstract or conceptual objects:** circle, rectangle, shape, account, order, invoice, etc.
+- **Places:** school, building, campus, classroom, room, etc.
+- **Processes/Transactions:** withdraw money, register, etc.
+- **Roles:** administrator, student, staff, registered user, etc.
+- **External systems:** databases, drivers, bank information system, web services, etc.
+- **Organizations:** school, company, firm, etc.
+- **Events:** ActionListener, ActionEvent, KeyListener, KeyEvent, logs, etc.
+
+### Classes and Objects
+
+- A **class** is a blueprint(template or prototype) that defines the structure (i.e.; attributes (data) and behaviors (methods) of something). 
+- An **object** is a concrete instance of a class.
+
+**Real world examples:**
+* Think of a class as a car design, while each object is an actual car produced from that design. The design (class) 
+specifies that every car has wheels, an engine, and doors, and can perform actions like start, stop, or accelerate. 
+But each real car (object) can have its own unique values, such as being red or blue, having different engine sizes, 
+or belonging to different owners.
+* Think of a class as a blueprint for building houses, while each object is an individual house built from that 
+blueprint. The blueprint defines the design, but each house can have its own paint color, furniture, or garden.
+
+  
+**Circle Object Example**
+
+"We aim to develop a drawing application. We need to draw a **Circle** with **radius**, **x** and **y** coordinates,
+and **color** properties. The Circle's area should also be calculated..."
+
+After analyzing this requirement list, we identified Circle as an object, with
+radius, x, y coordinates, and color as its attributes, and the calculate area function as its method.
+
+><img src="../resources/circle-object.png" width="300">
+>
+>**UML Class Diagram**
+
+
+**Code Example**
+>[Circle.java](./circleobject/Circle.java) | [CircleMain,java](./circleobject/Circle.java)
+
+
+***
+## Hands-on Exercise 1
+* Define the package `cc.ku.ict.module3.circleobject` in your Java project.
+* Place your Java files (`Circle.java`, `CircleMain.java` given above) under this package and run the application.
+***
+
+
+**Code Example: Extend the Circle class**
+
+> Add a new attribute and functionality to the existing `Circle` class by following these steps:
+
+1. **Add a new attribute**
+  - Define a private field named `label` (type `String`) to store the label of the circle.
+
+2. **Update constructors**
+  - Modify the existing constructors to also initialize the `label` field.
+  - If no label is provided, set a default value such as `"Unnamed"`.
+
+3. **Add getter and setter methods**
+  - Define a `getLabel()` method to return the circle’s label.
+  - Define a `setLabel(String label)` method to update the label.
+
+4. **Add a method to calculate circumference**
+  - Define a new method `calculateCircumference()` using the formula:
+
+    ```
+    Circumference = 2 × π × radius
+    ```
+
+  - (Note: The circumference is the perimeter of a circle.)
+
+5. **Update the `toString()` method**
+  - Extend the existing `toString()` to include the `label` field in the output.
+
+6. **Test your changes**
+  - In the `CircleMain` class, instantiate a new `Circle` object with a label.
+  - Print the circle using `toString()`.
+  - Call and print the result of `calculateArea()` and `calculateCircumference()`.
+
+
+
+***
+## Hands-on Exercise 2
+* Extend the Circle application in accordance with the instructions given above.
+***
+
+
+## Constructors
+- Special methods in a class used to initialize objects.
+- Have the same name as the class and do not have a return type.
+- Can take parameters to set initial values for object attributes.
+- In Java development, the compiler defines a **default constructor** if none is provided.
+  - It initializes the object with default values:
+    - Numbers → 0
+    - char → '\u0000'
+    - Objects → null
+    - boolean → false
+
+## Encapsulation
+- Principle of bundling data (attributes) and methods (functions) into a single unit (class).
+- Restricts direct access to some of the object’s components (information hiding).
+- Improves maintainability and prevents unintended modifications.
+
+## Access Modifiers: Public, Private, Protected
+- Define the visibility of classes, methods, and variables:
+  - **public** → accessible from anywhere.
+  - **private** → accessible only within the same class.
+  - **protected** → accessible within the same package and by subclasses.
+
+**Code Example**
+~~~java
+public class Circle {
+    private int radius;
+
+    // Public method
+    public double calculateArea() {
+        return Math.PI * square(radius);  // calling private method
+    }
+
+    // Private helper method
+    private int square(int value) {
+        return value * value;
+    }
+}
+~~~
+
+## Getters and Setters
+- Methods used to access and update private attributes of a class.
+- **Getter** → returns the value of an attribute.
+- **Setter** → updates or modifies the value of an attribute.
+- Helps enforce encapsulation and allows validation before changing values.
+
+**Code Example**
+~~~java
+public class Circle {
+    private int radius;
+
+  // Setter with validation
+  public void setRadius(int radius) {
+    if (radius > 0) {         // validation rule: radius must be positive
+      this.radius = radius;
+    } else {
+      System.out.println("Invalid radius. It must be positive.");
+    }
+  }
+
+  // Getter
+  public int getRadius() {
+    return radius;
+  }
+}
+~~~
+
+
+***
+## Hands-on Exercise 3
+* Extend the Circle application in accordance with the improvements 
+given in the `Access Modifiers` and `Getters and Setters`sections.
+***
+
+***
+## [Hands-on Exercise 4](./exercises/README.md)
+***
+
+
