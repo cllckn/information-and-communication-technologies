@@ -21,51 +21,52 @@ The course will cover the following topics:
 * Software Types (system, application, middleware)
 * The Internet and World Wide Web
 * Introduction to Programming, Databases, and Networking
-* Setting up the development environment: IntelliJ(for Java Development), Node.js, PostgreSQL
+* Setting up the development environment
 
 ### Module 2: Programming Fundamentals
-* Programming Languages (Compiled vs. Interpreted)
-* Programming Paradigms (Procedural, OOP, Functional)
-* Writing and running your first "Hello, World!" in Java
+* What is Programming?
+* Programming Paradigms
+* Programming Languages
+* Writing and Running Programs in Java
 * Variables, Data Types, and Operators
 * Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)
 * Basic Data Structures: Arrays
-* Functions: Declaration, parameters, and return values
-* Hands-on exercises
+* Functions (Methods): Declaration, Parameters, Return Values, Overloading
+* Hands-on Exercises
 
 ### Module3: Object-Oriented Programming (OOP) I
+* Software Development Life Cycle (SDLC)
 * The Core Concepts of OOP: Classes and Objects
-* Design and implement a simple class with attributes and methods
 * Constructors
-* Instance Variables and Methods
 * Encapsulation
 * Access Modifiers: Public, Private, Protected
 * Getters and Setters
-* Hands-on exercises
+* Collections: ArrayList
+* Hands-on Exercises
 
 ### Module 4: Object-Oriented Programming (OOP) II
+* Introduction to UML:  Class Diagrams
 * Inheritance
+* Object Relationships
+* Polymorphism
 * Abstract Classes
 * Interfaces
-* Polymorphism
-* Introduction to UML:  Class Diagrams
-* Object Relationships
-* Hands-on exercises
+* Hands-on Exercises
 
 ### Module 5: Database Management Systems
 * Introduction to Database Management Systems (DBMS)
 * Relational Databases and Basic SQL (Structured Query Language)
-* NoSQL databases
-* Using a Programming Language to Interact with a Database
-* Hands-on exercises
+* NoSQL Databases
+* Using a Programming Language to Interact With a Database
+* Hands-on Exercises
 
 ### Module 6: Computer Networks
-* Network basics (LAN, WAN, Internet)
-* OSI & TCP/IP models
-* IP addressing, DNS, ports, sockets
-* Client-server communication
+* Network Basics (LAN, WAN, Internet)
+* OSI & TCP/IP Models
+* IP addressing, DNS, Ports, Sockets
+* Client-Server Communication
 * Common Networking Tools: ping, traceroute, nslookup, netcat
-* Hands-on exercises
+* Hands-on Exercises
 
 ### Module 7: Web Applications, Web Services, and Basic User Interaction
 * Fundamentals of web applications and web services
@@ -73,8 +74,8 @@ The course will cover the following topics:
 * Developing web applications using HTML,CSS, JS and Node.js
 * jQuery and Basic Form Operations for User Interaction
 * Developing RESTful APIs
-* Providing database support for the modules
-* Hands-on exercises
+* Database Integration
+* Hands-on Exercises
 
 ### Module 8: Cutting-Edge Technologies in ICT
 * Internet of Things (IoT): Definition, components, and applications of interconnected smart devices.
