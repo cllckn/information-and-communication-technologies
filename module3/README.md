@@ -18,6 +18,9 @@
   * [Getters and Setters](#getters-and-setters)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
   * [Hands-on Exercise 4](#hands-on-exercise-4)
+  * [Collections: ArrayList](#collections-arraylist)
+    * [ArrayList](#arraylist)
+  * [Hands-on Exercise 5](#hands-on-exercise-5)
 <!-- TOC -->
 
 ---
@@ -234,8 +237,52 @@ public class Circle {
 given in the `Access Modifiers` and `Getters and Setters`sections.
 ***
 
+
 ***
 ## [Hands-on Exercise 4](./exercises/README.md)
+***
+
+## Collections: ArrayList
+
+
+- A Collection in Java is an object that holds a group of objects.
+- It includes both the data structure for storing the objects and the methods for processing them.
+- Main purposes:
+  - Easier management of groups of data
+  - Flexible size (dynamic growth/shrink)
+  - Built-in methods for searching, sorting, and iteration
+  - Improved code readability and reusability
+- Collections in Java are closely related to **Abstract Data Types (ADTs)**.
+- An ADT defines *what operations* can be performed on data, without specifying *how* they are implemented.
+- In Java:
+  - Interfaces such as **List**, **Set**, **Queue**, and **Map** represent ADTs.
+  - Classes such as **ArrayList**, **HashSet**, **PriorityQueue**, and **HashMap** provide concrete implementations of those ADTs.
+
+
+**Common Collection Types in Java**
+- **List** → Ordered collection, allows duplicates (e.g., ArrayList, LinkedList, Vector).
+- **Set** → Unordered collection, no duplicates allowed (e.g., HashSet, TreeSet, LinkedHashSet).
+- **Queue** → Designed for holding elements prior to processing (e.g., PriorityQueue, ArrayDeque, LinkedList).
+- **Map** → Stores key-value pairs (not part of Collection interface, but part of Collections Framework) (e.g., HashMap, TreeMap, LinkedHashMap, Hashtable).
+
+
+
+### ArrayList
+
+- An **ArrayList** is a dynamic array that can grow and shrink in size.
+- When it needs more space, its capacity increases by **50%**.
+- Provides fast access to elements using their index.
+- Part of the **List interface**, so it supports common operations like add, remove, and get.
+- Can be defined in a **type-safe** way using generics, e.g., `List<Double>` instead of primitive types.
+
+
+**Code Example**
+>[Book.java](./collections/Book.java) | [CollectionsMain,java](./collections/CollectionsMain.java)
+
+
+
+***
+## [Hands-on Exercise 5](./exercises/README.md)
 ***
 
 
