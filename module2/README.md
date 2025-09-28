@@ -4,38 +4,125 @@
 
 <!-- TOC -->
 * [Module 2: Programming Fundamentals](#module-2-programming-fundamentals)
-    * [What is Programming](#what-is-programming)
-    * [Programming Languages](#programming-languages-)
-    * [Programming Paradigms](#programming-paradigms)
-      * [Structured (Procedural) Programming](#structured-procedural-programming)
-      * [Object-Oriented Programming (OOP)](#object-oriented-programming-oop)
-      * [Structured (Procedural) Programming vs. Object-Oriented Programming (OOP)](#structured-procedural-programming-vs-object-oriented-programming-oop)
-      * [Functional Programming](#functional-programming)
-    * [Writing and running programs in Java](#writing-and-running-programs-in-java)
+  * [What is Programming](#what-is-programming)
+  * [Programming Paradigms](#programming-paradigms)
+    * [Structured (Procedural) Programming](#structured-procedural-programming)
+    * [Object-Oriented Programming (OOP)](#object-oriented-programming-oop)
+    * [Structured (Procedural) Programming vs. Object-Oriented Programming (OOP)](#structured-procedural-programming-vs-object-oriented-programming-oop)
+    * [Functional Programming](#functional-programming)
+  * [Programming Languages](#programming-languages-)
+  * [Writing and running programs in Java](#writing-and-running-programs-in-java)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
-    * [Variables, Data Types, and Operators](#variables-data-types-and-operators)
+  * [Variables, Data Types, and Operators](#variables-data-types-and-operators)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
-    * [Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)](#control-flow-conditional-statements-ifelse-switch-case-loops-for-while-do-while)
-      * [if / else](#if--else)
-      * [Nested if / else](#nested-if--else)
-      * [switch-case](#switch-case)
+  * [Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)](#control-flow-conditional-statements-ifelse-switch-case-loops-for-while-do-while)
+    * [if / else](#if--else)
+    * [Nested if / else](#nested-if--else)
+    * [switch-case](#switch-case)
     * [Loops](#loops)
       * [for loop](#for-loop)
       * [while loop](#while-loop)
       * [do-while loop](#do-while-loop)
-    * [Basic Data Structures: Arrays](#basic-data-structures-arrays)
-    * [Functions (Methods): Declaration, parameters, and return values](#functions-methods-declaration-parameters-and-return-values)
+  * [Basic Data Structures: Arrays](#basic-data-structures-arrays)
+  * [Functions (Methods): Declaration, parameters, return values, overloading](#functions-methods-declaration-parameters-return-values-overloading)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
 <!-- TOC -->
 
 ---
 
-### What is Programming
+## What is Programming
 Writing instructions for a computer using programming languages to perform tasks.
 
 <img src="../resources/software-development.png" width="700" alt="Programming">
 
-### Programming Languages 
+## Programming Paradigms
+![](../resources/programming-paradigms.png "Programming Paradigms")
+
+
+### Structured (Procedural) Programming
+
+> - Programs are collections of functions operating on shared data.
+> - A **function** is the smallest piece of the program.
+> - The **main function** serves as the entry point of the program.
+    >   - Execution starts in the main function.
+>   - From there, related functions are called in sequence as needed.
+> - The focus is directly on the **problem**, and methods are developed to solve it (**control-centric** approach).
+> - If a function requires data to perform a task, the necessary data is passed as **parameters**.
+
+![](../resources/structured-programming.png "Structured Programming")
+
+
+
+### Object-Oriented Programming (OOP)
+
+> - The fundamental building blocks in OOP are **objects**, and programs are composed of objects and their interactions.
+> - An object contains both **data** and the **methods** that operate on that data.
+> - Developers focus on designing and implementing **classes**, which serve as blueprints for making (instantiating) objects.
+> - ***This way, the program's logic is distributed across all modules in a object-centric manner.***
+
+![](../resources/object-oriented-programming.png "Object Oriented Programming")
+
+
+### Structured (Procedural) Programming vs. Object-Oriented Programming (OOP)
+>
+> - In software development, ***change is mandatory, not an option, when developing software.*** — requirements evolve, errors must be fixed, and new features are added.
+> - As systems grow larger, **relationships among components become more complex**, and making changes becomes difficult and error-prone.
+>
+> **Structured Programming**
+> - Functions have unrestricted access to data, making it harder to control changes.
+> - When we are required to change data, it is difficult to track which functions use it, and this makes handling the change difficult.
+> - This lack of control can lead to **unexpected side effects** when modifying or extending the program.
+>
+> **Object-Oriented Programming (OOP)**
+> - Provides mechanisms that make change more manageable and less risky.
+> - When we need to change data, encapsulation makes it easy to track which functions use it. Mechanisms that ensure
+    low coupling (such as abstraction in SOLID) also prevent any change requests from affecting dependent modules.
+> - Key features:
+    >  - **Access specifiers** (public, private, protected) → control how data can be accessed.
+>  - **Encapsulation** → bundle data and behavior together.
+>  - **Inheritance** → reuse and extend existing code.
+>  - **Polymorphism** → design flexible and extensible systems.
+>  - **Abstraction** → hide complexity, expose only essentials.
+>- These features allow OOP systems to **adapt to change more effectively** than purely procedural systems.
+
+![](../resources/modules-interactions.png "Object Oriented Programming vs StructuredProgramming")
+
+
+### Functional Programming
+
+>Functional programming is widely used to perform operations on collections and process streaming data efficiently,
+thanks to its immutability and support for parallelism.
+> - Programs are built using **pure functions** as the main building blocks.
+> - For the same input, a function always produces the **same output** (no side effects).
+> - **No shared or global variables** are used.
+> - **Immutability**: the state of objects passed as parameters cannot be modified.
+> - **No iterative loops** (for, while); instead, recursion and higher-order functions are used.
+> - Because **state changes are not allowed**, functional programming naturally supports **parallelism and stream processing**.
+
+
+~~~java
+List<Customer> customers = Arrays.asList(
+        new Customer("Alice", 30, "Astana"),
+        new Customer("Bob", 25, "Almaty"),
+        new Customer("Charlie", 35, "New York"),
+        new Customer("Diana", 28, "Petropavlovsk"),
+        new Customer("Ethan", 40, "London")
+);
+// One pipeline: filter, map, sort, collect — in parallel
+List<String> result = customers.parallelStream()
+    .filter(c -> c.getAge() > 25)           // filter
+    .map(c -> c.getName().toUpperCase())    // map
+    .sorted()                               // sort
+    .collect(Collectors.toList());          // collect
+
+System.out.println("Result: " + result);
+// Output
+// Result: [ALICE, CHARLIE, DIANA, ETHAN]
+~~~
+
+
+
+## Programming Languages 
 
 A programming language is a formal language that provides syntax and rules to write programs.
 
@@ -80,93 +167,8 @@ CPU executes
 ***A virtual machine, such as the Java Virtual Machine (JVM), is a computer architecture implemented in 
 software rather than hardware. It simulates a physical machine so programs can run in a platform-independent way.***
 
-### Programming Paradigms
-![](../resources/programming-paradigms.png "Programming Paradigms")
 
-
-#### Structured (Procedural) Programming
-
-> - Programs are collections of functions operating on shared data.
-> - A **function** is the smallest piece of the program.
-> - The **main function** serves as the entry point of the program.
->   - Execution starts in the main function.
->   - From there, related functions are called in sequence as needed.
-> - The focus is directly on the **problem**, and methods are developed to solve it (**control-centric** approach).
-> - If a function requires data to perform a task, the necessary data is passed as **parameters**.
-
-![](../resources/structured-programming.png "Structured Programming")
-
-
-
-#### Object-Oriented Programming (OOP)
-
-> - The fundamental building blocks in OOP are **objects**, and programs are composed of objects and their interactions.
-> - An object contains both **data** and the **methods** that operate on that data.
-> - Developers focus on designing and implementing **classes**, which serve as blueprints for making (instantiating) objects.
-> - ***This way, the program's logic is distributed across all modules in a object-centric manner.***
-
-![](../resources/object-oriented-programming.png "Object Oriented Programming")
-
-
-#### Structured (Procedural) Programming vs. Object-Oriented Programming (OOP)
->
-> - In software development, ***change is mandatory, not an option, when developing software.*** — requirements evolve, errors must be fixed, and new features are added.
-> - As systems grow larger, **relationships among components become more complex**, and making changes becomes difficult and error-prone.
->
-> **Structured Programming**
-> - Functions have unrestricted access to data, making it harder to control changes.
-> - When we are required to change data, it is difficult to track which functions use it, and this makes handling the change difficult.
-> - This lack of control can lead to **unexpected side effects** when modifying or extending the program.
->
-> **Object-Oriented Programming (OOP)**
-> - Provides mechanisms that make change more manageable and less risky.
-> - When we need to change data, encapsulation makes it easy to track which functions use it. Mechanisms that ensure 
-low coupling (such as abstraction in SOLID) also prevent any change requests from affecting dependent modules.
-> - Key features:
->  - **Access specifiers** (public, private, protected) → control how data can be accessed.
->  - **Encapsulation** → bundle data and behavior together.
->  - **Inheritance** → reuse and extend existing code.
->  - **Polymorphism** → design flexible and extensible systems.
->  - **Abstraction** → hide complexity, expose only essentials.
->- These features allow OOP systems to **adapt to change more effectively** than purely procedural systems.
-
-![](../resources/modules-interactions.png "Object Oriented Programming vs StructuredProgramming")
-
-
-#### Functional Programming
-
->Functional programming is widely used to perform operations on collections and process streaming data efficiently, 
-thanks to its immutability and support for parallelism.
-> - Programs are built using **pure functions** as the main building blocks.
-> - For the same input, a function always produces the **same output** (no side effects).
-> - **No shared or global variables** are used.
-> - **Immutability**: the state of objects passed as parameters cannot be modified.
-> - **No iterative loops** (for, while); instead, recursion and higher-order functions are used.
-> - Because **state changes are not allowed**, functional programming naturally supports **parallelism and stream processing**.
-
-
-~~~java
-List<Customer> customers = Arrays.asList(
-        new Customer("Alice", 30, "Astana"),
-        new Customer("Bob", 25, "Almaty"),
-        new Customer("Charlie", 35, "New York"),
-        new Customer("Diana", 28, "Petropavlovsk"),
-        new Customer("Ethan", 40, "London")
-);
-// One pipeline: filter, map, sort, collect — in parallel
-List<String> result = customers.parallelStream()
-    .filter(c -> c.getAge() > 25)           // filter
-    .map(c -> c.getName().toUpperCase())    // map
-    .sorted()                               // sort
-    .collect(Collectors.toList());          // collect
-
-System.out.println("Result: " + result);
-// Output
-// Result: [ALICE, CHARLIE, DIANA, ETHAN]
-~~~
-
-
-### Writing and running programs in Java
+## Writing and running programs in Java
 
 
 
@@ -219,7 +221,7 @@ Hello World
 Write and run your first "Hello, World!" in Java
 ***
 
-### Variables, Data Types, and Operators
+## Variables, Data Types, and Operators
 
 You must define variables before using them as java is a statically typed language.
 
@@ -228,6 +230,13 @@ You must define variables before using them as java is a statically typed langua
 int x = 5;
 // Operating system allocates memory for x in RAM and stores the value 5.
 ~~~
+
+
+***Best Practices and Performance Tips***
+
+    Use meaningful names for identifiers i.e.;variables, constants, classes, objects and methods.**  
+      This improves readability and makes the program easier to maintain.
+
 
 **Primitive Types**
 
@@ -451,12 +460,12 @@ public class VariablesMain {
 
 
 
-### Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)
+## Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)
 
 
 
 
-#### if / else
+### if / else
 The `if/else` statement is used when we want to make a decision between two options.
 
 * Example: Decide whether a student passed or failed.
@@ -475,8 +484,17 @@ if (grade >= 50) {
 
 ~~~
 
+***Best Practices and Performance Tips***
 
-#### Nested if / else
+    Write the likely (most probable) condition first to improve program speed.
+    Place the likely case in the if block and the unlikely case in the else block.
+      This allows the branch predictor to work more efficiently and reduces costly mispredictions.
+      In the example above,  grade >= 50 is placed in the if condition since it is the more common case.    
+    Place the likely condition in the if block.
+      This improves execution speed because the CPU’s branch predictor is more often correct, avoiding pipeline flushes.
+      
+
+### Nested if / else
 
 A `nested if/else` statement is an if-else statement placed inside another if-else statement.
 We use this statement when we have multiple conditions (more than 2 options to choose).
@@ -503,7 +521,7 @@ if (grade >= 90) {
 The program checks conditions from top to bottom. Only the first true condition is executed.
 
 
-#### switch-case
+### switch-case
 It is an alternative to a long chain of if-else if-else statements, 
 especially when you are checking a single variable against multiple possible constant values.
 
@@ -535,7 +553,7 @@ switch (grade) {
 ~~~
 
 
-Anything you can do with a switch/case statement can also be done with if/else, but the reverse is not always true.
+***Anything you can do with a switch/case statement can also be done with if/else, but the reverse is not always true.***
 
 
 ### Loops
@@ -625,7 +643,7 @@ do {
 ~~~
 
 
-### Basic Data Structures: Arrays
+## Basic Data Structures: Arrays
 
 Arrays are collections that hold multiple elements of the same type.
 
@@ -679,18 +697,21 @@ for (int number : numbers) {
 ~~~
 
 
-### Functions (Methods): Declaration, parameters, and return values
+## Functions (Methods): Declaration, parameters, return values, overloading
 
 In Java, functions are called methods. They are blocks of code that perform a specific task and are reusable, which 
 helps to organize a program and avoid code repetition.
 
 Defining a method is a two-part process that involves declaring the method and providing its body.
 
-Declaring a method means defining its structure, including its name, the type of data it will return, and 
-the data it needs to receive.
+- **Declaring a method**  
+  This means defining its structure, including:
+  - The method name
+  - The return type (the type of data it will give back)
+  - The parameter list (the data it needs to receive)
 
-Method Body is the block of code inside the method where the actual work is done.
-
+- **Method body**  
+  The block of code inside the method where the actual work is done.
 
 ~~~java
 // Method to add two integers
@@ -729,6 +750,36 @@ public class Calculator {
 }
 ~~~
 
+**Method Signature**
+
+- The **method signature** is the combination of the method name and its parameter list.
+- Example: `add(int a, int b)`
+- Note: the return type is *not* part of the method signature.
+- In the same scope, the signatures of methods must be unique.
+
+**Method Overloading**
+
+- **Method overloading** means defining multiple methods with the same name but different parameter lists.
+- The compiler decides which method to use based on the number or type of parameters.
+- This allows the same method name to be used for related tasks.
+- Example:
+  - `add(int, int)` → adds two integers
+  - `add(double, double)` → adds two doubles
+  - `add(int, int, int)` → adds three integers
+
+~~~java
+public static int add(int a, int b) {
+    return a + b;
+}
+
+public static double add(double a, double b) {
+    return a + b;
+}
+
+public static int add(int a, int b, int c) {
+    return a + b + c;
+}
+~~~
 
 ***
 ## [Hands-on Exercise 3](./exercises/README.md)
