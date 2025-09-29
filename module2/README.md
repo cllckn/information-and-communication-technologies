@@ -14,13 +14,13 @@
   * [Writing and running programs in Java](#writing-and-running-programs-in-java)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
   * [Variables, Data Types, and Operators](#variables-data-types-and-operators)
-    * [**Primitive Types**](#primitive-types)
-    * [**Reference Types**](#reference-types)
-    * [**Operators in Java**](#operators-in-java)
-    * [**Operator Precedence in Java **](#operator-precedence-in-java-)
-    * [**Package in Java**](#package-in-java)
+    * [Primitive Types](#primitive-types)
+    * [Reference Types](#reference-types)
+    * [Operators in Java](#operators-in-java)
+    * [Operator Precedence in Java](#operator-precedence-in-java)
+    * [Package in Java](#package-in-java)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
-    * [**Type Conversion**](#type-conversion)
+    * [Type Conversion](#type-conversion)
   * [Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)](#control-flow-conditional-statements-ifelse-switch-case-loops-for-while-do-while)
     * [if / else](#if--else)
     * [Nested if / else](#nested-if--else)
@@ -244,7 +244,7 @@ int x = 5;
       This improves readability and makes the program easier to maintain.
 
 
-### **Primitive Types**
+### Primitive Types
 
 Directly store values and are simple with defined boundaries.
 
@@ -268,7 +268,7 @@ and optimize resource utilization.
 | **Boolean Type**     | Stores true or false values.             | `boolean`                |                          |
 | - `boolean`          | Represents true or false.                | `boolean isValid = true;`| `true` or `false`        |
 
-### **Reference Types**
+### Reference Types
 
 Store references to objects and arrays, allowing for more complex data structures and operations with variable lengths.
 
@@ -284,7 +284,7 @@ Store references to objects and arrays, allowing for more complex data structure
 | - `Car`              | A class representing a car.                        | `Car myCar = new Car();` | Depends on class design   |
 
 
-### **Operators in Java**
+### Operators in Java
 
 | **Operator**        | **Type**             | **Syntax/Usage**           | **Description**                                        | **Example**                    |
 |---------------------|----------------------|----------------------------|--------------------------------------------------------|--------------------------------|
@@ -312,7 +312,7 @@ Store references to objects and arrays, allowing for more complex data structure
 | **`%=`** (modulus equal)| Assignment         | `a %= b`                   | Modulus and assigns the result                          | `a %= 3 // a = a % 3`          |
 
 
-### **Operator Precedence in Java **
+### Operator Precedence in Java
 
 Operator precedence determines the order in which operators are evaluated in an expression — just like in mathematics.
 
@@ -378,7 +378,7 @@ int value = 10 + 20 * 3 % 7 - (4 + 6) / 2 * -3 + ++x;
 ~~~
 
 
-### **Package in Java**
+### Package in Java
 
 Package structure makes large software systems more manageable, modular, and maintainable. As a best practice, 
 all classes should be placed inside a package in Java for better organization and to avoid name conflicts.
@@ -393,7 +393,7 @@ Helps organize code and avoid class name conflicts.
 
 Imports the Scanner class from the Java library. Used to read user input (e.g., from the keyboard).
 
-**Example**
+**Code Example**
 
 * cc.ku.ict.module2.variables.VariablesMain.java
 
@@ -466,7 +466,7 @@ public class VariablesMain {
 
 
 
-### **Type Conversion**
+### Type Conversion
 
 **Code Example**
 
