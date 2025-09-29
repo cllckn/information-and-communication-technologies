@@ -139,7 +139,7 @@ Use clear headings and subheadings to enhance readability.
 
 ## Email Submission
 
-Students are required to attach their report as a pdf file and submit it via **email**.
+Students are required to attach their report as a PDF file and submit it via **email (cceken@ku.edu.kz)** before the oral examination.
 
 * Email Subject: Use the following format for the subject line of your email:
     - ict-assignment1-StudentName
