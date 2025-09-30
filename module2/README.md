@@ -47,7 +47,7 @@ Writing instructions for a computer using programming languages to perform tasks
 
 ### Structured (Procedural) Programming
 
-> - Programs are collections of functions operating on shared data.
+> - Programs are collections of functions (methods) operating on shared data.
 > - A **function** is the smallest piece of the program.
 > - The **main function** serves as the entry point of the program.
     >   - Execution starts in the main function.
