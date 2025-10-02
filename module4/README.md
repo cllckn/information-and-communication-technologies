@@ -41,7 +41,7 @@ A class is represented by a rectangle divided into three sections:
 * Operations: The methods/functions of the class. They also include visibility signs and may show 
 parameters and return types.
 
-[Sample Class Diagram](../resources/uml-class-diagram.png)
+![Sample Class Diagram](../resources/uml-class-diagram.png)
 
 
 
