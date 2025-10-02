@@ -12,12 +12,13 @@
     * [Classes and Objects](#classes-and-objects)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
-  * [Constructors](#constructors)
-  * [Encapsulation](#encapsulation)
-  * [Access Modifiers: Public, Private, Protected](#access-modifiers-public-private-protected)
-  * [Getters and Setters](#getters-and-setters)
+    * [Constructors](#constructors)
+    * [Encapsulation](#encapsulation)
+    * [Access Modifiers: Public, Private, Protected](#access-modifiers-public-private-protected)
+    * [Getters and Setters](#getters-and-setters)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
   * [Hands-on Exercise 4](#hands-on-exercise-4)
+    * [static and final keywords](#static-and-final-keywords)
   * [Collections: ArrayList](#collections-arraylist)
     * [ArrayList](#arraylist)
   * [Hands-on Exercise 5](#hands-on-exercise-5)
@@ -164,7 +165,7 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
 ***
 
 
-## Constructors
+### Constructors
 - Special methods in a class used to initialize objects.
 - Have the same name as the class and do not have a return type.
 - Can take parameters to set initial values for object attributes.
@@ -175,12 +176,12 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
     - Objects → null
     - boolean → false
 
-## Encapsulation
+### Encapsulation
 - Principle of bundling data (attributes) and methods (functions) into a single unit (class).
 - Restricts direct access to some of the object’s components (information hiding).
 - Improves maintainability and prevents unintended modifications.
 
-## Access Modifiers: Public, Private, Protected
+### Access Modifiers: Public, Private, Protected
 - Define the visibility of classes, methods, and variables:
   - **public** → accessible from anywhere.
   - **private** → accessible only within the same class.
@@ -203,7 +204,7 @@ public class Circle {
 }
 ~~~
 
-## Getters and Setters
+### Getters and Setters
 - Methods used to access and update private attributes of a class.
 - **Getter** → returns the value of an attribute.
 - **Setter** → updates or modifies the value of an attribute.
@@ -241,6 +242,62 @@ given in the `Access Modifiers` and `Getters and Setters`sections.
 ***
 ## [Hands-on Exercise 4](./exercises/README.md)
 ***
+
+### static and final keywords
+
+
+**static Keyword**
+
+- Normally, members (attributes and methods) belong to **objects**.
+- When declared with the **`static`** keyword, they belong to the **class itself**, not to any specific object.
+- This means:
+  - There is **only one copy** of a static variable shared across all objects.
+  - Static methods can be called using the class name (e.g., `Car.getActiveCars()`), without needing to instantiate an object.
+- Therefore, `static` makes members **class-level** instead of **object-level**.
+
+- Can be applied to:
+  - **Variables** → one copy shared by all objects.
+  - **Methods** → can be called without instantiating an object.
+
+**final Keyword**
+- Used to declare constants or prevent modifications.
+- Can be applied to:
+  - **Variables** → value cannot be changed once assigned.
+  - **Methods** → cannot be overridden in derived classes.
+  - **Classes** → cannot be extended (no subclasses).
+
+**Example: Requirement List for A Car Race Application**
+    
+    We want to model a simple **Car Race** system.
+    Class: Car
+    - **Attributes**
+      - `name` (String) → the name of the car.
+      - `static activeCars` (int) → shared among all Car objects, counts how many cars are currently active in the race.
+      - `static final MAX_CARS` (int) → constant that specifies the maximum number of cars allowed in the race.
+    
+      - **Methods**
+        - **Constructor** `(Car(String name))`
+          - When a new Car is created, it joins the race.
+          - Increments `activeCars` if it does not exceed `MAX_CARS`.
+        - `leaveRace()`
+          - Decreases `activeCars` when a car leaves the race.
+        - `static getActiveCars()`
+          - Returns the number of currently active cars.
+    
+    Class: CarRaceMain
+    - **Methods**
+      - `main(String[] args)`
+        - Instantiate several `Car` objects.
+        - Show how `activeCars` is updated when cars join or leave.
+        - Demonstrate the effect of the `final` constant `MAX_CARS`.
+
+
+
+**Code Example**
+>[CarRaceMain.java](./statics/CarRaceMain.java) | [Car.java](./statics/Car.java)
+
+
+
 
 ## Collections: ArrayList
 
