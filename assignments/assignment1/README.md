@@ -1,4 +1,4 @@
-# Assignment 1: Design and Implementation of a Console-Based E-Commerce System using Java
+# Assignment1: Design and Implementation of a Console-Based E-Commerce System using Java
 
 ## Objective:
 The goal of this assignment is to design and develop a simple **console-based e-commerce system** using **Java classes** and **inheritance**.  
@@ -71,7 +71,7 @@ Students will practice object-oriented programming principles such as **class de
 ## Deliverables
 - Source code (`.java` files) organized in packages.
 - UML Class diagram (hand-drawn or tool-based).
-- Documentation report (pdf file).
+- Documentation report (PDF file).
 - Running console application to be demonstrated during oral exam.
 
 
@@ -83,7 +83,7 @@ The assignment will be evaluated based on two primary components:
 
 1) Project Implementation: The quality and effectiveness of the project you implement.
 
-2) Oral Exam Performance: Your performance during the oral exam, which will take place during your lab class in Week 8( the week starting October 20, 2026 ).
+2) Oral Exam Performance: Your performance during the oral exam, which will take place during your lab class in Week 8( the week starting October 20, 2025 ).
 
 - **Correctness** (Does the application meet the requirements?).
 - **Object-Oriented Design** (Proper use of class, inheritance, encapsulation).
