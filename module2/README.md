@@ -591,6 +591,9 @@ switch (grade) {
 * Each loop structure is used for different scenarios, but they are interchangeable. For instance: Anything 
 that can be written with a `for` loop can also be written with a `while` or a `do-while` loop, and vice versa.
 
+* Control Statements in Loops:
+    - `break` → Immediately terminates the loop, regardless of the loop condition, and transfers control to the statement following the loop.
+    - `continue` → Skips the current iteration and moves to the next one without exiting the loop entirely.
   
 #### for loop
 
@@ -665,6 +668,36 @@ do {
 // Step 2 → Loop body runs once unconditionally.
 // Step 3 → Condition is checked. If true, go back to Step 2, otherwise terminate the loop statement.
 
+~~~
+
+#### Control Statements in Loops
+
+~~~java
+int k = 1; // Initialization
+
+do {
+        // If k equals 5, skip this iteration
+        if (k == 5) {
+            k++; // Must update before continue to avoid infinite loop
+        continue; // Skip printing and move to the next iteration
+        }
+
+        // If k equals 8, stop the loop entirely
+        if (k == 8) {
+            System.out.println("Loop terminated early at iteration " + k);
+            break; // Exit the loop
+        }
+
+                System.out.println("Number of iteration is: " + k);
+        k++; // Update
+} while (k <= 10); // Condition (checked after body)
+
+// Lifecycle of a do-while loop with break and continue:
+// Step 1 → Initialization happens before the loop.
+// Step 2 → Loop body runs once unconditionally.
+// Step 3 → If 'continue' is used, skip the remaining body and move to next iteration.
+// Step 4 → If 'break' is used, exit the loop immediately.
+// Step 5 → After body execution, condition is checked; if true, loop repeats; otherwise, it terminates.
 
 ~~~
 
