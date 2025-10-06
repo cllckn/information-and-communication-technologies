@@ -11,11 +11,11 @@
     * [Object Candidates (Craig Larman)](#object-candidates-craig-larman)
     * [Classes and Objects](#classes-and-objects)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
-  * [Hands-on Exercise 2](#hands-on-exercise-2)
     * [Constructors](#constructors)
     * [Encapsulation](#encapsulation)
     * [Access Modifiers: Public, Private, Protected](#access-modifiers-public-private-protected)
     * [Getters and Setters](#getters-and-setters)
+  * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
   * [Hands-on Exercise 4](#hands-on-exercise-4)
     * [static and final keywords](#static-and-final-keywords)
@@ -124,47 +124,6 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
 * Place your Java files (`Circle.java`, `CircleMain.java` given above) under this package and run the application.
 ***
 
-
-**Code Example: Extend the Circle class**
-
-> Add a new attribute and functionality to the existing `Circle` class by following these steps:
-
-1. **Add a new attribute**
-  - Define a private field named `label` (type `String`) to store the label of the circle.
-
-2. **Update constructors**
-  - Modify the existing constructors to also initialize the `label` field.
-  - If no label is provided, set a default value such as `"Unnamed"`.
-
-3. **Add getter and setter methods**
-  - Define a `getLabel()` method to return the circle’s label.
-  - Define a `setLabel(String label)` method to update the label.
-
-4. **Add a method to calculate circumference**
-  - Define a new method `calculateCircumference()` using the formula:
-
-    ```
-    Circumference = 2 × π × radius
-    ```
-
-  - (Note: The circumference is the perimeter of a circle.)
-
-5. **Update the `toString()` method**
-  - Extend the existing `toString()` to include the `label` field in the output.
-
-6. **Test your changes**
-  - In the `CircleMain` class, instantiate a new `Circle` object with a label.
-  - Print the circle using `toString()`.
-  - Call and print the result of `calculateArea()` and `calculateCircumference()`.
-
-
-
-***
-## Hands-on Exercise 2
-* Extend the Circle application in accordance with the instructions given above.
-***
-
-
 ### Constructors
 - Special methods in a class used to initialize objects.
 - Have the same name as the class and do not have a return type.
@@ -204,6 +163,8 @@ public class Circle {
 }
 ~~~
 
+
+
 ### Getters and Setters
 - Methods used to access and update private attributes of a class.
 - **Getter** → returns the value of an attribute.
@@ -230,6 +191,56 @@ public class Circle {
   }
 }
 ~~~
+
+
+**Code Example: Extend the Circle class**
+
+> Add a new attribute and functionality to the existing `Circle` class by following these steps:
+
+1. **Add a new attribute**
+  - Define a private field named `label` (type `String`) to store the label of the circle.
+
+2. **Update constructors**
+  - Modify the existing constructors to also initialize the `label` field.
+  - If no label is provided, set a default value such as `"Unnamed"`.
+
+3. **Add getter and setter methods**
+  - Define a `getLabel()` method to return the circle’s label.
+  - Define a `setLabel(String label)` method to update the label.
+
+4. **Add a method to calculate circumference**
+  - Define a new method `calculateCircumference()` using the formula:
+
+    ```
+    Circumference = 2 × π × radius
+    ```
+
+  - (Note: The circumference is the perimeter of a circle.)
+
+5. **Update the `toString()` method**
+  - Extend the existing `toString()` to include the `label` field in the output.
+
+6. **Extend your application**
+- In the `CircleMain` class:
+- Use a loop structure (e.g., `while` or `do-while`) to repeatedly:
+  - Ask the user to enter the following details for the circle:
+    - `label` (String) → A name for the circle.
+    - `x` (int) → X coordinate of the circle’s center.
+    - `y` (int) → Y coordinate of the circle’s center.
+    - `radius` (int) → Radius of the circle.
+    - `color` (String) → The circle’s color.
+  - Instantiate a new `Circle` object with these values.
+  - Print the circle using `toString()`.
+  - Call and print the result of `calculateArea()` and `calculateCircumference()`.
+- After each iteration, ask the user whether they want to instantiate another circle.
+- Exit the loop if the user chooses not to continue.
+
+
+***
+## Hands-on Exercise 2
+* Extend the Circle application in accordance with the instructions given above.
+***
+
 
 
 ***
