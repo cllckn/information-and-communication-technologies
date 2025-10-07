@@ -17,11 +17,11 @@
     * [Getters and Setters](#getters-and-setters)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
-  * [Hands-on Exercise 4](#hands-on-exercise-4)
     * [static and final keywords](#static-and-final-keywords)
+    * [Scope of a Variable](#scope-of-a-variable)
   * [Collections: ArrayList](#collections-arraylist)
     * [ArrayList](#arraylist)
-  * [Hands-on Exercise 5](#hands-on-exercise-5)
+  * [Hands-on Exercise 4](#hands-on-exercise-4)
 <!-- TOC -->
 
 ---
@@ -115,7 +115,7 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
 
 
 **Code Example**
->[Circle.java](./circleobject/Circle.java) | [CircleMain.java](./circleobject/CircleMain.java)
+>[Circle.java](./circleobject/Circle.java) | [CircleMain,java](./circleobject/Circle.java)
 
 
 ***
@@ -134,6 +134,37 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
     - char → '\u0000'
     - Objects → null
     - boolean → false
+
+**Code Example**
+
+```java
+   //No-parameter constructor (Default constructor)
+   //This sets some default values for a new Circle object
+   public Circle() {
+        this.x = 0;         // Default X coordinate
+        this.y = 0;         // Default Y coordinate
+        this.radius = 1;    // Default radius (a minimal circle)
+        this.color = "Black"; // Default color
+    }
+    
+   //Overloaded full constructor: initializes all attributes
+   public Circle(int x, int y, int radius, String color) {
+        // "this" refers to the current object.
+        // since the parameters and member variables have the same name
+        // we must use this keyword to prevent ambiguity.
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = color;
+    }
+
+   // Overloaded constructor: initializes only coordinates
+   // Radius and color can be set later using setters
+    public Circle(int x1, int y) {
+        x = x1;
+        this.y = y;
+    }
+```
 
 ### Encapsulation
 - Principle of bundling data (attributes) and methods (functions) into a single unit (class).
@@ -206,7 +237,8 @@ public class Circle {
 
 3. **Add getter and setter methods**
   - Define a `getLabel()` method to return the circle’s label.
-  - Define a `setLabel(String label)` method to update the label.
+  - Define a `setLabel(String label)` method to update the label. 
+    Before assigning the label it must check for null value and convert to the uppercase.
 
 4. **Add a method to calculate circumference**
   - Define a new method `calculateCircumference()` using the formula:
@@ -235,6 +267,10 @@ public class Circle {
 - After each iteration, ask the user whether they want to instantiate another circle.
 - Exit the loop if the user chooses not to continue.
 
+**Code Example**
+>[Circle.java](./extendedcircleobject/Circle.java) | [CircleMain,java](./extendedcircleobject/CircleMain.java)
+
+![Extended circle](../resources/circle-object-extended.png)
 
 ***
 ## Hands-on Exercise 2
@@ -244,18 +280,10 @@ public class Circle {
 
 
 ***
-## Hands-on Exercise 3
-* Extend the Circle application in accordance with the improvements 
-given in the `Access Modifiers` and `Getters and Setters`sections.
-***
-
-
-***
-## [Hands-on Exercise 4](./exercises/README.md)
+## [Hands-on Exercise 3](./exercises/README.md)
 ***
 
 ### static and final keywords
-
 
 **static Keyword**
 
@@ -308,7 +336,66 @@ given in the `Access Modifiers` and `Getters and Setters`sections.
 >[CarRaceMain.java](./statics/CarRaceMain.java) | [Car.java](./statics/Car.java)
 
 
+### Scope of a Variable
 
+`Scope` defines where a variable can be accessed or used:
+
+Based on the following code example:
+
+1) Class/Static Scope (PI) – Declared with static; shared by all objects of the class. Accessible also without an instance.
+
+2) Instance/Object Scope (radius) – Declared without static; unique to each object. Accessible by all methods within that object.
+
+3) Method/Local Scope (area, radius parameter in Circle(double radius), numDots in printDots() ) – Declared inside a method; exists only while the method runs.
+
+4) Block Scope (i) – Declared inside a block (e.g., a loop); accessible only within that block.
+
+```java
+public class Circle {
+
+    // 1. Class/Static Variable (Shared Scope) 🌐
+    // Declared with the 'static' keyword. Shared by all Circle objects.
+    public static final double PI = 3.14159; 
+
+    // 2. Instance Variable (Object Scope) 🟠
+    // Unique to each object (instance) of the Circle class.
+    private double radius; 
+
+    // Constructor to initialize the Instance Variable
+    public Circle(double radius) { // (Method Scope) 
+        this.radius = radius;
+    }
+    
+    public double calculateArea() {
+        // 3. Local Variable (Method Scope) 
+        // Variable 'area' is created when the method starts and destroyed when it ends.
+        double area = PI * radius * radius; 
+        
+        System.out.println("--- Inside calculateArea() ---");
+        System.out.println("Local variable 'area' calculated.");
+        
+        // The local variable is returned, making its value available outside.
+        return area; 
+    }
+
+    public void printDots(int numDots) { //(Method Scope) 
+      System.out.println("\n--- Inside printDots() Method ---");
+      System.out.println("Printing " + numDots + " dots for radius " + this.radius + ":");
+  
+      // The variable 'i' has Block Scope.
+      // It is initialized and incremented only within the loop's execution.
+      for (int i = 0; i < numDots; i++) {
+        System.out.print(" . ");
+      }
+      
+      // ERROR DEMONSTRATION: 
+      // If you tried to access 'i' here, the compiler would throw an error 
+      // because 'i' is out of scope.
+      System.out.println("The value of i outside the loop is: " + i); 
+    }
+    
+}
+```
 
 ## Collections: ArrayList
 
@@ -350,7 +437,7 @@ given in the `Access Modifiers` and `Getters and Setters`sections.
 
 
 ***
-## [Hands-on Exercise 5](./exercises/README.md)
+## [Hands-on Exercise 4](./exercises/README.md)
 ***
 
 
