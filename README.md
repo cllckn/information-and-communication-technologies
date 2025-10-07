@@ -36,16 +36,19 @@ The course will cover the following topics:
 
 ### Module3: Object-Oriented Programming (OOP) I
 * Software Development Life Cycle (SDLC)
-* The Core Concepts of OOP: Classes and Objects
-* Constructors
-* Encapsulation
-* Access Modifiers: Public, Private, Protected
-* Getters and Setters
+* The Core Concepts of OOP
+  * Classes and Objects
+  * Constructors
+  * Encapsulation
+  * Access Modifiers: Public, Private, Protected
+  * Getters and Setters
+  * `static` and `final` Keywords
+  * Scope of a Variable
 * Collections: ArrayList
 * Hands-on Exercises
 
 ### Module 4: Object-Oriented Programming (OOP) II
-* Introduction to UML:  Class Diagrams
+* Introduction to UML:  Class Diagram
 * Inheritance
 * Object Relationships
 * Polymorphism
@@ -98,12 +101,12 @@ Students will be evaluated based on the following components:
 | Final Exam                    |  TBA     |
 ## Assignments and Exams Schedule
 
-| **Assignment**                | **Oral Exam Date**     | **Due Date**       |
-|-------------------------------|------------------------|--------------------|
-| Assignment 1                  | TBA                    | TBA            |
-| Assignment 1 Oral Examination | TBA                    | TBA            |
-| Assignment 2                  | TBA                    | TBA            |
-| Assignment 2 Oral Examination | TBA                    | TBA            |
+| **Assignment**                | **Oral Exam Date** | **Due Date**                |
+|-------------------------------|--------------------|-----------------------------|
+| Assignment 1                  | ---                | before the oral examination |
+| Assignment 1 Oral Examination | during your own lab class in Week 8( the week starting October 20, 2025 )                | ---                         |
+| Assignment 2                  | TBA                | TBA                         |
+| Assignment 2 Oral Examination | TBA                | TBA                         |
 
 
 ### Course Policies
