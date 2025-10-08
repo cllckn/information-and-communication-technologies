@@ -125,7 +125,8 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
 ***
 
 ### Constructors
-- Special methods in a class used to initialize objects.
+- Constructors are special methods that are called automatically when an object is instantiated.
+- They initialize the object by setting initial values and performing any necessary setup operations.
 - Have the same name as the class and do not have a return type.
 - Can take parameters to set initial values for object attributes.
 - In Java development, the compiler defines a **default constructor** if none is provided.
