@@ -115,7 +115,7 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
 
 
 **Code Example**
->[Circle.java](./circleobject/Circle.java) | [CircleMain,java](./circleobject/Circle.java)
+>[Circle.java](./circleobject/Circle.java) | [CircleMain.java](./circleobject/CircleMain.java)
 
 
 ***
@@ -442,3 +442,5 @@ public class Circle {
 ***
 ## [Hands-on Exercise 4](./exercises/README.md)
 ***
+
+
