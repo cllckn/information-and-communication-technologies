@@ -168,8 +168,10 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
 ```
 
 ### Encapsulation
-- Principle of bundling data (attributes) and methods (functions) into a single unit (class).
-- Restricts direct access to some of the object’s components (information hiding).
+- Encapsulation is principle of bundling data (attributes) and methods (functions) into a single unit (class).
+- Encapsulation restricts direct access to an object’s internal data and implementation details(information hiding).
+- By hiding internal details, encapsulation ensures that dependencies occur only through well-defined interfaces.
+- This reduces side effects: changes to the internal implementation do not break other parts of the code.
 - Improves maintainability and prevents unintended modifications.
 
 ### Access Modifiers: Public, Private, Protected
@@ -440,5 +442,3 @@ public class Circle {
 ***
 ## [Hands-on Exercise 4](./exercises/README.md)
 ***
-
-
