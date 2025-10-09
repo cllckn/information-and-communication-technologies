@@ -5,6 +5,7 @@
   * [Introduction to UML: Class Diagrams](#introduction-to-uml-class-diagrams)
   * [Inheritance](#inheritance)
     * [Method Overriding](#method-overriding)
+    * [Inheritance and Constructors](#inheritance-and-constructors)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Object Relationships](#object-relationships)
