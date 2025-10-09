@@ -4,6 +4,7 @@
 * [Module 4: Object-Oriented Programming (OOP) II](#module-4-object-oriented-programming-oop-ii)
   * [Introduction to UML: Class Diagrams](#introduction-to-uml-class-diagrams)
   * [Inheritance](#inheritance)
+    * [Method Overriding](#method-overriding)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Object Relationships](#object-relationships)
@@ -75,6 +76,12 @@ or even in different projects.
 - File → TextFile, AudioFile, VideoFile, ImageFile
 - Image → PNG, JPEG, GIF, BMP
 
+***We can validate an inheritance relationship between classes using the “is-a” test.***
+- `Car` is a `Vehicle`
+- `Circle` is a `Shape`
+- `Book` is a `Product`
+
+
 
 In UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfilled) triangle pointing toward the superclass.
 ```scss
@@ -93,10 +100,76 @@ In UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfill
 ### Method Overriding
 
 
-- Occurs when a subclass provides a new implementation for a method already defined in its superclass.
-- The method in the subclass must have the **same name, return type, and parameters** as in the superclass.
+- Occurs when a derived class provides a new implementation for a method already defined in its base class.
+- The method in the subclass must have the **same name, return type, and parameters** as in the base class.
 - The **@Override** annotation is recommended to ensure correctness.
-- The overridden method in the superclass can be called using **super.methodName()**.
+- The overridden method in the base class can be called using **super.methodName()** in the derived class.
+
+**Code Example**
+
+* The @Override annotation instructs the compiler to verify that the toString() method actually overrides a method from the base class.
+* If the method signature doesn’t match (for example, due to a typo or wrong parameters), the compiler will report an error, preventing misuse.
+* We override the toString() method because the base class version is partially useful — it provides some information, 
+but we need to extend or customize it to include details specific to the derived class.
+```java
+
+class Shape{
+    // ...  
+    public String toString() {
+      return "Shape at (" + x + "," + y + ") with color " + color;
+    }
+    // ...
+    
+}
+
+class Circle extends Shape{
+    // ...
+    // Overriding parent's toString to extend its behavior
+    @Override
+    public String toString() {
+      return super.toString() + ", Circle with radius " + radius;
+    }
+    
+    // ...
+}
+```
+
+
+### Inheritance and Constructors
+
+- Constructors are **not inherited** by derived classes.
+- When instantiating a derived class object, the **base class constructor** is always called first to initialize base members.
+- If not explicitly called, the compiler inserts a call to **`super()`** (the base class’s no-argument constructor).
+- If the base class has **no default constructor**, the derived class must explicitly call a suitable **`super(args)`** constructor.
+- This ensures proper **initialization along the inheritance chain**.
+
+**Code Example**
+
+```java
+
+class Shape{
+    // ...  
+    // Constructor: initializes common attributes
+    public Shape(int x, int y, String color) {
+      this.x = x;
+      this.y = y;
+      this.color = color;
+    }
+    // ...
+    
+}
+
+class Circle extends Shape{
+    // ...
+    // Constructor: initializes inherited + specific properties
+    public Circle(int x, int y, String color, double radius) {
+      super(x, y, color);   // Calls parent constructor
+      this.radius = radius;
+    }
+    
+    // ...
+}
+```
 
 
 ***
@@ -111,6 +184,9 @@ In UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfill
 ***
 ## [Hands-on Exercise 2](./exercises/README.md)
 ***
+
+
+
 
 ## Object Relationships
 
@@ -142,7 +218,9 @@ In UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfill
 User 1 —> 1 Address
 
 ```java
-class User { private Address address; }
+class User { 
+    private Address address; 
+}
 ```
 
 
@@ -154,7 +232,9 @@ class User { private Address address; }
 User 1 —> * Address
 
 ```java
-class User { private List<Address> addresses; }
+class User { 
+    private List<Address> addresses; 
+}
 
 ```
 
@@ -166,8 +246,13 @@ class User { private List<Address> addresses; }
 User 1 <—> 1 Address
 
 ```java
-class User { private Address address; }
-class Address { private User user; }
+class User { 
+    private Address address; 
+}
+
+class Address { 
+    private User user; 
+}
 
 ```
 
@@ -180,8 +265,13 @@ class Address { private User user; }
 User 1 <—> * Address
 
 ```java
-class User { private List<Address> addresses; }
-class Address { private User user; }
+class User { 
+    private List<Address> addresses; 
+}
+
+class Address { 
+    private User user; 
+}
 
 ```
 
