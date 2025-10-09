@@ -336,6 +336,9 @@ You can download the PostgreSQL JDBC driver from:
 5. **Close** the statement and connection to free resources.
 
 **Code Example**
+
+![DB Class Diagram](../resources/db-class-diagram.png)
+
 >[IDatabaseRepository.java](./dbinterface/IDatabaseRepository.java) |[PostgreSQLImplementation.java](./dbinterface/PostgreSQLImplementation.java) | [ClientService.java](./dbinterface/ClientService.java) |[DBInterfaceMain.java](./dbinterface/DBInterfaceMain.java)
 
 
@@ -362,6 +365,9 @@ You can download the PostgreSQL JDBC driver from:
 
 
 **Code Example**
+
+![DB Class Diagram](../resources/db-class-diagram.png)
+
 >[IDatabaseRepository.java](./dbinterface/IDatabaseRepository.java) |[MongoDBImplementation.java](./dbinterface/MongoDBImplementation.java) | [ClientService.java](./dbinterface/ClientService.java) |[DBInterfaceMain.java](./dbinterface/DBInterfaceMain.java)
 
 
