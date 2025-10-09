@@ -28,8 +28,10 @@
 - The level of detail depends on the **purpose of the model**.
 - As software becomes more complex, models are used to represent different aspects of them with required levels of detail.
 
-The **Unified Modeling Language™ (UML®)** is a standard visual modeling language for **business analysts, software architects and developers** used to **describe, 
-specify, design, and document** existing or new business processes, structure and behavior of artifacts of software systems (https://www.uml-diagrams.org/).
+The **Unified Modeling Language™ (UML®)** is a standard visual modeling language for **business analysts, 
+software architects and developers** used to **describe, 
+specify, design, and document** existing or new business processes, 
+structure and behavior of artifacts of software systems (https://www.uml-diagrams.org/).
 
 A **Class Diagram**: A Class Diagram is the most common diagram in UML and is essential for visualizing the static 
 structure of a system. It shows classes, their attributes, methods, and relationships.
@@ -73,10 +75,28 @@ or even in different projects.
 - File → TextFile, AudioFile, VideoFile, ImageFile
 - Image → PNG, JPEG, GIF, BMP
 
+
+In UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfilled) triangle pointing toward the superclass.
+```scss
+[Subclass] ─────────▷ [Superclass]
+        
+(solid line + hollow triangle)
+
+```
+
 ![Object Relationships](../resources/inheritance.png)
 
 **Code Example**
->[Shape.java](./inheritance/Shape.java) | [Circle,java](./inheritance/Circle.java) | [Rectangle.java](./inheritance/Rectangle.java) | [EquilateralTriangle.java](./inheritance/EquilateralTriangle.java) | [InheritanceMain.java](./inheritance/InheritanceMain.java)
+>[Shape.java](./inheritance/Shape.java) | [Circle.java](./inheritance/Circle.java) | [Rectangle.java](./inheritance/Rectangle.java) | [EquilateralTriangle.java](./inheritance/EquilateralTriangle.java) | [InheritanceMain.java](./inheritance/InheritanceMain.java)
+
+
+### Method Overriding
+
+
+- Occurs when a subclass provides a new implementation for a method already defined in its superclass.
+- The method in the subclass must have the **same name, return type, and parameters** as in the superclass.
+- The **@Override** annotation is recommended to ensure correctness.
+- The overridden method in the superclass can be called using **super.methodName()**.
 
 
 ***
