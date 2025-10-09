@@ -201,9 +201,12 @@ public class Circle {
 
 ### Getters and Setters
 - Methods used to access and update private attributes of a class.
-- **Getter** → returns the value of an attribute.
-- **Setter** → updates or modifies the value of an attribute.
 - Helps enforce encapsulation and allows validation before changing values.
+
+
+- **Getter** → returns the value of an attribute.
+- **Setter** → updates or modifies the value of an attribute. 
+We can apply any control logic such as validation, filtering, preprocessing/transformation etc.
 
 **Code Example**
 ~~~java
@@ -290,11 +293,11 @@ public class Circle {
 
 **static Keyword**
 
-- Normally, members (attributes and methods) belong to **objects**.
+- Normally, members (attributes and methods) belong to individual **objects** (such members are called instance variables and instance methods).
 - When declared with the **`static`** keyword, they belong to the **class itself**, not to any specific object.
 - This means:
-  - There is **only one copy** of a static variable shared across all objects.
-  - Static methods can be called using the class name (e.g., `Car.getActiveCars()`), without needing to instantiate an object.
+  - There is **only one copy** of a **static variable** shared across all objects.
+  - **Static methods** can be called using the class name (e.g., `Car.getActiveCars()`), without needing to instantiate an object.
 - Therefore, `static` makes members **class-level** instead of **object-level**.
 
 - Can be applied to:
@@ -371,7 +374,7 @@ public class Circle {
     
     public double calculateArea() {
         // 3. Local Variable (Method Scope) 
-        // Variable 'area' is created when the method starts and destroyed when it ends.
+        // Variable 'area' is defined when the method starts and destroyed when it ends.
         double area = PI * radius * radius; 
         
         System.out.println("--- Inside calculateArea() ---");
@@ -385,6 +388,7 @@ public class Circle {
       System.out.println("\n--- Inside printDots() Method ---");
       System.out.println("Printing " + numDots + " dots for radius " + this.radius + ":");
   
+      // 4. Block scope
       // The variable 'i' has Block Scope.
       // It is initialized and incremented only within the loop's execution.
       for (int i = 0; i < numDots; i++) {
@@ -435,7 +439,7 @@ public class Circle {
 
 
 **Code Example**
->[Book.java](./collections/Book.java) | [CollectionsMain,java](./collections/CollectionsMain.java)
+>[Book.java](./collections/Book.java) | [CollectionsMain.java](./collections/CollectionsMain.java)
 
 
 
