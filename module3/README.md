@@ -175,10 +175,20 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
 - Improves maintainability and prevents unintended modifications.
 
 ### Access Modifiers: Public, Private, Protected
-- Define the visibility of classes, methods, and variables:
-  - **public** → accessible from anywhere.
-  - **private** → accessible only within the same class.
-  - **protected** → accessible within the same package and by subclasses.
+**Define the visibility of classes, methods, and variables**
+
+- **For methods and variables:**
+  - `public` → accessible from anywhere.
+  - `private` → accessible only within the same class.
+  - `protected` → accessible within the same package and by subclasses.
+  - *(no modifier)* → accessible only within the same package.
+
+- **For classes:**
+  - `public` → accessible from anywhere.
+  - *(no modifier)* → accessible only within the same package.
+  - `private` → allowed only for inner classes; accessible only within the enclosing class.
+
+
 
 **Code Example**
 ~~~java
@@ -209,6 +219,7 @@ public class Circle {
 We can apply any control logic such as validation, filtering, preprocessing/transformation etc.
 
 **Code Example**
+
 ~~~java
 public class Circle {
     private int radius;
@@ -237,8 +248,11 @@ public class Circle {
 1. **Add a new attribute**
   - Define a private field named `label` (type `String`) to store the label of the circle.
 
-2. **Update constructors**
-  - Modify the existing constructors to also initialize the `label` field.
+2. **Define constructors**
+  - Define three constructors:
+    - i) one with no input parameters,
+    - ii) one with x and y input parameters, and
+    - iii) one with all parameters.
   - If no label is provided, set a default value such as `"Unnamed"`.
 
 3. **Add getter and setter methods**
@@ -262,11 +276,11 @@ public class Circle {
 - In the `CircleMain` class:
 - Use a loop structure (e.g., `while` or `do-while`) to repeatedly:
   - Ask the user to enter the following details for the circle:
-    - `label` (String) → A name for the circle.
     - `x` (int) → X coordinate of the circle’s center.
     - `y` (int) → Y coordinate of the circle’s center.
     - `radius` (int) → Radius of the circle.
     - `color` (String) → The circle’s color.
+    -  `label` (String) → A name for the circle.
   - Instantiate a new `Circle` object with these values.
   - Print the circle using `toString()`.
   - Call and print the result of `calculateArea()` and `calculateCircumference()`.
@@ -310,6 +324,8 @@ public class Circle {
   - **Variables** → value cannot be changed once assigned.
   - **Methods** → cannot be overridden in derived classes.
   - **Classes** → cannot be extended (no subclasses).
+
+
 
 **Example: Requirement List for A Car Race Application**
     
