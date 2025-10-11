@@ -84,9 +84,9 @@ or even in different projects.
 
 
 
-In UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfilled) triangle pointing toward the superclass.
+In UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfilled) triangle pointing toward the Base Class.
 ```scss
-[Subclass] ─────────▷ [Superclass]
+[Derived Class] ─────────▷ [Base Class]
         
 (solid line + hollow triangle)
 
@@ -108,12 +108,14 @@ In UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfill
 
 **Code Example**
 
-* The @Override annotation instructs the compiler to verify that the toString() method actually overrides a method from the base class.
-* If the method signature doesn’t match (for example, due to a typo or wrong parameters), the compiler will report an error, preventing misuse.
-* We override the toString() method because the base class version is partially useful — it provides some information, 
-but we need to extend or customize it to include details specific to the derived class.
-```java
+* The @Override annotation instructs the compiler to verify that the toString() method actually overrides a method 
+from the base class.
+* If the method signature doesn’t match (for example, due to a typo or wrong parameters), the compiler will report an 
+error, preventing misuse.
+* The toString() method is overridden because the base class version is only partially useful — some information is 
+provided, but it needs to be extended or customized to include additional details specific to the derived class.```java
 
+```java
 class Shape{
     // ...  
     public String toString() {
@@ -360,9 +362,9 @@ toString() and calculateArea()  methods.
 - Provides **loose coupling**: changes in the implementation do not affect client code.
 - Increases **code reuse** on the client side.
 
-- By programming to an interface rather than a concrete class, we **weaken the dependency** between client and implementation.
-- This ensures that changes in the implementation do not affect the client code.
-- The client only relies on the **contract** (methods defined in the interface), not the specific details of how they are executed.
+- By programming to an interface rather than a concrete class, we **weaken the dependency** between client and 
+implementation. This ensures that changes in the implementation do not affect the client code. The client only relies 
+on the **contract** (methods defined in the interface), not the specific details of how they are executed.
 
 
 
