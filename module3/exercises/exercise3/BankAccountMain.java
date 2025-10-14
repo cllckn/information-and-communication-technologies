@@ -7,7 +7,7 @@ public class BankAccountMain {
 
         BankAccount account1 = new BankAccount();
 
-        BankAccount account2 = new BankAccount("2","Jane Roe",30.0,"Checking");
+        BankAccount account2 = new BankAccount("0000000200","Jane Roe",30.0,"Checking");
 
         System.out.println(account1);
         System.out.println(account2);
