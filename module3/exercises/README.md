@@ -19,12 +19,12 @@ We want to develop a simple Bank Account application. The account should have th
 2. **Identify attributes (fields/properties)**
   - Determine which data should be stored in the class (account number, holder name, balance, account type, etc.).
 
-3. **Identify methods (behaviors/functions)**
-  - Determine which actions the account should perform (deposit, withdraw, display balance, etc.).
-
-4. **Define constructors**
+3. **Define constructors**
   - Include constructors to initialize account attributes.
   - Provide a default constructor and a parameterized constructor with all key attributes.
+
+4. **Identify methods (behaviors/functions)**
+  - Determine which actions the account should perform (deposit, withdraw, display balance, etc.).
 
 5. **Apply encapsulation**
   - Declare attributes as `private`.
@@ -38,7 +38,7 @@ We want to develop a simple Bank Account application. The account should have th
   - Provide a method to display account details, including account number, holder name, account type, and balance.
 
 8. **Test your class**
-  - In a main class (e.g., `BankAccountMain`), instantiate multiple Bank Account objects.
+  - In the main method of a class (e.g., `BankAccountMain`), instantiate multiple Bank Account objects.
   - Deposit and withdraw amounts using the methods.
   - Display account details and balance after each operation.
 
@@ -52,7 +52,7 @@ Now, you will use this class with **Java Collections** (`ArrayList`) to perform 
 ### Instructions
 
 **Extend your application**
-- In the `BankAccountMain` class:
+- In the main method of the `BankAccountMain` class:
 - Use a loop structure (e.g., `while` or `do-while`) to repeatedly:
    - Ask the user to enter the bank account details (i.e.;**account number**, **account holder name**... )
    - Instantiate a new object with these values.
@@ -60,8 +60,9 @@ Now, you will use this class with **Java Collections** (`ArrayList`) to perform 
    - Add the object into a collection (ArrayList).
 - After each iteration, ask the user whether they want to instantiate another account.
 - Exit the loop if the user chooses not to continue.
+- Change the loop type e.g. do-while, while, for
 
-* Traverse the `ArrayList` and display account details.
+* Iterate through the `ArrayList` and display accounts.
     - Use both **for loop** and **enhanced for loop** to practice iteration.
 * Compute the **total balance** of all accounts in the list.
     - Do this using a loop.
