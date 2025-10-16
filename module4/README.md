@@ -8,7 +8,7 @@
     * [Inheritance and Constructors](#inheritance-and-constructors)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
-  * [Object Relationships](#object-relationships)
+  * [Class Relationships](#class-relationships)
     * [Inheritance ("is a"):](#inheritance-is-a)
     * [Dependency ("uses"):](#dependency-uses)
     * [Association ("has a")](#association-has-a)
@@ -191,19 +191,33 @@ class Circle extends Shape{
 
 
 
-## Object Relationships
+## Class Relationships
+
+* Programs are composed of the modules and interaction between them. In object-oriented design, classes often 
+interact through a **provider–consumer relationship**.  
+* The **provider** (or **low-level**) class offers certain functionality or services,  
+while the **consumer** (or **high-level**) class depends on and uses that functionality.  
+* This separation supports **loose coupling** and makes the code easier to maintain and extend.
+
+
+| Class Name  | Role / Description                                           |
+|-------------|--------------------------------------------------------------|
+| **Module to be used** | **Provider**, **Dependency**, **Low-level class**, **Service** |
+|**Module that will use it**    | **Consumer**, **Dependent class**, **High-level class**, **Client** |
+
 
 ### Inheritance ("is a"):
-    Describes a relationship where a class is a subclass of another class.
+    Describes a relationship where a class is a derived from a base class.
 
 ### Dependency ("uses"):
     Describes a temporary relationship where one class uses another to perform a task.
+    Can be validated using the "uses" test.
 
 ### Association ("has a")
     Describes a relationship where one class has another class as an attribute. 
-    we can use "has a" term to describe this relationship.
+    We can use a "has a" test to validate this relationship.
     Derivatives are composition (strong ownership) and aggregation (weak ownership).
- 
+
 
 
 ![Object Relationships](../resources/OOP-relationships.png)
@@ -212,7 +226,9 @@ class Circle extends Shape{
 > [User.java](./relationships/User.java) | [Customer.java](./relationships/Customer.java) |[Employee.java](./relationships/Employee.java) | [Address.java](./relationships/Address.java) | [RelationshipsMain.java](./relationships/RelationshipsMain.java)
 
 
+
 ### Different Types of Associations: Between `User` and `Address` Classes
+
 
 **Unidirectional (One-to-One)**
 - User has one Address.
@@ -310,7 +326,7 @@ class Address {
 
 
 
-![Object Relationships](../resources/polymorphism.png)
+![Polymorphism](../resources/polymorphism.png)
 
 **Code Example**
 > [PolymorphismMain.java](./polymorphism/PolymorphismMain.java) | [ShapeRenderer.java](./polymorphism/ShapeRenderer.java)
@@ -333,7 +349,7 @@ class Address {
 - Primarily used for **inheritance**, providing a shared framework.
 - Enhance **code reuse**, simplify **changes and extensions**, and support **polymorphism**.
 
-![Object Relationships](../resources/abstract-class.png)
+![Abstrac Classes](../resources/abstract-class.png)
 
 
 **Code Example**
