@@ -200,10 +200,10 @@ while the **consumer** (or **high-level**) class depends on and uses that functi
 * This separation supports **loose coupling** and makes the code easier to maintain and extend.
 
 
-| Class Name  | Role / Description                                           |
-|-------------|--------------------------------------------------------------|
-| **Module to be used** | **Provider**, **Dependency**, **Low-level class**, **Service** |
-|**Module that will use it**    | **Consumer**, **Dependent class**, **High-level class**, **Client** |
+| Classes                    | Role / Description                                           |
+|----------------------------|--------------------------------------------------------------|
+| **Class to be used**       | **Provider**, **Dependency**, **Low-level class**, **Service** |
+| **Class that will use it** | **Consumer**, **Dependent class**, **High-level class**, **Client** |
 
 
 ### Inheritance ("is a"):
