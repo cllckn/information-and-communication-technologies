@@ -1,15 +1,12 @@
-package cc.ku.ict.modul4.polymorphism;
+package cc.ku.ict.module4.polymorphism;
 
-import cc.ku.ict.modul4.inheritance.Circle;
-import cc.ku.ict.modul4.inheritance.Rectangle;
-import cc.ku.ict.modul4.inheritance.Shape;
+import cc.ku.ict.module4.inheritance.Circle;
+import cc.ku.ict.module4.inheritance.Rectangle;
+import cc.ku.ict.module4.inheritance.Shape;
 
 public class ShapeRenderer {
 
     // Polymorphism allows client code (ShapeRenderer) to handle different shapes without modification.
-    // The static keyword makes a method a class-level method, which can be called without instantiating an object
-    // Static Fields (member variables): Shared among all instances of the class. There is only one copy of the static field.
-    // Static Methods: Can be called on the class itself, not requiring an instance. They can only access other static members directly.
     public void render1(Shape shape) {
         System.out.println(shape);
         //System.out.println("Area = " + shape.calculateArea());
