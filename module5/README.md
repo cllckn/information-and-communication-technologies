@@ -6,6 +6,11 @@
   * [Database System](#database-system)
   * [Essential Features of a Database Management System (DBMS)](#essential-features-of-a-database-management-system-dbms)
   * [Database Development Lifecycle](#database-development-lifecycle)
+  * [Database Development Lifecycle (DDLC)](#database-development-lifecycle-ddlc)
+    * [1. Requirement Analysis](#1-requirement-analysis)
+    * [2. Design](#2-design)
+    * [3. Implementation](#3-implementation)
+    * [4. Maintenance](#4-maintenance)
     * [Business Rules](#business-rules)
     * [Data Model: Entity–Relationship (ER) Model](#data-model-entityrelationship-er-model)
     * [Advantages of Data Modeling](#advantages-of-data-modeling)
@@ -48,7 +53,7 @@ structure of the database).
 - **DBMS (Database Management System)** 
 - **Database clients** = Application software or database client tools that interact with the DBMS.
 
-<img src="../resources/db-integration.png" width="300" alt="Database System">
+<img src="../resources/db-integration.png" width="400" alt="Database System">
 
 
 ## Essential Features of a Database Management System (DBMS)
@@ -73,25 +78,49 @@ structure of the database).
 
 ## Database Development Lifecycle
 
-When developing databases, it is important to follow the **Database Development Lifecycle**, which defines the stages required to design and implement a well-structured database system.
+The **Database Development Lifecycle** is a structured process used to design and build high-quality databases in a 
+systematic and efficient way. It breaks database development into distinct phases, each with specific goals and 
+deliverables. 
 
-1. **Requirements Analysis**
-  - Identify and document business needs, processes, and data requirements.
-  - Define **business rules** that determine how data should be used and constrained.
+The Database Development Lifecycle typically consists of four fundamental phases.
 
-2. **Conceptual Design**
-  - Develop a **high-level data model** (usually an **Entity-Relationship (ER) diagram**) to represent entities, attributes, and relationships.
-  - Focus on what data is important — not how it will be stored.
 
-3. **Logical Design**
-  - Transform the conceptual model into a **logical schema** (e.g., relational schema).
-  - Define **tables, columns, primary keys, foreign keys, and constraints** according to the chosen database model (relational, NoSQL, etc.).
+### 1. Requirement Analysis
+- Identify and document **business needs**, **processes**, and **data requirements**.
+- Define **business rules** that govern how data should be used and constrained.
 
-4. **Implementation**
-  - Build and configure the database using appropriate **DBMS tools and SQL (or NoSQL commands)**.
-  - Load initial data and verify structural and integrity rules.
+**Roles Involved:** Business Analysts, Project Managers, Stakeholders/Clients  
+**Output:** Requirements Specification Document
 
-> These stages ensure that the database aligns with business objectives, supports data consistency, and remains scalable and maintainable.
+
+
+### 2. Design
+- Develop the **data model** to represent entities, attributes, and relationships (ER Diagram).
+- Convert the conceptual model into a **logical schema** with **tables, columns, primary/foreign keys, and constraints**.
+- Ensure that the design supports business rules, normalization, and integrity requirements.
+
+**Roles Involved:** Data Architects, Database Designers, Data Modelers  
+**Output:** Database Design Document (ER Diagram + Logical Schema)
+
+
+
+### 3. Implementation
+- Build and configure the database using **DBMS tools and SQL (or NoSQL commands)**.
+- Populate the database with initial data and test for **structural integrity and performance**.
+
+**Roles Involved:** Database Developers, Database Administrators (DBAs)  
+**Output:** Operational Database
+
+
+
+### 4. Maintenance
+- Monitor database performance and ensure **availability, security, and reliability**.
+- Apply **updates, optimizations, and patches** as needed.
+- Handle **data backup, recovery, and tuning** tasks over time.
+
+**Roles Involved:** Database Administrators (DBAs), System Administrators  
+**Output:** Stable, Optimized, and Secure Database System
+
 
 ![Database System](../resources/db-development-lifecycle.png)
 
@@ -99,8 +128,10 @@ When developing databases, it is important to follow the **Database Development 
 
 ### Business Rules
 
+Business rules can be seen as a summarized version of the requirements list, focusing on data.
 **Business rules** summarize and formalize the data-related aspects of business requirements.  
-They are **statements that define or constrain** how a business operates, guiding how data is structured and managed within a database.
+They are **statements that define or constrain** how a business operates, guiding how data is structured and
+managed within a database.
 
 **Sources of Business Rules**
 
