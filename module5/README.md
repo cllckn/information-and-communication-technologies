@@ -37,17 +37,18 @@
 
 ## Introduction to Database Management Systems
 - A **database** is a collection of related data designed for efficient storage, retrieval, management, and manipulation.
-- A **Database Management System (DBMS)** is tailored software that manages databases and provides interfaces for database 
-clients to store, retrieve, and manipulate data efficiently.
+- A **Database Management System (DBMS)** is specialized software that controls and manages databases and 
+provides interfaces for database clients to store, retrieve, and manipulate data efficiently.
 
 
 ## Database System
 A **Database System** consists of three main parts:
-- **Database** = Raw Data + Metadata (used to define relationships and data characteristics, forming the logical structure of the database)..
+- **Database** = Raw Data + Metadata (used to define relationships and data characteristics, forming the logical 
+structure of the database).
 - **DBMS (Database Management System)** 
-- **Clients** = Application software and users that interact with the DBMS.
+- **Database clients** = Application software or database client tools that interact with the DBMS.
 
-![Database System](../resources/db-integration.png)
+<img src="../resources/db-integration.png" width="300" alt="Database System">
 
 
 ## Essential Features of a Database Management System (DBMS)
