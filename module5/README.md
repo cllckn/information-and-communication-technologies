@@ -6,7 +6,6 @@
   * [Database System](#database-system)
   * [Essential Features of a Database Management System (DBMS)](#essential-features-of-a-database-management-system-dbms)
   * [Database Development Lifecycle](#database-development-lifecycle)
-  * [Database Development Lifecycle (DDLC)](#database-development-lifecycle-ddlc)
     * [1. Requirement Analysis](#1-requirement-analysis)
     * [2. Design](#2-design)
     * [3. Implementation](#3-implementation)
@@ -346,7 +345,8 @@ Database drivers typically provide the following core capabilities:
 ### Database Operations with Java and PostgreSQL
 
 Java applications can seamlessly interact with PostgreSQL databases using **JDBC** (Java Database Connectivity).  
-JDBC is a **standard API** that defines a set of interfaces and classes for connecting to relational databases, sending SQL statements, and processing results.
+JDBC is a **standard API** that defines a set of interfaces and classes for connecting to relational databases, 
+sending SQL statements, and processing results.
 
 It provides:
 - **Connection management**
@@ -361,24 +361,45 @@ You can download the PostgreSQL JDBC driver from:
 
 
 ### Example Workflow (Conceptual)
-1. **Load the driver**(library or JAR file) in the project environment so that the Java application can communicate with the database.
-2. **Establish a connection** to the PostgreSQL database using a connection string (URL, username, and password).
+1. **Load the driver**(library or JAR file) in the project environment so that the Java application can 
+communicate with the database.
+2. **Establish a connection** to the PostgreSQL database using a connection string (URL(socket address), username, and password).
 3. **Define and execute SQL statements**.
 4. **Process the results** returned by the query.
 5. **Close** the statement and connection to free resources.
 
+
+***The Repository Pattern abstracts the logic of data access and storage from the business logic of an application.
+It provides a clean separation between the domain layer and the data access layer.
+Repositories act as mediators between the business logic and the data source (e.g., database, API, or file).
+This abstraction improves maintainability, testability, and supports dependency inversion.***
+
+
 **Code Example**
+
+```sql
+CREATE DATABASE ecommercedb;
+```
+
+```sql
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price DOUBLE PRECISION CHECK (price >= 0)
+);
+```
+
 
 ![DB Class Diagram](../resources/db-class-diagram.png)
 
->[IDatabaseRepository.java](./dbinterface/IDatabaseRepository.java) |[PostgreSQLImplementation.java](./dbinterface/PostgreSQLImplementation.java) | [ClientService.java](./dbinterface/ClientService.java) |[DBInterfaceMain.java](./dbinterface/DBInterfaceMain.java)
+>[ProductRepositoryMain.java](./repository/ProductRepositoryMain.java) | [IProductRepository.java](./repository/IProductRepository.java) | [ClientService.java](./repository/ClientService.java) | [Product.java](./repository/Product.java) | [ProductPostgresqlImplementation.java](./repository/ProductPostgresqlImplementation.java) | [ProductMongodbImplementation.java](./repository/ProductMongodbImplementation.java)
 
 
 ***
 ## Hands-on Exercise 1
-1. Import the `Northwind` database into the `PostgreSQL`.
-2. Run the program given above that performs operations on the  PostgreSQL database.
-3. Perform and modify each database operation (CRUD).
+1. Define the `ecommercedb` database and `products` table in `PostgreSQL`.
+2. Run the program given above that performs operations on the  PostgreSQL database (Check the db connection parameters).
+3. Define `findByName(String name)` and `findByPrice(double price)` methods and modify main method to test them.
 ***
 
 
@@ -400,30 +421,18 @@ You can download the PostgreSQL JDBC driver from:
 
 ![DB Class Diagram](../resources/db-class-diagram.png)
 
->[IDatabaseRepository.java](./dbinterface/IDatabaseRepository.java) |[MongoDBImplementation.java](./dbinterface/MongoDBImplementation.java) | [ClientService.java](./dbinterface/ClientService.java) |[DBInterfaceMain.java](./dbinterface/DBInterfaceMain.java)
+>[ProductRepositoryMain.java](./repository/ProductRepositoryMain.java) | [IProductRepository.java](./repository/IProductRepository.java) | [ClientService.java](./repository/ClientService.java) | [Product.java](./repository/Product.java) | [ProductPostgresqlImplementation.java](./repository/ProductPostgresqlImplementation.java) | [ProductMongodbImplementation.java](./repository/ProductMongodbImplementation.java)
 
 
 
 
 ***
 ## Hands-on Exercise 2
-1. Construct MongoDB database `northwind` and define collection `customers` with the following structure:
+1. Construct MongoDB database `ecommercedb` and define collection `products` with the following structure:
 
 ```json
-{"_id":{"$numberInt":"1"},
-  "name":"Kairat Yernar",
-  "email":"ky@example.com",
-  "country":"UpdatedLand",
-  "orders":[
-            {"orderId":101,"product":"Laptop","price":1200},
-            {"orderId":102,"product":"Mouse","price":25}
-  ],
-  "isActive":false,
-  "createdAt":"2025-10-05T10:00:00Z",
-  "updatedAt":"2025-10-05T16:54:39.795195Z"
-}
-
+{"id":{"$numberInt":"3581"},"name":"Laptop","price":{"$numberDouble":"1500.0"}}
 ```
 2. Run the program given above that performs operations on the  MongoDB database.
-3. Perform and modify each database operation (CRUD).
+3. Define `findByName(String name)` and `findByPrice(double price)` methods and modify main method to test them.
 ***
