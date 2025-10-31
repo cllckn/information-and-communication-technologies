@@ -290,7 +290,7 @@ public class Circle {
 **Code Example**
 >[Circle.java](./extendedcircleobject/Circle.java) | [CircleMain,java](./extendedcircleobject/CircleMain.java)
 
-![Extended circle](../resources/circle-object-extended.png)
+<img src="../resources/circle-object-extended.png" width="300">
 
 ***
 ## Hands-on Exercise 2
