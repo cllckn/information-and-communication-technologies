@@ -66,7 +66,7 @@ We want to design a system that keeps information about **users**, **customers**
 - Practice **association** relationships between classes.
 - Understand how objects interact in real-world scenarios.
 
-![](../../resources/interface-exercise.png)
+
 
 ## Requirement List
 Extend the system from **Hands-on Exercise 2** to include additional entities and relationships:
@@ -120,7 +120,7 @@ Extend the system from **Hands-on Exercise 2** to include additional entities an
 - Demonstrate unidirectional one-to-one and one-to-many relationships using abstraction.
 - Extend the system to support new features without modifying existing classes (Open/Closed Principle).
 
-
+![](../../resources/interface-exercise.png)
 
 ## Requirements
 
