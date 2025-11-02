@@ -29,6 +29,8 @@ We want to design a system that keeps information about **users**, **customers**
 
 ## Tasks
 
+Define a package named `cc.ku.ict.module4.exercises.exercise2`.
+
 1**Define Classes**
     - `User` (base class)
     - `Customer` (derived class)
@@ -85,7 +87,8 @@ Extend the system from **Hands-on Exercise 2** to include additional entities an
 
 ## Tasks
 
-1. Extend the `User` class from Exercise 2 as `ExtendedUser` without modifying the original User class.
+1. Define a package named `cc.ku.ict.module4.exercises.exercise3`.
+2. Extend the `User` class from Exercise 2 as `ExtendedUser` without modifying the original User class.
 
 2. **Enhance Classes**
     - Add `Address` class.
@@ -98,9 +101,9 @@ Extend the system from **Hands-on Exercise 2** to include additional entities an
     - Override `toString()` methods to include association info.
 
 3. **Testing**
-    - Instantiate two ExtendedUser objects.
-    - Assign an Address to each users.
-    - Assign multiple Images to each User.
+    - Instantiate an ExtendedUser object.
+    - Assign an Address to the user.
+    - Assign multiple Images to the user.
     - Print all objects to show inherited properties and associations.
 
 
@@ -117,18 +120,17 @@ Extend the system from **Hands-on Exercise 2** to include additional entities an
 - Reinforce inheritance and association.
 - Apply the Dependency Inversion Principle.
 - Use interfaces to weaken dependencies between classes.
-- Demonstrate unidirectional one-to-one and one-to-many relationships using abstraction.
 - Extend the system to support new features without modifying existing classes (Open/Closed Principle).
 
 ![](../../resources/interface-exercise.png)
 
-## Requirements
+## Tasks
 
-1. Define interfaces instead of directly depending on concrete classes:
-    - Define an interface `IAddress` and let `Address` implement it.
-    - Define an interface `IImage` and let `Image` implement it.
+1. Copy all the files developed in Exercise3 into the `cc.ku.ict.module4.exercises.exercise6` package.
 
-2. Extend the existing `User` class (from Exercise 2) as `ExtendedUser` without modifying the original `User` class.
+2. Define interfaces instead of directly depending on concrete classes:
+    - Add a displayInfo() method in the Address class. Define an interface `IAddress` and let `Address` implement it.
+    - Add a displayInfo() method in the Image class. Define an interface `IImage` and let `Image` implement it.
 
 3. Associations (implemented using interfaces):
     - `ExtendedUser` has a unidirectional one-to-one association with `IAddress`.
@@ -136,7 +138,7 @@ Extend the system from **Hands-on Exercise 2** to include additional entities an
 
 4. Constructor chaining:
     - Use `super(...)` to initialize inherited properties.
-    - Initialize `address` and image list in the derived class.
+    - Initialize `address` and `images` list in the derived class.
 
 5. Override the `toString()` method in all classes to display detailed object information, including associated interface-based objects.
 
