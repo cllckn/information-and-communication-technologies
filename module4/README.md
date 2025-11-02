@@ -106,14 +106,17 @@ In UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfill
 - The **@Override** annotation is recommended to ensure correctness.
 - The overridden method in the base class can be called using **super.methodName()** in the derived class.
 
+***Best Practices / Performance Tips***
+* The @Override annotation instructs the compiler to verify that the toString() method actually overrides a method
+  from the base class.
+* If the method signature doesn’t match (for example, due to a typo or wrong parameters), the compiler will report an
+  error, preventing misuse.
+* The toString() method is overridden because the base class version is only partially useful — some information is
+  provided, but it needs to be extended or customized to include additional details specific to the derived class.```java
+
+
 **Code Example**
 
-* The @Override annotation instructs the compiler to verify that the toString() method actually overrides a method 
-from the base class.
-* If the method signature doesn’t match (for example, due to a typo or wrong parameters), the compiler will report an 
-error, preventing misuse.
-* The toString() method is overridden because the base class version is only partially useful — some information is 
-provided, but it needs to be extended or customized to include additional details specific to the derived class.```java
 
 ```java
 class Shape{
@@ -383,8 +386,7 @@ implementation. This ensures that changes in the implementation do not affect th
 on the **contract** (methods defined in the interface), not the specific details of how they are executed.
 
 
-
-![Object Relationships](../resources/interface.png)
+<img src="../resources/interface.png" width="700">
 
 
 **Code Example**
