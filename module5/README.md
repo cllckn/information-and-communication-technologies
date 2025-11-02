@@ -12,7 +12,7 @@
     * [4. Maintenance](#4-maintenance)
     * [Business Rules](#business-rules)
     * [Data Model: Entity–Relationship (ER) Model](#data-model-entityrelationship-er-model)
-    * [Advantages of Data Modeling](#advantages-of-data-modeling)
+    * [Benefits of Data Modeling](#benefits-of-data-modeling)
     * [The Data Modeling Process](#the-data-modeling-process)
     * [Key Components of a Data Model](#key-components-of-a-data-model)
   * [Relational Databases and Basic SQL](#relational-databases-and-basic-sql)
@@ -27,12 +27,16 @@
       * [INSERT INTO](#insert-into)
       * [**UPDATE**](#update)
       * [**DELETE**](#delete)
+  * [NoSQL Databases](#nosql-databases)
+    * [Comparison with Relational DB:](#comparison-with-relational-db)
+    * [Main Types of NoSQL Databases](#main-types-of-nosql-databases)
   * [Using a Programming Language to Interact With a Database](#using-a-programming-language-to-interact-with-a-database)
     * [Database Drivers – Core Functions](#database-drivers--core-functions)
     * [Database Operations with Java and PostgreSQL](#database-operations-with-java-and-postgresql)
-    * [Example Workflow (Conceptual)](#example-workflow-conceptual)
+      * [Example Workflow (Conceptual)](#example-workflow-conceptual)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
-  * [NoSQL Databases](#nosql-databases)
+    * [Database Operations with Java and MongoDB](#database-operations-with-java-and-mongodb)
+      * [Example Workflow (Conceptual)](#example-workflow-conceptual-1)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
 <!-- TOC -->
 
@@ -127,10 +131,13 @@ The Database Development Lifecycle typically consists of four fundamental phases
 
 ### Business Rules
 
-Business rules can be seen as a summarized version of the requirements list, focusing on data.
-**Business rules** summarize and formalize the data-related aspects of business requirements.  
-They are **statements that define or constrain** how a business operates, guiding how data is structured and
-managed within a database.
+Specific statements that define or constrain business data and operations. They often originate from 
+requirement list (business requirements).
+
+* Data-oriented business rules → Define how data is structured and related (e.g., entities, attributes, relationships, 
+constraints). They are used to design and build the database.
+* Process-oriented business rules → Define business actions or workflows (e.g., approval steps, procedures). They are
+  implemented in application logic, not database structure.
 
 **Sources of Business Rules**
 
@@ -138,7 +145,7 @@ managed within a database.
 - **Managers and policymakers**
 - **Written documentation** such as standards, regulations, and procedures
 
-Directly consulting **end users** is often the most effective approach, as it provides practical insights into real-world data needs.
+Direct interaction with **end users** ensures a clearer understanding of actual data needs and system expectations.
 
 **Examples of Business Rules**
 
@@ -148,7 +155,7 @@ Directly consulting **end users** is often the most effective approach, as it pr
 - An order must include at least one product.
 - A customer can place multiple orders, but each order is placed by only one customer.
 
-Business rules help identify **entities, attributes, relationships, and constraints** when developing the **Entity-Relationship (ER) model**.  
+Data-oriented business rules help identify **entities, attributes, relationships, and constraints** when developing the **Entity-Relationship (ER) model**.  
 Once these rules are defined, the next step is to **model the database** to implement them effectively.
 
 
@@ -158,13 +165,12 @@ Once these rules are defined, the next step is to **model the database** to impl
 
 A **data model** is a conceptual tool used to represent complex real-world data structures in a simplified, often **graphical**, form.
 
-### Advantages of Data Modeling
-1. **Improved Communication**
-  - Facilitates clear communication between database designers, application developers, and end users.
-  - Ensures everyone understands and agrees on the database structure **before implementation**.
-
-2. **Simplified Implementation**
-  - Provides a **blueprint** for database design, making development and configuration more straightforward.
+### Benefits of Data Modeling
+1. **Improves Communication**
+  - Promotes clear communication between database designers, developers, and end users. 
+  - Ensures that all stakeholders share a common understanding of the data structure before implementation.
+2. **Guides Database Implementation**
+  - Directs the database development process and reduces implementation errors.
 
 ### The Data Modeling Process
 Data modeling is an **iterative** process:
@@ -188,10 +194,12 @@ Data modeling is an **iterative** process:
   - Each email address must be unique in the system.
 
 > **In summary:**  
-> Business rules drive the data model, and the ER model visualizes these rules to form the logical structure of the database.
+> Business rules form the foundation of the data model, and the ER model visualizes these rules to form the conceptual and 
+logical structure of the database.
 
 
 ## Relational Databases and Basic SQL
+
 - **Relational Database**: Organizes data into **tables** (rows = records, columns = attributes).
 - Relationships established using **keys**:
   - **Primary Key** → unique identifier of a row.
@@ -218,7 +226,7 @@ pgAdmin is the most commonly used graphical management tool for PostgreSQL.
 #### **Importing and Exporting Sample Databases**
 
 * **Northwind Sample Database**
-  - A well-known example database that simulates a trading company's operations.
+  - A well-known example database that represents the data structure of a trading company.
   - Can be imported using **pgAdmin**.
   - [Download](../resources/dbs/northwind.backup)
 
@@ -241,7 +249,7 @@ pgAdmin is the most commonly used graphical management tool for PostgreSQL.
 Constructs a new database.
 
 ```sql
-CREATE DATABASE "ShoppingApplicationDB"
+CREATE DATABASE ecommercedb
 ```
 
 #### CREATE TABLE
@@ -249,19 +257,26 @@ CREATE DATABASE "ShoppingApplicationDB"
 Defines a new table.
 
 ```sql
-CREATE TABLE "Products" (  
-    "productID" SERIAL,
-    "code" CHAR(6) NOT NULL,
-    "name" VARCHAR(40) NOT NULL,
-    "date" DATE DEFAULT '2019-01-01',
-    "unitPrice" MONEY,
-    "quantity" SMALLINT DEFAULT 0,
-    CONSTRAINT "productsPK" PRIMARY KEY("productID"),
-    CONSTRAINT "productsUnique" UNIQUE("code"),
-    CONSTRAINT "productsCheck" CHECK("quantity" >= 0)
+CREATE TABLE products (  
+    id SERIAL,
+    code CHAR(6) NOT NULL,
+    name VARCHAR(40) NOT NULL,
+    date DATE DEFAULT '2019-01-01',
+    price MONEY,
+    quantity SMALLINT DEFAULT 0,
+    CONSTRAINT "productsPK" PRIMARY KEY(id),
+    CONSTRAINT "productsUnique" UNIQUE(code),
+    CONSTRAINT "productsCheck" CHECK(quantity >= 0)
 );
 
 ```
+
+---
+**The following queries are based on the Northwind sample database.**
+
+---
+
+
 #### SELECT
 
 Retrieves data from one or more tables.
@@ -278,9 +293,9 @@ Returns only the records that have matching values in both tables.
 - Any product with a `NULL` `CategoryID` is excluded.
 
 ```sql
-SELECT Products.ProductID, Products.ProductName, Categories.CategoryName
-FROM Products
-INNER JOIN Categories ON Products.CategoryID = Categories.CategoryID;
+SELECT "ProductID", "ProductName", "CategoryName"
+FROM "Products"
+INNER JOIN "Categories" ON "Products"."CategoryID" = "Categories"."CategoryID";
 ```
 
 #### INSERT INTO
@@ -327,6 +342,98 @@ WHERE "CustomerID" = '1';
 ```
 
 
+## NoSQL Databases
+- **NoSQL** (AKA Not Only SQL) databases are  designed for scalability, flexibility, and high-performance.
+- They are capable of handling large-scale, unstructured, semi-structured, and rapidly changing data.
+
+### Comparison with Relational DB:
+
+![](../resources/sql-vs-nosql.png)
+
+
+
+### Main Types of NoSQL Databases
+
+1. **Document-Oriented Databases**
+- Store data as documents (usually in JSON or BSON format).
+- Each document can have a flexible structure.
+- **Examples:** MongoDB, CouchDB, Firebase Firestore
+- **Sample:**
+  ```json
+  {
+    "id": 101,
+    "name": "Jane Lee",
+    "email": "jl@email.com",
+    "orders": [
+      { "orderId": 1, "total": 250 },
+      { "orderId": 2, "total": 180 }
+    ]
+  }
+  ```
+- **Used in:**
+    - Content management systems (CMS)
+    - E-commerce product catalogs
+    - Mobile and web apps with dynamic data structures
+
+2. **Key–Value Stores**
+- Store data as key–value pairs (like a dictionary or map).
+- Very fast for lookups and caching.
+- **Examples:** Redis, Amazon DynamoDB, Riak
+- **Sample:**
+  ```
+  "user:101" -> { "name": "Alice", "balance": 300 }
+  "user:102" -> { "name": "Bob", "balance": 450 }
+  ```
+- **Used in:**
+    - Caching user sessions
+    - Real-time analytics and leaderboards
+    - High-speed transaction systems
+
+3. **Column-Family Stores**
+- Organize data into columns and column families instead of rows.
+- Designed for high performance and scalability across distributed systems.
+- **Examples:** Apache Cassandra, HBase, ScyllaDB
+    - **Sample:**
+      ```
+      UserProfiles (Column Family)
+      └── Row Key: user_101
+          ├── name: "Jane"
+          ├── email: "jane@email.com"
+          └── country: "Kazakhstan"
+    
+      └── Row Key: user_102
+          ├── name: "Jack"
+          └── email: "jck@email.com"
+
+      Customer (Column Family)
+      └── Row Key: user_101
+          ├── name: Alice
+          ├── email: alice@email.com
+          └── orders: [1, 2, 3]
+      ```
+- **Used in:**
+    - Time-series data storage
+    - IoT and sensor data collection
+    - Large-scale analytics applications
+
+4. **Graph Databases**
+- Represent data as nodes (entities) and edges (relationships).
+- Ideal for analyzing complex, interconnected data.
+- **Examples:** Neo4j, Amazon Neptune, ArangoDB
+- **Sample (relationships):**
+  ```
+  (Alice) -[:FRIEND]-> (Bob)
+  (Alice) -[:PURCHASED]-> (Product_A)
+  (Bob) -[:PURCHASED]-> (Product_B)
+  ```
+- **Used in:**
+    - Social networking platforms
+    - Recommendation engines
+    - Fraud detection and knowledge graphs
+ 
+
+
+
 ## Using a Programming Language to Interact With a Database
 
 Modern applications often need to store, retrieve, and manipulate data dynamically.  
@@ -360,7 +467,7 @@ You can download the PostgreSQL JDBC driver from:
  [https://jdbc.postgresql.org/download/](https://jdbc.postgresql.org/download/)
 
 
-### Example Workflow (Conceptual)
+#### Example Workflow (Conceptual)
 1. **Load the driver**(library or JAR file) in the project environment so that the Java application can 
 communicate with the database.
 2. **Establish a connection** to the PostgreSQL database using a connection string (URL(socket address), username, and password).
@@ -399,30 +506,78 @@ CREATE TABLE products (
 ## Hands-on Exercise 1
 1. Define the `ecommercedb` database and `products` table in `PostgreSQL`.
 2. Run the program given above that performs operations on the  PostgreSQL database (Check the db connection parameters).
-3. Define `findByName(String name)` and `findByPrice(double price)` methods and modify main method to test them.
+3. Define `findByName(String name)` and `findByPrice(double price)` methods for product repository and modify the main 
+method to test them.
 ***
 
 
+### Database Operations with Java and MongoDB
 
-## NoSQL Databases
-- **NoSQL** = “Not Only SQL”, designed for scalability and flexibility.
-- Useful for large-scale, unstructured, or rapidly changing data.
-- Types of NoSQL databases:
-  - **Document-based** (e.g., MongoDB)
-  - **Key-Value Stores** (e.g., Redis)
-  - **Column Stores** (e.g., Cassandra)
-  - **Graph Databases** (e.g., Neo4j)
-- Comparison with Relational DB:
-  - Relational → structured, schema-based, strong consistency.
-  - NoSQL → flexible schema, horizontal scaling, often eventual consistency.
+You can use MongoDB Cloud (https://account.mongodb.com/account/login
+) without installation, or install MongoDB on your computer from the following 
+link: https://www.mongodb.com/try/download/community
+
+#### Example Workflow (Conceptual)
+1. **Load the driver** using maven package manager.
+
+`pom.xml`
+```xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cc.ku</groupId>
+    <artifactId>java-projects</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.8</version>
+        </dependency>
+        <!-- mongodb -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-bom</artifactId>
+            <version>5.6.0</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>5.6.0</version>
+        </dependency>
+      
+    </dependencies>
+</project>
+
+
+```
+2. **Establish a connection** to the MongoDB database using a connection string (URL(socket address), username, and password).
+3. **Perform db operations**.
+4. **Process the results** returned by the query.
+5. **Close** the connection.
+
 
 
 **Code Example**
 
+* Define `ecommercedb.products` collection.
+
 ![DB Class Diagram](../resources/db-class-diagram.png)
 
 >[ProductRepositoryMain.java](./repository/ProductRepositoryMain.java) | [IProductRepository.java](./repository/IProductRepository.java) | [ClientService.java](./repository/ClientService.java) | [Product.java](./repository/Product.java) | [ProductPostgresqlImplementation.java](./repository/ProductPostgresqlImplementation.java) | [ProductMongodbImplementation.java](./repository/ProductMongodbImplementation.java)
-
 
 
 
@@ -431,8 +586,12 @@ CREATE TABLE products (
 1. Construct MongoDB database `ecommercedb` and define collection `products` with the following structure:
 
 ```json
-{"id":{"$numberInt":"3581"},"name":"Laptop","price":{"$numberDouble":"1500.0"}}
+{"id":3581,
+  "name":"Laptop",
+  "price":1500.0
+}
 ```
 2. Run the program given above that performs operations on the  MongoDB database.
-3. Define `findByName(String name)` and `findByPrice(double price)` methods and modify main method to test them.
+3. Define `findByName(String name)` and `findByPrice(double price)` methods for product repository and modify the 
+main method to test them.
 ***
