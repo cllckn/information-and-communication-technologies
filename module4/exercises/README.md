@@ -83,6 +83,7 @@ Extend the system from **Hands-on Exercise 2** to include additional entities an
     - Each User can have multiple images (profile pictures, gallery).
     - Use a **unidirectional one-to-many** association: User knows its Images.
 
+<img src="../../resources/relationships-exercise.png" width="800">
 
 
 ## Tasks
