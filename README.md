@@ -64,17 +64,20 @@ The course will cover the following topics:
 * Hands-on Exercises
 
 ### Module 6: Computer Networks
-* Network Basics (LAN, WAN, Internet)
+* Network Basics 
 * OSI & TCP/IP Models
-* IP addressing, DNS, Ports, Sockets
-* Client-Server Communication
-* Common Networking Tools: ping, traceroute, nslookup, netcat
+* Packet Switching in the TCP/IP Protocol
+* Encapsulation of Data in the TCP/IP Model
+* IP addressing, DNS, Ports, and Sockets
+* Client-Server Architecture
+* Network Devices & Services in a Modern Infrastructure
+* Common Networking Tools
 * Hands-on Exercises
 
 ### Module 7: Web Applications, Web Services, and Basic User Interaction
-* Fundamentals of web applications and web services
+* Fundamentals of Web Applications and Web Services
 * Introduction to Node.js
-* Developing web applications using HTML,CSS, JS and Node.js
+* Developing Web Applications Using HTML,CSS, JS, and Node.js
 * jQuery and Basic Form Operations for User Interaction
 * Developing RESTful APIs
 * Database Integration
@@ -99,14 +102,16 @@ Students will be evaluated based on the following components:
 | Assignment 2 Oral Examination |  TBA     |
 | Midterm Exam                  |  TBA     |
 | Final Exam                    |  TBA     |
-## Assignments and Exams Schedule
 
-| **Assignment**                | **Oral Exam Date** | **Due Date**                |
-|-------------------------------|--------------------|-----------------------------|
-| Assignment 1                  | ---                | before the oral examination |
-| Assignment 1 Oral Examination | during your own lab class in Week 8( the week starting October 20, 2025 )                | ---                         |
-| Assignment 2                  | TBA                | TBA                         |
-| Assignment 2 Oral Examination | TBA                | TBA                         |
+## Exams Schedule
+
+| **Component**                 | **Date**                                                                     |
+|-------------------------------|------------------------------------------------------------------------------|
+| Assignment 1 Report           | Before the oral examination.                                                 |
+| Assignment 1 Oral Examination | During your own lab class in Week 8( the week starting October 20, 2025 ).   |
+| Assignment 2 Report           | Before the oral examination.                                                 |
+| Assignment 2 Oral Examination | During your own lab class in Week 13( the week starting November 24, 2025 ). |
+| Midterm Exam                  | Thursday, November 27, 2025                                                  |
 
 
 ### Course Policies
