@@ -395,5 +395,7 @@ on the **contract** (methods defined in the interface), not the specific details
 
 ***
 ## Hands-on Exercise 6
-1. Modify the interface application to also support the MongoDB and Redis database management systems.
 ***
+
+
+**For a comprehensive case study, please refer to the application available at https://github.com/cllckn/atm-application/tree/main**
