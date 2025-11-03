@@ -25,24 +25,24 @@ We want to design a system that keeps information about **users**, **customers**
     - `salary`
     - `department`
 
-
+<img src="../../resources/inheritance-exercise.png" width="800">
 
 ## Tasks
 
-Define a package named `cc.ku.ict.module4.exercises.exercise2`.
+1. Define a package named `cc.ku.ict.module4.exercises.exercise2`.
 
-1**Define Classes**
+2. **Define Classes**
     - `User` (base class)
     - `Customer` (derived class)
     - `Employee` (derived class)
 
-2**Constructor Chaining**
+3. **Constructor Chaining**
     - Use `super(...)` in `Customer` and `Employee` to initialize inherited attributes.
 
-3**Method Overriding**
+4. **Method Overriding**
     - Override `toString()` in `User`, `Customer`, and `Employee` to show information.
 
-4**Testing**
+5. **Testing**
     - Instantiate objects of `User`, `Customer`, and `Employee` in a main method.
     - Print their details.
     - Observe **inheritance** and **method overriding** in action.
