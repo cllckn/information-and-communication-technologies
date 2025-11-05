@@ -125,6 +125,8 @@ Extend the system from **Hands-on Exercise 2** to include additional entities an
 
 ![](../../resources/interface-exercise.png)
 
+
+
 ## Tasks
 
 1. Copy all the files developed in Exercise3 into the `cc.ku.ict.module4.exercises.exercise6` package.
@@ -158,3 +160,6 @@ Extend the system from **Hands-on Exercise 2** to include additional entities an
 - Add `addImage()` and `removeImage()` methods in `ExtendedUser`.
 - Define alternative implementations such as `HomeAddress` and `OfficeAddress` to demonstrate polymorphism with `IAddress`.
 - In the test program, add encrypted images to a user using `addImage()`.
+
+## Alternative Solution
+![](../../resources/interface-exercise-alternative.png)
