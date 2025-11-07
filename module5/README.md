@@ -132,7 +132,7 @@ The Database Development Lifecycle typically consists of four fundamental phases
 ### Business Rules
 
 Specific statements that define or constrain business data and operations. They often originate from 
-requirement list (business requirements).
+requirement list.
 
 * Data-oriented business rules → Define how data is structured and related (e.g., entities, attributes, relationships, 
 constraints). They are used to design and build the database.
@@ -155,7 +155,9 @@ Direct interaction with **end users** ensures a clearer understanding of actual 
 - An order must include at least one product.
 - A customer can place multiple orders, but each order is placed by only one customer.
 
-Data-oriented business rules help identify **entities, attributes, relationships, and constraints** when developing the **Entity-Relationship (ER) model**.  
+Data-oriented business rules help identify **entities, attributes, relationships, and constraints** 
+when developing the **Entity-Relationship (ER) model**.  
+
 Once these rules are defined, the next step is to **model the database** to implement them effectively.
 
 
@@ -504,9 +506,13 @@ CREATE TABLE products (
 
 ***
 ## Hands-on Exercise 1
-1. Define the `ecommercedb` database and `products` table in `PostgreSQL`.
-2. Run the program given above that performs operations on the  PostgreSQL database (Check the db connection parameters).
-3. Define `findByName(String name)` and `findByPrice(double price)` methods for product repository and modify the main 
+
+1. Initialize a new project with maven support.
+2. Include relevant database drivers for PostgreSQL and MongoDB operations.
+3. Define a package named `cc.ku.ict.module5.exercises.exercise1`.
+4. Define the `ecommercedb` database and `products` table in `PostgreSQL`.
+5. Run the program given above that performs operations on the  PostgreSQL database (Check the db connection parameters).
+6. Define `findByName(String name)` and `findByPrice(double price)` methods for product repository and modify the main 
 method to test them.
 ***
 
@@ -583,7 +589,8 @@ link: https://www.mongodb.com/try/download/community
 
 ***
 ## Hands-on Exercise 2
-1. Construct MongoDB database `ecommercedb` and define collection `products` with the following structure:
+1. Extend the application in Exercise 1.
+4. Construct MongoDB database `ecommercedb` and define collection `products` with the following structure:
 
 ```json
 {"id":3581,
