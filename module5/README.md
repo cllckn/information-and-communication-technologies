@@ -510,7 +510,7 @@ CREATE TABLE products (
 1. Initialize a new project with maven support.
 2. Include relevant database drivers for PostgreSQL and MongoDB operations.
 3. Define a package named `cc.ku.ict.module5.exercises.exercise1`.
-4. Define the `ecommercedb` database and `products` table in `PostgreSQL`.
+4. Define the `ecommercedb` database and `products` table in `PostgreSQL`, using the SQL statements above the Class Diagram.
 5. Run the program given above that performs operations on the  PostgreSQL database (Check the db connection parameters).
 6. Define `findByName(String name)` and `findByPrice(double price)` methods for product repository and modify the main 
 method to test them.
@@ -540,8 +540,8 @@ link: https://www.mongodb.com/try/download/community
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -570,7 +570,8 @@ link: https://www.mongodb.com/try/download/community
 
 
 ```
-2. **Establish a connection** to the MongoDB database using a connection string (URL(socket address), username, and password).
+2. **Establish a connection** to the MongoDB database using 
+a connection string (URL(socket address), username, and password).
 3. **Perform db operations**.
 4. **Process the results** returned by the query.
 5. **Close** the connection.
@@ -593,9 +594,10 @@ link: https://www.mongodb.com/try/download/community
 4. Construct MongoDB database `ecommercedb` and define collection `products` with the following structure:
 
 ```json
-{"id":3581,
-  "name":"Laptop",
-  "price":1500.0
+{ 
+  "id":1,
+  "name":"SSD",
+  "price":2000
 }
 ```
 2. Run the program given above that performs operations on the  MongoDB database.
