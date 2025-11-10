@@ -296,8 +296,8 @@ Returns only the records that have matching values in both tables.
 
 ```sql
 SELECT "ProductID", "ProductName", "CategoryName"
-FROM "Products"
-INNER JOIN "Categories" ON "Products"."CategoryID" = "Categories"."CategoryID";
+FROM "products"
+INNER JOIN "categories" ON "products"."CategoryID" = "categories"."CategoryID";
 ```
 
 #### INSERT INTO
