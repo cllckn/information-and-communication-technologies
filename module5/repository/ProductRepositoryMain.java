@@ -6,6 +6,7 @@ public class ProductRepositoryMain {
         // Swap implementations easily
         IProductRepository repository = new ProductPostgresqlImplementation();
         //IProductRepository repository = new ProductMongodbImplementation();
+        //IProductRepository repository = new ProductRedisImplementation();
 
         ClientService service = new ClientService(repository);
         service.run();
