@@ -28,13 +28,13 @@
   * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Developing RESTful APIs](#developing-restful-apis)
     * [What is a RESTful API?](#what-is-a-restful-api)
-    * [A simple RESTful API](#a-simple-restful-api)
+    * [### Route definition in Express.js](#-route-definition-in-expressjs)
+    * [A simple Node.js-based RESTful API](#a-simple-nodejs-based-restful-api)
     * [REST Clients - Testing REST api using cURL and http client](#rest-clients---testing-rest-api-using-curl-and-http-client)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
     * [**Converting a Simple RESTful API into a Web Application with jQuery**](#converting-a-simple-restful-api-into-a-web-application-with-jquery)
   * [Hands-on Exercise 4](#hands-on-exercise-4)
   * [Hands-on Exercise 5](#hands-on-exercise-5)
-    * [Styling Web Applications with Tailwind CSS](#styling-web-applications-with-tailwind-css)
     * [Routers and Routes in Express.js](#routers-and-routes-in-expressjs)
   * [Database Integration](#database-integration)
   * [Hands-on Exercise 6](#hands-on-exercise-6)
@@ -156,10 +156,13 @@ Scalability ensures consistent performance as user demand grows.
 
 ### Service-Oriented Architecture (SOA)
 
-**Service-Oriented Architecture (SOA)** is a design pattern where software components (services) provide functionality 
-to other components over a network. Each service is a discrete unit of functionality, which can be independently 
-developed, deployed, and maintained. Services communicate with each other using well-defined interfaces and protocols, 
-typically over HTTP or messaging queues.
+**Service-Oriented Architecture (SOA)** is an architectural pattern in which software components are structured as 
+independent services.
+
+Each service performs a specific business function and communicates with other services through standardized interfaces 
+and language-agnostic protocols, typically over HTTP or messaging queues.
+
+For instance; in a banking system, separate services may handle account management, fund transfers, and customer notifications, all interacting through service interfaces.
 
 **Key Characteristics of SOA:**
 
@@ -179,15 +182,19 @@ typically over HTTP or messaging queues.
 ```
 In this diagram:
 
-* Service A acts as a client that sends a request to Service B.
+* Service A acts as a client (consumer) that sends a request to Service B.
 * Service B processes the request and sends back a response to Service A.
 * Communication between web services can be achieved using HTTP-based protocols such as REST and SOAP, remote procedure 
 call (RPC) frameworks like gRPC or XML-RPC, or asynchronous messaging systems such as Apache Kafka or RabbitMQ.
 
 ### Microservice Architecture
 
-**Microservice Architecture** is a design approach where an application is composed of small, independent services 
-that communicate over a network. Each service is responsible for a specific business capability and can be developed, 
+**Microservice Architecture** is a modern derivative (or evolution) of Service-Oriented Architecture (SOA).
+
+It is an architectural pattern where an application is composed of small, independent services 
+that communicate over a network. 
+
+Each service is responsible for a specific business capability and can be developed, 
 deployed, and scaled independently.
 
 **Key Characteristics of Microservice Architecture:**
@@ -202,8 +209,6 @@ deployed, and scaled independently.
 
 
 
-
-
 ## Introduction to Node.js
 
 ### Node.js
@@ -213,11 +218,14 @@ It uses the V8 JavaScript engine, which is also used by Google Chrome, to execut
 
 Key Features of Node.js:
 
-    Asynchronous and Event-Driven: Node.js uses an event-driven, non-blocking I/O model, making it efficient and suitable for real-time applications.
+    Asynchronous and Event-Driven: Node.js uses an event-driven, non-blocking I/O model, making it efficient and 
+    suitable for real-time applications.
     
-    Single-Threaded: Despite being single-threaded, Node.js can handle many connections concurrently thanks to its event loop.
+    Single-Threaded: Despite being single-threaded, Node.js can handle many connections concurrently thanks to 
+    its event loop.
     
-    NPM (Node Package Manager): Node.js comes with NPM, which is the largest ecosystem of open-source libraries in the world.
+    NPM (Node Package Manager): Node.js comes with NPM, which is the largest ecosystem of open-source libraries 
+    in the world.
     
     Scalability: Node.js is designed to build scalable network applications.
 
@@ -231,7 +239,8 @@ Use Cases:
 **For the details of Node.js, refer to https://www.w3schools.com/nodejs/**
 
 ### NPM (Node Package Manager)
-it is a package manager for JavaScript, and it is the default package manager for Node.js.
+It is a package manager for JavaScript, and it is the default package manager for Node.js.
+
 It allows developers to install, share, and manage dependencies (libraries and tools) for their projects.
 
 * Key Features of NPM:
@@ -262,7 +271,7 @@ It allows developers to install, share, and manage dependencies (libraries and t
   - npm init -y
   - Make a /src folder for the source code of the project
 
-* Make an hello-world.js file and write the following code:
+* Make a hello-world.js file and write the following code:
   - console.log('Hello world.');
         
 * Run the app:
@@ -523,23 +532,30 @@ Hello World !
 ### HTML (HyperText Markup Language)
 
     HTML (HyperText Markup Language) is the standard language for crafting web pages. 
+    
     It structures content using elements like headings, paragraphs, links, images, and forms. 
+    
     Browsers interpret HTML to display web pages visually. 
-    It works alongside CSS for styling and JavaScript for interactivity.
+    
+    It works together with CSS for styling and JavaScript for interactivity.
 
 **For the details of HTML, refer to https://www.w3schools.com/html/**
 
 ### CSS (Cascading Style Sheets)
 
-    CSS (Cascading Style Sheets) is a stylesheet language used to define the appearance of HTML elements. 
-    CSS is used to control the layout, colors, fonts, spacing, and responsiveness of web pages to ensure a consistent and attractive design across different devices and screen sizes.
+    CSS (Cascading Style Sheets) is used to define the appearance of HTML elements. 
+    
+    CSS is used to control the layout, colors, fonts, spacing, and responsiveness of web pages to ensure a consistent 
+    and attractive design across different devices and screen sizes.
 
 **For the details of CSS, refer to https://www.w3schools.com/css/**
 
 ### JavaScript
 
     JavaScript is a programming language used to make web pages interactive and dynamic. 
-    It allows developers to manipulate HTML and CSS, handle events like clicks or keyboard input, and fetch data from servers without reloading the page. 
+    
+    It allows developers to manipulate HTML and CSS, handle events like clicks or keyboard input, and fetch data 
+    from servers without reloading the page. 
 
 **For the details of JavaScript, refer to https://www.w3schools.com/js/**
 
@@ -557,6 +573,7 @@ Hello World !
 ## jQuery and Basic Form Operations for User Interaction
 
 **What is jQuery?**
+
 jQuery is a fast, small, and feature-rich JavaScript library designed to simplify:
 - HTML DOM traversal and manipulation
 - Event handling
@@ -564,12 +581,14 @@ jQuery is a fast, small, and feature-rich JavaScript library designed to simplif
 - AJAX interactions
 
 **Why Use jQuery?**
+
 - **Simplifies JavaScript code** – Reduces the need for writing long vanilla JavaScript functions.
 - **Cross-browser compatibility** – Works across different browsers without issues.
 - **Powerful event handling** – Allows easy manipulation of events like clicks, keypresses, and form submissions.
 - **AJAX support** – Enables smooth data loading without refreshing the page.
 
 **Adding jQuery to a Web Page**
+
 You can include jQuery in your project via a **CDN**:
 
 `<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>`
@@ -658,6 +677,7 @@ jQuery provides event handlers for form elements, such as:
     <input type="password" id="password" placeholder="Enter password" required>
     <button type="submit">Submit</button>
 </form>
+
 <p id="message"></p>
 
 <script>
@@ -737,10 +757,10 @@ Validate user input dynamically using the `.keyup()` event.
 
 REST (Representational State Transfer) is an architectural style (or a set of principles) for designing networked applications.
 
-A RESTful API  is a way to allow different software applications
-to communicate with each other over the internet using standard HTTP methods.
+RESTful refers to web services that adhere to the principles of REST (Representational State Transfer). 
 
-Here are some key points about RESTful APIs:
+RESTful is an approach for building scalable, stateless web APIs that use standard HTTP methods and principles.
+
 
 **Key Characteristics**
 
@@ -757,7 +777,8 @@ Here are some key points about RESTful APIs:
 2. **Resource-Based**: RESTful APIs use resources, which are identified by URLs.
    A resource could be a user, a product, or a function to control a heating system.
 
-3. **JSON or XML**: Data is typically exchanged in JSON or XML format, with JSON being more common due to its simplicity and ease of use.
+3. **JSON or XML**: Data is typically exchanged in JSON or XML format, with JSON being more common due to its 
+   simplicity and ease of use.
 
 4. **Stateless**: The server does not store any client context between requests.
 
@@ -773,7 +794,28 @@ Here are some key points about RESTful APIs:
 - **POST /heating-system/off**: Turn off the heating system.
 - **PUT /heating-system/temperature**: Set the desired temperature of the heating system.
 
-### A simple RESTful API
+### ### Route definition in Express.js
+
+A **route** in Express.js defines an endpoint where clients send requests to interact with the service via 
+**HTTP methods** (GET, POST, PUT, DELETE, etc.). 
+
+Each route consists of:
+
+1. **An HTTP method** (GET, POST, etc.)
+2. **A URL pattern** (e.g., `/api/customers/:id`)
+3. **A callback function** to handle the request
+
+Example of a simple route in Express.js:
+
+**Code Example**
+
+```javascript
+app.get("/api/customers", (req, res) => {
+    res.json({ message: "List of customers" });
+});
+```
+
+### A simple Node.js-based RESTful API
 
 **Code Example: /part2/server.js**
 
@@ -1213,7 +1255,10 @@ app.get("/api/products", (req, res) => {
 
         function loadProducts(query = "") {
             let url = query ? `/api/products?name=${encodeURIComponent(query)}` : "/api/products";
-            $.get(url, function(products){
+            <!-- The purpose of using encodeURIComponent() is to safely encode special characters in URL query 
+                parameters to prevent URL syntax errors and security issues.-->
+          
+          $.get(url, function(products){
                 $("#product-list").empty();
                 if (products.length === 0) {
                     $("#search-error").show();
@@ -1336,188 +1381,8 @@ Add search and update functions for the developed app in Exercise 4.
 
 
 
-
-
-### Styling Web Applications with Tailwind CSS
-
-Tailwind CSS is a utility-first CSS framework that allows developers to style their HTML elements using pre-designed utility classes.
-
-* [For the details](https://v3.tailwindcss.com/docs)
-
-* To use in a html file:
-```html
-<head>
-    <meta charset="UTF-8">
-
-    <!-- This line enables responsive web design by allowing the layout to adapt 
-    to different screen sizes without requiring manual zooming or horizontal scrolling. -->
-   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-   <title>Tailwind Example</title>
-   <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-```
-
-* Try tailwind here:
-
-https://play.tailwindcss.com/
-
-**Code Example**
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailwind Flex Layout</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100"> <!-- Sets the background color to a light gray (Tailwind's gray-100 shade) -->
-
-    <!-- Navbar -->
-    <nav class="bg-blue-600 text-white p-4 shadow-md"> <!-- 
-        Sets the background color to blue (Tailwind's blue-600 shade), 
-        text color to white, adds padding of 1rem (4 * 0.25rem), 
-        and applies a medium-sized shadow
-    -->
-        <div class="max-w-7xl mx-auto flex justify-between items-center"> <!-- 
-            Sets a maximum width of 80rem, centers the content horizontally, 
-            enables flexbox layout, distributes space evenly between items, 
-            and vertically aligns items to the center
-        -->
-            <h1 class="text-xl font-bold">My Dashboard</h1> <!-- Sets font size to extra large (1.25rem) and font weight to bold -->
-            <ul class="hidden md:flex space-x-4"> <!-- 
-                Hides the list by default, displays as flex on medium screens and larger, 
-                and adds horizontal space of 1rem (4 * 0.25rem) between items
-            -->
-                <li><a href="#" class="hover:underline">Home</a></li> <!-- Applies underline on hover -->
-                <li><a href="#" class="hover:underline">About</a></li> <!-- Applies underline on hover -->
-                <li><a href="#" class="hover:underline">Contact</a></li> <!-- Applies underline on hover -->
-            </ul>
-            <button class="md:hidden text-white focus:outline-none" id="menu-btn">☰</button> <!-- 
-                Hides the button on medium screens and larger, sets text color to white, 
-                and removes default focus outline
-            -->
-        </div>
-    </nav>
-
-    <!-- Sidebar + Main Content Container -->
-    <div class="flex h-screen"> <!-- Enables flexbox layout and sets height to 100% of screen height -->
-        <!-- Sidebar -->
-        <aside class="bg-gray-800 text-white w-64 space-y-6 py-6 px-4 hidden md:block"> <!-- 
-            Sets background color to dark gray (Tailwind's gray-800 shade), 
-            text color to white, width to 16rem, vertical space of 1.5rem (6 * 0.25rem), 
-            vertical padding of 1.5rem, horizontal padding of 1rem, 
-            hides by default, and displays as block on medium screens and larger
-        -->
-            <h2 class="text-xl font-semibold">Menu</h2> <!-- Sets font size to extra large (1.25rem) and font weight to semi-bold -->
-            <nav>
-                <a href="#" class="block py-2 px-4 hover:bg-gray-700 hover:bold">Dashboard</a> <!-- 
-                    Sets display to block, vertical padding of 0.5rem, horizontal padding of 1rem, 
-                    changes background color to a lighter gray on hover, and applies bold font on hover
-                -->
-                <a href="#" class="block py-2 px-4 hover:bg-gray-700">Products</a> <!-- 
-                    Sets display to block, vertical padding of 0.5rem, horizontal padding of 1rem, 
-                    changes background color to a lighter gray on hover
-                -->
-                <a href="#" class="block py-2 px-4 hover:bg-gray-700">Users</a> <!-- 
-                    Sets display to block, vertical padding of 0.5rem, horizontal padding of 1rem, 
-                    changes background color to a lighter gray on hover
-                -->
-                <a href="#" class="block py-2 px-4 hover:bg-gray-700">Settings</a> <!-- 
-                    Sets display to block, vertical padding of 0.5rem, horizontal padding of 1rem, 
-                    changes background color to a lighter gray on hover
-                -->
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="flex-1 p-6"> <!-- Allows main content to grow and take up remaining space, adds padding of 1.5rem -->
-            <h2 class="text-2xl font-bold mb-4">Welcome to the Dashboard</h2> <!-- 
-                Sets font size to 2xl (1.5rem), font weight to bold, and adds bottom margin of 1rem
-            -->
-            <p class="text-gray-700"> <!-- Sets text color to medium gray (Tailwind's gray-700 shade) -->
-                This is a simple dashboard layout built with Tailwind CSS. 
-                The sidebar is collapsible on smaller screens, and the layout is fully responsive.
-            </p>
-
-            <!-- Example Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6"> <!-- 
-                Enables CSS Grid layout, constructs one column on small screens, 
-                three columns on medium screens and larger, adds gap of 1rem, 
-                and adds top margin of 1.5rem
-            -->
-                <div class="bg-white p-4 shadow rounded"> <!-- 
-                    Sets background color to white, adds padding of 1rem, 
-                    applies default-sized shadow, and adds rounded corners
-                -->
-                    <h3 class="font-semibold">Card 1</h3> <!-- Sets font weight to semi-bold -->
-                    <p class="text-gray-600">Some content...</p> <!-- Sets text color to a slightly darker gray (Tailwind's gray-600 shade) -->
-                </div>
-                <div class="bg-white p-4 shadow rounded"> <!-- 
-                    Sets background color to white, adds padding of 1rem, 
-                    applies default-sized shadow, and adds rounded corners
-                -->
-                    <h3 class="font-semibold">Card 2</h3> <!-- Sets font weight to semi-bold -->
-                    <p class="text-gray-600">Some content...</p> <!-- Sets text color to a slightly darker gray (Tailwind's gray-600 shade) -->
-                </div>
-                <div class="bg-white p-4 shadow rounded"> <!-- 
-                    Sets background color to white, adds padding of 1rem, 
-                    applies default-sized shadow, and adds rounded corners
-                -->
-                    <h3 class="font-semibold">Card 3</h3> <!-- Sets font weight to semi-bold -->
-                    <p class="text-gray-600">Some content...</p> <!-- Sets text color to a slightly darker gray (Tailwind's gray-600 shade) -->
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white text-center py-4 mt-auto"> <!-- 
-        Sets background color to very dark gray (Tailwind's gray-900 shade), 
-        text color to white, centers text horizontally, adds vertical padding of 1rem, 
-        and sets margin top to auto
-    -->
-        <p> 2025 My Dashboard. All rights reserved.</p>
-    </footer>
-
-    <!-- Script for Mobile Menu -->
-    <script>
-        document.getElementById('menu-btn').addEventListener('click', function() {
-            document.querySelector('aside').classList.toggle('hidden'); // Toggles the 'hidden' class on the sidebar
-        });
-    </script>
-
-</body>
-</html>
-
-```
-
-* [/src/dss/module3/part5/structured-web-app](https://github.com/cllckn/decision-support-systems/tree/main/module3/part5)
-
-
-
-
-
-
 ### Routers and Routes in Express.js
 
-A **route** in Express.js defines an endpoint that a client can access via **HTTP methods**
-(GET, POST, PUT, DELETE, etc.). Each route consists of:
-
-1. **A URL pattern** (e.g., `/api/customers/:id`)
-2. **An HTTP method** (GET, POST, etc.)
-3. **A callback function** to handle the request
-
-Example of a simple route in Express.js:
-**Code Example**
-
-```javascript
-app.get("/api/customers", (req, res) => {
-    res.json({ message: "List of customers" });
-});
-```
 An **Express Router** helps organize routes by grouping them into separate files. This makes the code 
 modular, manageable, and scalable.
 
@@ -1607,11 +1472,6 @@ module.exports = router;
 To perform database operations using application programs, **database drivers** are essential.
 Drivers facilitate communication between the programming language and the database.
 
-**Database Drivers Provide the Following Core Functions:**
-- **Establishing a connection** to the database.
-- **Executing queries** (such as SELECT, INSERT, UPDATE, DELETE).
-- **Closing the connection** after operations are completed.
-
 
 **Database Operations with Node.js and PostgreSQL**
 
@@ -1635,7 +1495,7 @@ CREATE TABLE products (
 // Import necessary modules
 
 const express = require("express");
-const { Pool } = require("pg"); // PostgreSQL client
+const { Pool } = require("pg"); // PostgreSQL client (db driver)
 
 const app = express();
 
