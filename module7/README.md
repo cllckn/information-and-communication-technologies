@@ -62,10 +62,20 @@ A URL typically consists of:
 - `www.example.com` → Website domain
 - `/about` → Specific resource (page, file, function etc.)
 
-A URL acts as an address that locates and retrieves web resources, enabling users to navigate the internet efficiently.
+A URL acts as an address that identifies and retrieves web resources, enabling users to navigate the internet efficiently.
 
 ### Client Server Architecture
-![Client Server Architecture](../resources/client-server.png)
+
+A **client–server architecture** divides an application into two main components:
+- The **client**, which **initiates requests** (e.g., a web browser or mobile app).
+- The **server**, which **waits for incoming requests**, processes them, and sends back responses.
+
+> **Key point:** In this model, the **server cannot initiate communication** — it only responds to requests from the client.
+
+This design centralizes data and logic on the server, making systems easier to manage, update, and secure.
+
+
+<img src="../resources/client-server.png" width="700">
 
 ### Three-tier Web Architecture
 
@@ -105,24 +115,51 @@ A UML Deployment Diagram provides information regarding the deployment of softwa
 (artifacts/components) onto nodes (such as devices, operating systems, virtual machines, etc.). 
 It illustrates the physical topology where the software is deployed.
 
+<img src="../resources/deployment-diagram.png" width="400">
 
-![Deployment Diagram](../resources/deployment-diagram.png)
+
 
 ### Web Application Architecture - Synchronous Communication
+
+In **synchronous communication**, the client sends a request and **waits** for the server to respond before continuing.
+- Commonly implemented using **HTTP** (e.g., RESTful APIs).
+- Used for operations where an immediate response is required.
+- Example: Submitting a login form and waiting for authentication results.
+
+
 ![Web Application Architecture](../resources/web-application-architecture-synchronous.png)
 
 
 ### Web Application Architecture - Asynchronous Communication
+
+In **asynchronous communication**, the client sends a request and continues executing without waiting for a response.
+- Often implemented using **message queues**, **WebSockets**, or **AJAX**.
+- Enables **non-blocking** interaction and better performance for real-time updates.
+- Example: Attaching a large file to an email — the upload continues in the background while the user can still compose the message.
+
 ![Web Application Architecture](../resources/web-application-architecture-asynchronous.png)
 
 
 ### Scalable Web Application Architecture
+
+A **scalable architecture** is designed to handle increasing workloads efficiently by adding more resources.  
+It typically involves:
+- **Load balancing** (distributing requests across multiple servers).
+- **Database replication or sharding**.
+- **Caching** (e.g., Redis) to reduce repeated computations.
+- **Microservices** or containerized deployments for modular growth.
+
+Scalability ensures consistent performance as user demand grows.
+
 ![Web Application Architecture](../resources/scalable-web-architecture.png)
 
 
 ### Service-Oriented Architecture (SOA)
 
-**Service-Oriented Architecture (SOA)** is a design pattern where software components (services) provide functionality to other components over a network. Each service is a discrete unit of functionality, which can be independently developed, deployed, and maintained. Services communicate with each other using well-defined interfaces and protocols, typically over HTTP or messaging queues.
+**Service-Oriented Architecture (SOA)** is a design pattern where software components (services) provide functionality 
+to other components over a network. Each service is a discrete unit of functionality, which can be independently 
+developed, deployed, and maintained. Services communicate with each other using well-defined interfaces and protocols, 
+typically over HTTP or messaging queues.
 
 **Key Characteristics of SOA:**
 
@@ -134,21 +171,24 @@ It illustrates the physical topology where the software is deployed.
 **Simple Two-Service Communication Diagram**
 
 ```plaintext
-+----------------+       HTTP/Message Queue       +----------------+
-|  Service A     | <----------------------------> |  Service B     |
-| (Client)       |                                | (Provider)     |
++----------------+       HTTP / Message Queue     +----------------+
+|  Service A     | -----------------------------> |  Service B     |
+|                |                                |                |
+| (Client)       | <----------------------------- | (Provider)     |
 +----------------+                                +----------------+
 ```
 In this diagram:
 
 * Service A acts as a client that sends a request to Service B.
 * Service B processes the request and sends back a response to Service A.
-* Communication between the services can be done using HTTP (e.g.RESTful) or a messaging queue (e.g. Apache Kafka).
+* Communication between web services can be achieved using HTTP-based protocols such as REST and SOAP, remote procedure 
+call (RPC) frameworks like gRPC or XML-RPC, or asynchronous messaging systems such as Apache Kafka or RabbitMQ.
 
 ### Microservice Architecture
 
-**Microservice Architecture** is a design approach where an application is composed of small, independent services that communicate over a network.
-Each service is responsible for a specific business capability and can be developed, deployed, and scaled independently.
+**Microservice Architecture** is a design approach where an application is composed of small, independent services 
+that communicate over a network. Each service is responsible for a specific business capability and can be developed, 
+deployed, and scaled independently.
 
 **Key Characteristics of Microservice Architecture:**
 - **Decentralization**: Each service has its own database and business logic.
@@ -174,8 +214,11 @@ It uses the V8 JavaScript engine, which is also used by Google Chrome, to execut
 Key Features of Node.js:
 
     Asynchronous and Event-Driven: Node.js uses an event-driven, non-blocking I/O model, making it efficient and suitable for real-time applications.
+    
     Single-Threaded: Despite being single-threaded, Node.js can handle many connections concurrently thanks to its event loop.
+    
     NPM (Node Package Manager): Node.js comes with NPM, which is the largest ecosystem of open-source libraries in the world.
+    
     Scalability: Node.js is designed to build scalable network applications.
 
 
@@ -229,8 +272,10 @@ It allows developers to install, share, and manage dependencies (libraries and t
 
 ### Traditional synchronous operation in Node.js
 
-* Each operation is executed in sequence, and the script waits for each operation to complete before moving on to the next one.
-* This can lead to blocking, where the script is unable to perform other tasks while waiting for an operation to complete.
+* Each operation is executed in sequence, and the script waits for each operation to complete before moving on to 
+the next one.
+* This can lead to blocking, where the script is unable to perform other tasks while waiting for an operation to 
+complete.
 
 **Code Example: /part1/synchronous.js**
 
