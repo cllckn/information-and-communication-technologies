@@ -577,13 +577,14 @@ a connection string (URL(socket address), username, and password).
 ***
 ## Hands-on Exercise
 
-1. Define the `ecommercedb` database and `products` table in `PostgreSQL`, using the SQL statements provided above the Class Diagram.
+1. Define the `ecommercedb` database and `products` table in `PostgreSQL`, using the SQL statements provided above the 
+Class Diagram.
 2. Define `ecommercedb.products` collection in `MongoDB`.
 3. Initialize a new project with Maven support.
 4. Include the necessary database drivers for PostgreSQL and MongoDB operations.
 5. Define a package named `cc.ku.ict.module5.exercises.exercise1`.
 6. Run the program given above that performs operations on the  PostgreSQL database (Check the db connection parameters).
-7. Discuss how you can also add MariaDB support to the application without modifying the algorithm in the ClientService.
-8. Define `findByName(String name)` and `findByPrice(double price)` methods for product repository and modify the main
-   method to test them.
+7. Discuss how you can also add MariaDB support to the application without modifying the algorithm in the `ClientService`.
+8. Define `findByName(String name)` and `findByPrice(double price)` methods in the product repository and modify 
+the `ClientService` accordingly to test these methods.
 ***
