@@ -34,10 +34,9 @@
     * [Database Drivers – Core Functions](#database-drivers--core-functions)
     * [Database Operations with Java and PostgreSQL](#database-operations-with-java-and-postgresql)
       * [Example Workflow (Conceptual)](#example-workflow-conceptual)
-  * [Hands-on Exercise 1](#hands-on-exercise-1)
     * [Database Operations with Java and MongoDB](#database-operations-with-java-and-mongodb)
       * [Example Workflow (Conceptual)](#example-workflow-conceptual-1)
-  * [Hands-on Exercise 2](#hands-on-exercise-2)
+  * [Hands-on Exercise](#hands-on-exercise)
 <!-- TOC -->
 
 
@@ -504,19 +503,6 @@ CREATE TABLE products (
 >[ProductRepositoryMain.java](./repository/ProductRepositoryMain.java) | [IProductRepository.java](./repository/IProductRepository.java) | [ClientService.java](./repository/ClientService.java) | [Product.java](./repository/Product.java) | [ProductPostgresqlImplementation.java](./repository/ProductPostgresqlImplementation.java) | [ProductMongodbImplementation.java](./repository/ProductMongodbImplementation.java)
 
 
-***
-## Hands-on Exercise 1
-
-1. Initialize a new project with maven support.
-2. Include relevant database drivers for PostgreSQL and MongoDB operations.
-3. Define a package named `cc.ku.ict.module5.exercises.exercise1`.
-4. Define the `ecommercedb` database and `products` table in `PostgreSQL`, using the SQL statements above the Class Diagram.
-5. Run the program given above that performs operations on the  PostgreSQL database (Check the db connection parameters).
-6. Define `findByName(String name)` and `findByPrice(double price)` methods for product repository and modify the main 
-method to test them.
-***
-
-
 ### Database Operations with Java and MongoDB
 
 You can use MongoDB Cloud (https://account.mongodb.com/account/login
@@ -589,18 +575,14 @@ a connection string (URL(socket address), username, and password).
 
 
 ***
-## Hands-on Exercise 2
-1. Extend the application in Exercise 1.
-4. Construct MongoDB database `ecommercedb` and define collection `products` with the following structure:
+## Hands-on Exercise
 
-```json
-{ 
-  "id":1,
-  "name":"SSD",
-  "price":2000
-}
-```
-2. Run the program given above that performs operations on the  MongoDB database.
-3. Define `findByName(String name)` and `findByPrice(double price)` methods for product repository and modify the 
-main method to test them.
+1. Define the `ecommercedb` database and `products` table in `PostgreSQL`, using the SQL statements provided above the Class Diagram.
+2. Define `ecommercedb.products` collection in `MongoDB`.
+3. Initialize a new project with Maven support.
+4. Include the necessary database drivers for PostgreSQL and MongoDB operations.
+5. Define a package named `cc.ku.ict.module5.exercises.exercise1`.
+6. Run the program given above that performs operations on the  PostgreSQL database (Check the db connection parameters).
+7. Define `findByName(String name)` and `findByPrice(double price)` methods for product repository and modify the main
+   method to test them.
 ***
