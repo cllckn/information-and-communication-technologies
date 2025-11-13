@@ -42,20 +42,21 @@
 ## Fundamentals Of Web Applications And Web Services
 
 There are several services on the Internet, and the **Web (World Wide Web)** is one of the most widely used.
-The Web consists of websites, web pages, and resources that can be accessed through applications 
-such as web browsers or web services.
+
+The Web consists of various resources—such as websites, web pages, files, data services, and functions—that can be 
+accessed through applications like web browsers or web services.
 
 **What is a URL?**
 
-A **URL (Uniform Resource Locator)** is the address of a webpage or resource on the web. It tells 
-**where to find** and **how to access** a specific resource.
+A **URL (Uniform Resource Locator)** is the address of a resource on the Web. It specifies 
+**where to find** and **how to access** a Web resource.
 
 **Parts of a URL:**
 
 A URL typically consists of:
 - **Protocol:** Defines how to access the resource (e.g., `https://`, `http://`).
 - **Domain Name:** The website's name (e.g., `example.com`).
-- **Path (Optional):** Specifies a specific **resource** on the server (e.g., `/about`).
+- **Path (Optional):** Specifies a **resource** on the server (e.g., `/about`).
 
 **Example URL:**
 
@@ -64,7 +65,7 @@ A URL typically consists of:
 - `www.example.com` → Website domain
 - `/about` → Specific resource (page, file, function etc.)
 
-A URL acts as an address that identifies and retrieves web resources, enabling users to navigate the internet efficiently.
+**Applications can identify and send requests to a resource using the URL.**
 
 ### Client Server Architecture
 
