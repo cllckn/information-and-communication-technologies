@@ -15,38 +15,40 @@
     * [Node.js](#nodejs)
     * [NPM (Node Package Manager)](#npm-node-package-manager)
     * [Node.js & npm Installation](#nodejs--npm-installation)
-    * [Traditional synchronous operation in Node.js](#traditional-synchronous-operation-in-nodejs)
-    * [Asynchronous and non-blocking operations in Node.js](#asynchronous-and-non-blocking-operations-in-nodejs)
+    * [Sequential and Event-Driven Programming Models](#sequential-and-event-driven-programming-models)
+      * [Traditional blocking(sequential/synchronous) operation in Node.js](#traditional-blockingsequentialsynchronous-operation-in-nodejs)
+    * [Non-blocking (asynchronous) operations in Node.js](#non-blocking-asynchronous-operations-in-nodejs)
     * [Basic JSON Operations](#basic-json-operations)
   * [Developing Web Applications Using HTML,CSS, JS, and Node.js](#developing-web-applications-using-htmlcss-js-and-nodejs)
     * [HTML (HyperText Markup Language)](#html-hypertext-markup-language)
     * [CSS (Cascading Style Sheets)](#css-cascading-style-sheets)
     * [JavaScript](#javascript)
-  * [Hands-on Exercise 1](#hands-on-exercise-1)
   * [jQuery and Basic Form Operations for User Interaction](#jquery-and-basic-form-operations-for-user-interaction)
     * [**Handling Form Input Fields**](#handling-form-input-fields)
-  * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Developing RESTful APIs](#developing-restful-apis)
     * [What is a RESTful API?](#what-is-a-restful-api)
     * [### Route definition in Express.js](#-route-definition-in-expressjs)
     * [A simple Node.js-based RESTful API](#a-simple-nodejs-based-restful-api)
     * [REST Clients - Testing REST api using cURL and http client](#rest-clients---testing-rest-api-using-curl-and-http-client)
-  * [Hands-on Exercise 3](#hands-on-exercise-3)
+  * [Hands-on Exercise 1](#hands-on-exercise-1)
     * [**Converting a Simple RESTful API into a Web Application with jQuery**](#converting-a-simple-restful-api-into-a-web-application-with-jquery)
-  * [Hands-on Exercise 4](#hands-on-exercise-4)
-  * [Hands-on Exercise 5](#hands-on-exercise-5)
+  * [Hands-on Exercise 2](#hands-on-exercise-2)
+  * [Hands-on Exercise 3](#hands-on-exercise-3)
     * [Routers and Routes in Express.js](#routers-and-routes-in-expressjs)
   * [Database Integration](#database-integration)
-  * [Hands-on Exercise 6](#hands-on-exercise-6)
+  * [Hands-on Exercise 4](#hands-on-exercise-4)
 <!-- TOC -->
 
 ## Fundamentals Of Web Applications And Web Services
 
-There are several services on the Internet, and the **Web (World Wide Web)** is one of the most widely used. The web consists of websites, web pages, and online resources that people can access using a web browser.
+There are several services on the Internet, and the **Web (World Wide Web)** is one of the most widely used.
+The Web consists of websites, web pages, and resources that can be accessed through applications 
+such as web browsers or web services.
 
 **What is a URL?**
 
-A **URL (Uniform Resource Locator)** is the address of a webpage or resource on the web. It tells your browser **where to find** and **how to access** a specific resource.
+A **URL (Uniform Resource Locator)** is the address of a webpage or resource on the web. It tells 
+**where to find** and **how to access** a specific resource.
 
 **Parts of a URL:**
 
@@ -83,7 +85,7 @@ This design centralizes data and logic on the server, making systems easier to m
 The **Three-Tier Web Architecture** is a software architecture pattern that separates an application into three logical layers:
 
 1. **Presentation Tier (Client Layer)** – The front-end where users interact with the application (e.g., web browser, mobile app).
-2. **Application Tier (Business Logic Layer)** – The back-end server that processes requests and enforces business rules.
+2. **Application Tier (Business Logic Layer)** – The back-end server that handle requests and implements business logic.
 3. **Data Tier (Database Layer)** – The database that stores and retrieves data.
 
 
@@ -277,16 +279,22 @@ It allows developers to install, share, and manage dependencies (libraries and t
 * Run the app:
   - node hello-world.js
 
+### Sequential and Event-Driven Programming Models
+
+Traditional programming languages often follow a sequential (blocking) model, where each statement executes one after 
+another, and the program waits for each operation to complete before continuing.
+
+In contrast, event-driven systems use non-blocking I/O. For long-running operations such as network requests or file 
+reads, the system registers the operation and immediately continues executing other tasks. When the operation 
+completes, an event is emitted and the callback function (or async handler) is executed.
+
+This approach reduces CPU idle time and is ideal for I/O-intensive applications. Sequential (blocking) systems, 
+however, remain more suitable for CPU-intensive workloads, where operations are computation-heavy rather than I/O-bound.
+
+#### Traditional blocking(sequential/synchronous) operation in Node.js
 
 
-### Traditional synchronous operation in Node.js
-
-* Each operation is executed in sequence, and the script waits for each operation to complete before moving on to 
-the next one.
-* This can lead to blocking, where the script is unable to perform other tasks while waiting for an operation to 
-complete.
-
-**Code Example: /part1/synchronous.js**
+**Code Example: /part1/blocking.js**
 
 ```javascript
 const fs = require('fs');
@@ -309,11 +317,11 @@ console.log('End');
 
 ```
 
-### Asynchronous and non-blocking operations in Node.js
+### Non-blocking (asynchronous) operations in Node.js
 
 * Event Loop Example
 
-**Code Example: /part1/asynchronous.js**
+**Code Example: /part1/non-blocking.js**
 
 ```javascript
 const fs = require('fs');
@@ -506,9 +514,8 @@ const path = require('path'); // Import the built-in Node.js 'path' module
 const app = express(); // Initialize an Express application
 const PORT = 3000; // Define the port number where the server will listen
 
-// Middleware
-app.use(express.static(path.join(__dirname, 'public'))); // Middleware to serve static files (HTML, CSS, JS) from the 'public' folder
-
+// Middleware to serve static files (HTML, CSS, JS) from the 'public' folder.
+app.use(express.static(path.join(__dirname, 'public'))); 
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
@@ -558,15 +565,6 @@ Hello World !
     from servers without reloading the page. 
 
 **For the details of JavaScript, refer to https://www.w3schools.com/js/**
-
-
----
-## [Hands-on Exercise 1](./exercises/README.md)
-
----
-
-
-
 
 
 
@@ -740,11 +738,6 @@ Validate user input dynamically using the `.keyup()` event.
 **For the details of JQuery, refer to https://api.jquery.com/** or **https://www.w3schools.com/jquery**
 
 
----
-## [Hands-on Exercise 2](./exercises/README.md)
-
----
-
 
 
 
@@ -796,14 +789,13 @@ RESTful is an approach for building scalable, stateless web APIs that use standa
 
 ### ### Route definition in Express.js
 
-A **route** in Express.js defines an endpoint where clients send requests to interact with the service via 
-**HTTP methods** (GET, POST, PUT, DELETE, etc.). 
+A **route** in Express.js defines an endpoint where clients send requests to interact with the service.
 
 Each route consists of:
 
 1. **An HTTP method** (GET, POST, etc.)
 2. **A URL pattern** (e.g., `/api/customers/:id`)
-3. **A callback function** to handle the request
+3. **A callback function / route handler ** to handle the request
 
 Example of a simple route in Express.js:
 
@@ -833,7 +825,7 @@ let products = [
 ];
 
 // Route definations
-//Routes are the connection points (addresses) in a web service where clients send requests to interact with the server.
+// Routes are the connection points (end points - addresses) in a web service where clients send requests to interact with the service.
 // GET all products
 app.get("/api/products", (req, res) => {
   res.json(products); // Respond with the list of all products
@@ -946,10 +938,10 @@ curl -X DELETE http://localhost:3000/api/products/1
 
 
 
----
-## [Hands-on Exercise 3](./exercises/README.md)
+***
+## [Hands-on Exercise 1](./exercises/README.md)
 
----
+***
 
 
 
@@ -1165,10 +1157,10 @@ can view, add, update, and delete products using jQuery.
 
 ```
 
----
-## [Hands-on Exercise 4](./exercises/README.md)
+***
+## [Hands-on Exercise 2](./exercises/README.md)
 
----
+***
 
 
 
@@ -1372,12 +1364,10 @@ app.get("/api/products", (req, res) => {
 
 
 
----
-## [Hands-on Exercise 5](./exercises/README.md)
+***
+## [Hands-on Exercise 3](./exercises/README.md)
 
-Add search and update functions for the developed app in Exercise 4.
-
----
+***
 
 
 
@@ -1616,7 +1606,7 @@ app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`)
 
 ```
 
----
-## [Hands-on Exercise 6](./exercises/README.md)
+***
+## [Hands-on Exercise 4](./exercises/README.md)
 
----
+***
