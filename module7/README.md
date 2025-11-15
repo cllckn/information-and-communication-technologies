@@ -24,14 +24,16 @@
     * [CSS (Cascading Style Sheets)](#css-cascading-style-sheets)
     * [JavaScript](#javascript)
   * [jQuery and Basic Form Operations for User Interaction](#jquery-and-basic-form-operations-for-user-interaction)
-    * [**Handling Form Input Fields**](#handling-form-input-fields)
+    * [Handling Form Input Fields](#handling-form-input-fields)
   * [Developing RESTful APIs](#developing-restful-apis)
     * [What is a RESTful API?](#what-is-a-restful-api)
-    * [### Route definition in Express.js](#-route-definition-in-expressjs)
+    * [Route definition in Express.js](#route-definition-in-expressjs)
+    * [HTTP Status Codes](#http-status-codes)
+    * [Response Formats](#response-formats)
     * [A simple Node.js-based RESTful API](#a-simple-nodejs-based-restful-api)
     * [REST Clients - Testing REST api using cURL and http client](#rest-clients---testing-rest-api-using-curl-and-http-client)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
-    * [**Converting a Simple RESTful API into a Web Application with jQuery**](#converting-a-simple-restful-api-into-a-web-application-with-jquery)
+    * [Converting a Simple RESTful API into a Web Application with jQuery](#converting-a-simple-restful-api-into-a-web-application-with-jquery)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
     * [Routers and Routes in Express.js](#routers-and-routes-in-expressjs)
@@ -645,7 +647,7 @@ You must embed these code snippets into a HTML file.**
 ```
 
 
-### **Handling Form Input Fields**
+### Handling Form Input Fields
 
 **Selecting Form Elements**
 You can get and set values in form fields using `.val()`:
@@ -827,7 +829,7 @@ RESTful is an approach for building scalable, stateless web APIs that use standa
 - **POST /heating-system/off**: Turn off the heating system.
 - **PUT /heating-system/temperature**: Set the desired temperature of the heating system.
 
-### ### Route definition in Express.js
+### Route definition in Express.js
 
 A **route** in Express.js defines an endpoint where clients send requests to interact with the service.
 
@@ -846,6 +848,50 @@ app.get("/api/customers", (req, res) => {
     res.json({ message: "List of customers" });
 });
 ```
+
+
+
+### HTTP Status Codes
+HTTP Status Codes are 3-digit numbers returned by web servers to indicate the status of a requested HTTP operation 
+(successful, failed, not found, etc.).
+
+Here are some common status codes and their meanings:
+
+| **Status Code**       | **Meaning**                          |
+|------------------------|--------------------------------------|
+| **200 OK**             | The request was successful.          |
+| **201 Created**        | The resource was created successfully.|
+| **400 Bad Request**    | The client sent an invalid request.  |
+| **401 Unauthorized**   | Authentication is required.          |
+| **403 Forbidden**      | Access to the resource is denied.    |
+| **404 Not Found**      | The requested resource does not exist.|
+| **500 Internal Server Error** | A server-side error occurred.     |
+
+---
+
+### Response Formats
+APIs typically return data in one of the following formats:
+
+1) **JSON (JavaScript Object Notation)**
+- **Description**: A lightweight, human-readable, and easy-to-parse format.
+- **Usage**: Commonly used in modern APIs.
+- **Example**:
+```json
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com"
+  }
+```
+2) **XML (Extensible Markup Language)**
+```xml
+<user>
+  <id>1</id>
+  <name>John Doe</name>
+  <email>john.doe@example.com</email>
+</user>
+```
+
 
 ### A simple Node.js-based RESTful API
 
@@ -1007,7 +1053,7 @@ curl -X DELETE http://localhost:3000/api/products/1
 
 
 
-### **Converting a Simple RESTful API into a Web Application with jQuery**
+### Converting a Simple RESTful API into a Web Application with jQuery
 
 
 This section explains how to convert the existing **REST API** into a **web application** by developing web pages that 
