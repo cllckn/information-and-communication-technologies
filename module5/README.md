@@ -30,6 +30,7 @@
   * [NoSQL Databases](#nosql-databases)
     * [Comparison with Relational DB:](#comparison-with-relational-db)
     * [Main Types of NoSQL Databases](#main-types-of-nosql-databases)
+    * [MongoDB NoSQL Database](#mongodb-nosql-database)
   * [Using a Programming Language to Interact With a Database](#using-a-programming-language-to-interact-with-a-database)
     * [Database Drivers – Core Functions](#database-drivers--core-functions)
     * [Database Operations with Java and PostgreSQL](#database-operations-with-java-and-postgresql)
@@ -431,8 +432,179 @@ WHERE "CustomerID" = '1';
     - Social networking platforms
     - Recommendation engines
     - Fraud detection and knowledge graphs
- 
 
+
+### MongoDB NoSQL Database
+
+MongoDB is a popular NoSQL database that stores data in a flexible, document-oriented format instead of the traditional 
+table-and-row structure used by relational databases. Data is organized into collections, and each collection contains 
+documents represented in BSON (Binary JSON). Because documents can have varying structures, MongoDB is schema-less, 
+allowing applications to evolve without modifying fixed table definitions.
+
+One of MongoDB’s key strengths is its ability to handle large volumes of unstructured or semi-structured data while 
+maintaining high performance. It offers rich querying capabilities, indexing, and aggregation tools similar to SQL 
+features but designed for flexible document data. MongoDB also provides automatic generation of a unique _id field 
+for each document, acting like a primary key.
+
+MongoDB is designed for scalability and reliability. It supports replication for high availability and sharding for 
+horizontal scaling across multiple servers, making it suitable for modern distributed systems. Thanks to its 
+flexibility, scalability, and ease of use, MongoDB is widely used in web applications, real-time analytics, IoT 
+systems, and any environment where data structure can change over time.
+
+1) A replica set provides high availability by copying the same data across multiple servers. In a replica set, read 
+performance can also be improved by directing read operations to the nearest replica node.
+```text
+               +----------------------+
+               |     Client App       |
+               +-----------+----------+
+                           |
+                           v
+                 +--------------------+
+                 |     PRIMARY        |
+                 |  (Read & Write)    |
+                 +----+-----------+---+
+                      |           |
+        --------------+           +--------------
+        |                                      |
+        v                                      v
++--------------------+               +--------------------+
+|   SECONDARY 1      |               |   SECONDARY 2      |
+|  (Read / Failover) |               |  (Read / Failover) |
++--------------------+               +--------------------+
+
+SECONDARIES replicate data **from the PRIMARY**
+If PRIMARY fails → one SECONDARY becomes PRIMARY
+```
+
+2) Sharding splits big data across multiple servers (shards). The mongos router directs client requests to the correct shard.
+     
+```text
+
+                               Config Servers
+                              ┌──────┬──────┬──────┐
+                              │  C1  │  C2  │  C3  │
+                              └──────┴──────┴──────┘
+                                    ↑
+                              ┌─────────────┐
+        Clients → → → → → → → │   MONGOS    │ ← Query Router
+                              └─────────────┘
+                                    ↓
+        ┌─────────────┬────────────────┬───────────────┬
+        │             │                │               │
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│   SHARD A   │ │   SHARD B   │ │   SHARD C   │ │   SHARD D   │
+│  (Replica   │ │  (Replica   │ │  (Replica   │ │  (Replica   │
+│    Set)     │ │    Set)     │ │    Set)     │ │    Set)     │
+│ ┌─────────┐ │ │ ┌─────────┐ │ │ ┌─────────┐ │ │ ┌─────────┐ │
+│ │ Primary │ │ │ │ Primary │ │ │ │ Primary │ │ │ │ Primary │ │
+│ ├─────────┤ │ │ ├─────────┤ │ │ ├─────────┤ │ │ ├─────────┤ │
+│ │Secondary│ │ │ │Secondary│ │ │ │Secondary│ │ │ │Secondary│ │
+│ ├─────────┤ │ │ ├─────────┤ │ │ ├─────────┤ │ │ ├─────────┤ │
+│ │Secondary│ │ │ │Secondary│ │ │ │Secondary│ │ │ │Secondary│ │
+│ └─────────┘ │ │ └─────────┘ │ │ └─────────┘ │ │ └─────────┘ │
+└─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘
+
+```
+
+
+**Example**
+
+Assume that we have the following docs in table view.
+
+```text
+
++-----------------------------------------------------------+
+|                        PRODUCTS                           |
++----+----------------------+---------+----------------------+
+| ID |        name          | price   |      category        |
++----+----------------------+---------+----------------------+
+|  1 | Laptop               | 1500.00 | Electronics          |
+|  2 | Smartphone           | 999.99  | Electronics          |
+|  3 | Headphones           | 199.99  | Electronics          |
+|  4 | Monitor              | 300.00  | Electronics          |
+|  5 | Keyboard             | 49.99   | Accessories          |
+|  6 | Mouse                | 29.99   | Accessories          |
+|  7 | Backpack             | 75.00   | Travel               |
+|  8 | Water Bottle         | 20.00   | Lifestyle            |
+|  9 | Camera               | 650.00  | Electronics          |
+| 10 | Tripod               | 120.00  | Accessories          |
++-----------------------------------------------------------+
+```
+
+In replication, all nodes have EXACT same documents.
+```text
+                   REPLICA SET
+         (High Availability, NOT data distribution)
+
+            +-----------------------+
+            |       PRIMARY         |
+            +-----------------------+
+            | Docs 1 to 10 (ALL)    |
+            +-----------------------+
+
+           /                         \
+          /                           \
+         v                             v
+
++-----------------------+   +-----------------------+
+|     SECONDARY 1       |   |     SECONDARY 2       |
++-----------------------+   +-----------------------+
+| Docs 1 to 10 (ALL)    |   | Docs 1 to 10 (ALL)    |
++-----------------------+   +-----------------------+
+
+**Replica Set Rule:** Every node stores **all documents**.
+
+```
+In sharding, the data is partitioned and distributed across multiple shards, so each shard stores only a portion of the 
+overall dataset, not the full copy.
+Each shard is itself normally a Replica Set, so each shard’s data is also replicated internally.
+
+```text
+            SHARDED CLUSTER (Data Partitioning)
+
+                      +------------+
+                      |  mongos    |
+                      |  router    |
+                      +------------+
+                       /          \
+                      /            \
+                     v              v
+
+           +--------------------+      +--------------------+
+           |      SHARD 1       |      |      SHARD 2       |
+           | (IDs 1–5 only)     |      | (IDs 6–10 only)    |
+           +---------+----------+      +----------+---------+
+                     |                            |
+                     v                            v
+
++-----------------------------------------------------+
+|                 SHARD 1 DATA (Replica Set)          |
++----+----------------------+---------+----------------+
+| ID | name                 | price   | category       |
++----+----------------------+---------+----------------+
+|  1 | Laptop               | 1500.00 | Electronics    |
+|  2 | Smartphone           | 999.99  | Electronics    |
+|  3 | Headphones           | 199.99  | Electronics    |
+|  4 | Monitor              | 300.00  | Electronics    |
+|  5 | Keyboard             | 49.99   | Accessories    |
++-----------------------------------------------------+
+
++-----------------------------------------------------+
+|                 SHARD 2 DATA (Replica Set)          |
++----+----------------------+---------+----------------+
+| ID | name                 | price   | category       |
++----+----------------------+---------+----------------+
+|  6 | Mouse                | 29.99   | Accessories    |
+|  7 | Backpack             | 75.00   | Travel         |
+|  8 | Water Bottle         | 20.00   | Lifestyle      |
+|  9 | Camera               | 650.00  | Electronics    |
+| 10 | Tripod               | 120.00  | Accessories    |
++-----------------------------------------------------+
+
+Assume sharding by ID range:
+Shard 1 → IDs 1–5
+Shard 2 → IDs 6–10
+```
 
 
 ## Using a Programming Language to Interact With a Database
