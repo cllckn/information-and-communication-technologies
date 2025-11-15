@@ -78,7 +78,7 @@ A **client–server architecture** divides an application into two main componen
 This design centralizes data and logic on the server, making systems easier to manage, update, and secure.
 
 
-<img src="../resources/client-server.png" width="700">
+<img src="../resources/client-server.png" width="700" alt="client server architecture">
 
 ### Three-tier Web Architecture
 
@@ -448,14 +448,15 @@ console.log('End');
 ### Basic JSON Operations
 
 **Code Example: /part1/json.js**
+
 ```javascript
 const fs = require('fs'); // Import File System module
 
 // Sample product JSON object
 const product = {
     id: 1,
-    name: "Laptop",
-    category: "Electronics",
+    name: "SSD",
+    category: "Computer",
     price: 1000,
     stock: 50
 };
@@ -500,7 +501,7 @@ console.log("\nUpdated JSON file saved.");
 
 **Code Example: A Simple Web Server**
 
-/part1/web-server.js
+/part1/server.js
 
 ```javascript
 /**
@@ -615,19 +616,31 @@ You must embed these code snippets into a HTML file.**
 1. Add a button and a paragraph in your HTML.
 2. Use jQuery to hide the paragraph when the button is clicked.
 
-**Code Example**
-```javascript
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<button id="hide-btn">Hide</button>
-<p id="text">This is a paragraph.</p>
+**Code Example: /part1/public/jquery/index1.html**
 
-<script>
-    $(document).ready(function(){
-        $("#hide-btn").click(function(){
-            $("#text").hide();
-        })
-    });
-</script>
+```html
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <button id="hide-btn">Hide</button>
+  <p id="text">This is a paragraph.</p>
+
+  <script>
+    $(function () {
+    $("#hide-btn").on("click", function () {
+      $("#text").hide();
+    })
+  });
+  </script>
+
+</body>
+</html>
 
 ```
 
@@ -641,21 +654,33 @@ You can get and set values in form fields using `.val()`:
 2. When the button is clicked, retrieve the value entered in the input field.
 3. Display the value dynamically.
 
-**Code Example**
-```javascript
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<input type="text" id="name" placeholder="Enter your name">
-<button id="get-name">Get Name</button>
-<p id="output"></p>
+**Code Example: /part1/public/jquery/index2.html**
 
-<script>
-    $(document).ready(function(){
-        $("#get-name").click(function(){
-            var name = $("#name").val();
-            $("#output").text("Hello, " + name);
-        })
+```html
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <input type="text" id="name" placeholder="Enter your name">
+    <button id="get-name">Get Name</button>
+    <p id="output"></p>
+
+    <script>
+      $(function () {
+      $("#get-name").on("click", function () {
+        const name = $("#name").val();
+        $("#output").text("Hello, " + name);
+      })
     });
-</script>
+    </script>
+
+</body>
+</html>
 
 ```
 
@@ -669,8 +694,10 @@ jQuery provides event handlers for form elements, such as:
 - `submit()` – When a form is submitted.
 
 **Code Example: Form Submission Handling**
+
+Embed this JS code into /part1/public/jquery/index2.html.
+
 ```javascript
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <form id="user-form">
     <input type="text" id="username" placeholder="Enter username" required>
     <input type="password" id="password" placeholder="Enter password" required>
@@ -680,13 +707,13 @@ jQuery provides event handlers for form elements, such as:
 <p id="message"></p>
 
 <script>
-    $(document).ready(function(){
-        $("#user-form").submit(function(event){
-            event.preventDefault(); // Prevents page reload
-            var username = $("#username").val();
-            $("#message").text("Form submitted! Welcome, " + username);
-        });
-    });
+  $(function () {
+  $("#user-form").on("submit", function (event) {
+    event.preventDefault(); // Prevents page reload
+    const username = $("#username").val();
+    $("#message").text("Form submitted! Welcome, " + username);
+  })
+});
 </script>
 
 ```
@@ -697,17 +724,24 @@ jQuery provides event handlers for form elements, such as:
 Use `.prop()` to enable or disable input fields dynamically.
 
 **Code Example**
+
+Embed this JS code into /part1/public/jquery/index2.html.
+
 ```javascript
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <input type="text" id="email" disabled>
 <button id="enable-btn">Enable Input</button>
+<button id="disable-btn">Disable Input</button>
 
 <script>
-    $(document).ready(function(){
-        $("#enable-btn").click(function(){
-            $("#email").prop("disabled", false);
-        });
-    });
+  $(function () {
+    $("#enable-btn").on("click", function () {
+      $("#email").prop("disabled", false);
+    })
+
+    $("#disable-btn").on("click", function () {
+      $("#email").prop("disabled", true);
+    })
+  });
 </script>
 ```
 
@@ -716,22 +750,27 @@ Use `.prop()` to enable or disable input fields dynamically.
 Validate user input dynamically using the `.keyup()` event.
 
 **Code Example**
+
+
+Embed this JS code into /part1/public/jquery/index2.html.
+
+
 ```javascript
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <input type="text" id="phone" placeholder="Enter phone number">
 <p id="validation-msg"></p>
 
 <script>
-    $(document).ready(function(){
-        $("#phone").keyup(function(){
-            var input = $(this).val();
-            if (/^\d{10}$/.test(input)) {
-                $("#validation-msg").text("Valid number").css("color", "green");
-            } else {
-                $("#validation-msg").text("Invalid number").css("color", "red");
-            }
-        });
-    });
+  $(function () {    
+    $("#phone").on("keyup", function () {
+      const input = $(this).val();
+      if (/^\d{10}$/.test(input)) {
+        $("#validation-msg").text("Valid number").css("color", "green");
+      } else {
+        $("#validation-msg").text("Invalid number").css("color", "red");
+      }
+    })
+  });
 </script>
 ```
 
@@ -810,22 +849,40 @@ app.get("/api/customers", (req, res) => {
 
 ### A simple Node.js-based RESTful API
 
-**Code Example: /part2/server.js**
+**Code Example: /part2/restful-server.js**
 
 
 ```javascript
-const express = require("express");
-const app = express();
 
-app.use(express.json()); // Parse JSON requests
+// ───────────────────────────────────────────────────────────────
+// Import Required Modules
+// ───────────────────────────────────────────────────────────────
+const express = require("express"); // Import the Express.js framework
 
+// ───────────────────────────────────────────────────────────────
+// Configuration & Constants
+// ───────────────────────────────────────────────────────────────
+const app = express(); // Initialize an Express application
+const PORT = 3000; // Define the port number where the server will listen
+
+// ───────────────────────────────────────────────────────────────
+// Middleware: JSON Parser
+// ───────────────────────────────────────────────────────────────
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
+
+// ───────────────────────────────────────────────────────────────
 // In-memory database: JSON array for products
+// ───────────────────────────────────────────────────────────────
 let products = [
-  { id: 1, name: "Laptop", price: 999.99 },
-  { id: 2, name: "Phone", price: 499.99 },
+  { id: 1, name: "SSD", price: 999.99 },
+  { id: 2, name: "RAM", price: 499.99 },
 ];
 
-// Route definations
+// ───────────────────────────────────────────────────────────────
+// Define Routes
+// ───────────────────────────────────────────────────────────────
 // Routes are the connection points (end points - addresses) in a web service where clients send requests to interact with the service.
 // GET all products
 app.get("/api/products", (req, res) => {
@@ -866,9 +923,13 @@ app.delete("/api/products/:id", (req, res) => {
   res.json({ message: "Product deleted" }); // Respond with a deletion message
 });
 
-// Start server
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); // Start the server on port 3000
+// ───────────────────────────────────────────────────────────────
+// Start Express HTTP Server
+// ───────────────────────────────────────────────────────────────
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+
 ```
 
 **Endpoints (Routes) of the developed API**
@@ -880,14 +941,14 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); // Start 
         POST http://localhost:3000/api/products
         Content-Type: application/json
         {
-        "name": "Tablet",
+        "name": "HDD",
         "price": 299.99
         }
 
         PUT http://localhost:3000/api/products/2
         Content-Type: application/json
         {
-        "name": "Smartphone",
+        "name": "SSD",
         "price": 550.00
         }
     
@@ -917,7 +978,7 @@ curl -X GET http://localhost:3000/api/products/1
 
 curl -X POST http://localhost:3000/api/products \
      -H "Content-Type: application/json" \
-     -d '{"name": "Tablet", "price": 299.99}'
+     -d '{"name": "HDMI Cable", "price": 50.05}'
 
 
 ---
@@ -926,7 +987,7 @@ curl -X POST http://localhost:3000/api/products \
 
 curl -X PUT http://localhost:3000/api/products/1 \
      -H "Content-Type: application/json" \
-     -d '{"name": "Updated Laptop", "price": 1099.99}'
+     -d '{"name": "Updated Product", "price": 1099.99}'
 
 ---
 
@@ -949,7 +1010,8 @@ curl -X DELETE http://localhost:3000/api/products/1
 ### **Converting a Simple RESTful API into a Web Application with jQuery**
 
 
-This section explains how to convert the existing **REST API** into a **web application** by developing web pages that allow users to interact with the API using **jQuery**.
+This section explains how to convert the existing **REST API** into a **web application** by developing web pages that 
+allow users to interact with the API using **jQuery**.
 
 The web application will provide:
 - A **product list** fetched from the API.
@@ -959,85 +1021,101 @@ The web application will provide:
 
 
 **Steps to Convert the API into a Web Application**
-1. **Retain the existing REST API** as the backend.
+1. **Retain the existing REST API** as the backend, and add the statement to serve static files.
 2. **Develop frontend web pages** to interact with the API.
 3. **Use jQuery** to fetch, display, add, update, and delete products.
 4. **Implement event handling** using jQuery to interact with the API.
 5. **Enhance user experience** with jQuery effects.
 
 
-**Step 1: Modify the API** (`/part2/server.js`)
+**Step 1: Modify the API** (`/part2/restful-server.js`)
 
 We will slightly modify the existing API to serve **static HTML files** in addition to handling RESTful requests.
 
-**Code Example: /part2/server.js**
+**Code Example: /part2/web-server.js**
 
 ```javascript
 
-const express = require("express");
-const path = require("path");
-const app = express();
+// ───────────────────────────────────────────────────────────────
+// Import Required Modules
+// ───────────────────────────────────────────────────────────────
+const express = require("express"); // Import the Express.js framework
+const path = require("path"); // Import the built-in Node.js 'path' module
 const cors = require("cors"); // Import CORS
 
+// ───────────────────────────────────────────────────────────────
+// Configuration & Constants
+// ───────────────────────────────────────────────────────────────
+const app = express(); // Initialize an Express application
+const PORT = 3000; // Define the port number where the server will listen
 
-app.use(express.json()); // parse json requests
+// ───────────────────────────────────────────────────────────────
+// Middlewares
+// ───────────────────────────────────────────────────────────────
+app.use(express.json());// Middleware to parse JSON request bodies
 app.use(express.static(path.join(__dirname, 'public'))); // Middleware to serve static files (HTML, CSS, JS) from the 'public' folder
-
-
 app.use(cors()); // Enable CORS for all routes
 // The browser blocks cross-origin requests unless the server explicitly allows them.
 // Cross-Origin means that the protocol, domain, or port is different between the frontend and backend.
 
+// ───────────────────────────────────────────────────────────────
 // In-memory database: JSON array for products
+// ───────────────────────────────────────────────────────────────
 let products = [
-    { id: 1, name: "Laptop", price: 999.99 },
-    { id: 2, name: "Phone", price: 499.99 },
+  { id: 1, name: "SSD", price: 999.99 },
+  { id: 2, name: "RAM", price: 499.99 },
 ];
 
-// Route definations
-//Routes are the connection points (addresses) in a web service where clients send requests to interact with the server.
+// ───────────────────────────────────────────────────────────────
+// Define Routes
+// ───────────────────────────────────────────────────────────────
+// Routes are the connection points (end points - addresses) in a web service where clients send requests to interact with the service.
 // GET all products
 app.get("/api/products", (req, res) => {
-    res.json(products);
+  res.json(products); // Respond with the list of all products
 });
 
 // GET a single product by ID
 app.get("/api/products/:id", (req, res) => {
-    const product = products.find((p) => p.id === parseInt(req.params.id));
-    if (!product) return res.status(404).json({ error: "Product not found" });
-    res.json(product);
+  const product = products.find((p) => p.id === parseInt(req.params.id)); // Find the product by ID
+  if (!product) return res.status(404).json({ error: "Product not found" }); // If not found, respond with 404
+  res.json(product); // Respond with the found product
 });
 
 // POST - Add a new product
 app.post("/api/products", (req, res) => {
-    const { name, price } = req.body;
-    if (!name || !price) return res.status(400).json({ error: "Invalid input" });
+  const { name, price } = req.body; // Extract name and price from the request body
+  if (!name || !price) return res.status(400).json({ error: "Invalid input" }); // Validate input
 
-    const newProduct = { id: products.length + 1, name, price };
-    products.push(newProduct);
-    res.status(201).json(newProduct);
+  const newProduct = { id: products.length + 1, name, price }; // Add a new product with a unique ID
+  products.push(newProduct); // Add the new product to the list
+  res.status(201).json(newProduct); // Respond with the added product
 });
 
 // PUT - Update a product
 app.put("/api/products/:id", (req, res) => {
-    const product = products.find((p) => p.id === parseInt(req.params.id));
-    if (!product) return res.status(404).json({ error: "Product not found" });
+  const product = products.find((p) => p.id === parseInt(req.params.id)); // Find the product by ID
+  if (!product) return res.status(404).json({ error: "Product not found" }); // If not found, respond with 404
 
-    const { name, price } = req.body;
-    product.name = name || product.name;
-    product.price = price || product.price;
-    res.json(product);
+  const { name, price } = req.body; // Extract name and price from the request body
+  product.name = name || product.name; // Update the product name if provided
+  product.price = price || product.price; // Update the product price if provided
+  res.json(product); // Respond with the updated product
 });
 
 // DELETE - Remove a product
 app.delete("/api/products/:id", (req, res) => {
-    products = products.filter((p) => p.id !== parseInt(req.params.id));
-    res.json({ message: "Product deleted" });
+  products = products.filter((p) => p.id !== parseInt(req.params.id)); // Remove the product by ID
+  res.json({ message: "Product deleted" }); // Respond with a deletion message
 });
 
-// Start server
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// ───────────────────────────────────────────────────────────────
+// Start Express HTTP Server
+// ───────────────────────────────────────────────────────────────
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+
 ```
 
 
@@ -1052,49 +1130,50 @@ can view, add, update, and delete products using jQuery.
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Management</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        table { width: 50%; margin: auto; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 10px; }
-        .error { color: red; display: none; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    table { width: 50%; margin: auto; border-collapse: collapse; }
+    th, td { border: 1px solid black; padding: 10px; }
+    .error { color: red; display: none; }
+  </style>
 </head>
 <body>
-    <h2>Product List</h2>
-    <!-- Table to display products -->
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="product-list"></tbody> <!-- Products will be dynamically inserted here -->
-    </table>
+<h2>Product List</h2>
+<!-- Table to display products -->
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody id="product-list"></tbody> <!-- Products will be dynamically inserted here -->
+</table>
 
-    <h2>Add Product</h2>
-    <!-- Form to add a new product -->
-    <form id="add-product-form">
-        <input type="text" id="name" placeholder="Product Name" required>
-        <input type="number" id="price" placeholder="Price" required>
-        <button type="submit">Add Product</button>
-    </form>
-    <p class="error" id="error-msg">Invalid inputtttttttt</p> <!-- Error message for validation -->
+<h2>Add Product</h2>
+<!-- Form to add a new product -->
+<form id="add-product-form">
+  <input type="text" id="name" placeholder="Product Name" required>
+  <input type="number" id="price" placeholder="Price" required>
+  <button type="submit">Add Product</button>
+</form>
+<p class="error" id="error-msg">Invalid input</p> <!-- Error message for validation -->
 
-    <script>
-        $(document).ready(function(){
-            // Function to load products asynchronously using AJAX (GET request)
-            function loadProducts() {
-                $.get("/api/products", function(products){
-                    $("#product-list").empty(); // Clear the existing list
-                    products.forEach(product => {
-                        $("#product-list").append(`
+<script>
+
+  $(function () {
+    // Function to load products asynchronously using AJAX (GET request)
+    function loadProducts() {
+      $.get("/api/products", function(products){
+        $("#product-list").empty(); // Clear the existing list
+        products.forEach(product => {
+          $("#product-list").append(`
                             <tr>
                                 <td>${product.id}</td>
                                 <td>${product.name}</td>
@@ -1104,55 +1183,55 @@ can view, add, update, and delete products using jQuery.
                                 </td>
                             </tr>
                         `);
-                    });
-                });
-            }
-
-            // Handle form submission to add a new product (AJAX POST request)
-            $("#add-product-form").submit(function(event){
-                event.preventDefault(); // Prevent default form submission
-                var name = $("#name").val().trim(); // Get product name
-                var price = parseFloat($("#price").val().trim()); // Get product price
-
-                // Validate input: Ensure name is not empty and price is valid
-                if (!name || isNaN(price) || price <= 0) {
-                    $("#error-msg").fadeIn().delay(5000).fadeOut();
-                    return;
-                }
-
-                // Asynchronous request to add a product
-                $.post({
-                    url: "/api/products",
-                    contentType: "application/json", // Ensure JSON is sent correctly
-                    data: JSON.stringify({ name, price }),
-                    success: function(response) {
-                        loadProducts(); // Refresh product list after adding
-                        console.log("Product added:", response);
-                        $("#name").val(""); // Clear input fields
-                        $("#price").val("");
-                    },
-                    error: function(xhr) {
-                        console.error("Error:", xhr.responseText);
-                    }
-                });
-            });
-
-            // Handle product deletion (AJAX DELETE request)
-            $("#product-list").on("click", ".delete-btn", function() {
-                var id = $(this).data("id");
-                // Perform the deletion logic here
-                $.ajax({
-                    url: `/api/products/${id}`,
-                    type: "DELETE",
-                    success: function() {
-                        loadProducts();
-                    }
-                });
-            });
-
-            loadProducts(); // Initial load of products (asynchronous)
         });
-    </script>
+      });
+    }
+
+    // Handle form submission to add a new product (AJAX POST request)
+    $("#add-product-form").on("submit", function(event) {
+      event.preventDefault(); // Prevent default form submission
+      var name = $("#name").val().trim(); // Get product name
+      var price = parseFloat($("#price").val().trim()); // Get product price
+
+      // Validate input: Ensure name is not empty and price is valid
+      if (!name || isNaN(price) || price <= 0) {
+        $("#error-msg").fadeIn().delay(5000).fadeOut();
+        return;
+      }
+
+      // Asynchronous request to add a product
+      $.post({
+        url: "/api/products",
+        contentType: "application/json", // Ensure JSON is sent correctly
+        data: JSON.stringify({ name, price }),
+        success: function(response) {
+          loadProducts(); // Refresh product list after adding
+          console.log("Product added:", response);
+          $("#name").val(""); // Clear input fields
+          $("#price").val("");
+        },
+        error: function(xhr) {
+          console.error("Error:", xhr.responseText);
+        }
+      });
+    });
+
+    // Handle product deletion (AJAX DELETE request)
+    $("#product-list").on("click", ".delete-btn", function() {
+      var id = $(this).data("id");
+      // Perform the deletion logic here
+      $.ajax({
+        url: `/api/products/${id}`,
+        type: "DELETE",
+        success: function() {
+          loadProducts();
+        }
+      });
+    });
+
+    loadProducts(); // Initial load of products (asynchronous)
+  });
+</script>
 </body>
 </html>
 
@@ -1167,7 +1246,7 @@ can view, add, update, and delete products using jQuery.
 
 **Step 3: Add search and update functionalities to the web app**
 
-**Code Example: /part2/server.js**
+**Code Example: Add the following route to /part2/web-server.js**
 
 ```javascript
 // GET all products
@@ -1187,22 +1266,22 @@ app.get("/api/products", (req, res) => {
 
 ```
 
-**Code Example: /part2/public/index.html**
+**Code Example: /part2/public/index1.html**
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Management</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        table { width: 50%; margin: auto; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 10px; }
-        .error { color: red; display: none; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    table { width: 50%; margin: auto; border-collapse: collapse; }
+    th, td { border: 1px solid black; padding: 10px; }
+    .error { color: red; display: none; }
+  </style>
 </head>
 <body>
 <h2>Product List</h2>
@@ -1213,52 +1292,52 @@ app.get("/api/products", (req, res) => {
 
 <!-- Table to display products -->
 <table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody id="product-list"></tbody>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody id="product-list"></tbody>
 </table>
 
 <h2>Add Product</h2>
 <form id="add-product-form">
-    <input type="text" id="name" placeholder="Product Name" required>
-    <input type="number" id="price" placeholder="Price" required>
-    <button type="submit">Add Product</button>
+  <input type="text" id="name" placeholder="Product Name" required>
+  <input type="number" id="price" placeholder="Price" required>
+  <button type="submit">Add Product</button>
 </form>
 <p class="error" id="error-msg">Invalid input</p>
 
 <div id="updateform" hidden="true">
-    <h2>Update Product</h2>
-    <form id="update-product-form">
-        <input type="number" id="update-id" placeholder="Product ID" readonly required>
-        <input type="text" id="update-name" placeholder="New Name">
-        <input type="number" id="update-price" placeholder="New Price">
-        <button type="submit">Update Product</button>
-    </form>
-    <p class="error" id="update-error-msg">Invalid input</p>
+  <h2>Update Product</h2>
+  <form id="update-product-form">
+    <input type="number" id="update-id" placeholder="Product ID" readonly required>
+    <input type="text" id="update-name" placeholder="New Name">
+    <input type="number" id="update-price" placeholder="New Price">
+    <button type="submit">Update Product</button>
+  </form>
+  <p class="error" id="update-error-msg">Invalid input</p>
 </div>
 <script>
-    $(document).ready(function(){
-        let debounceTimer;
+  $(function () {
+    let debounceTimer;
 
-        function loadProducts(query = "") {
-            let url = query ? `/api/products?name=${encodeURIComponent(query)}` : "/api/products";
-            <!-- The purpose of using encodeURIComponent() is to safely encode special characters in URL query 
-                parameters to prevent URL syntax errors and security issues.-->
-          
-          $.get(url, function(products){
-                $("#product-list").empty();
-                if (products.length === 0) {
-                    $("#search-error").show();
-                } else {
-                    $("#search-error").hide();
-                    products.forEach(product => {
-                        $("#product-list").append(`
+    function loadProducts(query = "") {
+      let url = query ? `/api/products?name=${encodeURIComponent(query)}` : "/api/products";
+      <!-- The purpose of using encodeURIComponent() is to safely encode special characters in URL query
+          parameters to prevent URL syntax errors and security issues.-->
+
+      $.get(url, function(products){
+        $("#product-list").empty();
+        if (products.length === 0) {
+          $("#search-error").show();
+        } else {
+          $("#search-error").hide();
+          products.forEach(product => {
+            $("#product-list").append(`
                                 <tr>
                                     <td>${product.id}</td>
                                     <td>${product.name}</td>
@@ -1269,93 +1348,92 @@ app.get("/api/products", (req, res) => {
                                     </td>
                                 </tr>
                             `);
-                    });
-                }
-            });
+          });
         }
+      });
+    }
+    $("#add-product-form").on("submit", function(event) {
+      event.preventDefault();
+      let name = $("#name").val().trim();
+      let price = parseFloat($("#price").val().trim());
 
-        $("#add-product-form").submit(function(event){
-            event.preventDefault();
-            let name = $("#name").val().trim();
-            let price = parseFloat($("#price").val().trim());
+      if (!name || isNaN(price) || price <= 0) {
+        $("#error-msg").fadeIn().delay(5000).fadeOut();
+        return;
+      }
 
-            if (!name || isNaN(price) || price <= 0) {
-                $("#error-msg").fadeIn().delay(5000).fadeOut();
-                return;
-            }
-
-            $.post({
-                url: "/api/products",
-                contentType: "application/json",
-                data: JSON.stringify({ name, price }),
-                success: function() {
-                    loadProducts();
-                    $("#name, #price").val("");
-                }
-            });
-        });
-
-        $("#product-list").on("click", ".delete-btn", function() {
-            let id = $(this).data("id");
-            $.ajax({
-                url: `/api/products/${id}`,
-                type: "DELETE",
-                success: function() {
-                    loadProducts();
-                }
-            });
-        });
-
-     
-        //$("#search"):This is a jQuery selector that selects an HTML element with the id of search.
-        // The .on() method is used to attach an event handler to the selected element(s).
-        // "keyup" is the event type being listened for. The keyup event is triggered when a keyboard key is released after being pressed.
-        // function() { ... } is the callback function that will be executed when the keyup event occurs.
-        
-        $("#search").on("keyup", function() { // attaches an event listener to the search input field (#search). The event triggers whenever the user releases a key (keyup event).
-            clearTimeout(debounceTimer); // Clears any previously set timer (debounceTimer) to prevent multiple requests being sent in quick succession.
-            let query = $(this).val().trim();
-            debounceTimer = setTimeout(() => { //Sets a delay of 300 milliseconds before calling loadProducts(query).
-                loadProducts(query);
-            }, 300);
-        });
-
-        $("#update-product-form").submit(function(event){
-            event.preventDefault();
-            let id = parseInt($("#update-id").val().trim());
-            let name = $("#update-name").val().trim();
-            let price = parseFloat($("#update-price").val().trim());
-
-            if (isNaN(id) || id <= 0 || (!name && isNaN(price))) {
-                $("#update-error-msg").fadeIn().delay(5000).fadeOut();
-                return;
-            }
-
-            $.ajax({
-                url: `/api/products/${id}`,
-                type: "PUT",
-                contentType: "application/json",
-                data: JSON.stringify({ name, price }),
-                success: function() {
-                    loadProducts();
-                    $("#update-id, #update-name, #update-price").val("");
-                }
-            });
-        });
-
-        // Load product data into update form when "Edit" is clicked
-        $("#product-list").on("click", ".edit-btn", function() {
-            let id = $(this).data("id");
-            $("#updateform").fadeIn(2000);
-            $.get(`/api/products/${id}`, function(product) {
-                $("#update-id").val(product.id);
-                $("#update-name").val(product.name);
-                $("#update-price").val(product.price);
-            });
-        });
-
-        loadProducts();
+      $.post({
+        url: "/api/products",
+        contentType: "application/json",
+        data: JSON.stringify({ name, price }),
+        success: function() {
+          loadProducts();
+          $("#name, #price").val("");
+        }
+      });
     });
+
+    $("#product-list").on("click", ".delete-btn", function() {
+      let id = $(this).data("id");
+      $.ajax({
+        url: `/api/products/${id}`,
+        type: "DELETE",
+        success: function() {
+          loadProducts();
+        }
+      });
+    });
+
+
+    //$("#search"):This is a jQuery selector that selects an HTML element with the id of search.
+    // The .on() method is used to attach an event handler to the selected element(s).
+    // "keyup" is the event type being listened for. The keyup event is triggered when a keyboard key is released after being pressed.
+    // function() { ... } is the callback function that will be executed when the keyup event occurs.
+
+    $("#search").on("keyup", function() { // attaches an event listener to the search input field (#search). The event triggers whenever the user releases a key (keyup event).
+      clearTimeout(debounceTimer); // Clears any previously set timer (debounceTimer) to prevent multiple requests being sent in quick succession.
+      let query = $(this).val().trim();
+      debounceTimer = setTimeout(() => { //Sets a delay of 300 milliseconds before calling loadProducts(query).
+        loadProducts(query);
+      }, 300);
+    });
+
+    $("#update-product-form").on("submit", function(event) {
+      event.preventDefault();
+      let id = parseInt($("#update-id").val().trim());
+      let name = $("#update-name").val().trim();
+      let price = parseFloat($("#update-price").val().trim());
+
+      if (isNaN(id) || id <= 0 || (!name && isNaN(price))) {
+        $("#update-error-msg").fadeIn().delay(5000).fadeOut();
+        return;
+      }
+
+      $.ajax({
+        url: `/api/products/${id}`,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify({ name, price }),
+        success: function() {
+          loadProducts();
+          $("#update-id, #update-name, #update-price").val("");
+        }
+      });
+    });
+
+    // Load product data into update form when "Edit" is clicked
+    $("#product-list").on("click", ".edit-btn", function() {
+      let id = $(this).data("id");
+      $("#updateform").fadeIn(2000);
+      $.get(`/api/products/${id}`, function(product) {
+        $("#update-id").val(product.id);
+        $("#update-name").val(product.name);
+        $("#update-price").val(product.price);
+      });
+    });
+
+    loadProducts();
+  });
 </script>
 </body>
 </html>
@@ -1382,7 +1460,7 @@ Benefits of Using a Router
 * Reusability – Routes can be modular and reusable across different parts of the application.
 * Easier maintenance – Adding new routes does not clutter the main server file.
 
-**Code Example: /part2/server.js**
+**Code Example: /part2/server-with-router.js**
 
 Modify the existing code to include the router.
 
