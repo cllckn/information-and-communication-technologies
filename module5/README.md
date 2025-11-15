@@ -451,7 +451,10 @@ horizontal scaling across multiple servers, making it suitable for modern distri
 flexibility, scalability, and ease of use, MongoDB is widely used in web applications, real-time analytics, IoT 
 systems, and any environment where data structure can change over time.
 
-1) A replica set provides high availability by copying the same data across multiple servers. In a replica set, read 
+In MongoDB, a cluster refers to a group of interconnected servers (nodes) that work together as a single unified 
+database system, providing scalability, redundancy, and high availability.
+
+1) A replica set (cluster) provides high availability by copying the same data across multiple servers. In a replica set, read 
 performance can also be improved by directing read operations to the nearest replica node.
 ```text
                +----------------------+
@@ -476,7 +479,8 @@ SECONDARIES replicate data **from the PRIMARY**
 If PRIMARY fails → one SECONDARY becomes PRIMARY
 ```
 
-2) Sharding splits big data across multiple servers (shards). The mongos router directs client requests to the correct shard.
+2) Sharding (with sharding cluster) splits big data across multiple servers (shards). The mongos router directs client 
+requests to the correct shard.
      
 ```text
 
