@@ -42,7 +42,6 @@
 
 
 
-
 ## Introduction to Database Management Systems
 - A **database** is a collection of related data designed for efficient storage, retrieval, management, and manipulation.
 - A **Database Management System (DBMS)** is specialized software that controls and manages databases and 
