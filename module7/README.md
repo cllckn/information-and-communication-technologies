@@ -774,7 +774,7 @@ Embed this JS code into /part1/public/jquery/index2.html.
 ```javascript
 
 <input type="text" id="phone" placeholder="Enter phone number">
-<p id="validation-msg"></p>
+<p id="validation-msg">validation message</p>
 
 <script>
   $(function () {    
