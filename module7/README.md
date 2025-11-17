@@ -39,6 +39,8 @@
     * [Routers and Routes in Express.js](#routers-and-routes-in-expressjs)
   * [Database Integration](#database-integration)
   * [Hands-on Exercise 4](#hands-on-exercise-4)
+  * [Deploy application to a remote server](#deploy-application-to-a-remote-server)
+    * [Running Node.js app as a service using pm2](#running-nodejs-app-as-a-service-using-pm2)
 <!-- TOC -->
 
 ## Fundamentals Of Web Applications And Web Services
@@ -46,7 +48,7 @@
 There are several services on the Internet, and the **Web (World Wide Web)** is one of the most widely used.
 
 The Web consists of various resources—such as websites, web pages, files, data services, and functions—that can be 
-accessed through applications like web browsers or web services.
+accessed through client applications like web browsers or web services.
 
 **What is a URL?**
 
@@ -563,7 +565,7 @@ Hello World !
 
 ### JavaScript
 
-    JavaScript is a programming language used to make web pages interactive and dynamic. 
+    JavaScript is a programming language used to make web pages more interactive and dynamic. 
     
     It allows developers to manipulate HTML and CSS, handle events like clicks or keyboard input, and fetch data 
     from servers without reloading the page. 
@@ -614,11 +616,14 @@ jQuery follows a simple syntax:
 **For the following jQuery code snippets, you are required to use a Node.js-based web application.
 You must embed these code snippets into a HTML file.**
 
-**Example: Hiding a Paragraph on Click**
+
+**Code Example: Hiding a Paragraph on Click**
+
+/part1/public/jquery/index1.html
+
 1. Add a button and a paragraph in your HTML.
 2. Use jQuery to hide the paragraph when the button is clicked.
 
-**Code Example: /part1/public/jquery/index1.html**
 
 ```html
 <!DOCTYPE html>
@@ -634,11 +639,19 @@ You must embed these code snippets into a HTML file.**
   <p id="text">This is a paragraph.</p>
 
   <script>
+    // Runs the function only AFTER the HTML document is fully loaded
     $(function () {
-    $("#hide-btn").on("click", function () {
-      $("#text").hide();
-    })
-  });
+
+      // Attach a click event listener to the button with id="hide-btn":
+        // When the user clicks the button, jQuery triggers the anonymous callback function registered in the 
+        // on("click", ...) handler. This callback runs immediately and executes $("#text").hide(), which hides the 
+        // selected element from the page.
+      $("#hide-btn").on("click", function () {
+
+        // When the button is clicked, hide the element with id="text"
+        $("#text").hide();
+      });
+    });
   </script>
 
 </body>
@@ -649,14 +662,14 @@ You must embed these code snippets into a HTML file.**
 
 ### Handling Form Input Fields
 
-**Selecting Form Elements**
 You can get and set values in form fields using `.val()`:
 
-1. Form an input field and a button.
-2. When the button is clicked, retrieve the value entered in the input field.
-3. Display the value dynamically.
-
 **Code Example: /part1/public/jquery/index2.html**
+
+1. Form an input field, a button, and a paragraph element.
+2. When the button is clicked, retrieve the value entered the input field.
+3. Dynamically display the value inside the paragraph element.
+
 
 ```html
 <!DOCTYPE html>
@@ -670,15 +683,16 @@ You can get and set values in form fields using `.val()`:
 
     <input type="text" id="name" placeholder="Enter your name">
     <button id="get-name">Get Name</button>
-    <p id="output"></p>
+    <p id="output">Output</p>
 
     <script>
       $(function () {
-      $("#get-name").on("click", function () {
-        const name = $("#name").val();
-        $("#output").text("Hello, " + name);
-      })
-    });
+        // Attach a click event listener to the button with id="get-name":
+        $("#get-name").on("click", function () {
+          const name = $("#name").val();
+          $("#output").text("Hello, " + name);
+        })
+      });
     </script>
 
 </body>
@@ -710,11 +724,11 @@ Embed this JS code into /part1/public/jquery/index2.html.
 
 <script>
   $(function () {
-  $("#user-form").on("submit", function (event) {
-    event.preventDefault(); // Prevents page reload
-    const username = $("#username").val();
-    $("#message").text("Form submitted! Welcome, " + username);
-  })
+    $("#user-form").on("submit", function (event) {
+      event.preventDefault(); // Prevents page reload
+      const username = $("#username").val();
+      $("#message").text("Form submitted! Welcome, " + username);
+    })
 });
 </script>
 
@@ -778,8 +792,6 @@ Embed this JS code into /part1/public/jquery/index2.html.
 
 
 **For the details of JQuery, refer to https://api.jquery.com/** or **https://www.w3schools.com/jquery**
-
-
 
 
 
@@ -1735,3 +1747,36 @@ app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`)
 ## [Hands-on Exercise 4](./exercises/README.md)
 
 ***
+
+
+## Deploy application to a remote server
+
+    Intellij -> Tools -> Deployment -> Configuration 
+    Provide protocol -> sftp, socket address -> 192.2.2.1:22, credentials ->username:password
+    Right Click -> Deploy
+
+### Running Node.js app as a service using pm2
+PM2 is a popular, open-source, production-grade process manager for Node.js applications. It helps you manage and keep your
+Node.js applications running in the background, even after system reboots or crashes.
+```shell
+npm install pm2@latest -g
+
+pm2 start web-app-server.js
+
+pm2 status
+
+pm2 monit
+
+pm2 restart id/name
+
+pm2 stop id/name
+
+pm2 delete id/name
+
+pm2 save # Freeze a process list on reboot via
+
+pm2 startup  #This command will generate a script that you can copy and paste into your terminal to enable PM2 to start on boot.
+ 
+
+pm2 unstartup systemd  # Remove init script
+```
