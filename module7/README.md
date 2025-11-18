@@ -35,7 +35,7 @@
       * [curl](#curl)
       * [HTTP Client](#http-client)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
-  * [Converting a Simple RESTful API into a Web Application with jQuery](#converting-a-simple-restful-api-into-a-web-application-with-jquery)
+  * [Converting a Simple RESTful API into a Web Application](#converting-a-simple-restful-api-into-a-web-application)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
   * [Interconnecting Web Services](#interconnecting-web-services)
@@ -1116,7 +1116,7 @@ DELETE http://localhost:3000/api/products/1
 
 
 
-## Converting a Simple RESTful API into a Web Application with jQuery
+## Converting a Simple RESTful API into a Web Application
 
 
 This section explains how to convert the existing **REST API** into a **web application** by developing web pages that 
