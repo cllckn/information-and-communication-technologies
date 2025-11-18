@@ -31,12 +31,14 @@
     * [HTTP Status Codes](#http-status-codes)
     * [Response Formats](#response-formats)
     * [A simple Node.js-based RESTful API](#a-simple-nodejs-based-restful-api)
-    * [REST Clients - Testing REST api using cURL and http client](#rest-clients---testing-rest-api-using-curl-and-http-client)
+    * [REST Clients - Testing REST api using cURL and HTTP Client](#rest-clients---testing-rest-api-using-curl-and-http-client)
+      * [curl](#curl)
+      * [HTTP Client](#http-client)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
     * [Converting a Simple RESTful API into a Web Application with jQuery](#converting-a-simple-restful-api-into-a-web-application-with-jquery)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
-    * [Routers and Routes in Express.js](#routers-and-routes-in-expressjs)
+  * [Interconnecting Web Services](#interconnecting-web-services)
   * [Database Integration](#database-integration)
   * [Hands-on Exercise 4](#hands-on-exercise-4)
   * [Deploy application to a remote server](#deploy-application-to-a-remote-server)
@@ -774,7 +776,7 @@ Embed this JS code into /part1/public/jquery/index2.html.
 ```javascript
 
 <input type="text" id="phone" placeholder="Enter phone number">
-<p id="validation-msg">validation message</p>
+<p id="validation-msg"></p>
 
 <script>
   $(function () {    
@@ -1013,8 +1015,10 @@ app.listen(PORT, () => {
         DELETE http://localhost:3000/api/products/1
 
 
-### REST Clients - Testing REST api using cURL and http client
+### REST Clients - Testing REST api using cURL and HTTP Client
 
+
+#### curl
     curl --version
     if not installed -> Download cURL from: https://curl.se/windows/
 
@@ -1052,6 +1056,53 @@ curl -X PUT http://localhost:3000/api/products/1 \
 # Deletes a product from the database by specifying its ID.
 
 curl -X DELETE http://localhost:3000/api/products/1
+
+
+```
+
+#### HTTP Client
+
+**Code Example: /part2/restful-api-test.http**
+
+```http request
+###
+# curl -X GET http://localhost:3000/api/products
+GET http://localhost:3000/api/products
+
+
+###
+# curl -X GET http://localhost:3000/api/products
+GET http://localhost:3000/api/products/1
+
+###
+
+# curl -X POST http://localhost:3000/api/products
+#     -H "Content-Type: application/json"
+#     -d '{"name": "Tablet", "price": 299.99}'
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{"name": "SSD", "price": 500}
+
+###
+
+# curl -X PUT http://localhost:3000/api/products/1
+#     -H "Content-Type: application/json"
+#     -d '{"name": "Updated Laptop", "price": 1099.99}'
+PUT http://localhost:3000/api/products/1
+Content-Type: application/json
+
+{"name": "Updated SSD", "price": 1099.99}
+
+###
+
+
+# curl -X DELETE http://localhost:3000/api/products/1
+DELETE http://localhost:3000/api/products/1
+
+###
+
+
 
 
 ```
@@ -1115,6 +1166,8 @@ app.use(express.static(path.join(__dirname, 'public'))); // Middleware to serve 
 app.use(cors()); // Enable CORS for all routes
 // The browser blocks cross-origin requests unless the server explicitly allows them.
 // Cross-Origin means that the protocol, domain, or port is different between the frontend and backend.
+// The frontend is running on localhost:3000, and when it sends a request to the service running on localhost:4000, 
+// it is considered a cross-origin request.
 
 // ───────────────────────────────────────────────────────────────
 // In-memory database: JSON array for products
@@ -1304,7 +1357,7 @@ can view, add, update, and delete products using jQuery.
 
 **Step 3: Add search and update functionalities to the web app**
 
-**Code Example: Add the following route to /part2/web-server.js**
+**Code Example: Modify the following route in /part2/web-server.js**
 
 ```javascript
 // GET all products
@@ -1499,8 +1552,6 @@ app.get("/api/products", (req, res) => {
 ```
 
 
-
-
 ***
 ## [Hands-on Exercise 3](./exercises/README.md)
 
@@ -1508,90 +1559,73 @@ app.get("/api/products", (req, res) => {
 
 
 
-### Routers and Routes in Express.js
 
-An **Express Router** helps organize routes by grouping them into separate files. This makes the code 
-modular, manageable, and scalable.
+## Interconnecting Web Services
 
-Benefits of Using a Router
-* Code organization – Keeps web-app-server.js clean and structured.
-* Reusability – Routes can be modular and reusable across different parts of the application.
-* Easier maintenance – Adding new routes does not clutter the main server file.
+```text
+                                     Client
+                                       | ^
+        1) Sends request to Service A  | | 4)Final response
+                                       v |
+                            +--------------------------+
+                            |        Service A         |
+                            |        (4000)            |
+                            +--------------------------+
+                                       | ^
+                             2) A → B  | | 3) B → A (sends data back)
+                                       v |
+                            +--------------------------+
+                            |        Service B         |
+                            |        (3000)            |
+                            +--------------------------+
+                             
+```
+* Run the Service B /part2/restful-server.js
+* Send requests to this service with the following RESTful client service (Service A)
 
-**Code Example: /part2/server-with-router.js**
-
-Modify the existing code to include the router.
+**Code Example: /part2/restful-client-service.js**
 
 ```javascript
-const express = require("express");
-const productRoutes = require("./routes/products"); // Import product routes
+// ───────────────────────────────────────────────────────────────
+// Import Required Modules
+// ───────────────────────────────────────────────────────────────
+const express = require("express"); // Import the Express.js framework
+const axios = require("axios"); // Used to send HTTP requests to Service A
 
-const app = express();
+// ───────────────────────────────────────────────────────────────
+// Configuration & Constants
+// ───────────────────────────────────────────────────────────────
+const app = express(); // Initialize an Express application
+const PORT = 4000; // Define the port number where the server will listen
 
-app.use(express.json()); // Parse JSON requests
+// ───────────────────────────────────────────────────────────────
+// Middleware: JSON Parser
+// ───────────────────────────────────────────────────────────────
+// Middleware to parse JSON request bodies
+app.use(express.json());
 
 
-// Use product routes
-app.use("/api/products", productRoutes);
+// GET all products from the related web service
+app.get("/api/products", async (req, res) => {
+  try {
+    // Service B sends a GET request to Service A (port 3000)
+    const response = await axios.get("http://localhost:3000/api/products");
+
+    // Service B sends the data it received from Service A back to its own client
+    res.json(response.data);
+
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch products from Service A" });
+  }
+});
+
 
 // Start server
-const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
+
 ```
 
-**Code Example: /part2/routes/products.js**
-```javascript
-const express = require("express");
-const router = express.Router();
-
-// In-memory database: Array to store product data
-let products = [
-    { id: 1, name: "Laptop", price: 999.99 },
-    { id: 2, name: "Phone", price: 499.99 },
-];
-
-// GET all products
-router.get("/", (req, res) => {
-    res.json(products);
-});
-
-// GET a single product by ID
-router.get("/:id", (req, res) => {
-    const product = products.find((p) => p.id === parseInt(req.params.id));
-    if (!product) return res.status(404).json({ error: "Product not found" });
-    res.json(product);
-});
-
-// POST - Add a new product
-router.post("/", (req, res) => {
-    const { name, price } = req.body;
-    if (!name || !price) return res.status(400).json({ error: "Invalid input" });
-
-    const newProduct = { id: products.length + 1, name, price };
-    products.push(newProduct);
-    res.status(201).json(newProduct);
-});
-
-// PUT - Update a product
-router.put("/:id", (req, res) => {
-    const product = products.find((p) => p.id === parseInt(req.params.id));
-    if (!product) return res.status(404).json({ error: "Product not found" });
-
-    const { name, price } = req.body;
-    product.name = name || product.name;
-    product.price = price || product.price;
-    res.json(product);
-});
-
-// DELETE - Remove a product
-router.delete("/:id", (req, res) => {
-    products = products.filter((p) => p.id !== parseInt(req.params.id));
-    res.json({ message: "Product deleted" });
-});
-
-module.exports = router;
-```
 
 
 ## Database Integration
