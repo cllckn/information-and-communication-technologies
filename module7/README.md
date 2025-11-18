@@ -23,8 +23,8 @@
     * [HTML (HyperText Markup Language)](#html-hypertext-markup-language)
     * [CSS (Cascading Style Sheets)](#css-cascading-style-sheets)
     * [JavaScript](#javascript)
-  * [jQuery and Basic Form Operations for User Interaction](#jquery-and-basic-form-operations-for-user-interaction)
-    * [Handling Form Input Fields](#handling-form-input-fields)
+    * [jQuery and Basic Form Operations for User Interaction](#jquery-and-basic-form-operations-for-user-interaction)
+      * [Handling Form Input Fields](#handling-form-input-fields)
   * [Developing RESTful APIs](#developing-restful-apis)
     * [What is a RESTful API?](#what-is-a-restful-api)
     * [Route definition in Express.js](#route-definition-in-expressjs)
@@ -35,14 +35,14 @@
       * [curl](#curl)
       * [HTTP Client](#http-client)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
-    * [Converting a Simple RESTful API into a Web Application with jQuery](#converting-a-simple-restful-api-into-a-web-application-with-jquery)
+  * [Converting a Simple RESTful API into a Web Application with jQuery](#converting-a-simple-restful-api-into-a-web-application-with-jquery)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
   * [Interconnecting Web Services](#interconnecting-web-services)
   * [Database Integration](#database-integration)
   * [Hands-on Exercise 4](#hands-on-exercise-4)
-  * [Deploy application to a remote server](#deploy-application-to-a-remote-server)
-    * [Running Node.js app as a service using pm2](#running-nodejs-app-as-a-service-using-pm2)
+  * [Deployment of Node.js Application to a Remote Server](#deployment-of-nodejs-application-to-a-remote-server)
+    * [Running Node.js Applications as Services with PM2](#running-nodejs-applications-as-services-with-pm2)
 <!-- TOC -->
 
 ## Fundamentals Of Web Applications And Web Services
@@ -576,7 +576,7 @@ Hello World !
 
 
 
-## jQuery and Basic Form Operations for User Interaction
+### jQuery and Basic Form Operations for User Interaction
 
 **What is jQuery?**
 
@@ -662,7 +662,7 @@ You must embed these code snippets into a HTML file.**
 ```
 
 
-### Handling Form Input Fields
+#### Handling Form Input Fields
 
 You can get and set values in form fields using `.val()`:
 
@@ -1116,7 +1116,7 @@ DELETE http://localhost:3000/api/products/1
 
 
 
-### Converting a Simple RESTful API into a Web Application with jQuery
+## Converting a Simple RESTful API into a Web Application with jQuery
 
 
 This section explains how to convert the existing **REST API** into a **web application** by developing web pages that 
@@ -1783,15 +1783,16 @@ app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`)
 ***
 
 
-## Deploy application to a remote server
+## Deployment of Node.js Application to a Remote Server
 
     Intellij -> Tools -> Deployment -> Configuration 
     Provide protocol -> sftp, socket address -> 192.2.2.1:22, credentials ->username:password
     Right Click -> Deploy
 
-### Running Node.js app as a service using pm2
-PM2 is a popular, open-source, production-grade process manager for Node.js applications. It helps you manage and keep your
-Node.js applications running in the background, even after system reboots or crashes.
+### Running Node.js Applications as Services with PM2
+PM2 is a widely used, open-source, production-grade process manager for Node.js (Python) applications. 
+It helps you manage and keep your Node.js applications running in the background, even after system reboots or crashes.
+
 ```shell
 npm install pm2@latest -g
 
@@ -1811,6 +1812,5 @@ pm2 save # Freeze a process list on reboot via
 
 pm2 startup  #This command will generate a script that you can copy and paste into your terminal to enable PM2 to start on boot.
  
-
 pm2 unstartup systemd  # Remove init script
 ```
