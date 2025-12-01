@@ -719,7 +719,7 @@ Embed this JS code into /part1/public/jquery/index2.html.
 <form id="user-form">
     <input type="text" id="username" placeholder="Enter username" required>
     <input type="password" id="password" placeholder="Enter password" required>
-    <button type="submit">Submit</button>
+    <button type="submit">Submit </button>
 </form>
 
 <p id="message"></p>
@@ -755,7 +755,7 @@ Embed this JS code into /part1/public/jquery/index2.html.
     $("#enable-btn").on("click", function () {
       $("#email").prop("disabled", false);
     })
-
+        
     $("#disable-btn").on("click", function () {
       $("#email").prop("disabled", true);
     })
@@ -911,9 +911,7 @@ APIs typically return data in one of the following formats:
 
 **Code Example: /part2/restful-server.js**
 
-
 ```javascript
-
 // ───────────────────────────────────────────────────────────────
 // Import Required Modules
 // ───────────────────────────────────────────────────────────────
@@ -966,8 +964,39 @@ app.post("/api/products", (req, res) => {
   res.status(201).json(newProduct); // Respond with the added product
 });
 
-// PUT - Update a product
+
+// PUT - Replace a Product Record (full replacement)
 app.put("/api/products/:id", (req, res) => {
+  // 1. Destructure and extract all fields from the request body.
+  // Assuming 'name', 'price' are the mutable fields.
+  const { name, price } = req.body;
+
+  // 2. Validate the Request Body (Required for PUT)
+  // Check if all required fields are present.
+  // Note: Unlike the original code, we do NOT use '|| product.name'
+  // because PUT must overwrite all fields, or fail.
+  if (!name || price == null ) {
+    return res.status(400).json({
+      error: "PUT /products requires ALL mutable fields (name, price) for full replacement."
+    });
+  }
+
+  // 3. Find the Product
+  const product = products.find((p) => p.id === parseInt(req.params.id));
+  if (!product) {
+    return res.status(404).json({ error: "Product not found" });
+  }
+
+  // 4. Update/Replace: Directly assign ALL new values.
+  product.name = name;
+  product.price = price;
+
+  // 5. Respond with the fully updated product
+  res.json(product);
+});
+
+// PATCH - Modify a product (partial or full replacement)
+app.patch("/api/products/:id", (req, res) => {
   const product = products.find((p) => p.id === parseInt(req.params.id)); // Find the product by ID
   if (!product) return res.status(404).json({ error: "Product not found" }); // If not found, respond with 404
 
@@ -1028,17 +1057,24 @@ app.listen(PORT, () => {
 
 curl -X GET http://localhost:3000/api/products
 
+# -i - Include response headers
+# -X - Specify HTTP method
+# -H - Add headers
+# -d - Send data (POST/PUT)
+# -u - Basic authentication
+# -v - Verbose(detailed) output
+
 ---
 
 # Fetches details of a specific product using its ID.
 
-curl -X GET http://localhost:3000/api/products/1
+curl -iX GET http://localhost:3000/api/products/1
 
 ---
 
 # Adds a new product to the database. The request body must contain name and price in JSON format.
 
-curl -X POST http://localhost:3000/api/products \
+curl -iX POST http://localhost:3000/api/products \
      -H "Content-Type: application/json" \
      -d '{"name": "HDMI Cable", "price": 50.05}'
 
@@ -1094,6 +1130,17 @@ Content-Type: application/json
 
 {"name": "Updated SSD", "price": 1099.99}
 
+
+###
+
+# curl -X PATCH http://localhost:3000/api/products/1
+#     -H "Content-Type: application/json"
+#     -d '{"name": "Updated Laptop", "price": 1099.99}'
+PATCH http://localhost:3000/api/products/1
+Content-Type: application/json
+
+{"price": 200}
+
 ###
 
 
@@ -1101,8 +1148,6 @@ Content-Type: application/json
 DELETE http://localhost:3000/api/products/1
 
 ###
-
-
 
 
 ```
@@ -1144,7 +1189,6 @@ We will slightly modify the existing API to serve **static HTML files** in addit
 **Code Example: /part2/web-server.js**
 
 ```javascript
-
 // ───────────────────────────────────────────────────────────────
 // Import Required Modules
 // ───────────────────────────────────────────────────────────────
@@ -1166,7 +1210,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Middleware to serve 
 app.use(cors()); // Enable CORS for all routes
 // The browser blocks cross-origin requests unless the server explicitly allows them.
 // Cross-Origin means that the protocol, domain, or port is different between the frontend and backend.
-// The frontend is running on localhost:3000, and when it sends a request to the service running on localhost:4000, 
+// The frontend is running on localhost:3000, and when it sends a request to the service running on localhost:4000,
 // it is considered a cross-origin request.
 
 // ───────────────────────────────────────────────────────────────
@@ -1203,8 +1247,38 @@ app.post("/api/products", (req, res) => {
   res.status(201).json(newProduct); // Respond with the added product
 });
 
-// PUT - Update a product
+// PUT - Replace a Product Record (full replacement)
 app.put("/api/products/:id", (req, res) => {
+  // 1. Destructure and extract all fields from the request body.
+  // Assuming 'name', 'price' are the mutable fields.
+  const { name, price } = req.body;
+
+  // 2. Validate the Request Body (Required for PUT)
+  // Check if all required fields are present.
+  // Note: Unlike the original code, we do NOT use '|| product.name'
+  // because PUT must overwrite all fields, or fail.
+  if (!name || price == null ) {
+    return res.status(400).json({
+      error: "PUT /products requires ALL mutable fields (name, price) for full replacement."
+    });
+  }
+
+  // 3. Find the Product
+  const product = products.find((p) => p.id === parseInt(req.params.id));
+  if (!product) {
+    return res.status(404).json({ error: "Product not found" });
+  }
+
+  // 4. Update/Replace: Directly assign ALL new values.
+  product.name = name;
+  product.price = price;
+
+  // 5. Respond with the fully updated product
+  res.json(product);
+});
+
+// PATCH - Modify a product (partial or full replacement)
+app.patch("/api/products/:id", (req, res) => {
   const product = products.find((p) => p.id === parseInt(req.params.id)); // Find the product by ID
   if (!product) return res.status(404).json({ error: "Product not found" }); // If not found, respond with 404
 
@@ -1226,7 +1300,6 @@ app.delete("/api/products/:id", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
-
 ```
 
 
@@ -1245,11 +1318,32 @@ can view, add, update, and delete products using jQuery.
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Management</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- In your HTML file's <head> section -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Internal (or Embedded) CSS-->
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; }
-    table { width: 50%; margin: auto; border-collapse: collapse; }
-    th, td { border: 1px solid black; padding: 10px; }
-    .error { color: red; display: none; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    table {
+      width: 50%;
+      margin: auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+    }
+
+    .error {
+      color: red;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -1267,7 +1361,8 @@ can view, add, update, and delete products using jQuery.
   <tbody id="product-list"></tbody> <!-- Products will be dynamically inserted here -->
 </table>
 
-<h2>Add Product</h2>
+<!-- Inline (or Embedded) CSS-->
+<h2 style="color: #000066;font-family: Avenir,monospace">Add Product</h2>
 <!-- Form to add a new product -->
 <form id="add-product-form">
   <input type="text" id="name" placeholder="Product Name" required>
@@ -1278,10 +1373,10 @@ can view, add, update, and delete products using jQuery.
 
 <script>
 
-  $(function () {
+  $(function() {
     // Function to load products asynchronously using AJAX (GET request)
     function loadProducts() {
-      $.get("/api/products", function(products){
+      $.get("/api/products", function(products) {
         $("#product-list").empty(); // Clear the existing list
         products.forEach(product => {
           $("#product-list").append(`
@@ -1362,17 +1457,17 @@ can view, add, update, and delete products using jQuery.
 ```javascript
 // GET all products
 app.get("/api/products", (req, res) => {
-    // Accesses the name parameter from the query string in an Express.js request object.
-    const query = req.query.name?.toLowerCase() || ""; 
+  // Accesses the name parameter from the query string in an Express.js request object.
+  const query = req.query.name?.toLowerCase() || "";
 
-    if (query) {
-        const filteredProducts = products.filter(product =>
+  if (query) {
+    const filteredProducts = products.filter(product =>
             product.name.toLowerCase().includes(query)
-        );
-        return res.json(filteredProducts);
-    }
+    );
+    return res.json(filteredProducts);
+  }
 
-    res.json(products);
+  res.json(products);
 });
 
 ```
@@ -1388,10 +1483,26 @@ app.get("/api/products", (req, res) => {
   <title>Product Management</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; }
-    table { width: 50%; margin: auto; border-collapse: collapse; }
-    th, td { border: 1px solid black; padding: 10px; }
-    .error { color: red; display: none; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    table {
+      width: 50%;
+      margin: auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+    }
+
+    .error {
+      color: red;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -1433,7 +1544,7 @@ app.get("/api/products", (req, res) => {
   <p class="error" id="update-error-msg">Invalid input</p>
 </div>
 <script>
-  $(function () {
+  $(function() {
     let debounceTimer;
 
     function loadProducts(query = "") {
@@ -1441,7 +1552,7 @@ app.get("/api/products", (req, res) => {
       <!-- The purpose of using encodeURIComponent() is to safely encode special characters in URL query
           parameters to prevent URL syntax errors and security issues.-->
 
-      $.get(url, function(products){
+      $.get(url, function(products) {
         $("#product-list").empty();
         if (products.length === 0) {
           $("#search-error").show();
@@ -1463,6 +1574,7 @@ app.get("/api/products", (req, res) => {
         }
       });
     }
+
     $("#add-product-form").on("submit", function(event) {
       event.preventDefault();
       let name = $("#name").val().trim();
@@ -1623,7 +1735,6 @@ app.get("/api/products", async (req, res) => {
 // Start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-
 ```
 
 
@@ -1663,11 +1774,11 @@ const app = express();
 // Initialize a new PostgreSQL connection pool
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'testdb',
-    password: 'LecturePassword',
-    port: 5432,
+  user: 'postgres',
+  host: 'localhost',
+  database: 'testdb',
+  password: 'LecturePassword',
+  port: 5432,
 });
 
 /*const pool = new Pool({
@@ -1680,95 +1791,97 @@ app.use(express.json());
 
 // ------------------------ GET all products ------------------------
 app.get("/api/products", async (req, res) => {
-    try {
-        // Fetch all products from the database
-        const result = await pool.query("SELECT * FROM products ORDER BY id ASC");
+  try {
+    // Fetch all products from the database
+    const result = await pool.query("SELECT * FROM products ORDER BY id ASC");
 
-        // Respond with JSON data
-        res.json(result.rows);
-    } catch (err) {
-        res.status(500).json({ error: "Database error" }); // Handle errors
-    }
+    // Respond with JSON data
+    res.json(result.rows);
+  } catch (err) {
+    res.status(500).json({ error: "Database error" }); // Handle errors
+  }
 });
 
 // ------------------------ GET a single product by ID ------------------------
 app.get("/api/products/:id", async (req, res) => {
-    try {
-        const { id } = req.params; // Extract product ID from URL
+  try {
+    const { id } = req.params; // Extract product ID from URL
 
-        // Query database for the given product ID
-        const result = await pool.query("SELECT * FROM products WHERE id = $1", [id]);
+    // Query database for the given product ID
+    const result = await pool.query("SELECT * FROM products WHERE id = $1", [id]);
 
-        if (result.rows.length === 0)
-            return res.status(404).json({ error: "Product not found" });
+    if (result.rows.length === 0)
+      return res.status(404).json({ error: "Product not found" });
 
-        // Respond with the found product
-        res.json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: "Database error" });
-    }
+    // Respond with the found product
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: "Database error" });
+  }
 });
 
 // ------------------------ POST - Add a new product ------------------------
 app.post("/api/products", async (req, res) => {
-    try {
-        const { name, price } = req.body; // Extract product details from request body
+  try {
+    const { name, price } = req.body; // Extract product details from request body
 
-        // Validate input (ensure name and price are provided)
-        if (!name || !price)
-            return res.status(400).json({ error: "Invalid input" });
+    // Validate input (ensure name and price are provided)
+    if (!name || !price)
+      return res.status(400).json({ error: "Invalid input" });
 
-        // Insert new product into the database
-        const result = await pool.query(         //executes the query asynchronously using the PostgreSQL connection pool.
-            "INSERT INTO products (name, price) VALUES ($1, $2) RETURNING *", //$1, $2 are placeholders for parameterized queries, preventing SQL injection. // RETURNING * makes PostgreSQL return the newly inserted row.
+    // Insert new product into the database
+    const result = await pool.query(         //executes the query asynchronously using the PostgreSQL connection pool.
+            "INSERT INTO products (name, price) VALUES ($1, $2) RETURNING *", //$1, $2 are placeholders for parameterized 
+            // queries, preventing SQL injection. // RETURNING * makes PostgreSQL return the newly inserted row.
             [name, price] //name, price] is an array of values that replaces $1 and $2 in the query.
-        );
+    );
 
-        // Respond with the newly added product
-        res.status(201).json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: "Database error" });
-    }
+    // Respond with the newly added product
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: "Database error" });
+  }
 });
 
 // ------------------------ PUT - Update a product ------------------------
 app.put("/api/products/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { name, price } = req.body;
+  try {
+    const { id } = req.params;
+    const { name, price } = req.body;
 
-        // Update the product in the database if it exists
-        const result = await pool.query(
+    // Update the product in the database if it exists
+    const result = await pool.query(
             "UPDATE products SET name = COALESCE($1, name), price = COALESCE($2, price) WHERE id = $3 RETURNING *",
-            [name, price, id]   //COALESCE($1, name) ensures that if $1 (the provided value for name) is NULL or not given, the existing name value in the database remains unchanged.
-        );
+            [name, price, id]   //COALESCE($1, name) ensures that if $1 (the provided value for name) is NULL or not 
+            // given, the existing name value in the database remains unchanged.
+    );
 
-        if (result.rows.length === 0)
-            return res.status(404).json({ error: "Product not found" });
+    if (result.rows.length === 0)
+      return res.status(404).json({ error: "Product not found" });
 
-        // Respond with the updated product
-        res.json(result.rows[0]);
-    } catch (err) {
-        res.status(500).json({ error: "Database error" });
-    }
+    // Respond with the updated product
+    res.json(result.rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: "Database error" });
+  }
 });
 
 // ------------------------ DELETE - Remove a product ------------------------
 app.delete("/api/products/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-        // Delete the product from the database
-        const result = await pool.query("DELETE FROM products WHERE id = $1 RETURNING *", [id]);
+    // Delete the product from the database
+    const result = await pool.query("DELETE FROM products WHERE id = $1 RETURNING *", [id]);
 
-        if (result.rows.length === 0)
-            return res.status(404).json({ error: "Product not found" });
+    if (result.rows.length === 0)
+      return res.status(404).json({ error: "Product not found" });
 
-        // Respond with a success message
-        res.json({ message: "Product deleted" });
-    } catch (err) {
-        res.status(500).json({ error: "Database error" });
-    }
+    // Respond with a success message
+    res.json({ message: "Product deleted" });
+  } catch (err) {
+    res.status(500).json({ error: "Database error" });
+  }
 });
 
 // ------------------------ Start server ------------------------
@@ -1796,7 +1909,7 @@ It helps you manage and keep your Node.js applications running in the background
 ```shell
 npm install pm2@latest -g
 
-pm2 start web-app-server.js
+pm2 start server.js --name web-application-server
 
 pm2 status
 
