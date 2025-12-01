@@ -57,12 +57,11 @@ Develop the following RESTful routes:
 ### **Additional Challenges (Optional)**
 These tasks are for students to implement at home:
 
-- Try using Postman for testing APIs, as it provides an intuitive interface for making HTTP requests and analyzing responses.
+- Try using Postman or Insomnia API clients for testing APIs, as it provides an intuitive interface for making HTTP requests and analyzing responses.
 - Add validation for **email format** and **phone number** before adding a customer.
 - Implement a **search feature** (`GET /api/customers?city=Astana`) to filter customers by city.
 
 ---
-
 
 
 
@@ -103,20 +102,14 @@ This page contains a **form to add a new customer**.
 
 ---
 
-## **Task 3: Implement Update Customer Page**
-This page allows updating an existing customer's details.
-
-### **Steps**
-- Fetch the details of a selected customer from the REST API.
-- Prefill the form with existing values.
-- Allow users to modify details and send the updated data to the API.
+## **Task 3: Implement Delete Customer Page**
 
 ---
 
 
 ## **Task 5: Test and Verify**
 - Open the web pages and check if the data loads correctly.
-- Perform add, update, and delete operations.
+- Perform add and delete operations.
 - Verify the API responses to ensure proper functionality.
 - Test the API using cURL or http client.
 
@@ -136,5 +129,17 @@ Add search and update functions for the developed app in Exercise 2.
 
 Integrate PostgreSQL into the application developed in hands-on exercise 3.
 
-You are required to initialize a new database and construct the regarding table.
+You are required to initialize a new database and define the regarding table.
+
+```sql
+CREATE DATABASE customerdb;
+
+CREATE TABLE customers (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100),
+  email VARCHAR(100),
+  phone VARCHAR(30),
+  city VARCHAR(50)
+);
+```
 
