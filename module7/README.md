@@ -1112,33 +1112,26 @@ curl -X DELETE http://localhost:3000/api/products/1
 **Code Example: /part2/restful-api-test.http**
 
 ```http request
-### Retrieve all products
+###Retrieve all products
 GET http://localhost:3000/api/products
 
 
-### Find products by name
-#GET http://localhost:3000/api/products?name=SSD
-
-
-###
+### Find product by id
 # curl -X GET http://localhost:3000/api/products
-GET http://localhost:3000/api/products/1
+GET http://localhost:3000/api/products/2
+
+
+### Find products by name
+GET http://localhost:3000/api/products?name=SSD
+
 
 ###
-
-# curl -X POST http://localhost:3000/api/products
-#     -H "Content-Type: application/json"
-#     -d '{"name": "Tablet", "price": 299.99}'
 POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {"name": "SSD", "price": 500}
 
 ###
-
-# curl -X PUT http://localhost:3000/api/products/1
-#     -H "Content-Type: application/json"
-#     -d '{"name": "Updated Laptop", "price": 1099.99}'
 PUT http://localhost:3000/api/products/1
 Content-Type: application/json
 
@@ -1146,10 +1139,6 @@ Content-Type: application/json
 
 
 ###
-
-# curl -X PATCH http://localhost:3000/api/products/1
-#     -H "Content-Type: application/json"
-#     -d '{"price": 200}'
 PATCH http://localhost:3000/api/products/1
 Content-Type: application/json
 
@@ -1161,7 +1150,14 @@ Content-Type: application/json
 # curl -X DELETE http://localhost:3000/api/products/1
 DELETE http://localhost:3000/api/products/1
 
-###
+
+### Retrieve all products
+GET http://localhost:4000/api/products
+
+
+### Retrieve all products
+#GET http://191.101.2.182:3005/api/products
+GET http://localhost:3000/api/products
 
 
 ```
@@ -1657,6 +1653,9 @@ app.get("/api/products", (req, res) => {
 
 
 ## Interconnecting Web Services
+
+**Service-Oriented Architecture (SOA)** is an architectural pattern in which software components are structured as
+independent services.
 
 ```text
                                      Client
