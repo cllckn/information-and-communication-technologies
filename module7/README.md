@@ -641,13 +641,14 @@ You must embed these code snippets into a HTML file.**
   <p id="text">This is a paragraph.</p>
 
   <script>
-    // Runs the function only AFTER the HTML document is fully loaded
+    // It ensures the jQuery statements run after the HTML document (DOM) is fully loaded and ready.
+    // jQuery shortcut for $(document).ready()
     $(function () {
 
       // Attach a click event listener to the button with id="hide-btn":
-        // When the user clicks the button, jQuery triggers the anonymous callback function registered in the 
-        // on("click", ...) handler. This callback runs immediately and executes $("#text").hide(), which hides the 
-        // selected element from the page.
+      // When the user clicks the button, jQuery triggers the anonymous callback function registered in the 
+      // on("click", ...) handler. This callback runs immediately and executes $("#text").hide(), which hides the 
+      // selected element from the page.
       $("#hide-btn").on("click", function () {
 
         // When the button is clicked, hide the element with id="text"
@@ -688,6 +689,8 @@ You can get and set values in form fields using `.val()`:
     <p id="output">Output</p>
 
     <script>
+      // It ensures the jQuery statements run after the HTML document (DOM) is fully loaded and ready.
+      // jQuery shortcut for $(document).ready()
       $(function () {
         // Attach a click event listener to the button with id="get-name":
         $("#get-name").on("click", function () {
@@ -1081,12 +1084,20 @@ curl -iX POST http://localhost:3000/api/products \
 
 ---
 
-# Updates the details of an existing product using its ID. Any missing fields will retain their previous values.
+# Updates the details of an existing product using its ID.
 
 curl -X PUT http://localhost:3000/api/products/1 \
      -H "Content-Type: application/json" \
      -d '{"name": "Updated Product", "price": 1099.99}'
 
+
+---
+
+# Updates the details of an existing product using its ID. Any missing fields will retain their previous values.
+
+curl -X PATCH http://localhost:3000/api/products/1 \
+     -H "Content-Type: application/json" \
+     -d '{"price": 1099.99}'
 ---
 
 # Deletes a product from the database by specifying its ID.
@@ -1101,9 +1112,12 @@ curl -X DELETE http://localhost:3000/api/products/1
 **Code Example: /part2/restful-api-test.http**
 
 ```http request
-###
-# curl -X GET http://localhost:3000/api/products
+### Retrieve all products
 GET http://localhost:3000/api/products
+
+
+### Find products by name
+#GET http://localhost:3000/api/products?name=SSD
 
 
 ###
@@ -1135,7 +1149,7 @@ Content-Type: application/json
 
 # curl -X PATCH http://localhost:3000/api/products/1
 #     -H "Content-Type: application/json"
-#     -d '{"name": "Updated Laptop", "price": 1099.99}'
+#     -d '{"price": 200}'
 PATCH http://localhost:3000/api/products/1
 Content-Type: application/json
 
@@ -1318,32 +1332,11 @@ can view, add, update, and delete products using jQuery.
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Management</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- In your HTML file's <head> section -->
-  <link rel="stylesheet" href="styles.css">
-  
-  <!-- Internal (or Embedded) CSS-->
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    table {
-      width: 50%;
-      margin: auto;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      border: 1px solid black;
-      padding: 10px;
-    }
-
-    .error {
-      color: red;
-      display: none;
-    }
+    body { font-family: Arial, sans-serif; text-align: center; }
+    table { width: 50%; margin: auto; border-collapse: collapse; }
+    th, td { border: 1px solid black; padding: 10px; }
+    .error { color: red; display: none; }
   </style>
 </head>
 <body>
@@ -1361,8 +1354,7 @@ can view, add, update, and delete products using jQuery.
   <tbody id="product-list"></tbody> <!-- Products will be dynamically inserted here -->
 </table>
 
-<!-- Inline (or Embedded) CSS-->
-<h2 style="color: #000066;font-family: Avenir,monospace">Add Product</h2>
+<h2>Add Product</h2>
 <!-- Form to add a new product -->
 <form id="add-product-form">
   <input type="text" id="name" placeholder="Product Name" required>
@@ -1372,11 +1364,13 @@ can view, add, update, and delete products using jQuery.
 <p class="error" id="error-msg">Invalid input</p> <!-- Error message for validation -->
 
 <script>
-
-  $(function() {
+  // It ensures the jQuery statements run after the HTML document (DOM) is fully loaded and ready.
+  // jQuery shortcut for $(document).ready()
+  $(function () {
     // Function to load products asynchronously using AJAX (GET request)
     function loadProducts() {
-      $.get("/api/products", function(products) {
+      $.get("http://localhost:3000/api/products", function(products){
+        //$.get("http://1192.27.2.2:3000/api/products", function(products){ // cross-origin
         $("#product-list").empty(); // Clear the existing list
         products.forEach(product => {
           $("#product-list").append(`
@@ -1393,6 +1387,9 @@ can view, add, update, and delete products using jQuery.
       });
     }
 
+    // Attaches a submit event listener to the form.
+    // When the form is submitted (for example, by clicking the submit button or pressing Enter), jQuery triggers
+    // the anonymous callback function to handle the submission.
     // Handle form submission to add a new product (AJAX POST request)
     $("#add-product-form").on("submit", function(event) {
       event.preventDefault(); // Prevent default form submission
@@ -1422,6 +1419,8 @@ can view, add, update, and delete products using jQuery.
       });
     });
 
+    // Attaches a click event listener to the table body with id product-list.
+    // When a .delete-btn inside it is clicked, jQuery triggers the anonymous callback function to handle the delete operation.
     // Handle product deletion (AJAX DELETE request)
     $("#product-list").on("click", ".delete-btn", function() {
       var id = $(this).data("id");
@@ -1483,26 +1482,10 @@ app.get("/api/products", (req, res) => {
   <title>Product Management</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    table {
-      width: 50%;
-      margin: auto;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      border: 1px solid black;
-      padding: 10px;
-    }
-
-    .error {
-      color: red;
-      display: none;
-    }
+    body { font-family: Arial, sans-serif; text-align: center; }
+    table { width: 50%; margin: auto; border-collapse: collapse; }
+    th, td { border: 1px solid black; padding: 10px; }
+    .error { color: red; display: none; }
   </style>
 </head>
 <body>
@@ -1544,15 +1527,13 @@ app.get("/api/products", (req, res) => {
   <p class="error" id="update-error-msg">Invalid input</p>
 </div>
 <script>
-  $(function() {
+
+  $(function () { // It ensures the jQuery statements run after the HTML document (DOM) is fully loaded and ready.
     let debounceTimer;
-
+    alert("test")
     function loadProducts(query = "") {
-      let url = query ? `/api/products?name=${encodeURIComponent(query)}` : "/api/products";
-      <!-- The purpose of using encodeURIComponent() is to safely encode special characters in URL query
-          parameters to prevent URL syntax errors and security issues.-->
-
-      $.get(url, function(products) {
+      const url = query ? `/api/products?name=${query}` : '/api/products';
+      $.get(url, function(products){
         $("#product-list").empty();
         if (products.length === 0) {
           $("#search-error").show();
@@ -1613,8 +1594,10 @@ app.get("/api/products", (req, res) => {
     // "keyup" is the event type being listened for. The keyup event is triggered when a keyboard key is released after being pressed.
     // function() { ... } is the callback function that will be executed when the keyup event occurs.
 
-    $("#search").on("keyup", function() { // attaches an event listener to the search input field (#search). The event triggers whenever the user releases a key (keyup event).
-      clearTimeout(debounceTimer); // Clears any previously set timer (debounceTimer) to prevent multiple requests being sent in quick succession.
+    $("#search").on("keyup", function() { // attaches a "keyup" event listener to the search input field (#search).
+      // jQuery triggers the anonymous callback function whenever the user releases a key (keyup event).
+      clearTimeout(debounceTimer); //Clears any previously set timer (debounceTimer) to prevent 
+      // multiple requests being sent in quick succession.
       let query = $(this).val().trim();
       debounceTimer = setTimeout(() => { //Sets a delay of 300 milliseconds before calling loadProducts(query).
         loadProducts(query);
@@ -1644,7 +1627,8 @@ app.get("/api/products", (req, res) => {
       });
     });
 
-    // Load product data into update form when "Edit" is clicked
+    // Attaches a click event listener to the table body with id product-list.
+    // When a .edit-btn inside it is clicked, jQuery triggers the anonymous callback function to handle the update operation.
     $("#product-list").on("click", ".edit-btn", function() {
       let id = $(this).data("id");
       $("#updateform").fadeIn(2000);
@@ -1764,14 +1748,16 @@ CREATE TABLE products (
 
 ```javascript
 //npm install express pg
-// Import necessary modules
+//Import necessary modules
 
 const express = require("express");
-const { Pool } = require("pg"); // PostgreSQL client (db driver)
+const { Pool } = require("pg"); // import pg (node-postgres) library (db driver)
 
 const app = express();
 
 // Initialize a new PostgreSQL connection pool
+// Pool is a class from the pg (node-postgres) library that instantiate and manages a pool of
+// PostgreSQL database connections for efficient query execution in a Node.js application.
 
 const pool = new Pool({
   user: 'postgres',
@@ -1809,6 +1795,7 @@ app.get("/api/products/:id", async (req, res) => {
 
     // Query database for the given product ID
     const result = await pool.query("SELECT * FROM products WHERE id = $1", [id]);
+    //$1 is placeholders for parameterized queries, preventing SQL injection.
 
     if (result.rows.length === 0)
       return res.status(404).json({ error: "Product not found" });
@@ -1831,7 +1818,7 @@ app.post("/api/products", async (req, res) => {
 
     // Insert new product into the database
     const result = await pool.query(         //executes the query asynchronously using the PostgreSQL connection pool.
-            "INSERT INTO products (name, price) VALUES ($1, $2) RETURNING *", //$1, $2 are placeholders for parameterized 
+            "INSERT INTO products (name, price) VALUES ($1, $2) RETURNING *", //$1, $2 are placeholders for parameterized
             // queries, preventing SQL injection. // RETURNING * makes PostgreSQL return the newly inserted row.
             [name, price] //name, price] is an array of values that replaces $1 and $2 in the query.
     );
@@ -1844,27 +1831,59 @@ app.post("/api/products", async (req, res) => {
 });
 
 // ------------------------ PUT - Update a product ------------------------
+// FULL update (replace the entire product)
 app.put("/api/products/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { name, price } = req.body;
 
-    // Update the product in the database if it exists
+    // Validate required fields
+    if (!name || !price) {
+      return res.status(400).json({ error: "All fields are required for PUT" });
+    }
+
     const result = await pool.query(
-            "UPDATE products SET name = COALESCE($1, name), price = COALESCE($2, price) WHERE id = $3 RETURNING *",
-            [name, price, id]   //COALESCE($1, name) ensures that if $1 (the provided value for name) is NULL or not 
-            // given, the existing name value in the database remains unchanged.
+            "UPDATE products SET name = $1, price = $2 WHERE id = $3 RETURNING *",
+            [name, price, id]
     );
 
     if (result.rows.length === 0)
       return res.status(404).json({ error: "Product not found" });
 
-    // Respond with the updated product
     res.json(result.rows[0]);
+
   } catch (err) {
     res.status(500).json({ error: "Database error" });
   }
 });
+
+
+// ------------------------ PUT - Modify a product ------------------------
+// PARTIAL update (only provided fields)
+app.patch("/api/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, price } = req.body;
+
+    const result = await pool.query(
+            `UPDATE products
+       SET name  = COALESCE($1, name),
+           price = COALESCE($2, price)
+       WHERE id = $3
+       RETURNING *`,
+            [name, price, id]
+    );
+
+    if (result.rows.length === 0)
+      return res.status(404).json({ error: "Product not found" });
+
+    res.json(result.rows[0]);
+
+  } catch (err) {
+    res.status(500).json({ error: "Database error" });
+  }
+});
+
 
 // ------------------------ DELETE - Remove a product ------------------------
 app.delete("/api/products/:id", async (req, res) => {
