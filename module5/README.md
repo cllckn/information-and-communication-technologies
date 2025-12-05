@@ -42,6 +42,7 @@
 
 
 
+
 ## Introduction to Database Management Systems
 - A **database** is a collection of related data designed for efficient storage, retrieval, management, and manipulation.
 - A **Database Management System (DBMS)** is specialized software that controls and manages databases and 
@@ -612,9 +613,9 @@ Shard 2 → IDs 6–10
 
 ## Using a Programming Language to Interact With a Database
 
-Modern applications often need to store, retrieve, and manipulate data dynamically.  
-To perform such database operations from within an application, **database drivers** are essential.  
-These drivers facilitate communication between the **programming language** and the **database system**.
+Modern applications often need to store, retrieve, and manipulate data dynamically.
+To perform these database operations from within an application, database drivers are essential.
+These drivers act as a bridge between the programming language and the database management system (DBMS).
 
 ### Database Drivers – Core Functions
 Database drivers typically provide the following core capabilities:
