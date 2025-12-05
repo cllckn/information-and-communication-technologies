@@ -196,7 +196,7 @@ class Circle extends Shape{
 
 ## Class Relationships
 
-* Programs are composed of the modules and interaction between them. In object-oriented design, classes often 
+* Programs are composed of modules and the interactions between them. In object-oriented design, classes often 
 interact through a **provider–consumer relationship**.  
 * The **provider** (or **low-level**) class offers certain functionality or services,  
 while the **consumer** (or **high-level**) class depends on and uses that functionality.  
