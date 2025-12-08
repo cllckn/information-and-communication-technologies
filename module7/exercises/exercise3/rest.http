@@ -1,0 +1,32 @@
+###
+GET http://localhost:3000/api/customers
+
+###
+GET http://localhost:3000/api/customers?name=Bruce
+
+###
+GET http://localhost:3000/api/customers/2
+
+###
+POST http://localhost:3000/api/customers
+Content-Type: application/json
+
+{ "name": "Jack", "email": "b@mail.com", "phone":"666", "city":"Almaty"}
+
+###
+PUT http://localhost:3000/api/customers/4
+Content-Type: application/json
+
+{ "name": "Alice", "email": "a@mail.com", "phone":"666", "city":"Almaty"}
+
+
+###
+PATCH http://localhost:3000/api/customers/4
+Content-Type: application/json
+
+{ "name": "Bruce"}
+
+###
+DELETE http://localhost:3000/api/customers/1
+
+
