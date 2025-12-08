@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- In your HTML file's <head> section -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Internal (or Embedded) CSS-->
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          text-align: center;
+      }
+
+      table {
+          width: 50%;
+          margin: auto;
+          border-collapse: collapse;
+      }
+
+      th, td {
+          border: 1px solid black;
+          padding: 10px;
+      }
+
+      .error {
+          color: red;
+          display: none;
+      }
+  </style>
+</head>
+<body>
+<h2>Customer List</h2>
+<!-- Table to display products -->
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>City</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody id="customer-list"></tbody> <!-- Products will be dynamically inserted here -->
+</table>
+
+<!-- Inline (or Embedded) CSS-->
+<h2 style="color: #000066;font-family: Avenir,monospace">Add Customer</h2>
+<!-- Form to add a new product -->
+<form id="add-customer-form">
+  <input type="text" id="name" placeholder="Name" required>
+  <input type="text" id="email" placeholder="email" >
+  <input type="text" id="phone" placeholder="phone" >
+  <input type="text" id="city" placeholder="city" >
+  <button type="submit">Add Customer</button>
+</form>
+<p class="error" id="error-msg">Invalid input</p> <!-- Error message for validation -->
+
+<script>
+
+  $(function() {
+    // Function to load customers asynchronously using AJAX (GET request)
+    loadCustomers();
+    function loadCustomers() {
+      $.get("/api/customers", function(customers) {
+        $("#customer-list").empty(); // Clear the existing list
+        customers.forEach(customer => {
+          $("#customer-list").append(`
+                            <tr>
+                                <td>${customer.id}</td>
+                                <td>${customer.name}</td>
+                                <td>${customer.email}</td>
+                                <td>${customer.phone}</td>
+                                <td>${customer.city}</td>
+                                <td>
+                                    <button class="delete-btn" data-id="${customer.id}" data-email="${customer.email}">Delete</button>
+                                </td>
+                            </tr>
+                        `);
+        });
+      });
+    }
+
+    // Handle form submission to add a new customer (AJAX POST request)
+    $("#add-customer-form").on("submit", function(event) {
+      event.preventDefault(); // Prevent default form submission
+      let name = $("#name").val().trim(); // Get customer name
+      let email = $("#email").val().trim();
+      let phone = $("#phone").val().trim();
+      let city = $("#city").val().trim();
+
+      // Validate input: Ensure fields are not empty.
+      if (!name || !email || !phone || !city) {
+        $("#error-msg").fadeIn().delay(5000).fadeOut();
+        return;
+      }
+
+      // Asynchronous request to add a customer
+      $.post({
+        url: "/api/customers",
+        contentType: "application/json", // Ensure JSON is sent correctly
+        data: JSON.stringify({ name, email, phone, city }), //attach new customer to the request
+        success: function(response) {
+          loadCustomers(); // Refresh customer list after insert operation
+          console.log("Customer added:", response);
+          $("#name").val(""); // Clear input fields
+          $("#email").val("");
+          $("#phone").val("");
+          $("#city").val("");
+        },
+        error: function(xhr) {
+          console.error("Error:", xhr.responseText);
+        }
+      });
+    });
+
+    // Handle customer deletion (AJAX DELETE request)
+    $("#customer-list").on("click", ".delete-btn", function() {
+      let id = $(this).data("id");
+      //let email = $(this).data("email");
+      //alert(id+":"+email);
+      // Perform the deletion logic here
+      $.ajax({
+        url: `/api/customers/${id}`,
+        type: "DELETE",
+        success: function() {
+          loadCustomers();
+        }
+      });
+    });
+
+    loadProducts(); // Initial load of customers (asynchronous)
+  });
+</script>
+</body>
+</html>
