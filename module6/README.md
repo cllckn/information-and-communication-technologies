@@ -114,7 +114,6 @@ Peer layers on sender and receiver sides use the same protocol to exchange data 
 * **Telnet** – Provide remote terminal access (unencrypted).  
 * **SSH** – Enable secure remote login and command execution (encrypted).  
 * **RTP / RTSP / SIP** – Support real-time streaming of voice and video.  
-* **NetBIOS** – Network basic input/output system (naming & sessions)
 
 **Layer 6 – Presentation**
 * Handles syntax translation, encryption, and compression before transmission.
@@ -182,14 +181,15 @@ between billions of connected devices.
 
 ## Encapsulation of Data in the TCP/IP Model (Data → Segment → Packet → Frame)
 As data moves through the TCP/IP layers, each layer **adds its own header information** — this process is called **encapsulation**.
+
 ***Network Access layer additionally appends a trailer for error detection.***
 
 When data is sent:
-- Application Layer: Generates the original `data` (e.g., a web request). 
-- Transport Layer: Divides data into `segments` and adds source and destination port numbers for process-level communication. 
+- Application Layer: Generates the original `data` (e.g., a web request) as a single continuous stream. 
+- Transport Layer: Divides data into `segments` and adds source and destination port numbers for process-level communication. Segment (TCP) / Datagram (UDP)
 - Internet Layer: Wraps each segment into a `packet` (also called a datagram) by adding IP addresses for routing across networks. 
 - Network Access Layer: Encapsulates packets into `frames` by adding MAC addresses and error-checking information for physical transmission. 
-- Finally, the frame is transmitted over the physical medium (cables, fiber, radio signals) toward its destination.
+- Finally, the frame is transmitted over the physical medium (cables (electrical signal), fiber(optical signals), air(radio signals)) toward its destination.
 
 When data is received, the reverse process, called **decapsulation**, occurs as each layer removes its header 
 (and trailer) to extract the original data.
@@ -667,7 +667,7 @@ netstat -n               # show numeric addresses (no DNS)
 netstat -nt              # TCP connections (numeric)
 netstat -nu              # UDP connections (numeric)
 netstat -i               # interface statistics
-netstat -nt | grep 8899  # show TCP connections to port 80
+netstat -nt | grep 8899  # show TCP connections to port 8899
 netstat en0              # 
 # Windows:
 # netstat -ano
@@ -748,5 +748,3 @@ netstat -i
 3. Use `traceroute` to observe the route packets take across the Internet.
 4. Perform a DNS lookup using `nslookup`.
 5. Practice using `netcat` to establish a simple TCP connection between two devices.
-
-
