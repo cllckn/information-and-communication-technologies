@@ -22,11 +22,8 @@
     * [1. Reverse Proxy / Load Balancer](#1-reverse-proxy--load-balancer)
     * [2. Web Server (DMZ Zone)](#2-web-server-dmz-zone)
     * [3. Application Server (Secure/Internal Zone)](#3-application-server-secureinternal-zone)
-    * [4. Database Server (Highly Secure Zone)](#4-database-server-highly-secure-zone)
+    * [4. Database Server (Secure/Internal Zone)](#4-database-server-secureinternal-zone)
     * [5. Network Zones](#5-network-zones)
-    * [c) User Access Zones](#c-user-access-zones)
-  * [6. IPS / IDS Placement](#6-ips--ids-placement)
-    * [Roles:](#roles)
   * [Common Networking Tools](#common-networking-tools)
   * [Hands-on Exercises 1](#hands-on-exercises-1)
 <!-- TOC -->
@@ -35,8 +32,8 @@
 
 
 ## Network Basics
-A computer network is a collection of interconnected devices that communicate and share resources. 
-These resources include data, applications, and hardware such as printers, storage, and servers.
+A computer network is a collection of interconnected devices that **communicate and share resources**. 
+These resources include **data, applications**, and **hardware** such as printers, storage, and servers.
 
 **Types of Networks:**
 - **LAN (Local Area Network):**  
@@ -50,7 +47,7 @@ These resources include data, applications, and hardware such as printers, stora
 
 **Network Protocol**
 
-In data communication, a protocol is a set of rules that governs data exchange between devices in a network. 
+In data communication, **a protocol is a set of rules that governs data exchange between devices** in a network. 
 
 It defines what, when, and how information is exchanged.
 
@@ -78,12 +75,11 @@ remote device using a common protocol.
     
 
 ## OSI & TCP/IP Models
-Networking is organized into **layers** to simplify communication and troubleshooting.
 
 The OSI (Open Systems Interconnection) model is a conceptual framework used to understand and design network architectures.
 
-It defines a set of protocols that enable communication between different systems, independent of their 
-hardware or software implementations.
+It defines a set of protocols that enable communication between different systems, **independent of their 
+hardware or software** implementations.
 
 The OSI model consists of seven distinct but related layers, each responsible for specific communication tasks.
 
@@ -143,22 +139,22 @@ Peer layers on sender and receiver sides use the same protocol to exchange data 
 
 **Layer 3 – Network**
 * Handles logical addressing and routing of data packets.
-**IP (IPv4 / IPv6)** – Handles logical addressing and routing of data packets.  
-**ICMP** – Sends error and diagnostic messages between network devices.  
-**Routing Protocols (OSPF, RIP, BGP)** – Determine optimal paths for packet delivery.
+* **IP (IPv4 / IPv6)** – Handles logical addressing and routing of data packets.  
+* **ICMP** – Sends error and diagnostic messages between network devices.  
+* **Routing Protocols (OSPF, RIP, BGP)** – Determine optimal paths for packet delivery.
 
 
 **Layer 2 – Data Link**
 * Performs MAC(physical) addressing.
-**Ethernet / Wi-Fi (802.11) / PPP / Frame Relay** – Define framing, error detection, and physical addressing (MAC).
-**ARP** – Maps IP addresses to physical (MAC) addresses.
+* **Ethernet / Wi-Fi (802.11) / PPP / Frame Relay** – Define framing, error detection, and physical addressing (MAC).
+* **ARP** – Maps IP addresses to physical (MAC) addresses.
 
 
 **Layer 1 – Physical**
 * Handles the processes that transmit data bits over the medium.
-**Coaxial Cable / Fiber Optic / Twisted Pair** – Physical media that carry electrical or optical signals.  
-**Air (Wireless Medium)** – Used by Wi-Fi for radio wave transmission of data.  
-**Signaling and Bit Transmission** – Convert digital data into physical signals for communication.
+* **Coaxial Cable / Fiber Optic / Twisted Pair** – Physical media that carry electrical or optical signals.  
+* **Air (Wireless Medium)** – Used by Wi-Fi for radio wave transmission of data.  
+* **Signaling and Bit Transmission** – Convert digital data into physical signals for communication.
 
 
 
@@ -179,7 +175,8 @@ This method improves **network efficiency**, **reliability**, and **fault tolera
 - **Reliability:** Errors can be detected and corrected at the **transport layer** (e.g., TCP retransmission).
 - **Fault Tolerance:** Alternate routes can be used if a path fails.
 
-Packet switching is the foundation of **modern Internet communication**, enabling scalable and robust data transfer between billions of connected devices.
+Packet switching is the foundation of **modern Internet communication**, enabling scalable and robust data transfer 
+between billions of connected devices.
 
 ![Packet Switching.](../resources/tcp-ip-packet-switching.png)
 
@@ -202,8 +199,8 @@ When data is received, the reverse process, called **decapsulation**, occurs as 
 ## IP Addressing, DNS, Ports, and Sockets
 
 - **IP Address:** A unique identifier for a device on a network (e.g., 192.168.1.10).
-  - **IPv4:** 32-bit addresses (e.g., 192.168.0.1)
-  - **IPv6:** 128-bit addresses for a larger address space.
+  - **IPv4:** 32-bit addresses (e.g., 192.168.0.1) (4.3 billion unique addresses).
+  - **IPv6:** 128-bit addresses for a larger address space (provides a vastly larger address space).
 - **DNS (Domain Name System):** Translates domain names (like `www.example.com`) into IP addresses.
 - **Port Numbers:** Identify specific applications or services on a device (e.g., Port 80 for HTTP, Port 25 for SMTP).
 - **Socket:** The combination of an IP address and port number (e.g., `192.168.1.10:8080`) — 
@@ -235,7 +232,7 @@ typical network infrastructure.
 
 ### **Firewall**
  
-A network security system that monitors and controls incoming and outgoing traffic based on predefined rules.
+A network security system that **monitors and controls incoming and outgoing traffic** based on predefined rules.
 
 **Functions:**
 - Acts as a barrier between **trusted internal** and **untrusted external** networks
@@ -251,7 +248,9 @@ sudo ufw allow ssh                          # allow incoming SSH (port 22) conne
 sudo ufw enable                             # enable and activate the firewall
 sudo ufw allow 80                           # allow HTTP traffic
 sudo ufw allow 443                          # allow HTTPS (secure web) traffic
-sudo ufw allow 3000                         # allow incoming traffic on port 3000 (e.g., development server)sudo ufw allow 5432/tcp                     # allow TCP traffic on port 5432 (PostgreSQL default)
+sudo ufw allow 3000                         # allow incoming traffic on port 3000
+sudo ufw allow 3005
+sudo ufw allow 5432/tcp                     # allow TCP traffic on port 5432 (PostgreSQL default)
 sudo ufw status                             # display current firewall status and rules
 sudo ufw allow from 176.106.98.12 to any port 5432 proto tcp   # allow only this IP to access port 5432 over TCP
 sudo ufw status numbered                                        # list rules with index numbers
@@ -263,9 +262,11 @@ sudo ufw disable                           # disable the firewall
 
 ### **NAT (Network Address Translation)**
 
-Network Address Translation (NAT) is a technique used by routers and firewalls to modify IP addresses in packet 
-headers during transit to manage address spaces. It allows multiple devices on a private network to share a single 
-public IP address and also adds a basic layer of security by hiding internal addresses.
+Network Address Translation (NAT) is a technique used by routers and firewalls to **modify IP addresses** in packet 
+headers during transit **to manage address spaces**. 
+
+***It allows multiple devices on a private network to share a single 
+public IP address and also adds a basic layer of security by hiding internal addresses.***
 
 **Types:**
 - **SNAT (Source NAT):** Converts private → public IP for outbound traffic
@@ -279,7 +280,7 @@ public IP address and also adds a basic layer of security by hiding internal add
 1. The internal device (192.168.10.50) sends a request from source port 54321.
 2. The router replaces the private IP and port with its public IP (203.0.113.10) and a new port (62001).
 3. The router stores the mapping in its NAT table:
-   192.168.10.50:54321 ↔ 203.0.113.10:62001
+   `192.168.10.50:54321 ↔ 203.0.113.10:62001`
 4. When a reply arrives at 203.0.113.10:62001, the router checks the table.
 5. The router forwards the response back to 192.168.10.50:54321.
 
@@ -312,6 +313,10 @@ Router is a network device that connects multiple networks and forwards data pac
 
 Connects devices in **different broadcast domains**.
 
+***A broadcast domain is the portion of a network in which a broadcast packet is received by all devices at 
+Layer 2 (Data Link layer).***
+
+
 **Functions:**
 - Interconnects subnets or VLANs
 - Makes routing decisions (based on routing tables)
@@ -331,7 +336,6 @@ Connects devices within the same local network (Layer 2). Connects devices in th
 **Functions:**
 - MAC address learning and frame forwarding
 - VLAN segmentation
-- Spanning Tree Protocol (STP) for loop prevention
 
 ***A switch connects devices within the same broadcast domain (same LAN or VLAN), while a router connects devices in 
 different broadcast domains (different networks/subnets) and does not forward broadcast traffic by default.***
@@ -360,7 +364,7 @@ Allows wireless devices to connect to a wired network.
 
 ### 1. Reverse Proxy / Load Balancer
 
-Stands between external users and internal web servers to improve performance, scalability, and security.
+Stands between external clients and internal web servers to improve **performance, scalability, and security**.
 
 Functions:
 - **Load Balancing**: Distributes traffic among multiple web servers
@@ -406,7 +410,6 @@ Common Platforms:
 - Tomcat (Java)
 - Node.js
 - Django / Flask (Python)
-- PHP 
 - ...
 
 Functions:
@@ -423,7 +426,7 @@ Security Notes:
 
 
 
-### 4. Database Server (Highly Secure Zone)
+### 4. Database Server (Secure/Internal Zone)
 
 Stores all structured/critical data.
 
@@ -451,7 +454,8 @@ Security Notes:
 ### 5. Network Zones
 
 a) DMZ (Demilitarized Zone)
-Public-facing systems are placed in the DMZ (Demilitarized Zone)
+
+Public-facing systems are placed in the DMZ (Demilitarized Zone) to protect the internal network from external threats.
 
 **Contains:**
 - Reverse Proxy / Load Balancer
@@ -479,39 +483,10 @@ Contains trusted and sensitive systems.
 - Only specific traffic allowed from DMZ
 
 
-
-### c) User Access Zones
-
-Separated using VLANs, ACLs, and Firewall rules.
-
-**Examples:**
-- Student VLAN
-- Faculty VLAN
-- Staff VLAN
-- Admin VLAN
-
-**Characteristics:**
-- Segmentation for security
-- Least privilege rule applied
-- Controlled internet access
-
-
-
-## 6. IPS / IDS Placement
-
-Recommended positions:
-
-1. Between **Internet and Firewall**
-2. Between **DMZ and Internal Network**
-
-### Roles:
-- **IDS (Intrusion Detection System)**: Detects & alerts
-- **IPS (Intrusion Prevention System)**: Detects, blocks & prevents
-
-
-
-
 ## Common Networking Tools
+
+Brief overview of essential command-line utilities used to test, diagnose, and troubleshoot network connectivity.
+
 
 ```bash
 #!/bin/bash
@@ -589,7 +564,9 @@ sudo tcpdump -i en0 -w capture.pcap         # Save capture to file
 # ---------------------------
 # netcat (nc / ncat) — socket testing, file transfer, raw requests
 # ---------------------------
-# Netcat (nc) is a lightweight networking utility used to read and write data over TCP and UDP connections.
+# Netcat (nc) is a lightweight networking tool used to establish basic TCP/UDP client or server connections 
+# for testing network communication.
+
 # * Establishes client or server connections
 # * Useful for testing ports and services
 # * Transfers files and data streams
@@ -700,8 +677,8 @@ netstat en0              #
 # nslookup — translates domain names into IP addresses (and vice versa)
 # ---------------------------
 
-# nslookup is a command-line tool used to query DNS (Domain Name System)
-# It translates domain names into IP addresses (and vice versa)
+# nslookup is a command-line tool used to perform DNS queries, 
+# such as translating domain names into IP addresses (and vice versa).
 
 nslookup google.com
 
