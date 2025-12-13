@@ -839,12 +839,14 @@ RESTful is an approach for building scalable, stateless web APIs that use standa
 - **GET /users**: Retrieve a list of users.
 - **POST /users**: Add a new user.
 - **GET /users/{id}**: Retrieve a specific user by ID.
-- **PUT /users/{id}**: Update a specific user by ID.
+- **PUT /users/{id}**: Replaces (or fully updates) the user representation.
 - **DELETE /users/{id}**: Delete a specific user by ID.
-- **GET /heating-system/status**: Retrieve the current status of the heating system.
-- **POST /heating-system/on**: Turn on the heating system.
-- **POST /heating-system/off**: Turn off the heating system.
-- **PUT /heating-system/temperature**: Set the desired temperature of the heating system.
+- **GET /heating-system/state**: Retrieve the current status of the heating system.
+- **PUT /heating-system/state {"power":"on", "temperature":"22"}** : Full state replacement
+- **PATCH /heating-system/state {"power":"off"}**: Partially update
+
+***In RESTful APIs, a URI (path) must identify a resource, while the HTTP method defines the action performed on that resource.***
+
 
 ### Route definition in Express.js
 
