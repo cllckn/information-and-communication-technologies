@@ -1011,8 +1011,30 @@ app.patch("/api/products/:id", (req, res) => {
 
 // DELETE - Remove a product
 app.delete("/api/products/:id", (req, res) => {
-  products = products.filter((p) => p.id !== parseInt(req.params.id)); // Remove the product by ID
-  res.json({ message: "Product deleted" }); // Respond with a deletion message
+  const productIdToDelete = parseInt(req.params.id);
+
+  // 1. Store the initial count of products
+  const initialLength = products.length;
+
+  // 2. Filter the array, creating a new array without the specified product ID
+  products = products.filter((p) => p.id !== productIdToDelete);
+
+  // 3. Store the final count of products
+  const finalLength = products.length;
+
+  if (finalLength < initialLength) {
+    // The product was found and successfully deleted (the array length decreased).
+
+    // REST Best Practice: 204 No Content for a successful DELETE with no response body.
+    res.status(204).end();
+  } else {
+    // The product was NOT found (the array length remained the same).
+
+    // REST Best Practice: 404 Not Found indicates the resource doesn't exist.
+    res.status(404).json({
+      error: `Product with ID ${productIdToDelete} not found.`
+    });
+  }
 });
 
 // ───────────────────────────────────────────────────────────────
@@ -1300,8 +1322,30 @@ app.patch("/api/products/:id", (req, res) => {
 
 // DELETE - Remove a product
 app.delete("/api/products/:id", (req, res) => {
-  products = products.filter((p) => p.id !== parseInt(req.params.id)); // Remove the product by ID
-  res.json({ message: "Product deleted" }); // Respond with a deletion message
+  const productIdToDelete = parseInt(req.params.id);
+
+  // 1. Store the initial count of products
+  const initialLength = products.length;
+
+  // 2. Filter the array, creating a new array without the specified product ID
+  products = products.filter((p) => p.id !== productIdToDelete);
+
+  // 3. Store the final count of products
+  const finalLength = products.length;
+
+  if (finalLength < initialLength) {
+    // The product was found and successfully deleted (the array length decreased).
+
+    // REST Best Practice: 204 No Content for a successful DELETE with no response body.
+    res.status(204).end();
+  } else {
+    // The product was NOT found (the array length remained the same).
+
+    // REST Best Practice: 404 Not Found indicates the resource doesn't exist.
+    res.status(404).json({
+      error: `Product with ID ${productIdToDelete} not found.`
+    });
+  }
 });
 
 // ───────────────────────────────────────────────────────────────
@@ -1724,8 +1768,9 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 ## Database Integration
 
-To perform database operations using application programs, **database drivers** are essential.
-Drivers facilitate communication between the programming language and the database.
+Modern applications often need to store, retrieve, and manipulate data dynamically.
+To perform these database operations from within an application, database drivers are essential.
+These drivers act as a bridge between the programming language and the DBMS.
 
 
 **Database Operations with Node.js and PostgreSQL**
@@ -1760,10 +1805,10 @@ const app = express();
 
 const pool = new Pool({
   user: 'postgres',
-  host: 'localhost',
-  database: 'testdb',
   password: 'LecturePassword',
+  host: 'localhost',
   port: 5432,
+  database: 'testdb',
 });
 
 /*const pool = new Pool({
@@ -1889,16 +1934,22 @@ app.delete("/api/products/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Delete the product from the database
+    // Delete the product from the database and use RETURNING * to check if any row was affected
     const result = await pool.query("DELETE FROM products WHERE id = $1 RETURNING *", [id]);
 
-    if (result.rows.length === 0)
+    if (result.rows.length === 0) {
+      // 1. Resource Not Found: If the database reports no rows were deleted
+      // (because the ID didn't exist), return 404.
       return res.status(404).json({ error: "Product not found" });
+    }
 
-    // Respond with a success message
-    res.json({ message: "Product deleted" });
+    // 2. Successful Deletion: If a row was deleted, return 204 No Content.
+    // This is the RESTful standard for a successful DELETE that sends no body data.
+    res.status(204).end();
   } catch (err) {
-    res.status(500).json({ error: "Database error" });
+    // 3. Server Error: For database connection or query execution errors.
+    console.error(err); // Log the error for debugging
+    res.status(500).json({ error: "Database error during deletion" });
   }
 });
 
