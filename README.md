@@ -3,14 +3,27 @@
 This course provides a practical introduction to the fundamentals of Information and Communication Technologies (ICT). Students will learn about the main building blocks of modern computing, including hardware, software, programming, databases, networking, and web development. Through hands-on activities, they will develop the essential skills needed to understand and work with ICT systems. By the end of the course, students will have a solid foundation to continue their studies in various areas of computing.
 
 ## Course Objectives
-Upon successful completion of this course, students will be able to:
-* Understand ICT fundamentals.
-* Write object-oriented programs.
-* Use databases and SQL effectively.
-* Understand the basic concepts of computer networking.
-* Build and deploy simple web applications.
-* Describe and explain new ICT technologies like IoT, AI, Blockchain, and Decision Support Systems.
 
+This course aims to:
+
+* Provide a foundational understanding of Information and Communication Technologies (ICT) and their role in modern computing systems.
+* Develop problem-solving skills through programming using object-oriented principles.
+* Introduce database concepts and enable students to perform data operations using SQL.
+* Build a fundamental understanding of computer networking concepts and architectures.
+* Equip students with skills to design and develop simple web applications and services.
+* Familiarize students with emerging ICT technologies such as IoT, AI, and Decision Support Systems.
+* Encourage hands-on learning to integrate theoretical knowledge with practical implementation.
+
+## Course Learning Outcomes
+
+Upon successful completion of this course, students will be able to:
+
+* Explain fundamental concepts of ICT, including hardware, software, databases, and networking.
+* Apply programming skills using object-oriented principles to develop simple applications.
+* Design and use databases, and perform basic SQL operations.
+* Demonstrate understanding of computer networking concepts and communication models.
+* Develop and deploy basic web applications and integrate them with databases.
+* Describe and evaluate emerging ICT technologies such as IoT, AI, and Decision Support Systems.
 
 ## Course Content
 The course will cover the following topics:
@@ -123,16 +136,21 @@ Students will be evaluated based on the following components:
 
 
 ### Tools:
-    IntelliJ IDEA Ultimate - free of charge for students  (https://www.jetbrains.com/idea/download) 
-    Node.js (https://nodejs.org/en/download)
-    PostgreSQL, pgAdmin  (https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) version 15.10 or any other version that installs without issues.
-    HTTP Client (IntelliJ IDEA -> Preferences -> HTTP Client ) or Postman
-    JQuery (https://jquery.com/)
+* IntelliJ IDEA Ultimate - free of charge for students  (https://www.jetbrains.com/idea/download) 
+* Node.js (https://nodejs.org/en/download)
+* PostgreSQL, pgAdmin  (https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) any version that can
+  be installed without issues.
+* HTTP Client (IntelliJ IDEA -> Preferences -> HTTP Client ) or Postman
+* JQuery (https://jquery.com/)
 
 ### Resources
-    Main:
-    https://github.com/cllckn/information-and-communication-technologies
+* Main: https://github.com/cllckn/information-and-communication-technologies
+
 
 ## Acknowledgement
-In preparing these course materials, the instructor **leveraged AI agents** as a support tool for drafting lecture notes, generating examples, and organizing content.  
-All outputs were **reviewed, edited, and contextualized** before inclusion in this repository.
+
+In preparing these course materials, the instructor used AI-based tools as support for drafting lecture notes, generating examples and figures, and organizing content.
+
+All AI-generated outputs were reviewed, edited, and contextualized by the instructor prior to inclusion.
+
+Draw.io was used as a support tool to design some of the diagrams.
