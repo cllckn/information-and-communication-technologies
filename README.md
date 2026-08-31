@@ -1,13 +1,21 @@
 # Information and Communication Technologies
 
-This course provides a practical introduction to the fundamentals of Information and Communication Technologies (ICT). Students will learn about the main building blocks of modern computing, including hardware, software, programming, databases, networking, and web development. Through hands-on activities, they will develop the essential skills needed to understand and work with ICT systems. By the end of the course, students will have a solid foundation to continue their studies in various areas of computing.
+**Information and Communication Technologies (ICT)** refers to the systems, tools, and 
+resources used to acquire, generate, collect, store, process, transmit, and exchange information.
+This course provides a hands-on introduction to Information and Communication Technologies, covering foundational 
+concepts of computing, object-oriented programming, databases, computer networks, and web technologies. 
+Through practical exercises, they will gain experience in programming, database management, computer networking, and 
+web application development. 
+The course also introduces emerging ICT technologies, enabling students to understand their applications and roles in modern computing 
+systems.
 
 ## Course Objectives
 
 This course aims to:
 
-* Provide a foundational understanding of Information and Communication Technologies (ICT) and their role in modern computing systems.
-* Develop problem-solving skills through programming using object-oriented principles.
+* Provide a foundational understanding of Information and Communication Technologies (ICT) and their role in 
+modern computing systems.
+* Develop programming skills using object-oriented principles.
 * Introduce database concepts and enable students to perform data operations using SQL.
 * Build a fundamental understanding of computer networking concepts and architectures.
 * Equip students with skills to design and develop simple web applications and services.
@@ -19,7 +27,7 @@ This course aims to:
 Upon successful completion of this course, students will be able to:
 
 * Explain fundamental concepts of ICT, including hardware, software, databases, and networking.
-* Apply programming skills using object-oriented principles to develop simple applications.
+* Develop simple applications using object-oriented programming principles.
 * Design and use databases, and perform basic SQL operations.
 * Demonstrate understanding of computer networking concepts and communication models.
 * Develop and deploy basic web applications and integrate them with databases.
@@ -100,7 +108,6 @@ The course will cover the following topics:
 * Internet of Things (IoT): Definition, components, and applications of interconnected smart devices.
 * Artificial Intelligence (AI) and Machine Learning (ML): Basic concepts and applications of intelligent systems that learn from data.
 * Decision Support Systems (DSS): Overview of ICT systems that support decision-making through data analysis, modeling, and reporting.
-* Blockchain: Introduction to blockchain as a decentralized, secure, and transparent data management technology.
 
 
 ### Evaluation Method
@@ -110,21 +117,17 @@ Students will be evaluated based on the following components:
 | **Component**                 | **Weight** |
 |-------------------------------|-----------|
 | Assignment 1                  |   TBA    |
-| Assignment 1 Oral Examination |   TBA    |
 | Assignment 2                  |   TBA    |
-| Assignment 2 Oral Examination |  TBA     |
 | Midterm Exam                  |  TBA     |
 | Final Exam                    |  TBA     |
 
 ## Exams Schedule
 
-| **Component**                 | **Date**                                                                     |
-|-------------------------------|------------------------------------------------------------------------------|
-| Assignment 1 Report           | Before the oral examination.                                                 |
-| Assignment 1 Oral Examination | During your own lab class in Week 8( the week starting October 20, 2025 ).   |
-| Assignment 2 Report           | Before the oral examination.                                                 |
-| Assignment 2 Oral Examination | During your own lab class in Week 13( the week starting November 24, 2025 ). |
-| Midterm Exam                  | Thursday, November 27, 2025                                                  |
+| **Component**                | **Date** |
+|------------------------------|----------|
+| Assignment 1           | TBA      |
+| Assignment 2 Report          | TBA      |
+| Midterm Exam                 | TBA      |
 
 
 ### Course Policies
