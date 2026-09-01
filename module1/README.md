@@ -10,7 +10,7 @@
     * [What is ICT?](#what-is-ict)
   * [2. ICT System Functions](#2-ict-system-functions)
   * [3. A Brief History of ICT](#3-a-brief-history-of-ict)
-  * [4. ICT Applications by Sector](#4-ict-applications-by-sector)
+  * [4. ICT Across Different Sectors](#4-ict-across-different-sectors)
   * [5. Key Elements of ICT](#5-key-elements-of-ict)
   * [6. Computer Hardware Components](#6-computer-hardware-components)
     * [Central Processing Unit (CPU)](#central-processing-unit-cpu)
@@ -49,6 +49,7 @@ resources used to acquire, generate, collect, store, process, transmit, and exch
 From smartphones to global Internet infrastructure, ICT touches nearly every aspect of our lives.
 
 
+<img src="../resources/images/what-is-ict.png" width="800">
 
 **Official Definitions**
 
@@ -67,18 +68,15 @@ At its core, ICT is an umbrella term that encompasses two main pillars:
 
 
 
-[//]: # (> **Instructor Note:** *Emphasize to students that ICT is not just "computers" or "the internet." 
-It is the entire ecosystem and lifecycle of how human beings handle information.*)
-
-
 
 ---
 
 ## 2. ICT System Functions
 
-To understand how ICT works in practice, we must look at the lifecycle of information. ICT systems perform seven 
+ICT systems perform seven 
 fundamental functions to handle data from its origin to its final destination.
 
+<img src="../resources/images/ict-system-functions.png" width="800">
 
 | Function | Meaning | Example Tools |
 | :--- | :--- | :--- |
@@ -92,78 +90,54 @@ fundamental functions to handle data from its origin to its final destination.
 
 
 
-[//]: # (## 💡 Teaching Tips & Class Activities)
-
-[//]: # ()
-[//]: # (### Activity: Trace the Information Lifecycle)
-
-[//]: # (**Instructions:** Ask students to work in pairs and trace the journey of a single piece of information through all seven functions.)
-
-[//]: # (*Example Scenario: Taking a photo of a whiteboard and sending it to a study group via WhatsApp.*)
-
-[//]: # (1.  **Acquisition:** The smartphone camera captures the light/image.)
-
-[//]: # (2.  **Processing:** The phone's CPU processes the image &#40;adjusts lighting, compresses the file&#41;.)
-
-[//]: # (3.  **Storage:** The image is temporarily stored in the phone's RAM/SSD.)
-
-[//]: # (4.  **Collection:** The messaging app gathers the image data and the recipient's contact info.)
-
-[//]: # (5.  **Transmission:** The data is sent via radio waves to a cell tower, then through fiber optics to the internet.)
-
-[//]: # (6.  **Exchange:** The app delivers the image to the recipients' phones.)
-
-[//]: # (7.  **Generation:** *&#40;Optional extension&#41;* A student uses the image to generate a new study guide using a word processor.)
-
-
-
-[//]: # (### Key Distinctions to Highlight)
-
-[//]: # (*   **Processing vs. Generation:** Make sure students understand the difference. *Processing* is about transforming or organizing existing data &#40;e.g., calculating a sum in Excel&#41;. *Generation* is about creating entirely new content &#40;e.g., writing a new essay in Word&#41;.)
-
-[//]: # (*   **Transmission vs. Exchange:** *Transmission* is the physical/digital movement of data packets across a medium &#40;the "pipes"&#41;. *Exchange* is the actual sharing and receipt of the message between the end-users or systems &#40;the "delivery"&#41;.)
-
----
-
-
-
-
-
 ---
 
 ## 3. A Brief History of ICT
 
-The evolution of ICT can be understood through four major waves of innovation, each dramatically shrinking the world and accelerating information handling:
+The evolution of ICT can be broadly divided into four major periods, each representing significant advances in information processing and communication technologies.
 
-*   **Pre-20th Century (Foundations):** The telegraph and telephone laid the groundwork for instant long-distance communication.
+<img src="../resources/images/ict-history.png" width="800">
+
+*   **Pre-20th Century (Foundations):** The telegraph and telephone enabled instant long-distance communication.
 *   **Mid-20th Century (The Computing Era):** The invention of mainframes, transistors, and eventually Personal Computers (PCs) in the 1970s-80s brought data processing to businesses and homes.
-*   **Late 20th Century (The Connectivity Era):** The creation of the Internet and the World Wide Web (1990s) shifted ICT from isolated machines to a globally connected network.
-*   **21st Century (The Ubiquity & Intelligence Era):** The rise of smartphones, cloud computing, the Internet of Things (IoT), and Artificial Intelligence (AI) has made ICT invisible, omnipresent, and predictive.
+*   **Late 20th Century (The Connectivity Era):** The innovation of the Internet and the World Wide Web (1990s) shifted ICT from isolated machines to a globally connected network.
+*   **21st Century – The Smart ICT Era:** Smartphones, cloud computing, the Internet of Things (IoT), and Artificial Intelligence (AI) enable smarter services, automation, and data-driven decision-making.
 
-[//]: # (Instructor Note: Keep this historical overview high-level and fast-paced. Consider displaying a visual timeline on the board or slides. Emphasize the *exponential* rate of change—what took decades in the past now takes years or months.)
+
+
+
 
 ---
 
-## 4. ICT Applications by Sector
+## 4. ICT Across Different Sectors
 
-ICT is not a standalone industry; it is a horizontal enabler that transforms every vertical sector of society.
+ICT is not a standalone industry; it is a horizontal enabler that supports and transforms nearly every sector of society. 
+Some of these sectors include:
+
+<img src="../resources/images/ict-sectors.png" width="800">
 
 | Sector | Key ICT Applications & Tools |
 | :--- | :--- |
-| **Education** | Learning Management Systems (LMS like Moodle/Canvas), virtual classrooms, interactive whiteboards, adaptive learning AI. |
-| **Healthcare** | Electronic Health Records (EHR), telemedicine platforms, wearable health monitors, AI-assisted medical imaging. |
-| **Business & Finance** | Enterprise Resource Planning (ERP), e-commerce platforms, mobile banking, blockchain, and algorithmic trading. |
-| **Government & Society** | E-governance portals (tax filing, digital IDs), smart city infrastructure (traffic sensors, smart grids), disaster early-warning systems. |
-| **Agriculture** | Precision farming using drone imagery, soil moisture sensors, and GPS-guided automated machinery. |
+| **Education** | Learning Management Systems (LMS), virtual classrooms, online learning platforms, interactive whiteboards. |
+| **Healthcare** | Electronic Health Records (EHR), telemedicine, wearable health monitors, medical information systems, AI-assisted medical imaging. |
+| **Business & Finance** | Enterprise Resource Planning (ERP), Decision Support Systems (DSS), e-commerce, mobile banking, blockchain, algorithmic trading. |
+| **Government & Society** | E-governance portals, digital IDs, online public services, smart city systems, disaster early-warning systems. |
+| **Agriculture** | Precision agriculture, IoT-based monitoring, GPS-guided machinery, automated irrigation, and agricultural data analytics. |
+| **Industry & Manufacturing** | Industrial automation, Industrial IoT (IIoT), robotics, SCADA systems, digital twins, and manufacturing execution systems (MES). |
+| **Energy & Buildings** | Building Energy Management Systems (BEMS), smart grids, smart meters, energy monitoring, and automated HVAC and lighting control. |
+| **Transportation & Logistics** | Intelligent Transportation Systems (ITS), GPS tracking, traffic management, fleet management, and automated logistics systems. |
 
-
-[//]: # (Instructor Note: Make this relatable. Pause here and ask students: "Think of the last three apps you used today. Which sector do they serve, and which of the 7 information-handling functions do they primarily perform?" This bridges the theory to their daily lived experience.)
-
-
+---
 
 ## 5. Key Elements of ICT
 
-ICT is not merely a collection of gadgets; it is a **socio-technical system**. For any ICT system to function effectively, six core elements must work together in harmony.
+ICT is not just a collection of gadgets; it is a **socio-technical system** where people, technology, and rules work together.
+
+ICT = Technology + People + Rules
+
+For any ICT system to function effectively, the following core elements must work together in harmony.
+
+<img src="../resources/images/ict-key-elements.png" width="800">
 
 | Key Element | Description                                                                                                                           | Examples                                                                                                                       |
 | :--- |:--------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------|
@@ -176,26 +150,15 @@ ICT is not merely a collection of gadgets; it is a **socio-technical system**. F
 
 
 
-[//]: # (Instructor Note: Use the "Human Body" or "Restaurant" analogy to make this stick. For example: Hardware is the kitchen equipment, Software is the recipe, Data is the ingredients, Networks are the waiters delivering food, Processes are the health and safety rules, and People are the chefs and customers. Emphasize that without *People* and *Processes*, the technology is useless or even dangerous.)
-
----
-
-[//]: # (### 💡 Class Discussion Prompt)
-
-[//]: # (**"The Weakest Link"**  )
-
-[//]: # (Ask students: *"If you have the fastest computer &#40;Hardware&#41;, the best software, and a gigabit internet connection &#40;Network&#41;, but the user doesn't know how to operate it or shares their password with everyone &#40;People/Processes&#41;, is the ICT system effective?"*  )
-
-[//]: # (This drives home the point that ICT is a holistic system, and the human/procedural elements are often the most vulnerable or critical to success.)
-
-
 
 ---
 ## 6. Computer Hardware Components
 
-![computer-architecture.png](../resources/computer-architecture.png)
+![A sample motherboard](../resources/images/motherboard.png)
 
-[A sample motherboard](https://freebloet.click/product_details/60960180.html)
+
+![computer-architecture.png](../resources/images/Anatomy_of_Computer_Hardware_Components.png)
+
 
 ### Central Processing Unit (CPU)
 
@@ -235,6 +198,10 @@ It connects and allows communication between all the different hardware componen
 - **Distributes power**: Supplies electrical power to different parts of the computer.
 - **Hosts firmware**: Stores the BIOS/UEFI, which starts up the computer and manages low-level hardware settings.
 
+
+![computer-architecture.png](../resources/computer-architecture.png)
+
+
 ---
 ## 7. Software Types
 
@@ -272,7 +239,7 @@ It connects and allows communication between all the different hardware componen
 ---
 ## 9. Introduction to Programming, Databases, and Networking
 
-![software-development.png](../resources/software-development.png)
+![software-development.png](../resources/images/dbms-big-picture.png)
 
 ### Programming
 - Writing instructions for a computer using programming languages to perform tasks.
