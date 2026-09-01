@@ -114,20 +114,12 @@ The course will cover the following topics:
 
 Students will be evaluated based on the following components:
 
-| **Component**                 | **Weight** |
-|-------------------------------|-----------|
-| Assignment 1                  |   TBA    |
-| Assignment 2                  |   TBA    |
-| Midterm Exam                  |  TBA     |
-| Final Exam                    |  TBA     |
-
-## Exams Schedule
-
-| **Component**                | **Date** |
-|------------------------------|----------|
-| Assignment 1           | TBA      |
-| Assignment 2 Report          | TBA      |
-| Midterm Exam                 | TBA      |
+| **Component**                 | **Weight** | **Exam Date** |
+|-------------------------------|-----------|---------------|
+| Assignment 1                  |   TBA    | TBA           |
+| Assignment 2                  |   TBA    | TBA           |
+| Midterm Exam                  |  TBA     | TBA           |
+| Final Exam                    |  TBA     | TBA           |
 
 
 ### Course Policies
@@ -143,7 +135,7 @@ Students will be evaluated based on the following components:
 * Node.js (https://nodejs.org/en/download)
 * PostgreSQL, pgAdmin  (https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) any version that can
   be installed without issues.
-* HTTP Client (IntelliJ IDEA -> Preferences -> HTTP Client ) or Postman
+* HTTP Client (IntelliJ IDEA -> Preferences -> HTTP Client )
 * JQuery (https://jquery.com/)
 
 ### Resources
