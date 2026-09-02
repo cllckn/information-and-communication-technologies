@@ -85,8 +85,16 @@ fundamental functions to handle data from its origin to its final destination.
 | **Collection** | Gathering data from multiple sources into one centralized place. | Online forms, surveys, web crawlers |
 | **Storage** | Keeping information safe for later use and retrieval. | Hard disk, SSD, flash drive, cloud storage, databases |
 | **Processing** | Converting raw data into meaningful, organized information. | CPU, spreadsheets, database management systems (DBMS) |
-| **Transmission** | Sending information across distances. | Networks, fiber optics, radio waves, satellites |
+| **Transmission** | Transmitting information to destination systems. | Networks, fiber optics, radio waves, satellites |
 | **Exchange** | Sharing and distributing information between people and systems. | Email, messaging apps, file sharing, APIs |
+
+
+
+> **Activity: Trace the Information Lifecycle**
+> 
+> Imagine you are in class. The instructor writes a key concept on the whiteboard. You take out your smartphone, snap a photo, and instantly send it to your study group using an instant messaging app.
+>
+> Discuss the ICT functions performed during this simple operation.
 
 
 
@@ -102,9 +110,6 @@ The evolution of ICT can be broadly divided into four major periods, each repres
 *   **Mid-20th Century (The Computing Era):** The invention of mainframes, transistors, and eventually Personal Computers (PCs) in the 1970s-80s brought data processing to businesses and homes.
 *   **Late 20th Century (The Connectivity Era):** The innovation of the Internet and the World Wide Web (1990s) shifted ICT from isolated machines to a globally connected network.
 *   **21st Century – The Smart ICT Era:** Smartphones, cloud computing, the Internet of Things (IoT), and Artificial Intelligence (AI) enable smarter services, automation, and data-driven decision-making.
-
-
-
 
 
 ---
@@ -324,32 +329,31 @@ java HelloWorld.java
 Hello World
 ~~~
 
-
 ### 2. Node.js (for Web Development)
 - JavaScript runtime environment for server-side(backend) development.
-- Used for building web applications and services(APIs).
+- Used for building web applications and web services(APIs).
 - Download Link: [Node.js](https://nodejs.org/en/download)
 
-    * Setting up Intellij for Node.js based development
-      - IntelliJ IDEA -> Preferences -> Plugins -> Node.js
-      - IntelliJ IDEA -> File -> Settings -> Plugins -> Node.js
+* Set up Intellij for Node.js based development (or install WebStorm)
+  - IntelliJ IDEA -> Preferences -> Plugins -> Node.js (OSX, Linux)
+  - IntelliJ IDEA -> File -> Settings -> Plugins -> Node.js (Windows)
 
-    * Initialize a new Node.js project
-      - IntelliJ IDEA -> File -> New -> Project -> Empty Project (Give the project an appropriate name.)
-      - Open a terminal in IntelliJ
-      - npm init -y
-      - Make a /src folder to hold the source code of the project
+* Initialize a new Node.js project
+  - WebStorm/IntelliJ IDEA -> File -> New -> Project -> Empty Project (Give the project an appropriate name.)
+  - Open the terminal in IntelliJ
+  - npm init -y
+  - Make a /src folder for the source code of the project
 
-    * Make a /src/hello-world.js file and write the following code:
-      
+* Make a hello-world.js file and write the following code:
 ~~~javascript
-console.log('Hello world.');
+  console.log('Hello world.');
 ~~~
 
-  * Run the app:
-      - node hello-world.js
+* Run the app:
+  - node hello-world.js
 
-  * Make a /src/server.js file and write the following code:
+
+* Make a /src/server.js file and write the following code:
 
 ~~~javascript
 const express = require("express");
@@ -364,8 +368,8 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 ~~~ 
-   * Run the app:
-      - node server.js
+* Run the app:
+  - node server.js
 
 ### 3. HTTP Client (for testing web services)
 - Provides the ability to compose and execute HTTP requests from the code editor.
