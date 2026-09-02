@@ -4,9 +4,9 @@
 resources used to acquire, generate, collect, store, process, transmit, and exchange information.
 This course provides a hands-on introduction to Information and Communication Technologies, covering foundational 
 concepts of computing, object-oriented programming, databases, computer networks, and web technologies. 
-Through practical exercises, they will gain experience in programming, database management, computer networking, and 
-web application development. 
-The course also introduces emerging ICT technologies, enabling students to understand their applications and roles in modern computing 
+Through practical exercises, students will gain experience in programming, database management, computer networking, and 
+web application development. The course also introduces emerging ICT technologies, enabling students to understand their applications and roles in 
+modern computing 
 systems.
 
 ## Course Objectives
@@ -135,6 +135,7 @@ Students will be evaluated based on the following components:
 * Node.js (https://nodejs.org/en/download)
 * PostgreSQL, pgAdmin  (https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) any version that can
   be installed without issues.
+* MongoDB Cloud (https://account.mongodb.com/account/login)
 * HTTP Client (IntelliJ IDEA -> Preferences -> HTTP Client )
 * JQuery (https://jquery.com/)
 
