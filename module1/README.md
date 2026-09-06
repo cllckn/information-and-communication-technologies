@@ -8,34 +8,23 @@
 * [Foundations of Information and Communication Technologies(ICT)](#foundations-of-information-and-communication-technologiesict)
   * [1. Overview of ICT](#1-overview-of-ict)
     * [What is ICT?](#what-is-ict)
-  * [2. ICT System Functions](#2-ict-system-functions)
-  * [3. A Brief History of ICT](#3-a-brief-history-of-ict)
-  * [4. ICT Across Different Sectors](#4-ict-across-different-sectors)
-  * [5. Key Elements of ICT](#5-key-elements-of-ict)
-  * [6. Computer Hardware Components](#6-computer-hardware-components)
+    * [ICT System Functions](#ict-system-functions)
+    * [A Brief History of ICT](#a-brief-history-of-ict)
+    * [ICT Across Different Sectors](#ict-across-different-sectors)
+    * [Key Elements of ICT](#key-elements-of-ict)
+  * [2. Computer Hardware Components](#2-computer-hardware-components)
     * [Central Processing Unit (CPU)](#central-processing-unit-cpu)
     * [Memory](#memory)
     * [Storage (Secondary Memory)](#storage-secondary-memory)
     * [Input and Output (I/O) Devices](#input-and-output-io-devices)
     * [Motherboard](#motherboard)
-  * [7. Software Types](#7-software-types)
-    * [System Software](#system-software)
-    * [Application Software](#application-software)
-    * [Middleware](#middleware)
-  * [8. The Internet and World Wide Web](#8-the-internet-and-world-wide-web)
-    * [Internet](#internet)
-    * [World Wide Web (WWW)](#world-wide-web-www)
-  * [9. Introduction to Programming, Databases, and Networking](#9-introduction-to-programming-databases-and-networking)
-    * [Programming](#programming)
-    * [Databases](#databases)
-    * [Networking](#networking)
-  * [Summary](#summary-)
-  * [Setting Up the Development Environment](#setting-up-the-development-environment)
-    * [1. IntelliJ IDEA Ultimate (for Java-Based Program Development)](#1-intellij-idea-ultimate-for-java-based-program-development)
-    * [2. Node.js (for Web Development)](#2-nodejs-for-web-development)
-    * [3. HTTP Client (for testing web services)](#3-http-client-for-testing-web-services)
-    * [4. PostgreSQL (for DB Operations)](#4-postgresql-for-db-operations)
-    * [5.MongoDB Cloud (https://account.mongodb.com/account/login)](#5mongodb-cloud-httpsaccountmongodbcomaccountlogin)
+  * [3. Summary](#3-summary-)
+* [Setting Up the Development Environment](#setting-up-the-development-environment)
+  * [1. IntelliJ IDEA Ultimate (for Java-Based Program Development)](#1-intellij-idea-ultimate-for-java-based-program-development)
+  * [2. Node.js (for Web Development)](#2-nodejs-for-web-development)
+  * [3. HTTP Client (for testing web services)](#3-http-client-for-testing-web-services)
+  * [4. PostgreSQL (for DB Operations)](#4-postgresql-for-db-operations)
+  * [5.MongoDB Cloud (https://account.mongodb.com/account/login)](#5mongodb-cloud-httpsaccountmongodbcomaccountlogin)
 <!-- TOC -->
 
 ---
@@ -45,9 +34,9 @@
 - **Information and Communication Technologies (ICT)** refers to the systems, tools, and
 resources used to ***acquire, generate, collect, store, process, transmit, and exchange*** information.
 - ICT includes two main pillars:
-*   **Computing Technologies:** The physical and logical tools used to handle data, such as hardware 
+  - **Computing Technologies:** The physical and logical tools used to handle data, such as hardware 
 (computers, servers, mobile devices) and software (applications, operating systems, algorithms).
-*   **Communication Technologies:** The infrastructure and protocols that connect devices and allow them to communicate,
+  - **Communication Technologies:** The infrastructure and protocols that connect devices and allow them to communicate,
 such as networks, the internet, telecommunications, and broadcasting media.
 
 
@@ -69,9 +58,9 @@ These technological tools and resources include computers, the Internet (website
 
 ---
 
-## 2. ICT System Functions
+### ICT System Functions
 
-"ICT systems perform seven fundamental functions to manage the information lifecycle."
+ICT systems perform seven fundamental functions to manage the information lifecycle.
 
 
 <img src="../resources/images/ict-system-functions.png" width="800">
@@ -97,9 +86,10 @@ These technological tools and resources include computers, the Internet (website
 
 ---
 
-## 3. A Brief History of ICT
+### A Brief History of ICT
 
-The evolution of ICT can be broadly divided into four major periods, each representing significant advances in information processing and communication technologies.
+The evolution of ICT can be broadly divided into four major periods, each representing significant advances in 
+information processing and communication technologies.
 
 <img src="../resources/images/ict-history.png" width="800">
 
@@ -111,55 +101,64 @@ The evolution of ICT can be broadly divided into four major periods, each repres
 
 ---
 
-## 4. ICT Across Different Sectors
+### ICT Across Different Sectors
 
 ICT is not a standalone industry; it is a horizontal enabler that supports and transforms nearly every sector of society. 
 Some of these sectors include:
 
 <img src="../resources/images/ict-sectors.png" width="800">
 
-| Sector | Key ICT Applications & Tools |
-| :--- | :--- |
-| **Education** | Learning Management Systems (LMS), virtual classrooms, online learning platforms, interactive whiteboards. |
-| **Healthcare** | Electronic Health Records (EHR), telemedicine, wearable health monitors, medical information systems, AI-assisted medical imaging. |
-| **Business & Finance** | Enterprise Resource Planning (ERP), Decision Support Systems (DSS), e-commerce, mobile banking, blockchain, algorithmic trading. |
-| **Government & Society** | E-governance portals, digital IDs, online public services, smart city systems, disaster early-warning systems. |
-| **Agriculture** | Precision agriculture, IoT-based monitoring, GPS-guided machinery, automated irrigation, and agricultural data analytics. |
-| **Industry & Manufacturing** | Industrial automation, Industrial IoT (IIoT), robotics, SCADA systems, digital twins, and manufacturing execution systems (MES). |
-| **Energy & Buildings** | Building Energy Management Systems (BEMS), smart grids, smart meters, energy monitoring, and automated HVAC and lighting control. |
-| **Transportation & Logistics** | Intelligent Transportation Systems (ITS), GPS tracking, traffic management, fleet management, and automated logistics systems. |
+| Sector | Key ICT Applications & Tools                                                                                                       |
+| :--- |:-----------------------------------------------------------------------------------------------------------------------------------|
+| **Education** | Learning Management Systems (LMS), virtual classrooms, online learning platforms, interactive whiteboards.                         |
+| **Healthcare** | Electronic Health Records (EHR), wearable health monitors, medical information systems, AI-assisted medical imaging, telemedicine. |
+| **Business & Finance** | Enterprise Resource Planning (ERP), Decision Support Systems (DSS), e-commerce, mobile banking, blockchain, algorithmic trading.   |
+| **Government & Society** | E-governance portals, digital IDs, online public services, smart city systems, disaster early-warning systems.                     |
+| **Agriculture** | Precision agriculture, IoT-based monitoring, GPS-guided machinery, automated irrigation, and agricultural data analytics.          |
+| **Industry & Manufacturing** | Industrial automation, Industrial IoT (IIoT), robotics, SCADA systems, digital twins, and manufacturing execution systems (MES).   |
+| **Energy & Buildings** | Building Energy Management Systems (BEMS), smart grids, smart meters, energy monitoring, and automated HVAC and lighting control.  |
+| **Transportation & Logistics** | Intelligent Transportation Systems (ITS), GPS tracking, traffic management, fleet management, and automated logistics systems.     |
 
 ---
 
-## 5. Key Elements of ICT
+### Key Elements of ICT
 
-ICT is not just a collection of gadgets; it is a **socio-technical system** where people, technology, and rules work together.
+ICT is not just a collection of gadgets; it is a **socio-technical system** where technology, people, and processes must work together.
 
-ICT = Technology + People + Rules
+**ICT = Technology + People + Processes**
 
-For any ICT system to function effectively, the following core elements must work together in harmony.
+For any ICT system to function effectively, the following six core elements must work together in harmony. 
 
-<img src="../resources/images/ict-key-elements.png" width="800">
+<img src="../resources/images/ict-key-elements.png" width="800" alt="Diagram of the 6 key elements of ICT">
 
-| Key Element | Description                                                                                                                           | Examples                                                                                                                       |
-| :--- |:--------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------|
-| **1. Hardware** | Physical devices that support information handling and communication.                                                                 | Computers, servers, smartphones, routers, sensors, printers.                                                                   |
-| **2. Software** | Programs and instructions that control hardware and perform tasks.                                                                    | Windows/macOS, Microsoft Office, mobile apps, database management systems.                                                     |
-| **3. Data & Information** | The central element of ICT — the content that is acquired, generated, collected, stored, processed, transmitted, and exchanged.       | Text documents, images, audio, video, databases, spreadsheets, logs, big data repositories, sensor readings, analytics results |
-| **4. Networks & Connectivity** | The infrastructure and protocols that allow hardware and software to communicate and share resources.                                 | The Internet, Wi-Fi, fiber-optic cables, Bluetooth, TCP/IP protocols.                                                          |
-| **5. People** | The most critical element. Includes everyone who interacts with the system, from end-users to developers and IT administrators.       | Students, teachers, software engineers, network technicians, policymakers.                                                     |
-| **6. Processes** | The rules, procedures, policies, and workflows that govern how the ICT system is used and maintained.                                 | Password policies, data backup schedules, software update protocols, privacy guidelines (e.g., GDPR).                          |
+| Key Element | Description | Examples |
+| :--- | :--- | :--- |
+| **1. Hardware** | Physical devices that support information handling and communication. | Computers, servers, smartphones, routers, sensors, printers. |
+| **2. Software** | Programs and instructions that control hardware and perform tasks. | Windows/macOS, Microsoft Office, mobile apps, database management systems. |
+| **3. Data & Information** | The central element of ICT — the content that is acquired, generated, collected, stored, processed, transmitted, and exchanged. | Text documents, images, audio, video, databases, spreadsheets, logs, big data repositories, sensor readings. |
+| **4. Networks & Connectivity** | The infrastructure and protocols that allow hardware and software to communicate and share resources. | The Internet, Wi-Fi, fiber-optic cables, Bluetooth, TCP/IP protocols. |
+| **5. People** | The most critical element. Includes everyone who interacts with the system, from end-users to developers and IT administrators. | Students, teachers, software engineers, network technicians, policymakers. |
+| **6. Processes** | The rules, procedures, policies, and workflows that define and enforce business logic. | Business rules (e.g., "users must be 18 to register"), password policies, data backup schedules, software update protocols. |
 
+- *All of these ICT key elements must work together in harmony.*
+  * You can have excellent security software (**Technology**), but if an employee (**People**) sets a weak password, the system is still at risk.
+  * You can have powerful computers (**Technology**), but without a backup procedure (**Processes**), a system crash can cause major data loss.
 
-
-
+> **Activity: Identify the Key Elements of ICT**
+>
+>Imagine your phone stops working. Which ICT element might be causing the problem?
+> 
+> - Cracked screen? 
+> - App crashes? → **Software**
+>- No Wi-Fi? → **Networks**
+>- Lost photos? → **Data**
+>- I don't know how to fix it. → **People**
+>- No backup plan? → **Processes**
 ---
-## 6. Computer Hardware Components
+## 2. Computer Hardware Components
 
-![A sample motherboard](../resources/images/motherboard.png)
+![Computer hardware components](../resources/images/computer-hardware-components.png)
 
-
-![computer-architecture.png](../resources/images/Anatomy_of_Computer_Hardware_Components.png)
 
 
 ### Central Processing Unit (CPU)
@@ -201,90 +200,26 @@ It connects and allows communication between all the different hardware componen
 - **Hosts firmware**: Stores the BIOS/UEFI, which starts up the computer and manages low-level hardware settings.
 
 
-![computer-architecture.png](../resources/computer-architecture.png)
+![computer-architecture.png](../resources/images/computer-hardware-interaction.png)
 
 
 ---
-## 7. Software Types
-
-### System Software
-- Manages hardware and provides the foundation for applications.
-- Examples: Operating Systems (Windows, Linux, macOS), device drivers, utilities.
-
-### Application Software
-- Programs for end users to perform specific tasks.
-- Examples: MS Word, browsers, games, media players.
-
-### Middleware
-- Acts as a **bridge** between applications, databases, or systems.
-- Examples:
-  - Database middleware (JDBC, ODBC)
-  - Message brokers ( Kafka, MQTT, RabbitMQ)
 
 
----
-## 8. The Internet and World Wide Web
 
-### Internet
-- The Internet is a global network that connects devices and people, allowing them to share data and services.
-- Uses TCP/IP protocols for communication.
-- Provides services: www, email, file transfer, remote access,etc.
-
-### World Wide Web (WWW)
-- A **service** that runs on top of the Internet.
-- Uses **HTTP/HTTPS** protocols to access web pages.
-- Components:
-  - **Web servers** → host and deliver web pages.
-  - **Browsers & Applications** → access, display, or use content to trigger actions.
-  - **Devices** → desktops, laptops, mobile devices, tablets, and IoT systems.
-
----
-## 9. Introduction to Programming, Databases, and Networking
-
-![software-development.png](../resources/images/dbms-big-picture.png)
-
-### Programming
-- Writing instructions for a computer using programming languages to perform tasks.
-- Programming languages are divided into two main classes based on their execution method:
-  - **Compiled languages**: C, C++, Rust, Go → need compilation before execution.
-  - **Interpreted languages**: Python, JavaScript, Ruby, PHP → executed line by line.
-  - **Hybrid Approach (JIT Compilation)**: Java, C#, Python (with PyPy) - Source code → Bytecode → Just-In-Time Compiler → Native Machine Code
-- Programming paradigms:
-  - Procedural (step-by-step)
-  - Object-Oriented Programming (OOP)
-  - Functional programming
-
-### Databases
-- Collection of related data stored in files is called a database.
-- **Relational databases (RDBMS)**: PostgreSQL, MySQL, Oracle, MSSQL, etc.
-  - **SQL (Structured Query Language)** for data operations.
-  - Example operations: SELECT, INSERT, UPDATE, DELETE.
-- **NoSQL databases**: MongoDB, Redis, Cassandra, etc.
-
-
-### Networking
-- Connecting computers to share resources and communicate.
-- Types: **LAN**, **WAN**, **Internet**.
-- Key elements: IP addresses, DNS, ports, sockets.
-
----
-
-
-## Summary 
-*   ICT is the integration of computing and communication technologies to manage information.
-*   It is ubiquitous, impacting almost every facet of modern society.
-*   All ICT systems, regardless of how complex, ultimately perform one or more of the seven information-handling functions: Acquisition, Generation, Collection, Storage, Processing, Transmission, and Exchange.
-*   ICT has evolved rapidly from early mechanical communication to globally connected, AI-driven ecosystems.
-*   ICT is a foundational enabler across all sectors of society, driving efficiency, accessibility, and innovation in education, healthcare, business, government, and beyond.
-
+## 3. Summary 
+* ICT is the integration of computing and communication technologies to manage information.
+* All ICT systems, regardless of how complex, ultimately perform one or more of the seven information-handling 
+functions: Acquisition, Generation, Collection, Storage, Processing, Transmission, and Exchange. 
+* ICT is a horizontal enabler that supports and transforms nearly every sector of society.
 ---
 ***
 
-## Setting Up the Development Environment
+# Setting Up the Development Environment
 
 To practice throughout this course, install and configure the following tools:
 
-### 1. IntelliJ IDEA Ultimate (for Java-Based Program Development)
+## 1. IntelliJ IDEA Ultimate (for Java-Based Program Development)
 - Popular IDE for Java based development. 
 - For accessing a free IDE, you can visit (https://www.jetbrains.com/shop/eform/students)
 - Download Link: [IntelliJ](https://www.jetbrains.com/idea/download)
@@ -326,7 +261,7 @@ java HelloWorld.java
 Hello World
 ~~~
 
-### 2. Node.js (for Web Development)
+## 2. Node.js (for Web Development)
 - JavaScript runtime environment for server-side(backend) development.
 - Used for building web applications and web services(APIs).
 - Download Link: [Node.js](https://nodejs.org/en/download)
@@ -368,7 +303,7 @@ app.listen(PORT, () => {
 * Run the app:
   - node server.js
 
-### 3. HTTP Client (for testing web services)
+## 3. HTTP Client (for testing web services)
 - Provides the ability to compose and execute HTTP requests from the code editor.
 
 * Setting up Intellij for http client
@@ -380,10 +315,10 @@ app.listen(PORT, () => {
 GET localhost:3000/
 ~~~
 
-### 4. PostgreSQL (for DB Operations)
+## 4. PostgreSQL (for DB Operations)
 - PostgreSQL is an open-source and powerful relational database management system.
 - Complies with SQL standards and supports Linux, macOS, and Windows.
 - Download Link: [Download PostgreSQL](https://www.postgresql.org/download/) any version that can
   be installed without issues.
 
-### 5.MongoDB Cloud (https://account.mongodb.com/account/login)
+## 5.MongoDB Cloud (https://account.mongodb.com/account/login)
