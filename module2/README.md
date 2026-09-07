@@ -4,16 +4,20 @@
 
 <!-- TOC -->
 * [Module 2: Programming Fundamentals](#module-2-programming-fundamentals)
-  * [What is Programming](#what-is-programming)
-  * [Programming Paradigms](#programming-paradigms)
+  * [1. What is Programming](#1-what-is-programming)
+  * [2. Software Types](#2-software-types)
+    * [System Software](#system-software)
+    * [Application Software](#application-software)
+    * [Middleware](#middleware)
+  * [3. Programming Paradigms](#3-programming-paradigms)
     * [Structured (Procedural) Programming](#structured-procedural-programming)
     * [Object-Oriented Programming (OOP)](#object-oriented-programming-oop)
     * [Structured (Procedural) Programming vs. Object-Oriented Programming (OOP)](#structured-procedural-programming-vs-object-oriented-programming-oop)
     * [Functional Programming](#functional-programming)
-  * [Programming Languages](#programming-languages-)
-  * [Writing and running programs in Java](#writing-and-running-programs-in-java)
+  * [4. Programming Languages](#4-programming-languages-)
+  * [5. Writing and running programs in Java](#5-writing-and-running-programs-in-java)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
-  * [Variables, Data Types, and Operators](#variables-data-types-and-operators)
+  * [6. Variables, Data Types, and Operators](#6-variables-data-types-and-operators)
     * [Primitive Types](#primitive-types)
     * [Reference Types](#reference-types)
     * [Operators in Java](#operators-in-java)
@@ -21,7 +25,7 @@
     * [Package in Java](#package-in-java)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
     * [Type Conversion](#type-conversion)
-  * [Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)](#control-flow-conditional-statements-ifelse-switch-case-loops-for-while-do-while)
+  * [7. Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)](#7-control-flow-conditional-statements-ifelse-switch-case-loops-for-while-do-while)
     * [if / else](#if--else)
     * [Nested if / else](#nested-if--else)
     * [switch-case](#switch-case)
@@ -29,19 +33,63 @@
       * [for loop](#for-loop)
       * [while loop](#while-loop)
       * [do-while loop](#do-while-loop)
-  * [Basic Data Structures: Arrays](#basic-data-structures-arrays)
-  * [Functions (Methods): Declaration, parameters, return values, overloading](#functions-methods-declaration-parameters-return-values-overloading)
+      * [Control Statements in Loops](#control-statements-in-loops)
+  * [8. Basic Data Structures: Arrays](#8-basic-data-structures-arrays)
+  * [9. Functions (Methods): Declaration, parameters, return values, overloading](#9-functions-methods-declaration-parameters-return-values-overloading)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
 <!-- TOC -->
 
 ---
 
-## What is Programming
+## 1. What is Programming
 Writing instructions for a computer using programming languages to perform tasks.
 
 <img src="../resources/software-development.png" width="700" alt="Programming">
 
-## Programming Paradigms
+
+## 2. Software Types
+
+Before diving into how we program, it's important to understand **what** we are building. Software can be categorized into three main types:
+
+### System Software
+- **Purpose:** Manages computer hardware and provides a platform for running application software
+- **Examples:**
+    - Operating Systems (Windows, Linux, macOS, Android)
+    - Device drivers
+    - Utility programs (antivirus, disk management tools)
+    - Compilers and interpreters
+- **Characteristics:**
+    - Runs in the background
+    - Essential for computer operation
+    - Written in low-level or high-level languages for efficiency
+
+### Application Software
+- **Purpose:** Enables users to perform specific tasks or solve particular problems
+- **Examples:**
+    - Productivity tools (Microsoft Office, Google Docs)
+    - Web browsers (Chrome, Firefox, Safari)
+    - Media players, games, mobile apps
+    - Business applications (ERP, CRM systems)
+- **Characteristics:**
+    - User-facing
+    - Task-specific
+    - Built on top of system software
+
+### Middleware
+- **Purpose:** Acts as a bridge between system software and application software, or between different applications
+- **Examples:**
+    - Database middleware (JDBC, ODBC)
+    - Message brokers (Kafka, RabbitMQ, MQTT)
+    - Web servers (Apache, Nginx)
+    - API frameworks
+- **Characteristics:**
+    - Enables communication and data management
+    - Facilitates integration between disparate systems
+    - Often invisible to end-users but critical for system functionality
+
+
+
+## 3. Programming Paradigms
 ![](../resources/programming-paradigms.png "Programming Paradigms")
 
 
@@ -128,7 +176,7 @@ System.out.println("Result: " + result);
 
 
 
-## Programming Languages 
+## 4. Programming Languages 
 
 A programming language is a formal language that provides syntax and rules to write programs.
 
@@ -174,7 +222,7 @@ CPU executes
 software rather than hardware. It simulates a physical machine so programs can run in a platform-independent way.***
 
 
-## Writing and running programs in Java
+## 5. Writing and running programs in Java
 
 
 
@@ -227,7 +275,7 @@ Hello World
 Write and run your first "Hello, World!" in Java
 ***
 
-## Variables, Data Types, and Operators
+## 6. Variables, Data Types, and Operators
 
 You must define variables before using them as java is a statically typed language.
 
@@ -238,7 +286,7 @@ int x = 5;
 ~~~
 
 
-***Best Practices and Performance Tips***
+***Best Practices / Performance Tips***
 
     Use meaningful names for identifiers i.e.;variables, constants, classes, objects and methods.**  
       This improves readability and makes the program easier to maintain.
@@ -284,7 +332,7 @@ Store references to objects and arrays, allowing for more complex data structure
 | - `Car`              | A class representing a car.                        | `Car myCar = new Car();` | Depends on class design   |
 
 
-***Best Practices and Performance Tips***
+***Best Practices / Performance Tips***
 
     Select the smallest possible type that covers the expected value to improve performance and optimize resource utilization.  This improves readability and makes the program easier to maintain.
 
@@ -488,7 +536,7 @@ public class VariablesMain {
 >[TypeConversion.java](./typeconversion/TypeConversionDemoMain.java)
 
 
-## Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)
+## 7. Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)
 
 
 ### if / else
@@ -510,15 +558,12 @@ if (grade >= 50) {
 
 ~~~
 
-***Best Practices and Performance Tips***
+***Best Practices / Performance Tips***
 
-    Write the likely (most probable) condition first to improve program speed.
-    Place the likely case in the if block and the unlikely case in the else block.
+    Place the likely(most probable) case in the if block and the unlikely case in the else block.
       This allows the branch predictor to work more efficiently and reduces costly mispredictions.
-      In the example above,  grade >= 50 is placed in the if condition since it is the more common case.    
-    Place the likely condition in the if block.
-      This improves execution speed because the CPU’s branch predictor is more often correct, avoiding pipeline flushes.
-      
+      In the example above,  `grade >= 50` is placed in the if condition since it is the more common case.    
+       
 
 ### Nested if / else
 
@@ -595,6 +640,15 @@ that can be written with a `for` loop can also be written with a `while` or a `d
     - `break` → Immediately terminates the loop, regardless of the loop condition, and transfers control to the statement following the loop.
     - `continue` → Skips the current iteration and moves to the next one without exiting the loop entirely.
   
+
+***A common principle in science and engineering education: focus on understanding rather than memorization—learn 
+the underlying principles, not just formulas.***
+
+
+
+
+
+
 #### for loop
 
 Used when the number of repetitions is known in advance.
@@ -702,7 +756,7 @@ do {
 ~~~
 
 
-## Basic Data Structures: Arrays
+## 8. Basic Data Structures: Arrays
 
 Arrays are collections that hold multiple elements of the same type.
 
@@ -756,7 +810,7 @@ for (int number : numbers) {
 ~~~
 
 
-## Functions (Methods): Declaration, parameters, return values, overloading
+## 9. Functions (Methods): Declaration, parameters, return values, overloading
 
 In Java, functions are called methods. They are blocks of code that perform a specific task and are reusable, which 
 helps to organize a program and avoid code repetition.
