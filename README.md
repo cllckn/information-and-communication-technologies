@@ -5,9 +5,9 @@ resources used to acquire, generate, collect, store, process, transmit, and exch
 This course provides a hands-on introduction to Information and Communication Technologies, covering foundational 
 concepts of computing, object-oriented programming, databases, computer networks, and web technologies. 
 Through practical exercises, students will gain experience in programming, database management, computer networking, and 
-web application development. The course also introduces emerging ICT technologies, enabling students to understand their applications and roles in 
-modern computing 
-systems.
+web application development. 
+The course also introduces emerging ICT technologies, enabling students to understand their applications and roles in 
+modern computing systems.
 
 ## Course Objectives
 
@@ -84,8 +84,17 @@ The course will cover the following topics:
 * Using a Programming Language to Interact With a Database
 * Hands-on Exercises
 
-### Module 6: Computer Networks
-* Network Basics 
+### Module 6: Web Applications, Web Services, and Basic User Interaction
+* Fundamentals of Web Applications and Web Services
+* Introduction to Node.js
+* Developing Web Applications Using HTML,CSS, JS, and Node.js
+* jQuery and Basic Form Operations for User Interaction
+* Developing RESTful APIs
+* Database Integration
+* Hands-on Exercises
+
+### Module 7: Computer Networks
+* Network Basics
 * OSI & TCP/IP Models
 * Packet Switching in the TCP/IP Protocol
 * Encapsulation of Data in the TCP/IP Model
@@ -93,15 +102,6 @@ The course will cover the following topics:
 * Client-Server Architecture
 * Network Devices & Services in a Modern Infrastructure
 * Common Networking Tools
-* Hands-on Exercises
-
-### Module 7: Web Applications, Web Services, and Basic User Interaction
-* Fundamentals of Web Applications and Web Services
-* Introduction to Node.js
-* Developing Web Applications Using HTML,CSS, JS, and Node.js
-* jQuery and Basic Form Operations for User Interaction
-* Developing RESTful APIs
-* Database Integration
 * Hands-on Exercises
 
 ### Module 8: Cutting-Edge Technologies in ICT
