@@ -44,17 +44,56 @@
 ## 1. What is Programming
 Writing instructions for a computer using programming languages to perform tasks.
 
-<img src="../resources/software-development.png" width="700" alt="Programming">
+<img src="../resources/images/what-is-programming.png" width="800" alt="Programming">
 
+
+
+1. Problems & Programs
+> Real-world problems — whether **physical** (e.g., calculating trajectories, managing inventory) or **cyber/digital** (e.g., sorting data, encrypting messages) — are solved by writing **programs** that instruct computers to perform the necessary work.
+
+2. The Problem Domain
+> The context or environment where a problem exists is called the **problem domain**. Within it, **entities** (people, objects, events, transactions) exist in specific **states**, and those states are represented as **data**.
+
+3. The Core Computing Cycle
+> To solve a problem, we:
+> 1. **Gather** data (input)
+> 2. **Process** it using an algorithm
+> 3. **Produce** the desired outcome (output)
+>
+> This is the classic **Input → Process → Output (IPO)** model.
+
+4. Algorithms
+> An **algorithm** is a finite, well-defined sequence of instructions that describes *how* to solve a problem. 
+> Algorithms operate on data — without data, there is nothing to process.
+
+5. The Speed Mismatch Problem
+> | Component | Role | Speed |
+> |---|---|---|
+> | **I/O Devices** (HDD, SSD, network, keyboard, etc.) | Provide data to the system |  **Slow** |
+> | **CPU** | Executes algorithm instructions | 🚀 **Extremely Fast** |
+>
+> The CPU can execute billions of instructions per second, but I/O devices deliver data at a fraction of that speed. 
+> If the CPU had to wait for data directly from I/O, it would sit idle most of the time — leading a **bottleneck**.
+
+6. The Role of RAM (The Bridge)
+> **Random Access Memory (RAM)** acts as a high-speed **buffer** between slow I/O and the fast CPU:
+> - Data is **loaded from I/O into RAM** (relatively fast)
+> - The **CPU reads/writes data from RAM** (very fast)
+> - Results are eventually **written back to I/O** for persistence
+>
+> This **memory hierarchy** ensures the CPU stays busy and programs run efficiently.
+ 
 
 ## 2. Software Types
 
-Before diving into how we program, it's important to understand **what** we are building. Software can be categorized into three main types:
+Software systems can be categorized into three main types:
+
+<img src="../resources/images/software-types.png" width="800" alt="Programming">
 
 ### System Software
 - **Purpose:** Manages computer hardware and provides a platform for running application software
 - **Examples:**
-    - Operating Systems (Windows, Linux, macOS, Android)
+    - Operating Systems (Linux, macOS, Windows, Android)
     - Device drivers
     - Utility programs (antivirus, disk management tools)
     - Compilers and interpreters
@@ -66,13 +105,12 @@ Before diving into how we program, it's important to understand **what** we are 
 ### Application Software
 - **Purpose:** Enables users to perform specific tasks or solve particular problems
 - **Examples:**
-    - Productivity tools (Microsoft Office, Google Docs)
+    - Productivity tools (Office Apps, Calendar, IDEs)
     - Web browsers (Chrome, Firefox, Safari)
     - Media players, games, mobile apps
     - Business applications (ERP, CRM systems)
 - **Characteristics:**
     - User-facing
-    - Task-specific
     - Built on top of system software
 
 ### Middleware
@@ -81,9 +119,8 @@ Before diving into how we program, it's important to understand **what** we are 
     - Database middleware (JDBC, ODBC)
     - Message brokers (Kafka, RabbitMQ, MQTT)
     - Web servers (Apache, Nginx)
-    - API frameworks
+    - API frameworks (Spring Boot, Node.js (with Express))
 - **Characteristics:**
-    - Enables communication and data management
     - Facilitates integration between disparate systems
     - Often invisible to end-users but critical for system functionality
 
@@ -103,7 +140,7 @@ Before diving into how we program, it's important to understand **what** we are 
 > - The focus is directly on the **problem**, and methods are developed to solve it (**control-centric** approach).
 > - If a function requires data to perform a task, the necessary data is passed as **parameters**.
 
-![](../resources/structured-programming.png "Structured Programming")
+![](../resources/images/structured-programming.png "Structured Programming")
 
 
 
@@ -114,7 +151,7 @@ Before diving into how we program, it's important to understand **what** we are 
 > - Developers focus on designing and implementing **classes**, which serve as blueprints for making (instantiating) objects.
 > - ***This way, the program's logic is distributed across all modules in a object-centric manner.***
 
-![](../resources/object-oriented-programming.png "Object Oriented Programming")
+![](../resources/images/object-oriented-programming.png "Object Oriented Programming")
 
 
 ### Structured (Procedural) Programming vs. Object-Oriented Programming (OOP)
@@ -139,7 +176,7 @@ Before diving into how we program, it's important to understand **what** we are 
 >  - **Abstraction** → hide complexity, expose only essentials.
 >- These features allow OOP systems to **adapt to change more effectively** than purely procedural systems.
 
-![](../resources/modules-interactions.png "Object Oriented Programming vs StructuredProgramming")
+![](../resources/images/sp-vs-oop.png "Object Oriented Programming vs StructuredProgramming")
 
 
 ### Functional Programming
@@ -187,6 +224,8 @@ Programming languages are classified by their level of abstraction:
 
 
 Programming languages are divided into two main classes based on their execution method:
+
+<img src="../resources/images/programming-language-classification.png" width="800">
 
 1) Compiled Languages: Need compilation before execution. (e.g., C, C++, Rust, Go)
 ~~~plain
