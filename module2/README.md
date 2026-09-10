@@ -10,9 +10,9 @@
     * [Application Software](#application-software)
     * [Middleware](#middleware)
   * [3. Programming Paradigms](#3-programming-paradigms)
-    * [Structured (Procedural) Programming](#structured-procedural-programming)
+    * [Procedural Programming (PP)](#procedural-programming-pp)
     * [Object-Oriented Programming (OOP)](#object-oriented-programming-oop)
-    * [Structured (Procedural) Programming vs. Object-Oriented Programming (OOP)](#structured-procedural-programming-vs-object-oriented-programming-oop)
+    * [Procedural Programming vs. Object-Oriented Programming (OOP)](#procedural-programming-vs-object-oriented-programming-oop)
     * [Functional Programming](#functional-programming)
   * [4. Programming Languages](#4-programming-languages-)
   * [5. Writing and running programs in Java](#5-writing-and-running-programs-in-java)
@@ -82,8 +82,7 @@ Writing instructions for a computer using programming languages to perform tasks
 > - Results are eventually **written back to I/O** for persistence
 >
 > This **memory hierarchy** ensures the CPU stays busy and programs run efficiently.
- 
-
+---
 ## 2. Software Types
 
 Software systems can be categorized into three main types:
@@ -125,63 +124,74 @@ Software systems can be categorized into three main types:
     - Often invisible to end-users but critical for system functionality
 
 
+---
 
 ## 3. Programming Paradigms
-![](../resources/programming-paradigms.png "Programming Paradigms")
+
+<img src="../resources/images/programming-paradigms.png" width="600" alt="Programming Paradigms">
 
 
-### Structured (Procedural) Programming
+### Procedural Programming (PP)
 
-> - Programs are collections of functions (methods) operating on shared data.
-> - A **function** is the smallest piece of the program.
-> - The **main function** serves as the entry point of the program.
-    >   - Execution starts in the main function.
->   - From there, related functions are called in sequence as needed.
-> - The focus is directly on the **problem**, and methods are developed to solve it (**control-centric** approach).
-> - If a function requires data to perform a task, the necessary data is passed as **parameters**.
+Procedural programming: Functions + interactions between functions
 
-![](../resources/images/structured-programming.png "Structured Programming")
+- In procedural programming, we structure the system around functions and the interactions between them.
+- A **function (methods)** is the smallest piece of the program.
+- We have data, and functions operate on that data.
+- The **main function** serves as the entry point of the program.
+  - Execution starts in the main function.
+- From there, related functions are called in sequence as needed.
+- The focus is directly on the **problem**, and methods are developed to solve it (**control-centric** approach).
+
+![](../resources/images/procedural-programming.png "Procedural Programming")
 
 
 
 ### Object-Oriented Programming (OOP)
 
-> - The fundamental building blocks in OOP are **objects**, and programs are composed of objects and their interactions.
-> - An object contains both **data** and the **methods** that operate on that data.
-> - Developers focus on designing and implementing **classes**, which serve as blueprints for making (instantiating) objects.
-> - ***This way, the program's logic is distributed across all modules in a object-centric manner.***
+OOP: Objects + interactions between objects
+
+- The fundamental building blocks in OOP are **objects**, and programs are composed of objects and their interactions.
+- An object contains both **data** and the **methods** that operate on that data.
+- Developers focus on designing and implementing **classes**, which serve as blueprints for making (instantiating) objects.
+- ***This way, the program's logic is distributed across all modules in a object-centric manner.***
 
 ![](../resources/images/object-oriented-programming.png "Object Oriented Programming")
 
 
-### Structured (Procedural) Programming vs. Object-Oriented Programming (OOP)
->
-> - In software development, ***change is inevitable, not optional.*** — requirements evolve, errors must be fixed, and new features are added.
-> - As systems grow larger, **relationships among components become more complex**, and making changes becomes difficult and error-prone.
->
-> **Structured Programming**
-> - Functions have unrestricted access to data, making it harder to control changes.
-> - When we are required to change data, it is difficult to track which functions use it, and this makes handling the change difficult.
-> - This lack of control can lead to **unexpected side effects** when modifying or extending the program.
->
-> **Object-Oriented Programming (OOP)**
-> - Provides mechanisms that make change more manageable and less risky.
-> - When we need to change data, encapsulation makes it easy to track which functions use it. Mechanisms that ensure
-    low coupling (such as abstraction in SOLID) also prevent any change requests from affecting dependent modules.
-> - Key features:
-    >  - **Access specifiers** (public, private, protected) → control how data can be accessed.
->  - **Encapsulation** → bundle data and behavior together.
->  - **Inheritance** → reuse and extend existing code.
->  - **Polymorphism** → design flexible and extensible systems.
->  - **Abstraction** → hide complexity, expose only essentials.
->- These features allow OOP systems to **adapt to change more effectively** than purely procedural systems.
+### Procedural Programming vs. Object-Oriented Programming (OOP)
+
+- In software development, ***change is inevitable, not optional.*** — requirements evolve, errors must be fixed, and new features are added.
+- As systems grow larger, **relationships among components become more complex**, and making changes becomes difficult and error-prone.
+
+**Procedural Programming**
+
+- PP separates data and logic. When data is broadly shared, multiple functions may access or modify it, making data access harder to control.
+- When shared data changes, it may be difficult to identify all the functions that depend on it and may need modification.
+- This can lead to **unexpected side effects** when modifying or extending the program.
+
+**Object-Oriented Programming (OOP)**
+
+- OOP takes a different approach. We organize the system around **objects**, where data and the behavior that manages that data are combined.
+
+- **Encapsulation** controls access to the object's data, while **abstraction** hides implementation details and exposes only what is necessary.
+
+- As a result, good OOP design (aligned with design principles) can **reduce coupling and localize changes**, making the system easier to maintain and extend.
+
+
+
+
+
+
+
+
 
 ![](../resources/images/sp-vs-oop.png "Object Oriented Programming vs StructuredProgramming")
 
 
 ### Functional Programming
 
->Functional programming is widely used to perform operations on collections and process streaming data efficiently,
+Functional programming is widely used to perform operations on collections and process streaming data efficiently,
 thanks to its immutability and support for parallelism.
 > - Programs are built using **pure functions** as the main building blocks.
 > - For the same input, a function always produces the **same output** (no side effects).
@@ -210,6 +220,11 @@ System.out.println("Result: " + result);
 // Output
 // Result: [ALICE, CHARLIE, DIANA, ETHAN]
 ~~~
+
+> Structured Programming is a discipline or technique of avoiding chaotic code jumps (like GOTO). While Procedural and 
+> OOP achieve this using explicit control-flow mechanisms, such as conditional statements (if/else, switch-case) and 
+> iterative loops (for, while, do-while), Functional Programming achieves it using pure functions, recursion, and 
+> immutability. 
 
 
 
