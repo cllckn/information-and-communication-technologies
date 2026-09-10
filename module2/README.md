@@ -128,7 +128,18 @@ Software systems can be categorized into three main types:
 
 ## 3. Programming Paradigms
 
+A programming paradigm is a style, approach, or philosophy of programming, dictating (determining) how you organize your code, 
+how you handle data, and how you control the flow of execution.
+
 <img src="../resources/images/programming-paradigms.png" width="600" alt="Programming Paradigms">
+
+
+**Imperative Programming (The "How to do")**: You give the computer a step-by-step list of instructions. You explicitly 
+control the flow of execution (using loops, if/else statements) and change the program's state along the way.
+
+**Declarative Programming (The "What to do")**: You describe the desired outcome or the logic of the computation without 
+explicitly describing the step-by-step control flow. The underlying system figures out the "how."
+
 
 
 ### Procedural Programming (PP)
