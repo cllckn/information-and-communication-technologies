@@ -149,12 +149,13 @@ For any ICT system to function effectively, the following six core elements must
 >Imagine your phone stops working. Which ICT element might be causing the problem?
 > 
 > - Cracked screen? 
-> - App crashes? → **Software**
->- No Wi-Fi? → **Networks**
->- Lost photos? → **Data**
->- I don't know how to fix it. → **People**
->- No backup plan? → **Processes**
+> - App crashes? 
+>- No Wi-Fi?
+>- Lost photos?
+>- I don't know how to fix it. 
+>- No backup plan?
 ---
+
 ## 2. Computer Hardware Components
 
 ![Computer hardware components](../resources/images/computer-hardware-components.png)
@@ -167,7 +168,7 @@ For any ICT system to function effectively, the following six core elements must
 - Performance factors:
   - **Clock speed** (GHz) → how fast it processes instructions.
   - **Cores** → multiple cores allow parallel processing.
-- Example: Intel Core i7, AMD Ryzen, M1/M2/M3 ...
+- Example: Intel Core (i5, i7, i9), AMD Ryzen, M1/M2/M3/M4/M5 ...
 
 ### Memory
 - **RAM (Random Access Memory) - Main Memory**
@@ -177,6 +178,7 @@ For any ICT system to function effectively, the following six core elements must
 - **ROM (Read Only Memory)**
   - Non-volatile (keeps data without power).
   - Stores firmware or permanent instructions.
+  - Initializes hardware and loads operating system.
 
 ### Storage (Secondary Memory)
 - **HDD (Hard Disk Drive)**
