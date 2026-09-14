@@ -302,16 +302,22 @@ software rather than hardware. It simulates a physical machine so programs can r
 ***To develop Java applications, you need to install the Java Development Kit (JDK). The JDK provides all the necessary 
 tools to write, compile, debug, and run Java programs, including the Java compiler (javac) and 
 the Java Runtime Environment (JRE).***
+
+**Code Example**
+>[HelloWorldMain.java](./hello/HelloWorldMain.java)
+
 ~~~java
 
 public class HelloWorldMain {
   // 'public' → This class is accessible from anywhere in the project.
   // In Java, if a class is declared 'public', the filename must match the class name.
   // So here, the file must be named 'HelloWorldMain.java'.
+  // Internal or helper classes are typically left package-private (no access modifier) to enforce encapsulation and
+  // hide implementation details.
 
   public static void main(String[] args) { // Entry point of the application
     // 'public' → Java applications start execution from the main method.
-    // It must be accessible to the Java runtime (so it can find and run the program).
+    // It must be accessible (public) to the Java runtime (so it can find and run the program).
     // Every Java application must include exactly one main method as the entry point.
 
     System.out.println("Hello World!");
@@ -491,7 +497,8 @@ System.out.println("n = " + n); // 15
 
 
 // Example with mixed arithmetic, modulus, parentheses, and unary operators:
-int value = 10 + 20 * 3 % 7 - (4 + 6) / 2 * -3 + ++x;
+int x=1;
+int value = 10 + 20 * 3 % 5 - (4 + 6) / 2 * -3 + ++x;
 
 ~~~
 
@@ -509,9 +516,10 @@ all classes should be placed inside a package in Java for better organization an
 * import java.util.Scanner;
   - Imports the Scanner class from the Java library. Used to read user input (e.g., from the keyboard).
 
-**Code Example**
 
-* cc.ku.ict.module2.variables.VariablesMain.java
+**Code Example**
+>[VariablesMain.java](./variables/VariablesMain.java)
+
 
 ~~~java
 package cc.ku.ict.module2.variables;
@@ -586,11 +594,10 @@ public class VariablesMain {
 
 1. Implicit Conversion (Type Promotion / Widening):
    - Done automatically by the compiler. the compiler always tries to avoid data loss.
-   - Happens when assigning a smaller type to a larger type (no data loss) or
-   when different types appear in the same expression.
+   - Happens when different types appear in the same expression.
    - Smaller type is automatically promoted to a larger type (no data loss).
    - The order of Java numeric types from smallest to largest:
-     - byte → short → int → long → float → double
+     > - byte → short → int → long → float → double
 
 2. Explicit Conversion (Narrowing / Casting)
    - Done manually by the programmer using a cast operator (type).
@@ -599,6 +606,107 @@ public class VariablesMain {
    
 **Code Example**
 >[TypeConversion.java](./typeconversion/TypeConversionDemoMain.java)
+
+
+```java
+package cc.ku.ict.module2.typeconversion;
+
+public class TypeConversionDemoMain {
+    public static void main(String[] args) {
+
+        // 1. Implicit Conversion (Type Promotion / Widening):
+        // Done automatically by the compiler. The compiler always tries to avoid data loss.
+        // Happens when different types appear in the same expression.
+        // Smaller type is automatically promoted to a larger type (no data loss).
+        // The order of Java numeric types from smallest to largest:
+        // byte → short → int → long → float → double
+        int i = 100;          // int is 32-bit
+        double d = i;         // int → double (automatic widening)
+        System.out.println("Implicit Conversion:");
+        System.out.println("i = " + i); // 100
+        System.out.println("d = " + d); // 100.0
+
+        // 2. Explicit Conversion (Narrowing / Casting)
+        // Done manually by the programmer using a cast operator (type).
+        // Required when assigning a larger type to a smaller type (possible data loss).
+        // The programmer is responsible for any potential data loss.
+        double d2 = 9.78;
+        int i2 = (int) d2;    // explicit cast double → int
+        System.out.println("\nExplicit Conversion:");
+        System.out.println("d2 = " + d2); // 9.78
+        System.out.println("i2 = " + i2); // 9 (fractional part is lost after converting to int)
+
+        // 3. Mixed Expressions and Promotion
+        // In arithmetic, byte/short/char are promoted to int before calculation.
+        byte a = 10;
+        byte b = 20;
+        // byte result = a + b; //  Compile error: a+b is promoted to int
+        int result = a + b;    //  must be stored in int
+        System.out.println("\nMixed Expression Promotion:");
+        System.out.println("result = " + result); // 30
+
+        // 4. Casting with Overflow
+        // Narrowing to a smaller type can cause overflow (value wraps around).
+        int bigNumber = 130;
+        byte smallNumber = (byte) bigNumber;  // narrowing with overflow
+        System.out.println("\nCasting with Overflow:");
+        System.out.println("big = " + bigNumber);     // 130
+        System.out.println("small = " + smallNumber); // -126 (overflow)
+
+        // 5. Numeric Literals with Suffix
+        // Suffixes define literal type: F for float, L for long, D optional for double.
+        float f = 3.14F;        // 'f' or 'F' required (otherwise 3.14 is double)
+        long l = 3000000000L;  // 'L' required (otherwise too big for int)
+        double d3 = 2.5d;       // 'd' or 'D' optional (double is default)
+        System.out.println("\nNumeric Literals with Suffix:");
+        System.out.println("f = " + f); // 3.14
+        System.out.println("l = " + l); // 10000000000
+        System.out.println("d3 = " + d3); // 2.5
+
+        // 6. Length of types
+        // The order of Java numeric types from smallest to largest: byte → short → int → long → float → double
+
+
+        // int / int → integer division first, then widened if assigned to double.
+        int num1 = 5;
+        int num2 = 2;
+        double div1 = (float)num1 / num2;      // int division → 2, then widened → 2.0
+        double div2 =  num1 / num2; // cast before division → 2.5
+        System.out.println("\nInteger Division stored in Double:");
+        System.out.println("num1 / num2 (as double) = " + div1); // 2.0
+        System.out.println("(double)num1 / num2 = " + div2);     // 2.5
+
+
+        // Mixed int and long
+        long l1 = 10L;
+        int i1 = 4;
+        long result1 = l1 + i1;              // int promoted to long → 14
+        System.out.println("\nMixed int + long:");
+        System.out.println("l1 + i1 = " + result1);
+
+        // Mixed int and float
+        float f1 = 3.5f;
+        int ii2 = 2;
+        float result2 = f1 + i2;             // int promoted to float → 5.5
+        System.out.println("\nMixed int + float:");
+        System.out.println("f1 + i2 = " + result2);
+
+        // Mixed long and double
+        double d1 = 2.5;
+        long l2 = 4L;
+        double result3 = d1 + l2;            // long promoted to double → 6.5
+        System.out.println("\nMixed long + double:");
+        System.out.println("d1 + l2 = " + result3);
+
+        // Mixed float and double
+        float f2 = 1.2f;
+        double dd2 = 3.4;
+        double result4 = f2 + dd2;            // float promoted to double → 4.6
+        System.out.println("\nMixed float + double:");
+        System.out.println("f2 + d2 = " + result4);
+    }
+}
+```
 
 
 ## 7. Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)
@@ -658,14 +766,16 @@ The program checks conditions from top to bottom. Only the first true condition 
 
 
 ### switch-case
-It is an alternative to a long chain of if-else if-else statements, 
-especially when you are checking a single variable against multiple possible constant values.
+
+Traditionally, switch replaces long if-else chains for checking a single variable against constant values. However, 
+modern Java expands this capability: use Java 21+ Record Patterns within switch expressions to elegantly destructure 
+and handle multiple variables simultaneously, and Java 16+ Records to cleanly group or return those multiple values.
 
 
 **Example: Grade categories.**
 
 ~~~java
-char grade = 'C'; // Variables in switch/case must be (byte, short, char, int, String, or enum).
+char grade = 'C'; // Traditionally, variables in switch/case must be (byte, short, char, int, String, or enum).
 
 switch (grade) {
     case 'A':
@@ -698,8 +808,14 @@ switch (grade) {
 * Instead of writing the same lines of code again and again, a loop automates the repetition (iteration).
 * Loops help us write shorter, cleaner, and more efficient programs.
 * Java has three main types of loops: `for`, `while`, `do-while`. 
-* Each loop structure is used for different scenarios, but they are interchangeable. For instance: Anything 
-that can be written with a `for` loop can also be written with a `while` or a `do-while` loop, and vice versa.
+* Each loop structure is used for different scenarios, but they are interchangeable. 
+For instance: Anything that can be done with a `for` loop can also be done with a `while` or a `do-while` loop, and vice versa.
+
+
+> ***Java has three classic loops: for, while, and do-while. Because they all belong to the C-family of languages, they 
+share this exact same foundational syntax with a massive ecosystem of other languages, including C, C++, JavaScript, 
+C#, PHP, TypeScript, Dart, Objective-C, Perl, etc.***
+
 
 * Control Statements in Loops:
     - `break` → Immediately terminates the loop, regardless of the loop condition, and transfers control to the statement following the loop.
