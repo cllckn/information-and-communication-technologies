@@ -356,7 +356,7 @@ int x = 5;
 // Operating system allocates memory for x in RAM and stores the value 5.
 ~~~
 
-<img src="../resources/images/variables.png" width="800">
+<img src="../resources/images/variables.png" >
 
 
 
