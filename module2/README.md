@@ -348,13 +348,16 @@ Write and run your first "Hello, World!" in Java
 
 ## 6. Variables, Data Types, and Operators
 
-You must define variables before using them as java is a statically typed language.
+You must define variables before using them as java is a `statically typed language`.
 
 ~~~java
 // Defining a variable.
 int x = 5;
 // Operating system allocates memory for x in RAM and stores the value 5.
 ~~~
+
+<img src="../resources/images/variables.png" width="800">
+
 
 
 ***Best Practices / Performance Tips***
@@ -367,7 +370,7 @@ int x = 5;
 
 Directly store values and are simple with defined boundaries.
 
-* As a best practice, we should select the smallest possible type that covers the expected value to improve performance 
+* As a best practice, we should select the **smallest possible type that covers the expected value** to improve performance 
 and optimize resource utilization.
 * For the exam score, we can choose byte since its range (0 to 127) covers 0-100.
 * For the world population, we can choose long since the value exceeds 8 billion.
@@ -408,32 +411,46 @@ Store references to objects and arrays, allowing for more complex data structure
     Select the smallest possible type that covers the expected value to improve performance and optimize resource utilization.  This improves readability and makes the program easier to maintain.
 
 
+> **Activity: Choose the Right Data Type**
+> * A person's age (0 to 150)?
+> * The temperature in Celsius (-50 to 50)?
+> * The number of days in a year (365 or 366)?
+> * A student's GPA (0.0 to 4.0)?
+> * Whether a user is logged in (true or false)?
+> * The letter grade for a course (A, B, C, D, or F)?
+> * A product price ($0.01 to $999.99)?
+> * The number of employees in a small company (1 to 500)?
+> * Shopping cart: like an ArrayList or Array, to allow for variable lengths? 
+> * User profile: an Object or Class, to group complex data structures together?
+
+
+
+
 ### Operators in Java
 
-| **Operator**        | **Type**             | **Syntax/Usage**           | **Description**                                        | **Example**                    |
-|---------------------|----------------------|----------------------------|--------------------------------------------------------|--------------------------------|
-| **`+`** (plus)      | Arithmetic            | `a + b`                    | Adds two values                                         | `3 + 2 // returns 5`           |
-| **`-`** (minus)     | Arithmetic            | `a - b`                    | Subtracts second operand from the first                 | `5 - 2 // returns 3`           |
-| **`*`** (multiply)  | Arithmetic            | `a * b`                    | Multiplies two values                                   | `4 * 3 // returns 12`          |
-| **`/`** (divide)    | Arithmetic            | `a / b`                    | Divides the first operand by the second                 | `10 / 2 // returns 5`          |
-| **`%`** (modulus)   | Arithmetic            | `a % b`                    | Modulus (remainder of division)                         | `10 % 3 // returns 1`          |
-| **`++`** (increment)| Increment             | `++a` or `a++`             | Increments value by 1 (pre/post increment)              | `int a = 1; ++a; // a = 2`     |
-| **`--`** (decrement)| Decrement             | `--a` or `a--`             | Decreases value by 1 (pre/post decrement)               | `int a = 2; --a; // a = 1`     |
-| **`==`** (equal)    | Comparison            | `a == b`                   | Checks if two values are equal                          | `5 == 5 // returns true`       |
-| **`!=`** (not equal)| Comparison            | `a != b`                   | Checks if two values are not equal                      | `5 != 3 // returns true`       |
-| **`>`** (greater)   | Comparison            | `a > b`                    | Checks if first operand is greater than the second      | `5 > 3 // returns true`        |
-| **`<`** (less)      | Comparison            | `a < b`                    | Checks if first operand is less than the second         | `3 < 5 // returns true`        |
-| **`>=`** (greater or equal)| Comparison     | `a >= b`                   | Checks if first operand is greater than or equal to the second | `5 >= 5 // returns true` |
-| **`<=`** (less or equal)| Comparison        | `a <= b`                   | Checks if first operand is less than or equal to the second | `3 <= 5 // returns true` |
-| **`&&`** (logical AND)| Logical (AND)       | `a && b`                   | Logical AND, returns true if both operands are true     | `true && false // returns false` |
-| **`||`** (logical OR)| Logical (OR)         | `a || b`                   | Logical OR, returns true if at least one operand is true | `true || false // returns true` |
-| **`!`** (logical NOT)| Logical (NOT)        | `!a`                       | Logical NOT, inverts the boolean value                  | `!true // returns false`       |
-| **`=`** (assignment)| Assignment            | `a = b`                    | Assigns value of right operand to left operand          | `int a = 5 // a = 5`           |
-| **`+=`** (plus equal)| Assignment            | `a += b`                   | Adds right operand to left operand and assigns the result | `a += 2 // a = a + 2`         |
-| **`-=`** (minus equal)| Assignment           | `a -= b`                   | Subtracts right operand from left operand and assigns the result | `a -= 2 // a = a - 2`         |
-| **`*=`** (multiply equal)| Assignment        | `a *= b`                   | Multiplies and assigns the result                       | `a *= 3 // a = a * 3`          |
-| **`/=`** (divide equal)| Assignment          | `a /= b`                   | Divides and assigns the result                          | `a /= 2 // a = a / 2`          |
-| **`%=`** (modulus equal)| Assignment         | `a %= b`                   | Modulus and assigns the result                          | `a %= 3 // a = a % 3`          |
+| **Operator**     | **Type**             | **Syntax/Usage** | **Description**                                                 | **Example**                     |
+|------------------|----------------------|------------------|-----------------------------------------------------------------|---------------------------------|
+| **`+`** (plus)   | Arithmetic            | `a + b`          | Adds two values                                                 | `3 + 2 // returns 5`            |
+| **`-`** (minus)  | Arithmetic            | `a - b`          | Subtracts second operand from the first                         | `5 - 2 // returns 3`            |
+| **`*`** (multiply) | Arithmetic            | `a * b`          | Multiplies two values                                           | `4 * 3 // returns 12`           |
+| **`/`** (divide) | Arithmetic            | `a / b`          | Divides the first operand by the second                         | `10 / 2 // returns 5`           |
+| **`%`** (modulus) | Arithmetic            | `a % b`          | Modulus (remainder of division)                                 | `10 % 3 // returns 1`           |
+| **`++`** (increment)| Increment             | `++a` or `a++`   | Increments value by 1 (pre/post increment)                      | `int a = 1; ++a; // a = 2`      |
+| **`--`** (decrement)| Decrement             | `--a` or `a--`   | Decreases value by 1 (pre/post decrement)                       | `int a = 2; --a; // a = 1`      |
+| **`==`** (equal) | Comparison            | `a == b`         | Checks if two values are equal                                  | `5 == 5 // returns true`        |
+| **`!=`** (not equal)| Comparison            | `a != b`         | Checks if two values are not equal                              | `5 != 3 // returns true`        |
+| **`>`** (greater) | Comparison            | `a > b`          | Checks if first operand is greater than the second              | `5 > 3 // returns true`         |
+| **`<`** (less)   | Comparison            | `a < b`          | Checks if first operand is less than the second                 | `3 < 5 // returns true`         |
+| **`>=`** (greater or equal)| Comparison     | `a >= b`         | Checks if first operand is greater than or equal to the second  | `5 >= 5 // returns true`        |
+| **`<=`** (less or equal)| Comparison        | `a <= b`         | Checks if first operand is less than or equal to the second     | `3 <= 5 // returns true`        |
+| **`&&`** (logical AND)| Logical (AND)       | `a && b`         | Logical AND, returns true if both operands are true             | `true && false // returns false` |
+| `\|\|` (logical OR) | Logical (OR) | `a \|\| b` | Logical OR, returns true if at least one operand is true | `true \|\| false // returns true` || **`!`** (logical NOT)| Logical (NOT)        | `!a`             | Logical NOT, inverts the boolean value                          | `!true // returns false`        |
+| **`=`** (assignment)| Assignment            | `a = b`          | Assigns value of right operand to left operand                  | `int a = 5 // a = 5`            |
+| **`+=`** (plus equal)| Assignment            | `a += b`         | Adds right operand to left operand and assigns the result       | `a += 2 // a = a + 2`           |
+| **`-=`** (minus equal)| Assignment           | `a -= b`         | Subtracts right operand from left operand and assigns the result | `a -= 2 // a = a - 2`           |
+| **`*=`** (multiply equal)| Assignment        | `a *= b`         | Multiplies and assigns the result                               | `a *= 3 // a = a * 3`           |
+| **`/=`** (divide equal)| Assignment          | `a /= b`         | Divides and assigns the result                                  | `a /= 2 // a = a / 2`           |
+| **`%=`** (modulus equal)| Assignment         | `a %= b`         | Modulus and assigns the result                                  | `a %= 3 // a = a % 3`           |
 
 
 ### Operator Precedence in Java
@@ -454,7 +471,7 @@ Operator precedence determines the order in which operators are evaluated in an 
 | **5**          | `<` `<=` `>` `>=`         | Comparison (less, greater)    | Left to right    | `a > b`, `a <= b`         |
 | **6**          | `==` `!=`                 | Equality / Inequality         | Left to right    | `a == b`, `a != b`        |
 | **7**          | `&&`                      | Logical AND                   | Left to right    | `a && b`                  |
-| **8**          | `||`                      | Logical OR                    | Left to right    | `a || b`                  |
+| **8** | `\|\|` | Logical OR | Left to right | `a \|\| b` |
 | **9**          | `=` `+=` `-=` `*=` `/=` `%=` | Assignment                | Right to left    | `a = 5`, `a += 2`         |
 
 
@@ -603,6 +620,13 @@ public class VariablesMain {
    - Done manually by the programmer using a cast operator (type).
    - Required when assigning a larger type to a smaller type (possible data loss).
    - The programmer is responsible for any potential data loss.
+
+**Default Java Numeric Literal Types and Type Suffixes**
+
+| Literal Type | Example | Default Data Type | Suffix Needed for Other Types |
+|---|---|---|---|
+| Whole Numbers | `10`, `-500` | `int` | Add `L` or `l` for `long` (`10L`) |
+| Decimal Numbers | `3.14`, `-0.01` | `double` | Add `F` or `f` for `float` (`3.14f`) |
    
 **Code Example**
 >[TypeConversion.java](./typeconversion/TypeConversionDemoMain.java)
@@ -612,99 +636,98 @@ public class VariablesMain {
 package cc.ku.ict.module2.typeconversion;
 
 public class TypeConversionDemoMain {
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        // 1. Implicit Conversion (Type Promotion / Widening):
-        // Done automatically by the compiler. The compiler always tries to avoid data loss.
-        // Happens when different types appear in the same expression.
-        // Smaller type is automatically promoted to a larger type (no data loss).
-        // The order of Java numeric types from smallest to largest:
-        // byte → short → int → long → float → double
-        int i = 100;          // int is 32-bit
-        double d = i;         // int → double (automatic widening)
-        System.out.println("Implicit Conversion:");
-        System.out.println("i = " + i); // 100
-        System.out.println("d = " + d); // 100.0
+    // 1. Implicit Conversion (Type Promotion / Widening):
+    // Done automatically by the compiler. The compiler always tries to avoid data loss.
+    // Happens when different types appear in the same expression.
+    // Smaller type is automatically promoted to a larger type (no data loss).
+    // The order of Java numeric types from smallest to largest:
+    // byte → short → int → long → float → double
+    int i = 100;          // int is 32-bit
+    double d = i;         // int → double (automatic widening)
+    System.out.println("Implicit Conversion:");
+    System.out.println("i = " + i); // 100
+    System.out.println("d = " + d); // 100.0
 
-        // 2. Explicit Conversion (Narrowing / Casting)
-        // Done manually by the programmer using a cast operator (type).
-        // Required when assigning a larger type to a smaller type (possible data loss).
-        // The programmer is responsible for any potential data loss.
-        double d2 = 9.78;
-        int i2 = (int) d2;    // explicit cast double → int
-        System.out.println("\nExplicit Conversion:");
-        System.out.println("d2 = " + d2); // 9.78
-        System.out.println("i2 = " + i2); // 9 (fractional part is lost after converting to int)
+    // 2. Explicit Conversion (Narrowing / Casting)
+    // Done manually by the programmer using a cast operator (type).
+    // Required when assigning a larger type to a smaller type (possible data loss).
+    // The programmer is responsible for any potential data loss.
+    double d2 = 9.78;
+    int i2 = (int) d2;    // explicit cast double → int
+    System.out.println("\nExplicit Conversion:");
+    System.out.println("d2 = " + d2); // 9.78
+    System.out.println("i2 = " + i2); // 9 (fractional part is lost after converting to int)
 
-        // 3. Mixed Expressions and Promotion
-        // In arithmetic, byte/short/char are promoted to int before calculation.
-        byte a = 10;
-        byte b = 20;
-        // byte result = a + b; //  Compile error: a+b is promoted to int
-        int result = a + b;    //  must be stored in int
-        System.out.println("\nMixed Expression Promotion:");
-        System.out.println("result = " + result); // 30
+    // 3. Mixed Expressions and Promotion
+    // In arithmetic, byte/short/char are promoted to int before calculation.
+    byte a = 10;
+    byte b = 20;
+    // byte result = a + b; //  Compile error: a+b is promoted to int
+    int result = a + b;    //  must be stored in int
+    System.out.println("\nMixed Expression Promotion:");
+    System.out.println("result = " + result); // 30
 
-        // 4. Casting with Overflow
-        // Narrowing to a smaller type can cause overflow (value wraps around).
-        int bigNumber = 130;
-        byte smallNumber = (byte) bigNumber;  // narrowing with overflow
-        System.out.println("\nCasting with Overflow:");
-        System.out.println("big = " + bigNumber);     // 130
-        System.out.println("small = " + smallNumber); // -126 (overflow)
+    // 4. Casting with Overflow
+    // Narrowing to a smaller type can cause overflow (value wraps around).
+    int bigNumber = 130;
+    byte smallNumber = (byte) bigNumber;  // narrowing with overflow
+    System.out.println("\nCasting with Overflow:");
+    System.out.println("big = " + bigNumber);     // 130
+    System.out.println("small = " + smallNumber); // -126 (overflow)
 
-        // 5. Numeric Literals with Suffix
-        // Suffixes define literal type: F for float, L for long, D optional for double.
-        float f = 3.14F;        // 'f' or 'F' required (otherwise 3.14 is double)
-        long l = 3000000000L;  // 'L' required (otherwise too big for int)
-        double d3 = 2.5d;       // 'd' or 'D' optional (double is default)
-        System.out.println("\nNumeric Literals with Suffix:");
-        System.out.println("f = " + f); // 3.14
-        System.out.println("l = " + l); // 10000000000
-        System.out.println("d3 = " + d3); // 2.5
-
-        // 6. Length of types
-        // The order of Java numeric types from smallest to largest: byte → short → int → long → float → double
+    // 5. Numeric Literals with Suffix
+    // Suffixes define literal type: F for float, L for long, D optional for double.
+    float f = 3.14F;        // 'f' or 'F' required (otherwise 3.14 is double)
+    long l = 3000000000L;  // 'L' required (otherwise too big for int)
+    double d3 = 2.5d;       // 'd' or 'D' optional (double is default)
+    System.out.println("\nNumeric Literals with Suffix:");
+    System.out.println("f = " + f); // 3.14
+    System.out.println("l = " + l); // 10000000000
+    System.out.println("d3 = " + d3); // 2.5
 
 
-        // int / int → integer division first, then widened if assigned to double.
-        int num1 = 5;
-        int num2 = 2;
-        double div1 = (float)num1 / num2;      // int division → 2, then widened → 2.0
-        double div2 =  num1 / num2; // cast before division → 2.5
-        System.out.println("\nInteger Division stored in Double:");
-        System.out.println("num1 / num2 (as double) = " + div1); // 2.0
-        System.out.println("(double)num1 / num2 = " + div2);     // 2.5
+    // Mixed Expressions
+    int num1 = 5;
+    int num2 = 2;
+
+    double div1 = (float) num1 / num2; // cast before division -> 2.5
+    double div2 = num1 / num2;        // int division -> 2, then widened -> 2.0
+
+    System.out.println("\nInteger Division stored in Double:");
+    System.out.println("(float)num1 / num2 = " + div1); // 2.5
+    System.out.println("num1 / num2 (as double) = " + div2); // 2.0
 
 
-        // Mixed int and long
-        long l1 = 10L;
-        int i1 = 4;
-        long result1 = l1 + i1;              // int promoted to long → 14
-        System.out.println("\nMixed int + long:");
-        System.out.println("l1 + i1 = " + result1);
+    // Mixed int and long
+    long l1 = 10L;
+    int i1 = 4;
+    long result1 = l1 + i1;              // int promoted to long -> 14L
+    System.out.println("\nMixed int + long:");
+    System.out.println("l1 + i1 = " + result1);
 
-        // Mixed int and float
-        float f1 = 3.5f;
-        int ii2 = 2;
-        float result2 = f1 + i2;             // int promoted to float → 5.5
-        System.out.println("\nMixed int + float:");
-        System.out.println("f1 + i2 = " + result2);
+    // Mixed int and float
+    float f1 = 3.5f;
+    int ii2 = 2;                          // fixed variable name to match usage
+    float result2 = f1 + ii2;             // int promoted to float -> 5.5f
+    System.out.println("\nMixed int + float:");
+    System.out.println("f1 + ii2 = " + result2);
 
-        // Mixed long and double
-        double d1 = 2.5;
-        long l2 = 4L;
-        double result3 = d1 + l2;            // long promoted to double → 6.5
-        System.out.println("\nMixed long + double:");
-        System.out.println("d1 + l2 = " + result3);
+    // Mixed long and double
+    double d1 = 2.5;
+    long l2 = 4L;
+    double result3 = d1 + l2;            // long promoted to double -> 6.5
+    System.out.println("\nMixed long + double:");
+    System.out.println("d1 + l2 = " + result3);
 
-        // Mixed float and double
-        float f2 = 1.2f;
-        double dd2 = 3.4;
-        double result4 = f2 + dd2;            // float promoted to double → 4.6
-        System.out.println("\nMixed float + double:");
-        System.out.println("f2 + d2 = " + result4);
-    }
+    // Mixed float and double
+    float f2 = 1.2f;
+    double dd2 = 3.4;                     // fixed variable name to match usage
+    double result4 = f2 + dd2;            // float promoted to double -> 4.6
+    System.out.println("\nMixed float + double:");
+    System.out.println("f2 + dd2 = " + result4);
+  }
 }
 ```
 
@@ -716,8 +739,8 @@ public class TypeConversionDemoMain {
 The `if/else` statement is used when we want to make a decision between two options.
 
 * Example: Decide whether a student passed or failed.
-- If the grade is **50 or higher** → print **"Pass"**.
-- Otherwise → print **"Fail"**.
+  - If the grade is **50 or higher** → print **"Pass"**.
+  - Otherwise → print **"Fail"**.
 
 
 ~~~java
@@ -730,13 +753,7 @@ if (grade >= 50) {
 }
 
 ~~~
-
-***Best Practices / Performance Tips***
-
-    Place the likely(most probable) case in the if block and the unlikely case in the else block.
-      This allows the branch predictor to work more efficiently and reduces costly mispredictions.
-      In the example above,  `grade >= 50` is placed in the if condition since it is the more common case.    
-       
+ 
 
 ### Nested if / else
 
@@ -809,7 +826,7 @@ switch (grade) {
 * Loops help us write shorter, cleaner, and more efficient programs.
 * Java has three main types of loops: `for`, `while`, `do-while`. 
 * Each loop structure is used for different scenarios, but they are interchangeable. 
-For instance: Anything that can be done with a `for` loop can also be done with a `while` or a `do-while` loop, and vice versa.
+  * Anything that can be done with a `for` loop can also be done with a `while` or a `do-while` loop, and vice versa.
 
 
 > ***Java has three classic loops: for, while, and do-while. Because they all belong to the C-family of languages, they 
@@ -823,7 +840,11 @@ C#, PHP, TypeScript, Dart, Objective-C, Perl, etc.***
   
 
 ***A common principle in science and engineering education: focus on understanding rather than memorization—learn 
-the underlying principles, not just formulas.***
+the underlying principles, not just formulas.
+In programming, as in science and engineering, memorizing syntax is not enough. You must understand the underlying 
+mechanisms —how the CPU evaluates conditions, how loops actually execute, and why certain programming patterns exist. 
+Memorization gives you the ability to write code; understanding gives you the ability to debug, optimize, and transfer 
+that knowledge across languages.***
 
 
 
@@ -851,7 +872,7 @@ for (int i = 1; i <= 10; i++) {
 // Lifecycle of a for loop:
 // Step 1 → Initialization runs once at the start.
 // Step 2 → Condition is checked. If true, the loop body executes, otherwise loop statement is terminated.
-// Step 3 → Loop body runs (repeated code block).
+// Step 3 → Loop body (repeated code block) runs.
 // Step 4 → Update is applied to the control variable.
 // Step 5 → Go back to Step 2 and repeat until condition is false.
 
