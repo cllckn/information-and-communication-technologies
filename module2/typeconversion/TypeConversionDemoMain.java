@@ -4,9 +4,8 @@ public class TypeConversionDemoMain {
     public static void main(String[] args) {
 
         // 1. Implicit Conversion (Type Promotion / Widening):
-        // Done automatically by the compiler. the compiler always tries to avoid data loss.
-        // Happens when assigning a smaller type to a larger type (no data loss) or
-        // when different types appear in the same expression.
+        // Done automatically by the compiler. The compiler always tries to avoid data loss.
+        // Happens when different types appear in the same expression.
         // Smaller type is automatically promoted to a larger type (no data loss).
         // The order of Java numeric types from smallest to largest:
         // byte → short → int → long → float → double
@@ -37,11 +36,11 @@ public class TypeConversionDemoMain {
 
         // 4. Casting with Overflow
         // Narrowing to a smaller type can cause overflow (value wraps around).
-        int big = 130;
-        byte small = (byte) big;  // narrowing with overflow
+        int bigNumber = 130;
+        byte smallNumber = (byte) bigNumber;  // narrowing with overflow
         System.out.println("\nCasting with Overflow:");
-        System.out.println("big = " + big);     // 130
-        System.out.println("small = " + small); // -126 (overflow)
+        System.out.println("big = " + bigNumber);     // 130
+        System.out.println("small = " + smallNumber); // -126 (overflow)
 
         // 5. Numeric Literals with Suffix
         // Suffixes define literal type: F for float, L for long, D optional for double.
@@ -53,46 +52,45 @@ public class TypeConversionDemoMain {
         System.out.println("l = " + l); // 10000000000
         System.out.println("d3 = " + d3); // 2.5
 
-        // 6. Length of types
-        // The order of Java numeric types from smallest to largest: byte → short → int → long → float → double
 
-
-        // int / int → integer division first, then widened if assigned to double.
+        // Mixed Expressions
         int num1 = 5;
         int num2 = 2;
-        double div1 = (float)num1 / num2;      // int division → 2, then widened → 2.0
-        double div2 =  num1 / num2; // cast before division → 2.5
+
+        double div1 = (float) num1 / num2; // cast before division -> 2.5
+        double div2 = num1 / num2;        // int division -> 2, then widened -> 2.0
+
         System.out.println("\nInteger Division stored in Double:");
-        System.out.println("num1 / num2 (as double) = " + div1); // 2.0
-        System.out.println("(double)num1 / num2 = " + div2);     // 2.5
+        System.out.println("(float)num1 / num2 = " + div1); // 2.5
+        System.out.println("num1 / num2 (as double) = " + div2); // 2.0
 
 
         // Mixed int and long
         long l1 = 10L;
         int i1 = 4;
-        long result1 = l1 + i1;              // int promoted to long → 14
+        long result1 = l1 + i1;              // int promoted to long -> 14L
         System.out.println("\nMixed int + long:");
         System.out.println("l1 + i1 = " + result1);
 
         // Mixed int and float
         float f1 = 3.5f;
-        int ii2 = 2;
-        float result2 = f1 + i2;             // int promoted to float → 5.5
+        int ii2 = 2;                          // fixed variable name to match usage
+        float result2 = f1 + ii2;             // int promoted to float -> 5.5f
         System.out.println("\nMixed int + float:");
-        System.out.println("f1 + i2 = " + result2);
+        System.out.println("f1 + ii2 = " + result2);
 
         // Mixed long and double
         double d1 = 2.5;
         long l2 = 4L;
-        double result3 = d1 + l2;            // long promoted to double → 6.5
+        double result3 = d1 + l2;            // long promoted to double -> 6.5
         System.out.println("\nMixed long + double:");
         System.out.println("d1 + l2 = " + result3);
 
         // Mixed float and double
         float f2 = 1.2f;
-        double dd2 = 3.4;
-        double result4 = f2 + dd2;            // float promoted to double → 4.6
+        double dd2 = 3.4;                     // fixed variable name to match usage
+        double result4 = f2 + dd2;            // float promoted to double -> 4.6
         System.out.println("\nMixed float + double:");
-        System.out.println("f2 + d2 = " + result4);
+        System.out.println("f2 + dd2 = " + result4);
     }
 }
