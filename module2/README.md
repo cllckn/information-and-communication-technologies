@@ -375,20 +375,20 @@ and optimize resource utilization.
 * For the exam score, we can choose byte since its range (0 to 127) covers 0-100.
 * For the world population, we can choose long since the value exceeds 8 billion.
 
-| **Variable Type**    | **Description**                          | **Example**              | **Range**                |
-|----------------------|------------------------------------------|--------------------------|--------------------------|
-| **Integer Types**    | Stores whole numbers.                    |                          |                          |
-| - `int`              | 32-bits signed integer.                  | `int age = 30;`          | -2,147,483,648 to 2,147,483,647 |
-| - `byte`             | 8-bits signed integer.                   | `byte b = 127;`          | -128 to 127              |
-| - `short`            | 16-bits signed integer.                  | `short s = 1000;`        | -32,768 to 32,767        |
-| - `long`             | 64-bits signed integer.                  | `long l = 100000L;`      | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 |
-| **Floating-Point Types** | Stores numbers with decimal points.      | `float`, `double`        |                          |
-| - `float`            | Single-precision 32-bits floating point. | `float f = 3.14f;`       | Approx. ±3.40282347E+38 (7 decimal digits) |
-| - `double`           | Double-precision 64-bits floating point. | `double d = 3.14159;`    | Approx. ±1.79769313486231570E+308 (15 decimal digits) |
-| **Character Type**   | Stores single characters.                | `char`                   |                          |
-| - `char`             | 16-bits Unicode character.               | `char c = 'A';`          | 0 to 65,535              |
-| **Boolean Type**     | Stores true or false values.             | `boolean`                |                          |
-| - `boolean`          | Represents true or false.                | `boolean isValid = true;`| `true` or `false`        |
+| **Variable Type**    | **Description**                          | **Example**              | **Range**                                                                                                |
+|----------------------|------------------------------------------|--------------------------|----------------------------------------------------------------------------------------------------------|
+| **Integer Types**    | Stores whole numbers.                    |                          |                                                                                                          |
+| - `int`              | 32-bits signed integer.                  | `int age = 30;`          | -2,147,483,648 to 2,147,483,647                                                                          |
+| - `byte`             | 8-bits signed integer.                   | `byte b = 127;`          | -128 to 127                                                                                              |
+| - `short`            | 16-bits signed integer.                  | `short s = 1000;`        | -32,768 to 32,767                                                                                        |
+| - `long`             | 64-bits signed integer.                  | `long l = 100000L;`      | -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807                                                  |
+| **Floating-Point Types** | Stores numbers with decimal points.      | `float`, `double`        |                                                                                                          |
+| - `float`            | Single-precision 32-bits floating point. | `float f = 3.14f;`       | Approx. ±3.40282347E+38 (6–7 significant decimal digits(whole + fractional parts combined))              |
+| - `double`           | Double-precision 64-bits floating point. | `double d = 3.14159;`    | Approx. ±1.79769313486231570E+308 (15–17 significant decimal digits (whole + fractional parts combined)) |
+| **Character Type**   | Stores single characters.                | `char`                   |                                                                                                          |
+| - `char`             | 16-bits Unicode character.               | `char c = 'A';`          | 0 to 65,535                                                                                              |
+| **Boolean Type**     | Stores true or false values.             | `boolean`                |                                                                                                          |
+| - `boolean`          | Represents true or false.                | `boolean isValid = true;`| `true` or `false`                                                                                        |
 
 ### Reference Types
 
@@ -515,7 +515,39 @@ System.out.println("n = " + n); // 15
 
 // Example with mixed arithmetic, modulus, parentheses, and unary operators:
 int x=1;
-int value = 10 + 20 * 3 % 5 - (4 + 6) / 2 * -3 + ++x;
+int value = 10 + 20 * 3 % 5 - (4 + 6) / 2 * -3 + ++x; // x = 2    value = 27
+// Step 1: Parentheses () have the highest precedence.
+// Evaluate (4 + 6) -> 10
+// Expression becomes: 10 + 20 * 3 % 5 - 10 / 2 * -3 + ++x
+
+// Step 2: Unary operators (++, --, +, -) are evaluated next (Right to Left).
+// Evaluate ++x: x was 1, it increments to 2, and the expression uses the new value (2).
+// The unary minus on 3 (-3) is just the negative number -3.
+// Expression becomes: 10 + 20 * 3 % 5 - 10 / 2 * -3 + 2
+
+// Step 3: Multiplication (*), Division (/), and Modulus (%) (Left to Right).
+// 3a. Evaluate 20 * 3 -> 60
+//     Expression becomes: 10 + 60 % 5 - 10 / 2 * -3 + 2
+// 3b. Evaluate 60 % 5 -> 0  (60 divided by 5 has a remainder of 0)
+//     Expression becomes: 10 + 0 - 10 / 2 * -3 + 2
+// 3c. Evaluate 10 / 2 -> 5
+//     Expression becomes: 10 + 0 - 5 * -3 + 2
+// 3d. Evaluate 5 * -3 -> -15
+//     Expression becomes: 10 + 0 - (-15) + 2
+
+// Step 4: Addition (+) and Subtraction (-) (Left to Right).
+// 4a. Evaluate 10 + 0 -> 10
+//     Expression becomes: 10 - (-15) + 2  (which is 10 + 15 + 2)
+// 4b. Evaluate 10 + 15 -> 25
+//     Expression becomes: 25 + 2
+// 4c. Evaluate 25 + 2 -> 27
+
+// Step 5: Assignment (=) happens last (Right to Left).
+// Assign the final result (27) to the variable 'value'.
+
+// Final State:
+// x = 2
+// value = 27
 
 ~~~
 
@@ -525,13 +557,18 @@ int value = 10 + 20 * 3 % 5 - (4 + 6) / 2 * -3 + ++x;
 Package structure makes large software systems more manageable, modular, and maintainable. As a best practice, 
 all classes should be placed inside a package in Java for better organization and to avoid name conflicts.
 
-* package cc.ku.ict.module2.variables;
-  - Declares the package (namespace) where this class belongs.
-  - Helps organize code and avoid class name conflicts.
+* Defining a Java package
+  * `package cc.ku.ict.module2.variables;`
+  * Declares the package (namespace) where this class belongs.
+  * Helps organize code and avoid class name conflicts.
 
 
-* import java.util.Scanner;
-  - Imports the Scanner class from the Java library. Used to read user input (e.g., from the keyboard).
+
+
+* Including a package
+  * `import java.util.Scanner;`
+  * Imports the Scanner class from the Java library. 
+  Used to read user input (e.g., from the keyboard).
 
 
 **Code Example**
@@ -539,16 +576,14 @@ all classes should be placed inside a package in Java for better organization an
 
 
 ~~~java
-package cc.ku.ict.module2.variables;
-// Declares the package (namespace) where this class belongs.
+package cc.ku.ict.module2.variables; // Define the package (namespace) where this class belongs.
 // Helps organize code and avoid class name conflicts.
 
 import java.text.DecimalFormat;
 // Imports the DecimalFormat class from the Java library.
 // Used for formatting numbers (e.g., rounding or custom number formats).
 
-import java.util.Scanner;
-// Imports the Scanner class from the Java library.
+import java.util.Scanner; // Imports the Scanner class from the Java library.
 // Used to read user input (e.g., from the keyboard).
 
 public class VariablesMain {
@@ -559,7 +594,7 @@ public class VariablesMain {
     // You must define variables before using them as java is a statically typed language
     // Operating system allocates memory for x in RAM and stores the value 5.
     int x = 5;
-    System.out.println("Value of x var is:"+x);
+    System.out.println("Value of x var is:" + x);
 
     // Operator Precedence
     // x + 2 is calculated first since + has higher precedence than =,
@@ -600,6 +635,9 @@ public class VariablesMain {
 
 ~~~
 
+***In Java, numeric literals are written directly, string literals are placed between double quotes, and character literals 
+are placed between single quotes.***
+
 
 ***
 ## [Hands-on Exercise 2](./exercises/README.md)
@@ -609,10 +647,13 @@ public class VariablesMain {
 
 ### Type Conversion
 
+Type conversion is the process of changing a value from one data type to another during operations, 
+assignments, or method calls.
+
 1. Implicit Conversion (Type Promotion / Widening):
-   - Done automatically by the compiler. the compiler always tries to avoid data loss.
+   - Done automatically by the compiler to avoid data loss.
    - Happens when different types appear in the same expression.
-   - Smaller type is automatically promoted to a larger type (no data loss).
+   - A value of a narrower type is automatically promoted to a wider type.
    - The order of Java numeric types from smallest to largest:
      > - byte → short → int → long → float → double
 
@@ -626,7 +667,7 @@ public class VariablesMain {
 | Literal Type | Example | Default Data Type | Suffix Needed for Other Types |
 |---|---|---|---|
 | Whole Numbers | `10`, `-500` | `int` | Add `L` or `l` for `long` (`10L`) |
-| Decimal Numbers | `3.14`, `-0.01` | `double` | Add `F` or `f` for `float` (`3.14f`) |
+| Floating-Point Numbers | `3.14`, `-0.01` | `double` | Add `F` or `f` for `float` (`3.14f`) |
    
 **Code Example**
 >[TypeConversion.java](./typeconversion/TypeConversionDemoMain.java)
@@ -641,9 +682,10 @@ public class TypeConversionDemoMain {
     // 1. Implicit Conversion (Type Promotion / Widening):
     // Done automatically by the compiler. The compiler always tries to avoid data loss.
     // Happens when different types appear in the same expression.
-    // Smaller type is automatically promoted to a larger type (no data loss).
+    // A value of a narrower type is automatically promoted to a wider type.
     // The order of Java numeric types from smallest to largest:
     // byte → short → int → long → float → double
+    
     int i = 100;          // int is 32-bit
     double d = i;         // int → double (automatic widening)
     System.out.println("Implicit Conversion:");
@@ -723,7 +765,7 @@ public class TypeConversionDemoMain {
 
     // Mixed float and double
     float f2 = 1.2f;
-    double dd2 = 3.4;                     // fixed variable name to match usage
+    double dd2 = 3.4;                     
     double result4 = f2 + dd2;            // float promoted to double -> 4.6
     System.out.println("\nMixed float + double:");
     System.out.println("f2 + dd2 = " + result4);
@@ -736,6 +778,11 @@ public class TypeConversionDemoMain {
 
 
 ### if / else
+
+In an `if/else` statement, we have a **conditional test**. The condition is evaluated. If it is **true**, 
+the statement or block after `if` is executed. Otherwise, the `else` block is executed.
+
+
 The `if/else` statement is used when we want to make a decision between two options.
 
 * Example: Decide whether a student passed or failed.
@@ -784,9 +831,11 @@ The program checks conditions from top to bottom. Only the first true condition 
 
 ### switch-case
 
-Traditionally, switch replaces long if-else chains for checking a single variable against constant values. However, 
+Traditionally, switch replaces long if-else chains for checking a single variable against constant values. 
+
+***However, 
 modern Java expands this capability: use Java 21+ Record Patterns within switch expressions to elegantly destructure 
-and handle multiple variables simultaneously, and Java 16+ Records to cleanly group or return those multiple values.
+and handle multiple variables simultaneously, and Java 16+ Records to cleanly group or return those multiple values.***
 
 
 **Example: Grade categories.**
@@ -829,15 +878,23 @@ switch (grade) {
   * Anything that can be done with a `for` loop can also be done with a `while` or a `do-while` loop, and vice versa.
 
 
+* A loop repeatedly executes a block of code as long as a specified condition remains true.
+
+* During each iteration, the condition is evaluated. If it is true, the loop body is executed, and the process repeats. 
+If the condition becomes false, the loop terminates, and the program continues with the code following the loop.
+
+* Control statements such as `break` and `continue` can also be used to control the loop flow. `break` exits the loop 
+immediately, while `continue` skips the remaining code in the current iteration and moves to the next iteration.
+
+* This mechanism allows loops to efficiently handle repetitive tasks while providing flexibility in controlling their 
+execution.
+
+
 > ***Java has three classic loops: for, while, and do-while. Because they all belong to the C-family of languages, they 
 share this exact same foundational syntax with a massive ecosystem of other languages, including C, C++, JavaScript, 
 C#, PHP, TypeScript, Dart, Objective-C, Perl, etc.***
 
-
-* Control Statements in Loops:
-    - `break` → Immediately terminates the loop, regardless of the loop condition, and transfers control to the statement following the loop.
-    - `continue` → Skips the current iteration and moves to the next one without exiting the loop entirely.
-  
+ 
 
 ***A common principle in science and engineering education: focus on understanding rather than memorization—learn 
 the underlying principles, not just formulas.
@@ -993,8 +1050,9 @@ System.out.println("Updated value at index 3: " + numbers[3]); // Output: 60
 numbers[3] = 40;
 
 // Loops are a fundamental tool for processing every item within a collection, also known as traversing.
+// Iterating over every element in an array or collection is called traversing.
 
-System.out.println("\nTraversing the array using a for loop:");
+        System.out.println("\nTraversing the array using a for loop:");
 
 for (int i = 0; i < numbers.length; i++) {
         System.out.println("Element at index " + i + ": " + numbers[i]);
@@ -1003,7 +1061,7 @@ for (int i = 0; i < numbers.length; i++) {
 // The condition 'i < numbers.length' ensures the loop runs for every element.
 
 // for-each loop - cleaner than for loop 
-//  Better for iterating over every element in an array or collection when you don't need the index.
+//  Better for iterating through an array or collection when you don't need the index.
 for (int number : numbers) {
         System.out.println(number);
 }
@@ -1014,19 +1072,27 @@ for (int number : numbers) {
 
 ## 9. Functions (Methods): Declaration, parameters, return values, overloading
 
-In Java, functions are called methods. They are blocks of code that perform a specific task and are reusable, which 
-helps to organize a program and avoid code repetition.
+In Java, functions are called **methods**. 
 
-Defining a method is a two-part process that involves declaring the method and providing its body.
+A method is a block of code that performs a specific task. 
 
-- **Declaring a method**  
-  This means defining its structure, including:
-  - The method name
-  - The return type (the type of data it will give back)
-  - The parameter list (the data it needs to receive)
+Methods are reusable, which helps organize a program and avoid code repetition.
 
-- **Method body**  
-  The block of code inside the method where the actual work is done.
+Defining a method involves two main parts: **the method declaration** and **the method body**.
+
+* **Method declaration**
+  This defines the method's structure, including:
+
+  * Access modifier (public, private, protected) — who can call it
+  * `static` keyword (optional) — whether it belongs to the class or an instance
+  * The **return type** — the type of value the method returns
+  * The **method name**
+  * The **parameter list** — the input data the method can receive
+
+* **Method body**
+  This is the block of code inside the method where the actual work is performed.
+
+
 
 ~~~java
 // Method to add two integers
