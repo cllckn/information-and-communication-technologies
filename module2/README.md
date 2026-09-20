@@ -263,44 +263,14 @@ Programming languages are divided into two main classes based on their execution
 
 <img src="../resources/images/programming-language-classification.png" width="800">
 
-1) Compiled Languages: Need compilation before execution. (e.g., C, C++, Rust, Go)
 
-~~~plain
-Source Code  ──► Compiler ──► Machine Code (Executable) ──► CPU executes
-~~~
-
-2) Interpreted Languages: Executed line by line. (e.g., Python, JavaScript, PHP, Ruby)
-
-~~~plain
-Source Code ──► Interpreter ──► CPU executes line by line
-~~~
-
-3) Hybrid Approach:  Compilation + Interpretation (e.g., Java, C#, Python (with PyPy) )
-
-~~~plain
-Source Code (.java)
-│
-▼
-Java Compiler (javac)
-│
-▼
-Bytecode (.class files)
-│
-▼
-VM (Virtual Machine- implemented in software) 
-├─► Interpreter (executes bytecode)
-└─► JIT Compiler (converts bytecode into machine code for faster execution)
-│
-▼
-CPU executes
-~~~
 
 ***A virtual machine, such as the Java Virtual Machine (JVM), is a computer architecture implemented in
 software rather than hardware. It simulates a physical machine so programs can run in a platform-independent way.***
 
 ## 5. Writing and running programs in Java
 
-<img src="../resources/java-platform.png" width="800" alt="Java Platform">
+<img src="../resources/images/writing-and-running-programs-in-java.png"  alt="Writing Programs in Java">
 
 * Programs are written in Java source code (.java files).
 
