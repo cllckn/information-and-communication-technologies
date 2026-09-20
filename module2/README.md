@@ -791,6 +791,21 @@ public class TypeConversionDemoMain {
 
 ## 7. Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)
 
+
+***"Java's core control flow structures — if-else, switch-case, and the three classic loops (for, while, do-while) — 
+all share the exact same foundational syntax with a massive ecosystem of C-family languages, including C, C++, 
+JavaScript, C#, PHP, TypeScript, Dart, Objective-C, and Perl. While the structural syntax is identical, minor 
+behavioral differences exist (e.g., Java requires strict boolean conditions in if statements, while C/C++ treat 
+any non-zero number as true).***
+
+***A common principle in science and engineering education: focus on understanding rather than memorization—learn
+the underlying principles, not just formulas.
+In programming, as in science and engineering, memorizing syntax is not enough. You must understand the underlying
+mechanisms —how the CPU evaluates conditions, how loops actually execute, and why certain programming patterns exist.
+Memorization gives you the ability to write code; understanding gives you the ability to debug, optimize, and transfer
+that knowledge across languages.***
+
+
 ### if / else
 
 In an `if/else` statement, we have a **conditional test**. The condition is evaluated. If it is **true**,
@@ -805,14 +820,10 @@ The `if/else` statement is used when we want to make a decision between two opti
 ~~~java
 int grade = 65;
 
-if(grade >=50){
-        System.out.
-
-println("Pass");
+if(grade>=50){
+        System.out.println("Pass");
 }else{
-        System.out.
-
-println("Fail");
+        System.out.println("Fail");
 }
 
 ~~~
@@ -829,25 +840,15 @@ We use this statement when we have multiple conditions (more than 2 options to c
 int grade = 85;
 
 if(grade >=90){
-        System.out.
-
-println("A");
+        System.out.println("A");
 }else if(grade >=80){
-        System.out.
-
-println("B");
+        System.out.println("B");
 }else if(grade >=70){
-        System.out.
-
-println("C");
+        System.out.println("C");
 }else if(grade >=60){
-        System.out.
-
-println("D");
+        System.out.println("D");
 }else{
-        System.out.
-
-println("F");
+        System.out.println("F");
 }
 
 ~~~
@@ -858,50 +859,79 @@ The program checks conditions from top to bottom. Only the first true condition 
 
 Traditionally, switch replaces long if-else chains for checking a single variable against constant values.
 
-***However,
-modern Java expands this capability: use Java 21+ Record Patterns within switch expressions to elegantly destructure
-and handle multiple variables simultaneously, and Java 16+ Records to cleanly group or return those multiple values.***
+***However, modern Java expands this capability: by using the modern switch expression syntax (->) (arrow syntax), you can now 
+leverage Java 16+ Records to cleanly group multiple values, and Java 21+ Record Patterns to elegantly destructure and 
+evaluate those multiple variables simultaneously within a single case.***
 
 **Example: Grade categories.**
 
-~~~java
-char grade = 'C'; // Traditionally, variables in switch/case must be (byte, short, char, int, String, or enum).
+```java
+char grade = 'B'; 
+// Note: Switch traditionally accepts: byte, short, char, int, String, or enum as switch var type.
 
-switch(grade){
-        case'A':
-        System.out.
-
-println("Excellent!");
-        break; // Exits the switch statement once a match is found to prevent the code from proceeding to the next case.
-                case'B':
-                System.out.
-
-println("Good job!");
+switch (grade) {
+    case 'A':
+        System.out.println("Excellent!");
+        break; // Exits the switch to prevent "fall-through" to the next case
+        
+    case 'B':
+        System.out.println("Good job!");
         break;
-                case'C':
-                System.out.
-
-println("Satisfactory.");
+        
+    case 'C':
+    case 'D': 
+        // Fall-through: If grade is 'C', it skips down and executes the 'D' block
+        System.out.println("Satisfactory.");
         break;
-                case'D':
-                System.out.
-
-println("Needs improvement.");
+        
+    case 'F':
+        System.out.println("Fail.");
         break;
-                case'F':
-                System.out.
-
-println("Fail.");
+        
+    default: // Optional block that runs if none of the cases match
+        System.out.println("Invalid grade.");
         break;
-default: // An optional block that runs if none of the cases match.
-        System.out.
-
-println("Invalid grade.");
 }
-~~~
+```
 
-***Anything you can do with a switch/case statement can also be done with if/else, but the reverse is not always true.
-***
+**Example: Grade categories-in modern Java**
+```java
+char grade = 'B';
+
+switch (grade) {
+    case 'A'       -> System.out.println("Excellent!");
+    case 'B'       -> System.out.println("Good job!");
+    case 'C', 'D'  -> System.out.println("Satisfactory."); // Comma replaces fall-through
+    case 'F'       -> System.out.println("Fail.");
+    default        -> System.out.println("Invalid grade.");
+}
+```
+
+***Anything you can do with a switch/case statement can also be done with if/else, but the reverse is not always true.***
+
+
+**Example: Menu System**
+
+```java
+switch (menuChoice) {
+    case 1 -> System.out.println("New Game");
+    case 2 -> System.out.println("Load Game");
+    case 3 -> System.out.println("Settings");
+    case 4 -> System.out.println("Exit");
+    default -> System.out.println("Invalid choice");
+}
+```
+
+**Example: State Machines / Status Codes**
+```java
+switch (httpStatusCode) {
+    case 200 -> System.out.println("OK");
+    case 404 -> System.out.println("Not Found");
+    case 500 -> System.out.println("Server Error");
+    default  -> System.out.println("Unknown status");
+}
+```
+
 
 ### Loops
 
@@ -924,18 +954,7 @@ println("Invalid grade.");
 * This mechanism allows loops to efficiently handle repetitive tasks while providing flexibility in controlling their
   execution.
 
-> ***Java has three classic loops: for, while, and do-while. Because they all belong to the C-family of languages, they
-share this exact same foundational syntax with a massive ecosystem of other languages, including C, C++, JavaScript,
-C#, PHP, TypeScript, Dart, Objective-C, Perl, etc.***
-
-
-
-***A common principle in science and engineering education: focus on understanding rather than memorization—learn
-the underlying principles, not just formulas.
-In programming, as in science and engineering, memorizing syntax is not enough. You must understand the underlying
-mechanisms —how the CPU evaluates conditions, how loops actually execute, and why certain programming patterns exist.
-Memorization gives you the ability to write code; understanding gives you the ability to debug, optimize, and transfer
-that knowledge across languages.***
+  
 
 #### for loop
 
@@ -949,12 +968,9 @@ Used when the number of repetitions is known in advance.
 // 2. Condition → i <= 10;        (checked before each iteration; if true, loop continues)
 // 3. Update → i++                (changes the control variable after each iteration)
 
-for(int i = 1;
-i <=10;i++){
+for(int i = 1;i <=10;i++){
         // Repeated code block- loop body
-        System.out.
-
-println("Number of iteration is: "+i);
+        System.out.println("Number of iteration is: "+i);
 }
 
 // Lifecycle of a for loop:
@@ -978,12 +994,9 @@ Used when the number of repetitions is not known in advance, but depends on a co
 
 int j = 1; // Initialization
 while(j <=10){ // Condition
-        System.out.
-
-println("Number of iteration is: "+j);
-
-j++; // Update
-        }
+        System.out.println("Number of iteration is: "+j);
+        j++; // Update
+}
 
 // Lifecycle of a while loop:
 // Step 1 → Initialization happens outside the loop.
@@ -1003,12 +1016,9 @@ Similar to while, but the body executes at least once, even if the condition is 
 
 int k = 1; // Initialization
 do{
-        System.out.
-
-println("Number of iteration is: "+k);
-
-k++; // Update
-        }while(k <=10); // Condition (checked after body)
+        System.out.println("Number of iteration is: "+k);
+        k++; // Update
+}while(k <=10); // Condition (checked after body)
 
 // Lifecycle of a do-while loop:
 // Step 1 → Initialization happens before the loop.
@@ -1017,41 +1027,44 @@ k++; // Update
 
 ~~~
 
+
+**Loop Examples**
+
+- **`for` loop**: Listing students enrolled in a class.
+- **`while` loop**: Reading a text file line-by-line until the end is reached.
+- **`do-while` loop**: Displaying a main menu and prompting the user for a choice.
+
 #### Control Statements in Loops
 
-~~~java
+```java
 int k = 1; // Initialization
 
-do{
-        // If k equals 5, skip this iteration
-        if(k ==5){
-k++; // Must update before continue to avoid infinite loop
-        continue; // Skip printing and move to the next iteration
-        }
+do {
+    // 1. Skip iteration if k is 5
+    if (k == 5) {
+        k++; // MUST increment before 'continue' to avoid an infinite loop
+        continue; 
+    }
 
-        // If k equals 8, stop the loop entirely
-        if(k ==8){
-        System.out.
+    // 2. Exit loop entirely if k is 8
+    if (k == 8) {
+        System.out.println("Loop terminated early at iteration " + k);
+        break; 
+    }
 
-println("Loop terminated early at iteration "+k);
-            break; // Exit the loop
-                    }
+    // 3. Normal execution
+    System.out.println("Number of iterations: " + k);
+    k++; // Update counter
 
-                    System.out.
+} while (k <= 10); // Condition is checked AFTER the body executes
 
-println("Number of iteration is: "+k);
+//Initialize: Variables are set up before the loop begins.
+//Execute: The loop body runs at least once, unconditionally.
+//Continue: If triggered, it skips the rest of the current iteration and jumps straight to the condition check (Step 5).
+//Break: If triggered, it exits the loop immediately, skipping the condition check entirely.
+//Evaluate: The while condition is checked. If true, the loop repeats (back to Step 2). If false, the loop terminates.
 
-k++; // Update
-        }while(k <=10); // Condition (checked after body)
-
-// Lifecycle of a do-while loop with break and continue:
-// Step 1 → Initialization happens before the loop.
-// Step 2 → Loop body runs once unconditionally.
-// Step 3 → If 'continue' is used, skip the remaining body and move to next iteration.
-// Step 4 → If 'break' is used, exit the loop immediately.
-// Step 5 → After body execution, condition is checked; if true, loop repeats; otherwise, it terminates.
-
-~~~
+```
 
 ## 8. Basic Data Structures: Arrays
 
@@ -1063,60 +1076,43 @@ Loops are a fundamental tool for processing every item within a collection, also
 
 ~~~java
 
-// ------------------- Static Array Initialization -------------------
+// ==================== 1. Static Array Initialization ====================
 // Define an integer array with fixed values.
 int[] numbers = {10, 20, 30, 40, 50};
 
-// ------------------- Accessing Elements -------------------
-// Access array elements using indices (0-based indexing).
 
-// Print the value at index 0
-System.out.
+// ==================== 2. Accessing Elements ====================
+// Access array elements using 0-based indexing.
 
-println("Value at index 0: "+numbers[0]); // Output: 10
+System.out.println("Value at index 0: " + numbers[0]); // Output: 10
+System.out.println("Value at index 2: " + numbers[2]); // Output: 30
 
-// Print the value at index 2
-System.out.
 
-println("Value at index 2: "+numbers[2]); // Output: 30
-
-// ------------------- Updating Elements -------------------
-// Arrays are mutable → we can change values at specific indices.
+// ==================== 3. Updating Elements ====================
+// Arrays are mutable, meaning we can change values at specific indices.
 
 // Change the fourth element (index 3) to 60
-numbers[3]=60;
-
-        System.out.
-
-println("Updated value at index 3: "+numbers[3]); // Output: 60
+numbers[3] = 60;
+System.out.println("Updated value at index 3: " + numbers[3]); // Output: 60
 
 // Change it back to 40
-numbers[3]=40;
+numbers[3] = 40;
 
-// Loops are a fundamental tool for processing every item within a collection, also known as traversing.
-// Iterating over every element in an array or collection is called traversing.
 
-        System.out.
-
-println("\nTraversing the array using a for loop:");
-
-for(
-int i = 0;
-i<numbers.length;i++){
-        System.out.
-
-println("Element at index "+i +": "+numbers[i]);
+// ==================== 4. Traversing the Array ====================
+// Traversing means iterating over every element in an array or collection.
+        
+System.out.println("\n--- Traversing using a standard 'for' loop ---");
+// The condition 'i < numbers.length' ensures the loop runs safely for every element.
+for (int i = 0; i < numbers.length; i++) {
+        System.out.println("Element at index " + i + ": " + numbers[i]);
 }
-// This loop will print each element from index 0 to the last index.
-// The condition 'i < numbers.length' ensures the loop runs for every element.
 
-// for-each loop - cleaner than for loop 
-//  Better for iterating through an array or collection when you don't need the index.
-        for(
-int number :numbers){
-        System.out.
 
-println(number);
+System.out.println("\n--- Traversing using an enhanced 'for-each' loop ---");
+// The for-each loop is cleaner and preferred when you only need the values, not the index.
+for (int number : numbers) {
+        System.out.println(number);
 }
 
 
