@@ -1044,6 +1044,8 @@ Each element can be accessed by an index (starting from 0).
 
 Loops are a fundamental tool for processing every item within a collection, also known as traversing.
 
+<img src="../resources/images/arrays.png" width="800">
+
 ~~~java
 
 // ==================== 1. Static Array Initialization ====================
