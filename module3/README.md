@@ -9,7 +9,7 @@
     * [Modeling Real-World Entities as Objects](#modeling-real-world-entities-as-objects)
     * [Identifying Objects from Requirements](#identifying-objects-from-requirements)
     * [Object Candidates (Craig Larman)](#object-candidates-craig-larman)
-    * [Classes and Objects](#classes-and-objects)
+    * [Class and Object](#class-and-object)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
     * [Constructors](#constructors)
     * [Encapsulation](#encapsulation)
@@ -64,7 +64,7 @@ screen, TV, desk, bicycle, car, dog, etc.).
 - Developers focus on designing and implementing **classes**, which serve as blueprints for making (instantiating) objects.
 - ***This way, the program's logic is distributed across all modules in a object-centric manner.***
 
-![](../resources/object-oriented-programming.png "Object Oriented Programming")
+<img src="../resources/images/object-oriented-programming.png">
 
 
 ### Identifying Objects from Requirements
@@ -87,12 +87,21 @@ during the analysis phase, following **Abbott’s technique**.
 - **Organizations:** school, company, firm, etc.
 - **Events:** ActionListener, ActionEvent, KeyListener, KeyEvent, logs, etc.
 
-### Classes and Objects
 
-- A **class** is a blueprint(template or prototype) that defines the structure (i.e.; attributes (data) and behaviors (methods) of something). 
-- An **object** is a concrete instance of a class.
+### Class and Object
 
-**Real world examples:**
+A **class** is a blueprint(template or prototype) that defines the **attributes (data)** and **behaviors (methods)** shared by its objects.
+
+An **object** is a concrete **instance of a class**, instantiated at runtime. It has:
+- a **unique identity**
+- its own **state** (current attribute values)
+- the class's **behavior**
+
+<img src="../resources/images/class-and-object.png">
+
+
+
+**Other real world examples:**
 * Think of a class as a car design, while each object is an actual car produced from that design. The design (class) 
 specifies that every car has wheels, an engine, and doors, and can perform actions like start, stop, or accelerate. 
 But each real car (object) can have its own unique values, such as being red or blue, having different engine sizes, 
@@ -173,6 +182,9 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
 - By hiding internal details, encapsulation ensures that dependencies occur only through well-defined interfaces.
 - This reduces side effects: changes to the internal implementation do not break other parts of the code.
 - Improves maintainability and prevents unintended modifications.
+
+
+<img src="../resources/images/encapsulation.png">
 
 ### Access Modifiers: Public, Private, Protected
 **Define the visibility of classes, methods, and variables**
@@ -375,11 +387,11 @@ Based on the following code example:
 ```java
 public class Circle {
 
-    // 1. Class/Static Variable (Shared Scope) 🌐
+    // 1. Class/Static Variable (Shared Scope) 
     // Declared with the 'static' keyword. Shared by all Circle objects.
     public static final double PI = 3.14159; 
 
-    // 2. Instance Variable (Object Scope) 🟠
+    // 2. Instance Variable (Object Scope) 
     // Unique to each object (instance) of the Circle class.
     private double radius; 
 
