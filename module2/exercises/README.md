@@ -1,9 +1,36 @@
+# Hands-on Exercise 1
+
+Write and run your first "Hello, World!" in Java
+
+~~~java
+
+public class HelloWorldMain {
+  // 'public' → This class is accessible from anywhere in the project.
+  // In Java, if a class is declared 'public', the filename must match the class name.
+  // So here, the file must be named 'HelloWorldMain.java'.
+  // Internal or helper classes are typically left package-private (no access modifier) to enforce encapsulation and
+  // hide implementation details.
+
+  public static void main(String[] args) { // Entry point of the application
+    // 'public' → Java applications start execution from the main method.
+    // It must be accessible (public) to the Java runtime (so it can find and run the program).
+    // Every Java application must include exactly one main method as the entry point.
+
+    System.out.println("Hello World!");
+    // Prints the text "Hello World!" to the console, followed by a new line.
+  }
+}
+~~~
+
+
+***
+
 # Hands-On Exercise 2: Student Grading System
 
 ## Tasks
 - Define a new class with a `main` method. 
 - Define variables for **midterm grade**, **final grade**, and **total grade**.
-- Ask the user to enter the **midterm grade** (integer or double).
+- Ask the user to enter the **midterm grade** (byte, integer or double).
 - Ask the user to enter the **final grade**.
 - Store these values in the respective variables.
 - Print them back to confirm input.
@@ -13,6 +40,9 @@
 - Calculate the **total grade** using the formula:
   - Total Grade = (Midterm × 0.4) + (Final × 0.6)
 - Print the total grade to the screen.  
+
+
+***
 
 
 # Hands-on Exercise 3: Functions and Loops in Java
@@ -48,5 +78,5 @@ new double variable called cartTotal.
 
 ## Additional Challenges (Optional)
 * Define a new method calculateTax(double price) that adds 10% to the given price and returns the result. Modify the 
-calculateTotal function so that it applies a 10% tax to the total using this new method. The function should still 
+* calculateTotal function so that it applies a 10% tax to the total using this new method. The function should still 
 return the final total.
