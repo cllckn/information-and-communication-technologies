@@ -240,9 +240,7 @@ List<String> result = customers.parallelStream()
         .sorted()                               // sort
         .collect(Collectors.toList());          // collect
 
-System.out.
-
-println("Result: "+result);
+System.out.println("Result: "+result);
 // Output
 // Result: [ALICE, CHARLIE, DIANA, ETHAN]
 ~~~
@@ -334,22 +332,15 @@ Write and run your first "Hello, World!" in Java
 
 ## 6. Variables, Data Types, and Operators
 
-You must define variables before using them as java is a `statically typed language`.
-
-~~~java
-// Defining a variable.
-int x = 5;
-// Operating system allocates memory for x in RAM and stores the value 5.
-~~~
 
 <img src="../resources/images/variables.png" >
 
 
 
-***Best Practices / Performance Tips***
-
-    Use meaningful names for identifiers i.e.;variables, constants, classes, objects and methods.**  
-      This improves readability and makes the program easier to maintain.
+> ***Best Practices / Performance Tips***
+> 
+>Use meaningful names for identifiers i.e.;variables, constants, classes, objects and methods.  
+>This improves readability and makes the program easier to maintain.
 
 ### Primitive Types
 
