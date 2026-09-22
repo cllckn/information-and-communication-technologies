@@ -29,6 +29,8 @@
     * [Type Conversion](#type-conversion)
   * [7. Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)](#7-control-flow-conditional-statements-ifelse-switch-case-loops-for-while-do-while)
     * [if / else](#if--else)
+    * [if (without else)](#if-without-else)
+    * [if with a range (using logical operators)](#if-with-a-range-using-logical-operators)
     * [Nested if / else](#nested-if--else)
     * [switch-case](#switch-case)
     * [Loops](#loops)
@@ -798,6 +800,46 @@ if(grade>=50){
 
 ~~~
 
+### if (without else)
+In a standalone `if` statement, we only care about one condition. The condition is evaluated. If it is true, the 
+statement or block after `if` is executed. If it is false, the block is simply skipped, and the program continues to 
+the next line of code.
+
+The `if` statement is used when we want to perform an action *only* under a specific condition, and do nothing otherwise.
+
+**Example:** 
+
+Check if a number is positive.
+
+If the number is greater than 0 → print "Positive".
+
+(If it is 0 or negative, do nothing).
+
+```java
+int number = 10;
+
+if (number > 0) {
+        System.out.println("The number is positive.");
+}
+```
+
+
+
+### if with a range (using logical operators)
+
+We can use logical operators to represent a range.
+
+```java
+int age = 25;
+
+if (age >= 18 && age <= 65) {
+    System.out.println("You are in the working age group.");
+}else
+    System.out.println("You are not in the working age group.");
+```
+
+***Logical operators; Ampersand(&&)-and, Vertical Bar(||)-or, and Exclamation mark(!)-not  can be used in conditional tests***
+
 ### Nested if / else
 
 A `nested if/else` statement is an if-else statement placed inside another if-else statement.
@@ -1006,6 +1048,10 @@ do{
 
 #### Control Statements in Loops
 
+*** We should use continue and break inside a conditional statement. Otherwise, they will either skip the rest of the 
+loop body (continue) or terminate the loop prematurely (break) on every run, which is not logical and makes some 
+code unreachable.***
+
 ```java
 int k = 1; // Initialization
 
@@ -1035,6 +1081,7 @@ do {
 //Evaluate: The while condition is checked. If true, the loop repeats (back to Step 2). If false, the loop terminates.
 
 ```
+
 
 ## 8. Basic Data Structures: Arrays
 
