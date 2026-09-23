@@ -1156,28 +1156,39 @@ Defining a method involves two main parts: **the method declaration/header** and
 
 We can call methods within another method.
 
+**Code Example**
+> [CalculatorMain.java](./calculator/CalculatorMain.java)
+
 ~~~java
-public class Calculator {
-    
-    // Method definition
+public class CalculatorMain {
+
+  // Method definition
 // Access|Static|Return|MethodName | Parameters
 //    ↓       ↓    ↓       ↓             ↓
-    public static int addTwoNumbers(int a, int b) {
-        // Method Body
-        int sum = a + b;
-        return sum; // Returns the integer result
-    }
+  public static int addTwoNumbers(int a, int b) {
+    // Method Body
+    int sum = a + b;
+    return sum; // Returns the integer result
+  }
 
-    // The main method where the program execution begins
-    public static void main(String[] args) {
-        // Calling the 'addTwoNumbers' method with arguments 5 and 7 
-        // The method expect 2 parameters
-        int result = addTwoNumbers(5, 7);
+  // The main method where the program execution begins
+  public static void main(String[] args) {
+    // Calling the 'addTwoNumbers' method with arguments 5 and 7
+    int result = addTwoNumbers(5, 7); // The method expect 2 parameters
 
-        // Printing the result to the console
-        System.out.println("The sum is: " + result);
-        // This will print "The sum is: 12"
-    }
+    // Printing the result to the console
+    System.out.println("The sum is: " + result);
+    // This will print "The sum is: 12"
+
+    // You can also call the method directly inside println
+    System.out.println("Another sum: " + addTwoNumbers(10, 20)); // Prints: Another sum: 30
+
+    // You can use variables as arguments too
+    int num1 = 15;
+    int num2 = 25;
+    result = addTwoNumbers(num1, num2);
+    System.out.println("The sum of " + num1 + " and " + num2 + " is " + result);
+  }
 }
 ~~~
 
