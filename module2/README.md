@@ -755,7 +755,7 @@ public class TypeConversionDemoMain {
 ## 7. Control Flow: Conditional statements (if/else, switch-case), Loops (for, while, do-while)
 
 
-***"Java's core control flow structures — if-else, switch-case, and the three classic loops (for, while, do-while) — 
+***Java's core control flow structures — if-else, switch-case, and the three classic loops (for, while, do-while) — 
 all share the exact same foundational syntax with a massive ecosystem of C-family languages, including C, C++, 
 JavaScript, C#, PHP, TypeScript, Dart, Objective-C, and Perl. While the structural syntax is identical, minor 
 behavioral differences exist (e.g., Java requires strict boolean conditions in if statements, while C/C++ treat 
@@ -1222,12 +1222,20 @@ Maintainability means making a program easier to understand, modify, debug, and 
 ### Method Overloading
 
 - **Method overloading** means defining multiple methods with the same name but different parameter lists.
-- The compiler decides which method to use based on the number or type of parameters.
-- This allows the same method name to be used for related tasks.
+- The compiler decides which method to use based on the number, types, or order of parameters.
+- This allows the same method name to be used for conceptually similar operations (related tasks).
 - Example:
     - `add(int, int)` → adds two integers
     - `add(double, double)` → adds two doubles
     - `add(int, int, int)` → adds three integers
+
+- The key benefit of method overloading is improved code readability and API consistency. 
+  - This significantly reduces 
+  cognitive load by allowing methods that perform conceptually similar operations to share a single, 
+  intuitive name. You don't have to memorize or maintain redundant names like printInt(), printString(), printDouble()—you just call print().
+
+***Overload resolution happens entirely at compile time, meaning there is zero runtime performance penalty or 
+dynamic lookup overhead.***
 
 ~~~java
 public static int add(int a, int b) {
@@ -1249,4 +1257,73 @@ public static int add(int a, int b, int c) {
 
 ***
 
+
+
+**Code Example**
+> [GradeCalculatorMain.java](./gradecalculator/GradeCalculatorMain.java)
+```java
+package cc.ku.ict.module2.gradecalculator;
+
+import java.util.Scanner;
+
+public class GradeCalculatorMain {
+
+    /**
+     * Calculates the final letter grade from a midterm and final exam score.
+     * Weighting: midterm = 40%, final = 60%.
+     *
+     * All grading logic lives in ONE place. If the weighting or the letter
+     * thresholds ever change, only this method needs to be updated —
+     * every caller (loop, user input, future code) automatically benefits.
+     */
+    public static char calculateLetterGrade(byte midtermScore, byte finalScore) {
+        double total = (midtermScore * 0.4) + (finalScore * 0.6);
+
+        char letterGrade;
+        if (total >= 90) {
+            letterGrade = 'A';
+        } else if (total >= 80) {
+            letterGrade = 'B';
+        } else if (total >= 70) {
+            letterGrade = 'C';
+        } else if (total >= 60) {
+            letterGrade = 'D';
+        } else {
+            letterGrade = 'F';
+        }
+
+        return letterGrade;
+    }
+
+    public static void main(String[] args) {
+
+        // Ten sample students' midterm and final scores
+        byte[] midtermScores = {95, 82, 76, 60, 45, 88, 91, 70, 55, 100};
+        byte[] finalScores   = {90, 85, 65, 70, 50, 92, 89, 75, 60, 97};
+
+        System.out.println("---- Grades for 10 students ----");
+        for (int i = 0; i < midtermScores.length; i++) {
+            char grade = calculateLetterGrade(midtermScores[i], finalScores[i]);
+            System.out.println("Student " + (i + 1) +
+                    " | Midterm: " + midtermScores[i] +
+                    " | Final: " + finalScores[i] +
+                    " | Grade: " + grade);
+        }
+
+        // Prompt the user for their own scores and reuse the same method
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("\nEnter your midterm score: ");
+        byte userMidterm = scanner.nextByte();
+
+        System.out.print("Enter your final score: ");
+        byte userFinal = scanner.nextByte();
+
+        char userGrade = calculateLetterGrade(userMidterm, userFinal);
+        System.out.println("Your final letter grade is: " + userGrade);
+
+        scanner.close();
+    }
+}
+```
 
