@@ -84,7 +84,7 @@ Writing instructions for a computer using programming languages to perform tasks
 > | Component | Role | Speed |
 > |---|---|---|
 > | **I/O Devices** (HDD, SSD, network, keyboard, etc.) | Provide data to the system |  **Slow** |
-> | **CPU** | Executes algorithm instructions | 🚀 **Extremely Fast** |
+> | **CPU** | Executes algorithm instructions | **Extremely Fast** |
 >
 > The CPU can execute billions of instructions per second, but I/O devices deliver data at a fraction of that speed.
 > If the CPU had to wait for data directly from I/O, it would sit idle most of the time — leading a **bottleneck**.
@@ -1199,13 +1199,13 @@ the method accepts when it is called.***
     
 ### Why Use Functions?
 
-| Benefit | Anchor Term                                       | Concise Explanation                                                                                                                                              |
-|---|---------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Reusability** | *DRY Principle (Don't Repeat Yourself)*           | Write logic once in `calculateGrade()` and invoke/call it repeatedly across different inputs (e.g., Alice, Bob) without duplicating code.                        |
-| **Modularity** | *Single Responsibility Principle (SRP)* | Break a complex program into smaller, focused parts. A function should do one thing and do it well — high cohesion.                                                 |
+| Benefit | Anchor Term                                       | Concise Explanation                                                                                                                                             |
+|---|---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Reusability** | *DRY Principle (Don't Repeat Yourself)*           | Write logic once in `calculateGrade()` and invoke/call it repeatedly across different inputs without duplicating code.                        |
+| **Modularity** | *Single Responsibility Principle (SRP)* | Break a complex program into smaller, focused parts. A function should do one thing and do it well — high cohesion.                                                |
 | **Abstraction** | *Information Hiding/Black Box*                              | Hides internal implementation details from callers. The caller only needs the function signature (input/output contract), keeping caller code clean and readable. |
-| **Easier Debugging & Updates** | *Change once → apply everywhere*                  | Fix or update the logic in one place. Fixing/updating `calculateGrade()` fixes/updates grading logic across the entire application simultaneously.               |
-| **Collaboration** | *Parallel Development*                             | Enables teams to work in parallel by defining clear function signatures so developers can implement different modules independently.                             |
+| **Easier Debugging & Updates** | *Change once → apply everywhere*                  | Fix or update the logic in one place. Fixing/updating `calculateGrade()` fixes/updates grading logic across the entire application simultaneously.              |
+| **Collaboration** | *Parallel Development*                             | Enables teams to work in parallel by defining clear function signatures so developers can implement different modules independently.                            |
 
 
 ***Bottom line: All of these benefits contribute to the maintainability of a program.
@@ -1229,7 +1229,7 @@ Maintainability means making a program easier to understand, modify, debug, and 
     - `add(double, double)` → adds two doubles
     - `add(int, int, int)` → adds three integers
 
-- The key benefit of method overloading is improved code readability and API consistency. 
+- The key benefit of method overloading is improved **code readability** and **API consistency**. 
   - This significantly reduces 
   cognitive load by allowing methods that perform conceptually similar operations to share a single, 
   intuitive name. You don't have to memorize or maintain redundant names like printInt(), printString(), printDouble()—you just call print().
