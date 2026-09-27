@@ -10,18 +10,17 @@
     * [Identifying Objects from Requirements](#identifying-objects-from-requirements)
     * [Object Candidates (Craig Larman)](#object-candidates-craig-larman)
     * [Class and Object](#class-and-object)
-  * [Hands-on Exercise 1](#hands-on-exercise-1)
     * [Constructors](#constructors)
+  * [Hands-on Exercise 1](#hands-on-exercise-1)
     * [Encapsulation](#encapsulation)
     * [Access Modifiers: Public, Private, Protected](#access-modifiers-public-private-protected)
     * [Getters and Setters](#getters-and-setters)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
-  * [Hands-on Exercise 3](#hands-on-exercise-3)
     * [static and final keywords](#static-and-final-keywords)
     * [Scope of a Variable](#scope-of-a-variable)
   * [Collections: ArrayList](#collections-arraylist)
     * [ArrayList](#arraylist)
-  * [Hands-on Exercise 4](#hands-on-exercise-4)
+  * [Hands-on Exercise 3](#hands-on-exercise-3)
 <!-- TOC -->
 
 ---
@@ -44,27 +43,29 @@ All of these models, in one way or another, include these fundamental phases.
 
 ### Modeling Real-World Entities as Objects
 
-- **Object-Oriented Programming (OOP)** was developed to model real-world entities more naturally and accurately.
-- In real life, almost everything can be considered as an **object** (e.g., human, product, order, invoice, student, 
-screen, TV, desk, bicycle, car, dog, etc.).
-- Objects have **states** and **behaviors**:
-  - Example (Human):
-    - States → name, age, height
-    - Behaviors → learn, understand, sleep, talk, run
-  - Example (Bicycle):
-    - States → color, current gear, speed, number of wheels, number of gears
-    - Behaviors → brake, accelerate, decelerate, change gear
-- Similarly, **software objects** also have states and behaviors:
-  - **States** (also called **attributes** or **properties**) are represented using **member variables**.
-  - **Behaviors** are represented using **member functions/methods**.
+<img src="../resources/images/what-is-oop.png">
 
 
-- The fundamental building blocks in OOP are **objects**, and programs are composed of objects and their interactions.
-- An object contains both **data** and the **methods** that operate on that data.
-- Developers focus on designing and implementing **classes**, which serve as blueprints for making (instantiating) objects.
-- ***This way, the program's logic is distributed across all modules in a object-centric manner.***
+- **Object-Oriented Programming (OOP)** emerged primarily to manage complexity in large software systems by organizing code into self-contained, reusable units.
+- It allows developers to model real-world entities more intuitively — naturally and accurately.
+- In real life, almost everything can be modeled as an **object** (e.g., human, product, order, invoice, student, screen, TV, desk, bicycle, car, dog, etc.).
+- Every object has **state** and **behavior**:
+  - **State** — the object's data or characteristics at a given moment (what it *is* or *has*).
+  - **Behavior** — the actions the object can perform (what it *does*).
+- Example (Human):
+  - State → name, age, height
+  - Behavior → learn, understand, sleep, talk, run
+- Example (Bicycle):
+  - State → color, current gear, speed, number of wheels, number of gears
+  - Behavior → brake, accelerate, decelerate, change gear
+- Software objects mirror this same structure:
+  - **State** (also called *attributes* or *properties*) is represented using **member variables**.
+  - **Behavior** is represented using **member functions/methods**.
+- **Objects** are the fundamental building blocks of OOP — programs are composed of objects and their interactions.
+- Each object bundles together its **data** and the **methods** that operate on that data.
+- Developers design **classes**, which act as blueprints for making (instantiating) objects.
+- As a result, program logic is organized around **objects** — bundles of data and behavior — rather than around a sequence of standalone functions, as in procedural programming.
 
-<img src="../resources/images/object-oriented-programming.png">
 
 
 ### Identifying Objects from Requirements
@@ -109,29 +110,7 @@ or belonging to different owners.
 * Think of a class as a blueprint for building houses, while each object is an individual house built from that 
 blueprint. The blueprint defines the design, but each house can have its own paint color, furniture, or garden.
 
-  
-**Circle Object Example**
-
-"We aim to develop a drawing application. We need to draw a **Circle** with **radius**, **x** and **y** coordinates,
-and **color** properties. The Circle's area should also be calculated..."
-
-After analyzing this requirement list, we identified Circle as an object, with
-radius, x, y coordinates, and color as its attributes, and the calculate area function as its method.
-
-><img src="../resources/circle-object.png" width="300">
->
->**UML Class Diagram**
-
-
-**Code Example**
->[Circle.java](./circleobject/Circle.java) | [CircleMain.java](./circleobject/CircleMain.java)
-
-
-***
-## Hands-on Exercise 1
-* Define the package `cc.ku.ict.module3.circleobject` in your Java project.
-* Place your Java files (`Circle.java`, `CircleMain.java` given above) under this package and run the application.
-***
+<img src="../resources/images/object-oriented-programming.png">
 
 ### Constructors
 - Constructors are special methods that are called automatically when an object is instantiated.
@@ -145,36 +124,192 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
     - Objects → null
     - boolean → false
 
+**Circle Object Example**
+
+"We aim to develop a drawing application. We need to draw a **Circle** with **radius**, **x** and **y** coordinates,
+and **color** properties. The Circle's area should also be calculated..."
+
+After analyzing this requirement list, we identified Circle as an object, with
+radius, x, y coordinates, and color as its attributes, and the calculate area function as its method.
+
+><img src="../resources/circle-object.png" width="300">
+>
+>**UML Class Diagram**
+ 
+
+<img src="../resources/images/circle-object-example.png">
+
+
 **Code Example**
+>[./circleobject/Circle.java](./circleobject/Circle.java) | [./circleobject/CircleMain.java](./circleobject/CircleMain.java)
 
 ```java
-   //No-parameter constructor (Default constructor)
-   //This sets some default values for a new Circle object
-   public Circle() {
-        this.x = 0;         // Default X coordinate
-        this.y = 0;         // Default Y coordinate
-        this.radius = 1;    // Default radius (a minimal circle)
-        this.color = "Black"; // Default color
-    }
-    
-   //Overloaded full constructor: initializes all attributes
-   public Circle(int x, int y, int radius, String color) {
-        // "this" refers to the current object.
-        // since the parameters and member variables have the same name
-        // we must use this keyword to prevent ambiguity.
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-        this.color = color;
-    }
+// Must be stored as Circle.java
 
-   // Overloaded constructor: initializes only coordinates
-   // Radius and color can be set later using setters
-    public Circle(int x1, int y) {
-        x = x1;
-        this.y = y;
-    }
+package cc.ku.ict.module3.circleobject;
+
+public class Circle {
+  // ============================
+  // Fields (Attributes / Properties)
+  // ============================
+  // These describe the state of a Circle object.
+  // They are kept private to follow the principle of "encapsulation".
+  // Access is provided through getters and setters.
+  private int x;        // X coordinate of the circle's center
+  private int y;        // Y coordinate of the circle's center
+  private int radius;   // Radius of the circle
+  private String color; // Color of the circle
+
+  // ============================
+  // Constructors
+  // ============================
+
+  // No-parameter constructor (Default constructor)
+  // This sets some default values for a new Circle object
+  public Circle() {
+    this.x = 0;          // Default X coordinate
+    this.y = 0;          // Default Y coordinate
+    this.radius = 1;     // Default radius (a minimal circle)
+    this.color = "Black"; // Default color
+  }
+
+  // Overloaded constructor: initializes only coordinates
+  // Radius and color can be set later using setters
+  // ENHANCEMENT: renamed the first parameter from "x1" to "x" for consistency
+  // with the other constructors. Since it now shares a name with the field,
+  // we use "this.x" to distinguish the field from the parameter (shadowing).
+  public Circle(int x, int y) {
+    this.x = x;
+    this.y = y;
+    // ENHANCEMENT: radius and color still need sensible defaults here too,
+    // otherwise radius stays 0 (an invalid circle) and color stays null.
+    this.radius = 1;
+    this.color = "Black";
+  }
+
+  // Overloaded full constructor: initializes all attributes
+  public Circle(int x, int y, int radius, String color) {
+    // "this" refers to the current object.
+    // Since the parameters and member variables have the same name,
+    // we must use "this" to prevent ambiguity (parameter shadowing the field).
+    this.x = x;
+    this.y = y;
+    // ENHANCEMENT: reuse the setter instead of a direct field assignment.
+    // This way, the validation logic in setRadius() is applied even during
+    // construction, instead of being duplicated or skipped here.
+    this.radius = radius;
+    this.color = color;
+  }
+
+
+
+  // ============================
+  // Other Behaviors
+  // ============================
+
+  // Calculates the area of the circle using the formula: pi * r^2
+  public double calculateArea() {
+    return Math.pow(radius, 2) * Math.PI;
+  }
+
+  // ============================
+  // 7. toString() in action
+  // ============================
+  // Every System.out.println(circleObject) call  convert the object into a readable String as defined below.
+  // Without overriding toString(), Java would print something like
+  // "cc.ku.ict.module3.circleobject.Circle@1b6d3586" instead —
+  // a memory reference, not useful information.
+  @Override  //
+  public String toString() {
+    return "Circle{" +
+            "x=" + x +
+            ", y=" + y +
+            ", radius=" + radius +
+            ", color='" + color + '\'' +
+            '}';
+  }
+}
 ```
+
+```java
+/**
+ * Must be stored as CircleMain.java
+ * This is the "driver class". It contains the main method,
+ * which is the starting point of the program.
+ */
+package cc.ku.ict.module3.circleobject;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class CircleMain {
+    public static void main(String[] s) {
+        // ============================
+        // 1. Instantiating a Circle object using the default constructor
+        // ============================
+        // IMPORTANT: This only works if Circle has a no-argument constructor (Circle()).
+        // Otherwise, you need to add one in Circle class.
+
+        Circle circleObject = new Circle();
+
+
+
+        // Printing the circle's details (calls the toString() method)
+        System.out.println(circleObject);
+        //System.out.println(circleObject.toString());
+
+        // ============================
+        // 2. Instantiating a Circle object using a constructor with parameters
+        // ============================
+
+        // Example: Circle with center (20,20), radius 3, color "Blue"
+         Circle circle1 = new Circle(20, 20, 3, "Blue");
+
+         System.out.println(circle1);    // Prints circle details
+         System.out.println(circle1.calculateArea()); // Prints area of the circle
+
+        // ============================
+        // 3. Using constructor directly in print statements
+        // ============================
+
+
+        System.out.println(new Circle(25, 50));       // Constructor with 2 parameters
+
+
+
+        // ============================
+        // 5. Taking user input (Scanner class)
+        // ============================
+
+         Scanner input = new Scanner(System.in);  // Instantiate Scanner object
+
+         System.out.print("Enter the radius: ");
+         int radius = input.nextInt();            // Read an integer from keyboard
+
+         Circle circle4 = new Circle(20, 20, radius,"green");  // Use input for radius
+         System.out.println(circle4);                  // Print details
+         System.out.println(circle4.calculateArea());  // Print area
+
+
+        // ============================
+        // 7. Formatting numeric output
+        // ============================
+
+         DecimalFormat fmt = new DecimalFormat("0.##"); // Format: 4 decimal places
+         System.out.println(fmt.format(circle4.calculateArea()));
+    }
+}
+
+```
+
+
+
+***
+## Hands-on Exercise 1
+* Define the package `cict.module3.circleobject` in your Java project.
+* Place your Java files (`Circle.java`, `CircleMain.java` given above) under this package and run the application.
+***
+
 
 ### Encapsulation
 - Encapsulation is principle of bundling data (attributes) and methods (functions) into a single unit (class).
@@ -205,9 +340,13 @@ radius, x, y coordinates, and color as its attributes, and the calculate area fu
 **Code Example**
 ~~~java
 public class Circle {
-    private int radius;
+    private int x;        // X coordinate of the circle's center
+    private int y;        // Y coordinate of the circle's center
+    private int radius;   // Radius of the circle
+    
+  
 
-    // Public method
+  // Public method
     public double calculateArea() {
         return Math.PI * square(radius);  // calling private method
     }
@@ -234,21 +373,47 @@ We can apply any control logic such as validation, filtering, preprocessing/tran
 
 ~~~java
 public class Circle {
-    private int radius;
+    private int x;        // X coordinate of the circle's center
+    private int y;        // Y coordinate of the circle's center
+    private int radius;   // Radius of the circle
 
-  // Setter with validation
-  public void setRadius(int radius) {
-    if (radius > 0) {         // validation rule: radius must be positive
-      this.radius = radius;
-    } else {
-      System.out.println("Invalid radius. It must be positive.");
+    //......
+  
+    public void setX(int x) {
+      this.x = x;
     }
-  }
+  
+    public int getX() {
+      return x;
+    }
+  
+    public void setY(int y) {
+      this.y = y;
+    }
+  
+    public int getY() {
+      return y;
+    }
+  
+  
+    // Setter with validation
+    public void setRadius(int radius) {
+      if (radius > 0) {         // validation rule: radius must be positive
+        this.radius = radius;
+      } else {
+        System.out.println("Invalid radius. It must be positive.");
+      }
+    }
+  
+  
+    public int getRadius() {
+      return radius;
+    }
+  
+  
+  
+    //.....
 
-  // Getter
-  public int getRadius() {
-    return radius;
-  }
 }
 ~~~
 
@@ -304,65 +469,74 @@ public class Circle {
 
 <img src="../resources/circle-object-extended.png" width="300">
 
-***
-## Hands-on Exercise 2
-* Extend the Circle application in accordance with the instructions given above.
-***
 
 
 
 ***
-## [Hands-on Exercise 3](./exercises/README.md)
+## [Hands-on Exercise 2](./exercises/README.md)
 ***
+
 
 ### static and final keywords
 
+<img src="../resources/images/static-final.png">
+
 **static Keyword**
 
-- Normally, members (attributes and methods) belong to individual **objects** (such members are called instance variables and instance methods).
+- Normally, members (attributes and methods) belong to individual **objects** (such members are called instance 
+variables and instance methods).
 - When declared with the **`static`** keyword, they belong to the **class itself**, not to any specific object.
 - This means:
-  - There is **only one copy** of a **static variable** shared across all objects.
+  - There is **only one copy** of a **static variable**, shared across all objects.
   - **Static methods** can be called using the class name (e.g., `Car.getActiveCars()`), without needing to instantiate an object.
 - Therefore, `static` makes members **class-level** instead of **object-level**.
-
 - Can be applied to:
   - **Variables** → one copy shared by all objects.
   - **Methods** → can be called without instantiating an object.
+- **Limitation:** a static method has no `this` reference, so it **cannot directly access instance (non-static) variables or methods** — only other static members. This is why `main()`, being static, can't call an instance method without first creating an object.
 
 **final Keyword**
-- Used to declare constants or prevent modifications.
+
+- Used to declare constants or prevent modification/extension.
 - Can be applied to:
-  - **Variables** → value cannot be changed once assigned.
+  - **Variables** → value (or reference) cannot be reassigned once initialized.
   - **Methods** → cannot be overridden in derived classes.
   - **Classes** → cannot be extended (no subclasses).
+- **Important nuance — `final` does not mean immutable for reference types:**
+  - For a `final` reference variable (an object or array), the *reference itself* can't be reassigned to point elsewhere — but the *object it points to* can still be mutated internally, if that object is otherwise mutable.
+  - Example:
+```java
+    final int[] arr = {1, 2, 3};
+    arr[0] = 99;      // allowed — modifying the object's contents
+    arr = new int[5]; // NOT allowed — reassigning the reference
+```
 
 
 
 **Example: Requirement List for A Car Race Application**
     
-    We want to model a simple **Car Race** system.
-    Class: Car
-    - **Attributes**
-      - `name` (String) → the name of the car.
-      - `static activeCars` (int) → shared among all Car objects, counts how many cars are currently active in the race.
-      - `static final MAX_CARS` (int) → constant that specifies the maximum number of cars allowed in the race.
-    
-      - **Methods**
-        - **Constructor** `(Car(String name))`
-          - When a new Car is created, it joins the race.
-          - Increments `activeCars` if it does not exceed `MAX_CARS`.
-        - `leaveRace()`
-          - Decreases `activeCars` when a car leaves the race.
-        - `static getActiveCars()`
-          - Returns the number of currently active cars.
-    
-    Class: CarRaceMain
+  We want to model a simple **Car Race** system.
+  Class: Car
+  - **Attributes**
+    - `name` (String) → the name of the car.
+    - `static activeCars` (int) → shared among all Car objects, counts how many cars are currently active in the race.
+    - `static final MAX_CARS` (int) → constant that specifies the maximum number of cars allowed in the race.
+  
     - **Methods**
-      - `main(String[] args)`
-        - Instantiate several `Car` objects.
-        - Show how `activeCars` is updated when cars join or leave.
-        - Demonstrate the effect of the `final` constant `MAX_CARS`.
+      - **Constructor** `(Car(String name))`
+        - When a new Car is instantiated, it joins the race.
+        - Increments `activeCars` if it does not exceed `MAX_CARS`.
+      - `leaveRace()`
+        - Decreases `activeCars` when a car leaves the race.
+      - `static getActiveCars()`
+        - Returns the number of currently active cars.
+  
+  Class: CarRaceMain
+  - **Methods**
+    - `main(String[] args)`
+      - Instantiate several `Car` objects.
+      - Show how `activeCars` is updated when cars join or leave.
+      - Demonstrate the effect of the `final` constant `MAX_CARS`.
 
 
 
@@ -372,70 +546,74 @@ public class Circle {
 
 ### Scope of a Variable
 
-`Scope` defines where a variable can be accessed or used:
 
-Based on the following code example:
+**Scope** defines the region of a program where a variable is `visible` and can be `referenced` (closely tied 
+to its lifetime — how long the variable exists during execution).
 
-1) Class/Static Scope (PI) – Declared with static; shared by all objects of the class. Accessible also without an instance.
-
-2) Instance/Object Scope (radius) – Declared without static; unique to each object. Accessible by all methods within that object.
-
-3) Method/Local Scope (area, radius parameter in Circle(double radius), numDots in printDots() ) – Declared inside a method; exists only while the method runs.
-
-4) Block Scope (i) – Declared inside a block (e.g., a loop); accessible only within that block.
+<img src="../resources/images/variable-scope.png">
 
 ```java
 public class Circle {
 
-    // 1. Class/Static Variable (Shared Scope) 
-    // Declared with the 'static' keyword. Shared by all Circle objects.
-    public static final double PI = 3.14159; 
+  // 1. Class/Static Scope
+  // Declared with 'static' — belongs to the CLASS itself, not to any object.
+  // Shared by all Circle instances; accessible even without instantiating an object (Circle.PI).
+  public static final double PI = 3.14159;
 
-    // 2. Instance Variable (Object Scope) 
-    // Unique to each object (instance) of the Circle class.
-    private double radius; 
+  // 2. Instance Scope
+  // Declared without 'static' — belongs to each OBJECT individually.
+  // Every Circle has its own separate copy of 'radius'.
+  private double radius;
 
-    // Constructor to initialize the Instance Variable
-    public Circle(double radius) { // (Method Scope) 
-        this.radius = radius;
-    }
-    
-    public double calculateArea() {
-        // 3. Local Variable (Method Scope) 
-        // Variable 'area' is defined when the method starts and destroyed when it ends.
-        double area = PI * radius * radius; 
-        
-        System.out.println("--- Inside calculateArea() ---");
-        System.out.println("Local variable 'area' calculated.");
-        
-        // The local variable is returned, making its value available outside.
-        return area; 
+  // Constructor — the parameter 'radius' here is a LOCAL variable (method-scoped).
+  public Circle(double radius) {
+    // SHADOWING: the parameter 'radius' has the same name as the instance
+    // variable 'radius'. Inside this constructor, the plain name 'radius'
+    // refers to the PARAMETER (the local one), not the instance variable —
+    // the local variable "shadows" (hides) the instance variable.
+    // 'this.radius' is required to explicitly reach the instance variable.
+    this.radius = radius;
+  }
+
+  public double calculateArea() {
+    // 3. Local Scope (method-level)
+    // 'area' is allocated when the method starts and destroyed when it returns.
+    // No shadowing here — there's no other 'area' variable anywhere else in the class.
+    double area = PI * radius * radius;
+
+    System.out.println("--- Inside calculateArea() ---");
+    System.out.println("Local variable 'area' calculated.");
+
+    return area;
+  }
+
+  public void printDots(int numDots) {
+    // 'numDots' is also local scope (method-level) — lives for this method call only.
+    System.out.println("\n--- Inside printDots() Method ---");
+    System.out.println("Printing " + numDots + " dots for radius " + this.radius + ":");
+
+    // 4. Block Scope
+    // 'i' is local scope too, but narrower: it only exists inside the for-loop's { }.
+    // Block scope is a SUBSET of local scope, not a separate category —
+    // every block-scoped variable is also local, but it dies at the end of its block,
+    // not at the end of the whole method.
+    for (int i = 0; i < numDots; i++) {
+      System.out.print(" . ");
     }
 
-    public void printDots(int numDots) { //(Method Scope) 
-      System.out.println("\n--- Inside printDots() Method ---");
-      System.out.println("Printing " + numDots + " dots for radius " + this.radius + ":");
-  
-      // 4. Block scope
-      // The variable 'i' has Block Scope.
-      // It is initialized and incremented only within the loop's execution.
-      for (int i = 0; i < numDots; i++) {
-        System.out.print(" . ");
-      }
-      
-      // ERROR DEMONSTRATION: 
-      // If you tried to access 'i' here, the compiler would throw an error 
-      // because 'i' is out of scope.
-      System.out.println("The value of i outside the loop is: " + i); 
-    }
-    
+    // ERROR DEMONSTRATION:
+    // 'i' no longer exists here — it was destroyed when the loop's block ended.
+    // Uncommenting the next line causes a compile-time error: cannot find symbol 'i'
+    // System.out.println("The value of i outside the loop is: " + i);
+  }
 }
 ```
 
 ## Collections: ArrayList
 
+<img src="../resources/images/collections.png">
 
-- A Collection in Java is an object that holds a group of objects.
+- A **Collection** in Java is an object that holds a group of objects.
 - It includes both the data structure for storing the objects and the methods for processing them.
 - Main purposes:
   - Easier management of groups of data
@@ -448,23 +626,24 @@ public class Circle {
   - Interfaces such as **List**, **Set**, **Queue**, and **Map** represent ADTs.
   - Classes such as **ArrayList**, **HashSet**, **PriorityQueue**, and **HashMap** provide concrete implementations of those ADTs.
 
-
 **Common Collection Types in Java**
 - **List** → Ordered collection, allows duplicates (e.g., ArrayList, LinkedList, Vector).
-- **Set** → Unordered collection, no duplicates allowed (e.g., HashSet, TreeSet, LinkedHashSet).
+- **Set** → No duplicates allowed; ordering depends on the implementation:
+  - `HashSet` → unordered (no guaranteed order)
+  - `LinkedHashSet` → maintains insertion order
+  - `TreeSet` → maintains sorted order (natural ordering or a custom `Comparator`)
 - **Queue** → Designed for holding elements prior to processing (e.g., PriorityQueue, ArrayDeque, LinkedList).
-- **Map** → Stores key-value pairs (not part of Collection interface, but part of Collections Framework) (e.g., HashMap, TreeMap, LinkedHashMap, Hashtable).
-
-
+- **Map** → Stores key-value pairs (not part of the Collection interface, but part of the Collections Framework) (e.g., HashMap, TreeMap, LinkedHashMap, Hashtable).
 
 ### ArrayList
 
 - An **ArrayList** is a dynamic array that can grow and shrink in size.
+- Default initial capacity is **10** if none is specified in the constructor.
 - When it needs more space, its capacity increases by **50%**.
 - Provides fast access to elements using their index.
 - Part of the **List interface**, so it supports common operations like add, remove, and get.
-- Can be defined in a **type-safe** way using generics, e.g., `List<Double>` instead of primitive types.
-
+- Can be defined in a **type-safe** way using generics, e.g., `List<Double>` instead of a primitive type.
+  - Java generics don't support primitive types (`List<double>` is a compile error) — only reference types are allowed, which is why the wrapper class `Double` is used instead of `double`.
 
 **Code Example**
 >[Book.java](./collections/Book.java) | [CollectionsMain.java](./collections/CollectionsMain.java)
@@ -472,7 +651,7 @@ public class Circle {
 
 
 ***
-## [Hands-on Exercise 4](./exercises/README.md)
+## [Hands-on Exercise 3](./exercises/README.md)
 ***
 
 
