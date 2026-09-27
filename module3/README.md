@@ -24,20 +24,33 @@
 <!-- TOC -->
 
 ---
-
 ## Software Development Life Cycle (SDLC)
-The SDLC is a structured process used to develop high-quality software in a systematic and efficient way. 
-It breaks software development into distinct phases, each with specific goals and deliverables.
 
-The Software Development Life Cycle (SDLC) consists of five fundamental phases.
+The SDLC is a structured process used to develop high-quality software in a systematic and efficient way. It breaks 
+software development into distinct phases, each with specific goals and deliverables.
 
-Today, there are different software development process models such as
-Waterfall, Spiral, Iterative/Incremental, Agile, and Unified Process. 
-All of these models, in one way or another, include these fundamental phases.
+The Software Development Life Cycle (SDLC) consists of five fundamental phases:
 
+1. **Requirements Analysis** — gathering and defining what the software must do.
+2. **Design** — planning the system's architecture and structure.
+3. **Implementation (Coding)** — writing the actual source code.
+4. **Testing** — verifying the software works correctly and meets requirements.
+5. **Deployment & Maintenance** — releasing the software and supporting/updating it afterward.
+
+
+Today, there are different software development process models, such as **Waterfall, Spiral, Iterative/Incremental, 
+Agile, and Unified Process**. These are not additional phases — they are different *strategies* for organizing and 
+sequencing the same fundamental phases above. What differs between models is the **order, repetition, and overlap** 
+of the phases:
+
+
+
+All of these models, in one way or another, still include the same fundamental phases.
 
 ![](../resources/sdlc.png "Software Development Life Cycle (SDLC)")
 
+***A software development process model is a structured framework that defines the order, repetition,
+and overlap of the fundamental SDLC phases for building a software product.***
 
 ## The Core Concepts of OOP: Classes and Objects
 
