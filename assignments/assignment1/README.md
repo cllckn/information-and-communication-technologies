@@ -169,3 +169,4 @@ However, this late defense of the oral exam will result in a 20% penalty on the 
 ### By adhering to these guidelines and policies, you will ensure that your submission is complete and meets the evaluation criteria. 
 
 ***Good luck with your projects and oral exams!***
+
