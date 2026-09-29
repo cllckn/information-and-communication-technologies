@@ -31,7 +31,7 @@ software development into distinct phases, each with specific goals and delivera
 
 The Software Development Life Cycle (SDLC) consists of five fundamental phases:
 
-1. **Requirements Analysis** — gathering and defining what the software must do.
+1. **Requirement Analysis** — gathering and defining what the software must do.
 2. **Design** — planning the system's architecture and structure.
 3. **Implementation (Coding)** — writing the actual source code.
 4. **Testing** — verifying the software works correctly and meets requirements.
@@ -107,7 +107,7 @@ during the analysis phase, following **Abbott’s technique**.
 A **class** is a blueprint(template or prototype) that defines the **attributes (data)** and **behaviors (methods)** shared by its objects.
 
 An **object** is a concrete **instance of a class**, instantiated at runtime. It has:
-- a **unique identity**
+- a **unique identity** (reference or memory address)
 - its own **state** (current attribute values)
 - the class's **behavior**
 
@@ -187,14 +187,12 @@ public class Circle {
   }
 
   // Overloaded constructor: initializes only coordinates
-  // Radius and color can be set later using setters
-  // ENHANCEMENT: renamed the first parameter from "x1" to "x" for consistency
-  // with the other constructors. Since it now shares a name with the field,
-  // we use "this.x" to distinguish the field from the parameter (shadowing).
+  // Since x and y share the same name with the field,
+  // we use "this.x", "this.y" to distinguish the field from the parameter (shadowing).
   public Circle(int x, int y) {
     this.x = x;
     this.y = y;
-    // ENHANCEMENT: radius and color still need sensible defaults here too,
+    // radius and color still need sensible defaults here too,
     // otherwise radius stays 0 (an invalid circle) and color stays null.
     this.radius = 1;
     this.color = "Black";
@@ -207,9 +205,6 @@ public class Circle {
     // we must use "this" to prevent ambiguity (parameter shadowing the field).
     this.x = x;
     this.y = y;
-    // ENHANCEMENT: reuse the setter instead of a direct field assignment.
-    // This way, the validation logic in setRadius() is applied even during
-    // construction, instead of being duplicated or skipped here.
     this.radius = radius;
     this.color = color;
   }
