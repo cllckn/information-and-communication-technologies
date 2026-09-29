@@ -114,12 +114,12 @@ The course will cover the following topics:
 
 Students will be evaluated based on the following components:
 
-| **Component**                 | **Weight** | **Exam Date** |
-|-------------------------------|-----------|---------------|
-| Assignment 1                  |   TBA    | TBA           |
-| Assignment 2                  |   TBA    | TBA           |
-| Midterm Exam                  |  TBA     | TBA           |
-| Final Exam                    |  TBA     | TBA           |
+| **Component**                 | **Weight** | **Exam Date**                            |
+|-------------------------------|-----------|------------------------------------------|
+| Assignment 1                  |   TBA    | Week 9 (the week starting October 26, 2026) |
+| Assignment 2                  |   TBA    | TBA                                      |
+| Midterm Exam                  |  TBA     | TBA                                      |
+| Final Exam                    |  TBA     | TBA                                      |
 
 
 ### Course Policies
