@@ -316,7 +316,17 @@ public class CircleMain {
 ## Hands-on Exercise 1
 * Define the package `cict.module3.circleobject` in your Java project.
 * Place your Java files (`Circle.java`, `CircleMain.java` given above) under this package and run the application.
-***
+* We would like to use this circle in a 3-dimensional plane. Please add a z-coordinate and the related constructors to 
+the Circle class, and update the main method properly to demonstrate instantiating a new Circle object in a 3-dimensional plane.
+* Add a method to calculate circumference, and call it in the main method.
+  - Define a new method `calculateCircumference()` using the formula:
+
+    ```
+    Circumference = 2 × π × radius
+    ```
+
+  - (Note: The circumference is the perimeter of a circle.)
+
 
 
 ### Encapsulation
