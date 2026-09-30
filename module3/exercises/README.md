@@ -1,8 +1,29 @@
-# Hands-on Exercise 3: Bank Account Application
+# Hands-on Exercise 1
+
+
+* Define the package `cict.module3.circleobject` in your Java project.
+* Place your Java files (`Circle.java`, `CircleMain.java` given above) under this package and run the application.
+* We would like to use this circle in a 3-dimensional plane. Please add a z-coordinate and the related constructors to
+  the Circle class, and update the main method properly to demonstrate instantiating a new Circle object in a 3-dimensional plane.
+* Add a method to calculate circumference, and call it in the main method.
+  - Define a new method `calculateCircumference()` using the formula:
+
+    ```
+    Circumference = 2 × π × radius
+    ```
+
+  - (Note: The circumference is the perimeter of a circle.)
+
+
+
+***
+
+
+# Hands-on Exercise 2: Bank Account Application
 
 ## Requirement List
 
-We want to develop a simple Bank Account application. The account should have the following features:
+We want to develop a simple Bank Account application. A user account should have the following features:
 
 * Store the **account number**, **account holder name**, **account type**(e.g., Savings, Checking), and **balance**.
 * Allow deposits to increase the balance.
@@ -44,7 +65,7 @@ We want to develop a simple Bank Account application. The account should have th
 
 ***
 ***
-## Hands-on Exercise 4: Working with BankAccount Objects in Collections
+## Hands-on Exercise 3: Working with BankAccount Objects in Collections
 
 In the previous exercise, you defined an `BankAccount` class with attributes and methods.  
 Now, you will use this class with **Java Collections** (`ArrayList`) to perform practical operations.
