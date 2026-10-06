@@ -4,27 +4,28 @@
 
 <!-- TOC -->
 * [Module 3: Object-Oriented Programming (OOP) I](#module-3-object-oriented-programming-oop-i)
-  * [Software Development Life Cycle (SDLC)](#software-development-life-cycle-sdlc)
-  * [The Core Concepts of OOP: Classes and Objects](#the-core-concepts-of-oop-classes-and-objects)
+  * [1. Software Development Life Cycle (SDLC)](#1-software-development-life-cycle-sdlc)
+  * [2. Classes and Objects](#2-classes-and-objects)
     * [Modeling Real-World Entities as Objects](#modeling-real-world-entities-as-objects)
     * [Identifying Objects from Requirements](#identifying-objects-from-requirements)
     * [Object Candidates (Craig Larman)](#object-candidates-craig-larman)
     * [Class and Object](#class-and-object)
     * [Constructors](#constructors)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
-    * [Encapsulation](#encapsulation)
+  * [3. Encapsulation](#3-encapsulation)
+      * [Benefits of Encapsulation](#benefits-of-encapsulation)
     * [Access Modifiers: Public, Private, Protected](#access-modifiers-public-private-protected)
     * [Getters and Setters](#getters-and-setters)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
-    * [static and final keywords](#static-and-final-keywords)
-    * [Scope of a Variable](#scope-of-a-variable)
-  * [Collections: ArrayList](#collections-arraylist)
+  * [4. static and final keywords](#4-static-and-final-keywords)
+  * [5. Scope of a Variable](#5-scope-of-a-variable)
+  * [6. Collections: ArrayList](#6-collections-arraylist)
     * [ArrayList](#arraylist)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
 <!-- TOC -->
 
 ---
-## Software Development Life Cycle (SDLC)
+## 1. Software Development Life Cycle (SDLC)
 
 The SDLC is a structured process used to develop high-quality software in a systematic and efficient way. It breaks 
 software development into distinct phases, each with specific goals and deliverables.
@@ -52,7 +53,7 @@ All of these models, in one way or another, still include the same fundamental p
 ***A software development process model is a structured framework that defines the order, repetition,
 and overlap of the fundamental SDLC phases for building a software product.***
 
-## The Core Concepts of OOP: Classes and Objects
+## 2. Classes and Objects
 
 ### Modeling Real-World Entities as Objects
 
@@ -329,7 +330,7 @@ the Circle class, and update the main method properly to demonstrate instantiati
 
 
 
-### Encapsulation
+## 3. Encapsulation
 - Encapsulation is principle of bundling data (attributes) and methods (functions) into a single unit (class).
 - Encapsulation restricts direct access to an object’s internal data and implementation details(information hiding).
 - By hiding internal details, encapsulation ensures that dependencies occur only through well-defined interfaces.
@@ -394,7 +395,7 @@ public class Circle {
 
 ### Getters and Setters
 - Methods used to access and update private attributes of a class.
-- Helps enforce encapsulation and allows validation before changing values.
+- Helps enforce encapsulation and allows performing any control logic before changing values.
 
 
 - **Getter** → returns the value of an attribute.
@@ -509,7 +510,7 @@ public class Circle {
 ***
 
 
-### static and final keywords
+## 4. static and final keywords
 
 <img src="../resources/images/static-final.png">
 
@@ -576,7 +577,7 @@ variables and instance methods).
 >[CarRaceMain.java](./statics/CarRaceMain.java) | [Car.java](./statics/Car.java)
 
 
-### Scope of a Variable
+## 5. Scope of a Variable
 
 
 **Scope** defines the region of a program where a variable is `visible` and can be `referenced` (closely tied 
@@ -641,7 +642,7 @@ public class Circle {
 }
 ```
 
-## Collections: ArrayList
+## 6. Collections: ArrayList
 
 <img src="../resources/images/collections.png">
 
