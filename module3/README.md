@@ -130,7 +130,7 @@ blueprint. The blueprint defines the design, but each house can have its own pai
 - They initialize the object by setting initial values and performing any necessary setup operations.
 - Have the same name as the class and do not have a return type.
 - Can take parameters to set initial values for object attributes.
-- In Java development, the compiler defines a **default constructor** if none is provided.
+- In Java, the compiler defines a **default constructor** if none is provided.
   - It initializes the object with default values:
     - Numbers → 0
     - char → '\u0000'
@@ -338,6 +338,20 @@ the Circle class, and update the main method properly to demonstrate instantiati
 
 
 <img src="../resources/images/encapsulation.png">
+
+####  Benefits of Encapsulation
+
+* The dependent module (client) cannot break the dependency module (provider). It has no access to the module's 
+internals, so it can't corrupt its state — only the module's own methods can modify it. 
+* A change in the dependency module (the module's internals) cannot break the dependent module (client). The client only coupled 
+itself to the public interface, so internal refactoring causes no side effects outside the module. 
+The side effect is contained — inside the class, not propagated to clients.
+
+>**From the interaction perspective, modules can have two roles:**
+> * The dependent (uses something) → dependent module, client code, consumer
+> * The dependency (is used) → dependency module, provider, supplier
+
+<img src="../resources/images/benefits-of-encapsulation.png">
 
 ### Access Modifiers: Public, Private, Protected
 **Define the visibility of classes, methods, and variables**
