@@ -20,6 +20,7 @@
   * [5. Writing and running programs in Java](#5-writing-and-running-programs-in-java)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
   * [6. Variables, Data Types, and Operators](#6-variables-data-types-and-operators)
+    * [Java Naming Conventions](#java-naming-conventions)
     * [Primitive Types](#primitive-types)
     * [Reference Types](#reference-types)
     * [Operators in Java](#operators-in-java)
@@ -337,10 +338,36 @@ Write and run your first "Hello, World!" in Java
 
 
 
+### Java Naming Conventions
+
+- **Packages:** all lowercase, dot-separated  
+  Example: `cc.ku.ict.module3` `com.company.project`
+
+- **Classes & Interfaces:** **PascalCase (UpperCamelCase-Every word begins with an uppercase letter)**  
+  Use nouns.  
+  Examples: `Circle`, `BankAccount`, `Runnable`
+
+- **Methods:** **camelCase (lowerCamelCase-The first word begins with a lowercase letter)**  
+  Use verbs or verb phrases.  
+  Examples: `calculateArea()`, `getRadius()`
+
+- **Variables:** **camelCase (lowerCamelCase)**  
+  Use descriptive nouns.  
+  Examples: `radius`, `xCoordinate`
+
+- **Constants:** **UPPER_SNAKE_CASE**  
+  Use underscores between words.  
+  Examples: `MAX_RADIUS`, `DEFAULT_COLOR`
+
+***Java permits Unicode identifiers, but the convention is ASCII-only (a–z, A–Z, 0–9,_).***
+
+
 > ***Best Practices / Performance Tips***
 > 
 >Use meaningful names for identifiers i.e.;variables, constants, classes, objects and methods.  
 >This improves readability and makes the program easier to maintain.
+ 
+
 
 ### Primitive Types
 
