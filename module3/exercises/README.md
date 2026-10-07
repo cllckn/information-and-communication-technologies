@@ -74,14 +74,14 @@ Now, you will use this class with **Java Collections** (`ArrayList`) to perform 
 
 **Extend your application**
 - In the main method of the `BankAccountMain` class:
-- Use a loop structure (e.g., `while` or `do-while`) to repeatedly:
+- Use a loop structure (e.g., `do-while`) to repeatedly:
    - Ask the user to enter the bank account details (i.e.;**account number**, **account holder name**... )
    - Instantiate a new object with these values.
    - Print the BankAccount object using `toString()`.
    - Add the object into a collection (ArrayList).
 - After each iteration, ask the user whether they want to instantiate another account.
 - Exit the loop if the user chooses not to continue.
-- Change the loop type e.g. do-while, while, for
+
 
 * Iterate through the `ArrayList` and display accounts.
     - Use both **for loop** and **enhanced for loop** to practice iteration.
