@@ -61,6 +61,8 @@ A class is represented by a rectangle divided into three sections:
 
 ## Inheritance
 
+![Inheritance](../resources/images/inheritance.png)
+
 In software development, ***change is inevitable, not optional.*** Facilitating change is therefore essential in programming.
 
 **Code reuse** is one of the most effective mechanisms to achieve this.
@@ -89,7 +91,8 @@ Instead of repeating the same code in multiple places, it is defined once and re
 ```
 - Should be applied only between similar entities with an **"is-a"** or **"is-kind-of"** relationship.
 - Helps reduce duplication and improves maintainability.
-- **Note:** inheritance is not the only way to achieve reuse — **composition** (building a class using instances of 
+
+>**Note:** inheritance is not the only way to achieve code reuse — **composition** (building a class using instances of 
 other classes) is often preferred in modern design when the relationship isn't a true "is-a" ("favor composition over inheritance").
 
 **Examples of Inheritance:**
@@ -115,7 +118,7 @@ In a UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfi
 ```
 
 
-![Object Relationships](../resources/inheritance.png)
+
 
 **Code Example**
 >[Shape.java](./inheritance/Shape.java) | [Circle.java](./inheritance/Circle.java) | [Rectangle.java](./inheritance/Rectangle.java) | [EquilateralTriangle.java](./inheritance/EquilateralTriangle.java) | [InheritanceMain.java](./inheritance/InheritanceMain.java)
@@ -433,6 +436,3 @@ on the **contract** (methods defined in the interface), not the specific details
 ***
 ## Hands-on Exercise 6
 ***
-
-
-**For a comprehensive case study, please refer to the application available at https://github.com/cllckn/atm-application/tree/main**
