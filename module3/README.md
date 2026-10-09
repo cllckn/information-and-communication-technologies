@@ -682,7 +682,6 @@ public class Circle {
 >[Book.java](./collections/Book.java) | [CollectionsMain.java](./collections/CollectionsMain.java)
 
 
-
 ***
 ## [Hands-on Exercise 3](./exercises/README.md)
 ***
