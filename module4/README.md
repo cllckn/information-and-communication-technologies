@@ -264,6 +264,7 @@ Describes a relationship where one class holds a **lasting reference** (the refe
 
 **Different Types of Associations: Between `User` and `Address` Classes**
 
+<img src="../resources/images/association-types.png">
 
 **Unidirectional (One-to-One)**
 - User has one Address.
@@ -356,9 +357,9 @@ class Address {
 
 - **Polymorphism** is the ability of objects to take many forms — the same method call can behave differently depending 
 on the actual object it's invoked on.
-- Achieved through two mechanisms, both of which establish an **"is-a"** relationship:
+- Achieved through two mechanisms:
   - **Inheritance** — a subclass can be treated as an instance of its base class, since it inherits the base class's 
-  non-private properties and behaviors.
+  attributes and behaviors.
   - **Interface implementation** — a class implementing an interface can be treated as that interface type, even with 
   no inheritance relationship involved (e.g., `List<String> list = new ArrayList<>();`).
 - Because a subclass **is-a** base type (or an implementing class **is-a** interface type), it can be referenced using 
