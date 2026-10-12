@@ -1,3 +1,18 @@
+# Hands-on Exercise 1
+
+## Tasks
+
+1. Define a package named `xy.module4.exercises.exercise1`.
+2. Download the existing shape application given in `/module4/inheritance/` here.
+3. Make the necessary adjustments to include a new Square class.
+4. Modify the shape classes to support positioning in a 3-dimensional space. Add a new instance
+   variable z for the third dimension and make any necessary changes to methods and constructors.
+5. Add a method that calculates the perimeter.
+6. Modify the `main()` method accordingly.
+
+
+***
+
 # Hands-on Exercise 2: Inheritance with User, Customer, and Employee
 
 ## Learning Objective
@@ -55,7 +70,7 @@ We want to design a system that keeps information about **users**, **customers**
 - Test these methods in your main class.
 
 ***
-***
+
 
 
 
