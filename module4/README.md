@@ -25,16 +25,28 @@
 
 ## Introduction to UML: Class Diagrams
 
-- **Modeling** is forming an abstraction (a simplified view) of reality.
+- **Modeling** is the process of forming an abstraction (a simplified view) of reality.
+- As **software systems become** more complex, models are used to represent different aspects of them with the required 
+level of detail.
 - **Abstraction** hides unnecessary details and focuses on the relevant ones, reducing complexity.
 - The level of detail depends on the **purpose of the model**.
-- As software becomes more complex, models are used to represent different aspects of them with the required level of detail.
 
-The **Unified Modeling Language™ (UML®)** is a standard visual modeling language for **business analysts, software architects, and developers**, used to **describe, specify, design, and document** the structure and behavior of software system components — whether newly designed or already existing.
+The **Unified Modeling Language™ (UML®)** is a standard visual modeling language for **business analysts, software 
+architects, and developers**. It is used to **describe, specify, design, and document** the structure and behavior 
+of software system components — whether new or existing.
+
+**Benefits of Modeling**
+
+* **Improves Communication**
+  * Facilitates clear communication between business analysts, software architects, developers, and end users.
+  * Ensures that all stakeholders share a common understanding of the core business logic before implementation.
+* **Guides Implementation**
+  * Serves as a blueprint for **the** implementation phase.
 
 ### Class Diagram
 
-A **Class Diagram** is the most common diagram in UML and is essential for visualizing the static structure of a system. It shows classes, their attributes, operations, and relationships.
+A **Class Diagram** is the most common diagram in UML and is essential for visualizing the static structure of a system.
+It shows classes, their attributes, operations/functions, and relationships.
 
 A class is represented by a rectangle divided into three sections:
 
@@ -79,13 +91,14 @@ Instead of repeating the same code in multiple places, it is defined once and re
   a member from the outside world.
 ```java
     class Vehicle {
-        private String vin;      // NOT accessible in Car
+        private String vin;      // Vehicle Identification Number (VIN)- NOT accessible in Car
         protected int maxSpeed;  // accessible in Car
     }
 
     class Car extends Vehicle {
         void printVin() {
             System.out.println(vin); // compile error
+            System.out.println(maxSpeed); // okay
         }
     }
 ```
@@ -94,6 +107,9 @@ Instead of repeating the same code in multiple places, it is defined once and re
 
 >**Note:** inheritance is not the only way to achieve code reuse — **composition** (building a class using instances of 
 other classes) is often preferred in modern design when the relationship isn't a true "is-a" ("favor composition over inheritance").
+> 
+> Inheritance is a powerful feature, but deep class hierarchies can become incredibly fragile. Imagine a base class 
+> with five levels of subclasses. Making a single change to the base class can unpredictably break the derived classes.
 
 **Examples of Inheritance:**
 - User → Admin, RegisteredUser, GuestUser
@@ -141,6 +157,7 @@ In a UML Class Diagram, inheritance is drawn as a solid line with a hollow (unfi
 
 ### Annotations
 
+- Instruct the compiler, tools, frameworks, or runtime to do something.
 - Provide **metadata** about code (information for the compiler, tools, or runtime) rather than executable logic.
 - An annotation has no effect on its own — it only does something if a tool actively reads it:
   - **Compiler-facing** (read at compile time, discarded afterward): `@Override`, `@SuppressWarnings`, `@Deprecated` (triggers a compiler warning on use).
@@ -177,12 +194,17 @@ class Circle extends Shape {
 
 - Constructors are **not inherited** by derived classes.
 - When instantiating a derived class object, the **base class constructor** is always called first to initialize base members.
-- The call to `super(...)` (or `this(...)`, when delegating to another constructor in the same class) must be the **first statement** in the constructor body — no other code can precede it.
+- The call to `super(...)` (or `this(...)`, when delegating to another constructor in the same class) must be the 
+**first statement** in the constructor body — no other code can precede it.
 - If not explicitly called, the compiler inserts an implicit call to **`super()`** (the base class's no-argument constructor).
 - This implicit call only succeeds if the base class actually has an accessible no-argument constructor:
-  - If the base class defines **no constructors at all**, Java automatically provides a default no-argument constructor, so the implicit `super()` works.
-  - If the base class defines **at least one constructor**, Java no longer supplies that automatic default — so if none of them takes zero arguments, the derived class **must** explicitly call a suitable `super(args)` constructor, or the code will not compile.
-- This ensures proper **initialization along the inheritance chain**, from the topmost superclass down to the actual subclass being instantiated.
+  - If the base class defines **no constructors at all**, Java automatically provides a default no-argument constructor,
+  so the implicit `super()` works.
+  - If the base class defines **at least one constructor**, Java no longer supplies that automatic default — so if none 
+  of them takes zero arguments, the derived class **must** explicitly call a suitable `super(args)` constructor, or the 
+  code will not compile.
+- This ensures proper **initialization along the inheritance chain**, from the topmost superclass down to the actual 
+subclass being instantiated.
 
 
 **Code Example**
@@ -212,11 +234,14 @@ class Circle extends Shape {
 
 ***
 ## Hands-on Exercise 1
-1. Make the necessary adjustments to the existing shape application to include a new Square class.
-2. Modify the shape classes to support positioning in a 3-dimensional space. Add a new instance
+
+1. Define a package named `xy.module4.exercises.exercise1`.
+2. Download the existing shape application given in `/module4/inheritance/` here.
+3. Make the necessary adjustments to include a new Square class.
+4. Modify the shape classes to support positioning in a 3-dimensional space. Add a new instance
    variable z for the third dimension and make any necessary changes to methods and constructors.
-3. Add a method that calculates the perimeter.
-4. Modify the `main()` method accordingly.
+5. Add a method that calculates the perimeter.
+6. Modify the `main()` method accordingly.
 ***
 
 ***
