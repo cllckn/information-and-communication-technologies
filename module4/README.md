@@ -395,7 +395,11 @@ calls to it resolve at runtime based on the object's actual type — this is wha
 - This mechanism boosts code reuse and makes changes and extensions easier, since new types can be added without 
 modifying existing code.
 
-<img src="../resources/images/polymorphism-abstract-class.png">
+<img src="../resources/images/polymorphism.png">
+
+**Code Example**
+> [PolymorphismMain.java](./polymorphism/PolymorphismMain.java) | [Shape.java](./polymorphism/Shape.java) | [ShapeRenderer.java](./polymorphism/ShapeRenderer.java) | [Circle.java](./polymorphism/Circle.java) | [Rectangle.java](./polymorphism/Rectangle.java)
+
 
 ## Abstract Classes
 
@@ -408,6 +412,8 @@ modifying existing code.
 - Act as **blueprints** or **code holders** for derived classes.
 - Primarily used for **inheritance**, providing a shared framework.
 - Enhance **code reuse**, simplify **changes and extensions**, and support **polymorphism** — abstract methods specifically *guarantee* polymorphic variation, since every concrete subclass is forced to provide its own implementation (unlike a concrete base method, which a subclass may leave un-overridden with no variation).
+  
+<img src="../resources/images/polymorphism-abstract-class.png">
 
 
 ![Abstrac Classes](../resources/abstract-class.png)
