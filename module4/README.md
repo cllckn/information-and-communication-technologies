@@ -2,28 +2,27 @@
 
 <!-- TOC -->
 * [Module 4: Object-Oriented Programming (OOP) II](#module-4-object-oriented-programming-oop-ii)
-  * [Introduction to UML: Class Diagrams](#introduction-to-uml-class-diagrams)
+  * [1. Introduction to UML: Class Diagrams](#1-introduction-to-uml-class-diagrams)
     * [Class Diagram](#class-diagram)
-  * [Inheritance](#inheritance)
+  * [2. Inheritance](#2-inheritance)
     * [Method Overriding](#method-overriding)
     * [Annotations](#annotations)
     * [Inheritance and Constructors](#inheritance-and-constructors)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
-  * [Class Relationships](#class-relationships)
+  * [3. Class Relationships](#3-class-relationships)
     * [Inheritance ("is-a")](#inheritance-is-a)
     * [Dependency ("uses")](#dependency-uses)
     * [Association ("has-a")](#association-has-a)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
-  * [Polymorphism](#polymorphism)
-  * [Abstract Classes](#abstract-classes)
-  * [Hands-on Exercise 5](#hands-on-exercise-5)
-  * [Interfaces](#interfaces)
+  * [4. Polymorphism](#4-polymorphism)
+  * [5. Abstract Classes](#5-abstract-classes)
+  * [6. Interfaces](#6-interfaces)
     * [Benefits of Using Interfaces](#benefits-of-using-interfaces)
-  * [Hands-on Exercise 6](#hands-on-exercise-6)
+  * [Hands-on Exercise 4](#hands-on-exercise-4)
 <!-- TOC -->
 
-## Introduction to UML: Class Diagrams
+## 1. Introduction to UML: Class Diagrams
 
 - **Modeling** is the process of forming an abstraction (a simplified view) of reality.
 - As **software systems become** more complex, models are used to represent different aspects of them with the required 
@@ -71,7 +70,7 @@ A class is represented by a rectangle divided into three sections:
 
 
 
-## Inheritance
+## 2. Inheritance
 
 ![Inheritance](../resources/images/inheritance.png)
 
@@ -250,7 +249,7 @@ class Circle extends Shape {
 
 
 
-## Class Relationships
+## 3. Class Relationships
 
 - Programs are composed of modules and the interactions between them. In object-oriented design, classes often interact through a **provider–consumer relationship**.
 - The **provider** (or **low-level**) class offers certain functionality or services, while the **consumer** (or **high-level**) class depends on and uses that functionality.
@@ -378,7 +377,7 @@ class Address {
 
 
 
-## Polymorphism
+## 4. Polymorphism
 
 - **Polymorphism** is the ability of objects to take many forms — the same method call can behave differently depending 
 on the actual object it's invoked on.
@@ -401,7 +400,7 @@ modifying existing code.
 > [PolymorphismMain.java](./polymorphism/PolymorphismMain.java) | [Shape.java](./polymorphism/Shape.java) | [ShapeRenderer.java](./polymorphism/ShapeRenderer.java) | [Circle.java](./polymorphism/Circle.java) | [Rectangle.java](./polymorphism/Rectangle.java)
 
 
-## Abstract Classes
+## 5. Abstract Classes
 
 - Declared using the **`abstract`** keyword; cannot be instantiated directly (`new Shape()` is illegal if `Shape` is abstract).
 - May contain:
@@ -422,17 +421,9 @@ modifying existing code.
 **Code Example**
 > [AbstractClassesMain.java](./abstractclasses/AbstractClassesMain.java) | [Shape.java](./abstractclasses/Shape.java) | [ShapeRenderer.java](./abstractclasses/ShapeRenderer.java) | [Circle.java](./abstractclasses/Circle.java) | [Rectangle.java](./abstractclasses/Rectangle.java)
 
-***
-## Hands-on Exercise 5
-1. Modify the `AbstractClassesMain` application to also support the Square shape.
-2. The Square class should inherit from the Shape class, include a sideLength attribute, and override the 
-toString() and calculateArea()  methods.
-3. Modify the `main()` method accordingly.
-***
 
 
-
-## Interfaces
+## 6. Interfaces
 
 - Traditionally contain only **abstract methods** (no body) and **constants** — but since Java 8, interfaces can also include:
   - **Default methods** — have a body, provide default behavior implementing classes may use as-is or override.
@@ -466,5 +457,5 @@ on the **contract** (methods defined in the interface), not the specific details
 
 
 ***
-## Hands-on Exercise 6
+## Hands-on Exercise 4
 ***
