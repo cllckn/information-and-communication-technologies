@@ -3,7 +3,7 @@ package cc.ku.ict.module4.polymorphism;
 
 public class ShapeRenderer {
 
-    // Polymorphism allows client code (ShapeRenderer) to handle different shapes without modification.
+    // Polymorphism allows client code/Consumer (ShapeRenderer) to handle different shapes without modification.
     public void render1(Shape shape) {
         System.out.println(shape.draw());
         //System.out.println("Area = " + shape.calculateArea());
