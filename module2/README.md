@@ -45,6 +45,13 @@
     * [Method Signature](#method-signature)
     * [Method Overloading](#method-overloading)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
+  * [10. Debugging Java Applications in IntelliJ IDEA](#10-debugging-java-applications-in-intellij-idea)
+    * [What Is Debugging?](#what-is-debugging)
+    * [Starting a Debug Session](#starting-a-debug-session)
+    * [Navigating Through Code](#navigating-through-code)
+    * [Inspecting Program State](#inspecting-program-state)
+    * [Advanced Techniques](#advanced-techniques)
+    * [Typical Debugging Workflow](#typical-debugging-workflow)
 <!-- TOC -->
 
 ---
@@ -364,8 +371,9 @@ Write and run your first "Hello, World!" in Java
 
 > ***Best Practices / Performance Tips***
 > 
->Use meaningful names for identifiers i.e.;variables, constants, classes, objects and methods.  
->This improves readability and makes the program easier to maintain.
+> Use meaningful names for identifiers i.e.;variables, constants, classes, objects and methods.  
+> This improves readability and makes the program easier to maintain.
+> An identifier can contain letters, digits, and underscores, but it cannot start with a digit.
  
 
 
@@ -1354,3 +1362,50 @@ public class GradeCalculatorMain {
 }
 ```
 
+
+
+## 10. Debugging Java Applications in IntelliJ IDEA
+
+### What Is Debugging?
+
+**Debugging** is the process of finding, understanding, and fixing defects (bugs) in a program.
+
+Instead of guessing why code misbehaves, we run it in a controlled way, pause it at chosen points, and inspect its actual state. The goal is to find where **actual behavior** diverges from **expected behavior**.
+
+### Starting a Debug Session
+
+1. **Set a breakpoint** by clicking the gutter next to the line number where execution should pause (a red dot appears).
+2. **Run in debug mode** using the bug icon or `Shift+F9`.
+3. The program runs normally until it reaches the breakpoint, then **pauses before executing that line**.
+
+### Navigating Through Code
+
+| Action | Shortcut | What it does | When to use it |
+|---|---|---|---|
+| **Step Over** | `F8` | Executes the current line and moves to the next, without entering called methods | You trust the method and want to continue |
+| **Step Into** | `F7` | Enters the method called on the current line | You want to see what happens inside the method |
+| **Step Out** | `Shift+F8` | Finishes the current method and returns to the caller | You have seen enough of the current method |
+| **Resume** | `F9` | Runs until the next breakpoint | You want to skip ahead |
+| **Run to Cursor** | `Alt+F9` | Runs until the line where the cursor is placed | You want to jump to a specific line without a breakpoint |
+
+### Inspecting Program State
+
+- **Variables panel:** shows the current values of local variables and fields. Objects can be expanded to inspect their contents.
+- **Watches:** expressions re-evaluated at every step, for example:
+  - `user.getName()`
+  - `list.size() > 5`
+- **Evaluate Expression** (`Alt+F8`): runs arbitrary code in the current context, useful for testing a hypothesis on the fly.
+
+### Advanced Techniques
+
+- **Conditional breakpoints:** right-click a breakpoint and add a condition (e.g., `i == 100`) so execution stops only when the condition is true. This is useful in loops and frequently called methods.
+- **Frames / Call Stack panel:** shows the chain of method calls that led to the current point, helping you understand *how* execution got here.
+
+### Typical Debugging Workflow
+
+1. **Reproduce** the bug reliably.
+2. **Place a breakpoint** near where the problem likely occurs.
+3. **Step through** the code while watching relevant variables.
+4. **Compare** actual values with expected ones to find where they diverge.
+5. **Fix** the defect.
+6. **Re-run** to confirm the fix and check that nothing else broke.
