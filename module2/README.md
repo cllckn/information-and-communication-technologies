@@ -45,7 +45,7 @@
     * [Method Signature](#method-signature)
     * [Method Overloading](#method-overloading)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
-  * [10. Debugging Java Applications in IntelliJ IDEA](#10-debugging-java-applications-in-intellij-idea)
+  * [10. Debugging](#10-debugging)
     * [What Is Debugging?](#what-is-debugging)
     * [Starting a Debug Session](#starting-a-debug-session)
     * [Navigating Through Code](#navigating-through-code)
@@ -1364,7 +1364,9 @@ public class GradeCalculatorMain {
 
 
 
-## 10. Debugging Java Applications in IntelliJ IDEA
+## 10. Debugging
+
+Debugging Java Applications in IntelliJ IDEA
 
 ### What Is Debugging?
 
