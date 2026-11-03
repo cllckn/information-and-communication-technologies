@@ -69,7 +69,7 @@ The assignment will be evaluated based on two primary components:
 
 1) Project Implementation: The quality and effectiveness of the project you implement.
 
-2) Oral Exam Performance: Your performance during the oral exam, which will take place during your lab class in Week 13 ( the week starting November 23, 2026 ).
+2) Oral Exam Performance: Your performance during the oral exam, which will take place during your lab class in Week 14 ( the week starting November 30, 2026 ).
 
 - **Correctness** (Does the application meet the requirements?).
 - **Code Quality** (Readable, well-structured, meaningful names).
@@ -136,7 +136,7 @@ Students are required to attach their report as a PDF file and submit it via **e
 
 
 ## Late Submission and Oral Exam Policy
-Students must submit their **reports and source code** before the **oral exam** (during their lab class in **Week 13**), 
+Students must submit their **reports and source code** before the **oral exam** (during their lab class in **Week 14**), 
 as the oral exam time is crucial for evaluation.
 
 If students are unable to attend the scheduled oral exam, they will be allowed to defend their project one week 
