@@ -129,7 +129,6 @@ Extend the system from **Hands-on Exercise 2** to include additional entities an
 - Inspection of variables using the **Variables panel** or **Watches**
 
 
-
 ## Additional Challenge
 - Add methods to add/remove Images from a ExtendedUser.
 - Print ExtendedUser details to see all associated Address and Images.
@@ -138,18 +137,15 @@ Extend the system from **Hands-on Exercise 2** to include additional entities an
 
 
 
-
-
-
-# Hands-on Exercise 4: Building an Extensible User Profile System with Interfaces
+# Hands-on Exercise 4: Building an Extensible User Profile System
 
 ## Scenario
 
-You are working on a **user profile module** for a social platform. Each user has a home address and a collection of 
-profile images. The product team has already announced that new kinds of addresses (home, office) and new kinds of 
-images (encrypted, cloud-hosted, ...) will be added over the next releases.
+You are working on a **user profile module** for a social platform. Each user has one address and a collection of 
+profile images. The address format is stable and will not change. The product team, however, has announced that new 
+kinds of images (encrypted now, cloud-hosted and others later) will be added over the next releases.
 
-Your job is to design the module so that **these features can be added later without modifying existing, tested code**.
+Your job is to design the module so that **new image types can be added without modifying existing, tested code**.
 
 ![](../../resources/images/exercise4.png)
 
@@ -158,35 +154,49 @@ Your job is to design the module so that **these features can be added later wit
 After completing this exercise, you should be able to:
 
 - Reinforce inheritance and association from Exercise 3.
-- Apply the **Dependency Inversion Principle (DIP)**: high-level classes depend on interfaces, not on concrete classes.
-- Use **polymorphism** to treat different implementations through one interface type.
-- Extend the system using the **Open/Closed Principle (OCP)**: open for extension, closed for modification.
+- Use **polymorphism** to treat different image types through one interface.
+- Decide **where an interface is worth introducing** and where a concrete class is enough.
+- Apply the **Dependency Inversion Principle (DIP)**: high-level classes depend on abstractions, not on concrete classes.
+- Apply the **Open/Closed Principle (OCP)**: add new behaviour by adding new classes.
+- Apply the **Single Responsibility Principle (SRP)**: separate data from reporting.
+
+
+## Design Principles
+
+| Principle | Explanation                                                                                    |
+|---|------------------------------------------------------------------------------------------------|
+| **SRP** | A class should have only one reason to change.                                                 |
+| **OCP** | Modules should be open for extension, but closed for modification.                             |
+| **DIP** | High-level modules should not depend on low-level modules; both should depend on abstractions. |
 
 ## Part 1: Refactor Exercise 3
 
 1. Copy all files from Exercise 3 into the package `cc.ku.ict.module4.exercises.exercise4`.
 
-2. Define the interfaces and make the existing classes implement them:
+2. Define the `IImage` interface and update the existing classes:
 
-   | Interface | Methods | Implemented by |
+   | Type | Methods | Notes |
       |---|---|---|
-   | `IAddress` | `String getInfo()` | `Address` |
-   | `IImage` | `String getInfo()`, `String getFileName()` | `Image` |
+   | `IImage` (interface) | `String getInfo()`, `String getFileName()` | New |
+   | `Image` | implements `IImage` | Update |
+   | `Address` (concrete class) | add `String getInfo()` | No interface: addresses are stable and will not change |
 
-   Use the same method name (`getInfo()`) in the interface and all implementing classes.
-
-3. Update `ExtendedUser` so that it depends **only on the interfaces**:
-   - One-to-one, unidirectional association with `IAddress`.
+3. Update `ExtendedUser`:
+   - One-to-one, unidirectional association with `Address`.
    - One-to-many, unidirectional association with `List<IImage>`.
-   - No import or mention of `Address` or `Image` anywhere in `ExtendedUser`.
-4. Add `addImage(IImage image)` and `removeImage(IImage image)` to `ExtendedUser`.
-5. Use constructor chaining: call `super(...)` for inherited properties, and initialize `address` and the `images` list in the derived class.
+   - No import or mention of `Image` anywhere in `ExtendedUser`.
+   - `addImage(IImage image)` and `removeImage(IImage image)`; reject `null` values.
+   - The class must **own its list**: copy the list passed to the constructor, and do not return the internal list from `getImages()`.
 
-6. Override `toString()` in all classes. In `ExtendedUser`, build the output by calling `getInfo()` on the associated `IAddress` and on every `IImage`; do not check the concrete type.
+4. Use constructor chaining: call `super(...)` for inherited properties, and initialize `address` and the `images` list in the derived class.
 
-## Part 2: Add Behaviour Using the Interfaces
+5. Override `toString()` in all classes as a **debugging aid**. In `ExtendedUser`, call `getInfo()` on the address 
+and on every `IImage`; do not check the concrete type.
 
-Define a new class `ProfileReport` that generates a text summary of a user:
+## Part 2: Separate Reporting (SRP)
+
+`ExtendedUser` stores data. It should not be responsible for producing user-facing reports. 
+Define a class named `ProfileReport`:
 
 ```java
 public class ProfileReport {
@@ -194,46 +204,53 @@ public class ProfileReport {
 }
 ```
 
-The report must list the user's name, the address info, and the info of each image. It must work for **any** `IAddress` 
-and `IImage` implementation through polymorphism, with no `instanceof` checks and no casting.
+The report must list the user's name, email, address info, and the info of each image. It must work for **any** 
+`IImage` implementation through polymorphism, with no `instanceof` checks and no casting.
 
 ## Part 3: Extend Without Modifying (OCP)
 
-The product team requests the following features. Implement them **only by adding new classes**.
+The product team requests a new image type. Implement it **only by adding a new class**.
 
-1. `EncryptedImage` implements `IImage`
-   - Attributes: `encryptionAlgorithm`, `encryptionKey`.
-   - `getInfo()` must show the file name and the algorithm. **Do not print the full key** (show only a masked version, 
-   e.g. `****a9f2`).
+`EncryptedImage` implements `IImage`:
 
-2. `HomeAddress` and `OfficeAddress` implement `IAddress`
-   - `HomeAddress`: street, city, postal code.
-   - `OfficeAddress`: company name, building, floor, city.
+- Attributes: `encryptionAlgorithm`, `encryptionKey`.
+- `getInfo()` must show the file name and the algorithm. **Do not print the full key**: show only a masked version, 
+e.g. `****a9f2`.
 
-
-> **Rule:** `ExtendedUser`, `ProfileReport`, `Address`, `Image`, and both interfaces must remain **unchanged** while 
-you add Part 3. 
+> **Rule:** `ExtendedUser`, `ProfileReport`, `Address`, `Image`, and `IImage` must remain **unchanged** during Part 3.
 
 ## Part 4: Testing
 
 Write a `Main` (or test) class that:
 
-1. Define  `ExtendedUser` objects.
-2. Assigns different address types to them, declared with the interface type:
-   ```java
-   IAddress home = new HomeAddress(...);
-   IAddress office = new OfficeAddress(...);
-   ```
-3. Gives each user a **mix** of `Image` and `EncryptedImage` objects, declared as `IImage`.
-4. Prints each user with `toString()` and with `ProfileReport.generate(...)`.
-5. Calls `removeImage()` on one user and prints the report again to show the change.
+1. Instantiate at least **two** `ExtendedUser` objects with different `Address` objects.
+2. Gives each user a **mix** of `Image` and `EncryptedImage` objects, declared as `IImage`.
+3. Prints each user with `toString()` and with `ProfileReport.generate(...)`.
+4. Calls `removeImage()` on one user and prints the report again to show the change.
 
 **Expected output (example format only):**
 
 ```text
 User: Ali Karimov (ali@example.com)
-Address: Home - 12 Abay St, Petropavl, 150000
+Address: 12 Abay St, Petropavl
 Images (2):
-  1. photo1.jpg - 1920x1080, 340 KB
+  1. photo1.jpg - https://example.com/photo1.jpg, 340 KB
   2. passport.png - encrypted (AES-256), key: ****a9f2
 ```
+
+
+## Additional Challenge
+
+- Add a `CloudImage` class (attributes: `bucket`, `objectKey`) that implements `IImage`, and add one to a user in `Main`. Confirm that no existing file changed.
+- Debugging: Use the IntelliJ debugger on your test program. Set a breakpoint in `ProfileReport.generate()` and:
+  - Step through the loop over `images` and observe how the runtime type of each element changes.
+
+
+## Reflection Questions
+
+
+1. Which class is the **high-level** module and which are the **low-level** modules? Where does the dependency arrow point after applying DIP?
+2. Why is there an interface for images but not for addresses? Under what circumstances would you introduce `IAddress` later, and what would it cost?
+3. What would you have had to change in `ExtendedUser` if you had **not** used `IImage` when `EncryptedImage` was added?
+4. Where in your code does polymorphism happen? Point to a specific line.
+5. Why is `ProfileReport` a separate class instead of a method inside `ExtendedUser`? What change would affect only `ProfileReport`?
