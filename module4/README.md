@@ -20,6 +20,8 @@
   * [6. Interfaces](#6-interfaces)
     * [Benefits of Using Interfaces](#benefits-of-using-interfaces)
   * [Hands-on Exercise 4](#hands-on-exercise-4)
+  * [Conclusion](#conclusion)
+    * [Key Takeaways](#key-takeaways)
 <!-- TOC -->
 
 ## 1. Introduction to UML: Class Diagrams
@@ -251,9 +253,14 @@ class Circle extends Shape {
 
 ## 3. Class Relationships
 
-- Programs are composed of modules and the interactions between them. In object-oriented design, classes often interact through a **provider–consumer relationship**.
-- The **provider** (or **low-level**) class offers certain functionality or services, while the **consumer** (or **high-level**) class depends on and uses that functionality.
-- This separation *can* support **loose coupling** — but only if the consumer depends on an **abstraction** (an interface or abstract class) rather than a concrete provider class directly. If the consumer is hard-wired to a specific concrete class, the relationship is still tightly coupled, even though it's technically "provider–consumer." Loose coupling is the goal, not an automatic result of the pattern.
+- Programs are composed of modules and the interactions between them. In object-oriented design, classes often 
+interact through a **provider–consumer relationship**.
+- The **provider** (or **low-level**) class offers certain functionality or services, while the **consumer** 
+(or **high-level**) class depends on and uses that functionality.
+- This separation *can* support **loose coupling** — but only if the consumer depends on an **abstraction** 
+(an interface or abstract class) rather than a concrete provider class directly. If the consumer is hard-wired to a 
+specific concrete class, the relationship is still tightly coupled, even though it's technically "provider–consumer." 
+Loose coupling is the goal, not an automatic result of the pattern.
 
 | Classes                    | Role / Description                                              |
 |-----------------------------|-------------------------------------------------------------------|
@@ -265,7 +272,8 @@ Describes a relationship where a class is derived from a base class, reusing and
 - UML notation: solid line with a **hollow triangle** pointing to the base class.
 
 ### Dependency ("uses")
-Describes a **temporary** relationship where one class uses another to perform a task — typically as a method parameter, a local variable, or a return type — without holding a lasting reference to it as a field.
+Describes a **temporary** relationship where one class uses another to perform a task — typically as a method parameter,
+a local variable, or a return type — without holding a lasting reference to it as a field.
 - Can be validated using the **"uses"** test (e.g., `Printer` *uses* `Document`).
 - UML notation: **dashed line** with an open arrowhead, pointing to the class being used.
 
@@ -371,6 +379,7 @@ class Address {
 ```
 
 
+
 ***
 ## [Hands-on Exercise 3](./exercises/README.md)
 ***
@@ -459,3 +468,29 @@ on the **contract** (methods defined in the interface), not the specific details
 ***
 ## Hands-on Exercise 4
 ***
+
+
+
+## Conclusion
+
+Good object-oriented design is largely about **managing change**: every principle in this module is a strategy for 
+keeping the cost of change low.
+
+### Key Takeaways
+
+1. **Design for change where change is expected.** Use concrete classes for stable concepts (e.g. `Address` in Exercise 4), and use 
+abstractions only where variation is actually expected (e.g. `IImage` in Exercise4).
+2. **Program to interfaces, not implementations (DIP).** High-level code depends on abstractions, so clients rely only 
+on the contract and implementations can be swapped and tested in isolation.
+3. **Favor composition over inheritance.** Use inheritance only for a true "is-a" relationship where a subclass can 
+safely substitute for its parent; subclasses are tightly coupled to their base class, so a base-class change can break 
+them, especially in deep hierarchies.
+4. **Extend by adding code, not editing tested code (OCP).** Introduce new classes implementing the same interface to 
+support new behavior.
+5. **One class, one reason to change (SRP).** SRP is separation of concerns at the class level: unrelated 
+responsibilities in one class become tightly coupled, so a change for one can break the other. Separate them to keep 
+changes local and bugs easier to find. SRP is separation of concerns applied at the class level. Separation of concerns 
+is the broader idea (it also covers layers, modules, and MVC)
+6. **High cohesion and loose coupling are enablers.** They make understandability, testability, and reuse possible, 
+but the payoff depends on boundaries drawn around real responsibilities.
+
