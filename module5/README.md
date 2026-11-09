@@ -2,37 +2,47 @@
 
 <!-- TOC -->
 * [Module 5: Database Management Systems (DBMS)](#module-5-database-management-systems-dbms)
-  * [Introduction to Database Management Systems](#introduction-to-database-management-systems)
-  * [Database System](#database-system)
-  * [Essential Features of a Database Management System (DBMS)](#essential-features-of-a-database-management-system-dbms)
-  * [Database Development Lifecycle](#database-development-lifecycle)
+  * [1. Introduction to Database Management Systems (DBMS)](#1-introduction-to-database-management-systems-dbms)
+  * [2. Data and Information](#2-data-and-information)
+  * [3. Database System](#3-database-system)
+  * [4. Essential Features of a Database Management System (DBMS)](#4-essential-features-of-a-database-management-system-dbms)
+  * [5. Some Well-Known Relational Database Management Systems (RDBMS)](#5-some-well-known-relational-database-management-systems-rdbms)
+  * [6. Some Well-Known NoSQL Database Management Systems (NoSQL DBMS)](#6-some-well-known-nosql-database-management-systems-nosql-dbms)
+  * [7. Setting up the development environment](#7-setting-up-the-development-environment)
+    * [PostgreSQL (for relational DB Operations)](#postgresql-for-relational-db-operations)
+    * [Designing ER diagrams](#designing-er-diagrams)
+    * [MongoDB (for NoSQL DB Operations)](#mongodb-for-nosql-db-operations)
+    * [IntelliJ IDEA (for Java-Based Program Development)](#intellij-idea-for-java-based-program-development)
+  * [8. Database Development Lifecycle](#8-database-development-lifecycle)
     * [1. Requirement Analysis](#1-requirement-analysis)
     * [2. Design](#2-design)
     * [3. Implementation](#3-implementation)
     * [4. Maintenance](#4-maintenance)
-    * [Business Rules](#business-rules)
-    * [Data Model: Entity–Relationship (ER) Model](#data-model-entityrelationship-er-model)
+  * [9. Business Rules](#9-business-rules)
+  * [10. Data Model: Entity–Relationship (ER) Model](#10-data-model-entityrelationship-er-model)
     * [Benefits of Data Modeling](#benefits-of-data-modeling)
     * [The Data Modeling Process](#the-data-modeling-process)
     * [Key Components of a Data Model](#key-components-of-a-data-model)
-  * [Relational Databases and Basic SQL](#relational-databases-and-basic-sql)
-    * [**Setting Up the Working Environment**](#setting-up-the-working-environment)
-      * [**Installing PostgreSQL**](#installing-postgresql)
-      * [**Installing pgAdmin**](#installing-pgadmin)
-      * [**Importing and Exporting Sample Databases**](#importing-and-exporting-sample-databases)
-    * [Basic SQL](#basic-sql)
+  * [11. Relational Databases and Basic SQL](#11-relational-databases-and-basic-sql)
+    * [Terminology](#terminology)
+    * [Setting Up the Working Environment](#setting-up-the-working-environment)
+      * [Importing and Exporting Sample Database](#importing-and-exporting-sample-database)
+    * [Basic Structured Query Language (SQL)](#basic-structured-query-language-sql)
       * [CREATE DATABASE](#create-database)
       * [CREATE TABLE](#create-table)
       * [SELECT](#select)
       * [INSERT INTO](#insert-into)
-      * [**UPDATE**](#update)
-      * [**DELETE**](#delete)
-  * [NoSQL Databases](#nosql-databases)
+      * [UPDATE](#update)
+      * [DELETE](#delete)
+  * [12. NoSQL Databases](#12-nosql-databases)
     * [Comparison with Relational DB:](#comparison-with-relational-db)
     * [Main Types of NoSQL Databases](#main-types-of-nosql-databases)
-    * [MongoDB NoSQL Database](#mongodb-nosql-database)
-  * [Using a Programming Language to Interact With a Database](#using-a-programming-language-to-interact-with-a-database)
+    * [1.3 MongoDB NoSQL Database](#13-mongodb-nosql-database)
+      * [Two Key Structures in a Cluster](#two-key-structures-in-a-cluster)
+  * [13. Using a Programming Language to Interact With a Database](#13-using-a-programming-language-to-interact-with-a-database)
     * [Database Drivers – Core Functions](#database-drivers--core-functions)
+    * [Initializing A New Project Using IntelliJ IDEA for Java-Based Program Development](#initializing-a-new-project-using-intellij-idea-for-java-based-program-development)
+      * [Loading Database Driver Into The Project Environment](#loading-database-driver-into-the-project-environment)
     * [Database Operations with Java and PostgreSQL](#database-operations-with-java-and-postgresql)
       * [Example Workflow (Conceptual)](#example-workflow-conceptual)
     * [Database Operations with Java and MongoDB](#database-operations-with-java-and-mongodb)
@@ -43,43 +53,159 @@
 
 
 
-## Introduction to Database Management Systems
-- A **database** is a collection of related data designed for efficient storage, retrieval, management, and manipulation.
-- A **Database Management System (DBMS)** is specialized software that controls and manages databases and 
-provides interfaces for database clients to store, retrieve, and manipulate data efficiently.
+
+## 1. Introduction to Database Management Systems (DBMS)
+
+* A **database** is a persistent and organized collection of related data designed for efficient storage, retrieval,
+  manipulation, management, and protection.
+* A **Database Management System (DBMS)** is specialized software that controls and manages databases and
+  provides interfaces for database clients to store, retrieve, and manipulate data efficiently.
 
 
-## Database System
+As applications grow in size and complexity, managing data directly through files and in-memory structures becomes
+inefficient, error-prone, and difficult to scale. A Database Management System (DBMS) provides a systematic way to
+store, organize, retrieve, and protect large volumes of persistent data while ensuring efficiency, consistency,
+security, and concurrent access by multiple users and applications. By abstracting low-level storage details and
+optimizing data access, a DBMS enables programs to focus on problem-solving logic rather than data handling, making
+it an essential component of modern software systems.
+
+![](../resources/images/dbms-big-picture.png)
+
+
+In summary:
+* Data originates from the problem domain.
+* Programs process it using algorithms, executed by the CPU.
+* Data is temporarily stored in RAM as data structures.
+* Fast access is provided by RAM.
+* Persistent, structured, and shared data is managed by a DBMS, which ensures long-term retention.
+
+
+## 2. Data and Information
+
+- Raw facts that have not been processed or given meaning are referred to as **data**.
+- When data is processed, organized, or analyzed, it is transformed into meaningful **information**.
+- **Information** represents the meaning derived from data and provides context.
+- Context is obtained by associating data with other related data.
+
+**Example:**
+
+> 80
+
+This number, as raw data without context, has no clear meaning on its own.
+
+> 80 is the final exam score of Student A in the Database course.
+
+By associating it with other data (such as the student, course, and assessment type),
+we provide **context**, allowing us to understand its meaning as information.
+
+- Accurate, relevant, and timely information is essential for effective **decision-making**.
+- Making correct and informed decisions is crucial for the **survival and success of organizations**.
+- **Data management** is one of the most fundamental activities in any organization.
+- Data management is the discipline concerned with the proper **generation, storage, organization, access, and
+  protection** of data.
+
+
+***Database Management Systems (DBMSs) are specialized software systems that manage data and enable its transformation
+into meaningful information.***
+
+
+## 3. Database System
 A **Database System** consists of three main parts:
-- **Database** = Raw Data + Metadata (used to define relationships and data characteristics, forming the logical 
-structure of the database).
-- **DBMS (Database Management System)** 
+- **Database** = Raw Data + Metadata (used to define relationships and data characteristics, forming the logical
+  structure of the database).
+- **DBMS (Database Management System)**
 - **Database clients** = Application software or database client tools that interact with the DBMS.
 
-<img src="../resources/db-integration.png" width="400" alt="Database System">
+<img src="../resources/images/database-system.png" width="800" alt="Database System">
+
+---
 
 
-## Essential Features of a Database Management System (DBMS)
 
-- **Data Integration**:  
-  Efficiently manages and organizes data to avoid unnecessary duplication.  
-  *Relational DBMSs* enforce structured relationships, while *NoSQL systems* focus on flexible data organization.
+## 4. Essential Features of a Database Management System (DBMS)
 
-- **Data Integrity**:  
-  Ensures data remains accurate and consistent.  
-  *Relational DBMSs* enforce integrity through schemas and constraints (e.g., primary and foreign keys),  
-  whereas *NoSQL systems* often relax these rules to achieve higher performance and scalability.
+- **Data Integration**  
+  Efficiently manages and organizes data to avoid unnecessary duplication, which can lead to anomalies in insert,
+  update, and delete operations.
+  - *Relational DBMSs* enforce structured relationships among data.
+  - *NoSQL systems* focus on flexible data organization to handle diverse and evolving data types.
 
-- **Data Security**:  
-  Protects data from unauthorized access, system failures, and attacks.  
-  Both SQL and NoSQL systems implement authentication, authorization, and backup mechanisms, though methods differ.
+- **Data Integrity**  
+  Ensures that data remains accurate, consistent, and reliable over time.
+  - *Relational DBMSs* enforce integrity through schemas and constraints, such as primary and foreign keys.
+  - *NoSQL systems* often relax these rules to achieve higher performance and scalability.
 
-- **Data Abstraction**:  
-  Provides a logical view of data, hiding the complexity of storage structures.  
-  *Relational DBMSs* use tables, while *NoSQL systems* use alternative models like key-value pairs, documents, or graphs.
+- **Data Security**  
+  Protects data from unauthorized access, system failures, and attacks.
+  - Both SQL and NoSQL systems implement mechanisms such as authentication, authorization, and backup, though
+    implementation methods may differ.
+
+- **Data Abstraction**  
+  Provides a logical view of data, hiding the complexity of underlying storage structures.
+  - *Relational DBMSs* organize data in tables with defined schemas.
+  - *NoSQL systems* use alternative models such as key-value stores, documents, wide-column stores, or graphs.
 
 
-## Database Development Lifecycle
+---
+
+## 5. Some Well-Known Relational Database Management Systems (RDBMS)
+
+- **PostgreSQL** – An advanced open-source RDBMS with strong support for SQL and some NoSQL features, known for data integrity, extensibility, and reliability.
+- **MySQL** – An open-source RDBMS known for its speed, ease of use, and reliability, widely used in web applications and data-driven platforms.
+- **Oracle Database** – A commercial RDBMS used in enterprise applications, offering high performance, strong security, and scalability.
+- **Microsoft SQL Server** – A robust RDBMS from Microsoft, widely used in business applications and tightly integrated with Windows environments.
+- **SQLite** – A lightweight, embedded RDBMS often used in mobile applications and local storage, without requiring a separate server.
+- **IBM Db2** – A high-performance RDBMS designed for large-scale enterprise applications, offering AI-driven optimizations.
+- **MariaDB** – A MySQL-compatible open-source database known for enhanced performance, security, and scalability.
+
+---
+
+## 6. Some Well-Known NoSQL Database Management Systems (NoSQL DBMS)
+
+- **MongoDB** – A popular document-oriented database that stores data in flexible JSON-like documents, ideal for dynamic and evolving datasets.
+- **Cassandra** – A highly scalable wide-column store designed for handling large volumes of distributed data across multiple nodes with high availability.
+- **Redis** – An in-memory key-value store known for extreme speed, used for caching, real-time analytics, and messaging.
+- **Couchbase** – A distributed NoSQL document database combining key-value access with flexible queries and full-text search capabilities.
+- **Neo4j** – A graph database optimized for storing and querying highly connected data, widely used in social networks and recommendation engines.
+- **Amazon DynamoDB** – A fully managed key-value and document database service offered by AWS, known for automatic scaling and high availability.
+- **Firebase Realtime Database** – A cloud-hosted NoSQL database for real-time synchronization in mobile and web applications.
+
+---
+
+## 7. Setting up the development environment
+
+To practice throughout this course, install/register/configure the following tools:
+
+---
+
+### PostgreSQL (for relational DB Operations)
+- PostgreSQL is an open-source and powerful relational database management system.
+- Complies with SQL standards and supports Linux, macOS, and Windows.
+- Download Link: [Download PostgreSQL](https://www.postgresql.org/download/) any version that can
+  be installed without issues.
+* For setting up the working environment, refer to Module 4.
+
+---
+
+### Designing ER diagrams
+
+Draw.io (now also known as diagrams.net) is a free and web-based diagramming tool used to design Entity Relationship(ER)  
+models.
+
+* https://app.diagrams.net/
+
+---
+
+
+### MongoDB (for NoSQL DB Operations)
+
+* https://www.mongodb.com/products/platform/cloud
+
+---
+
+### IntelliJ IDEA (for Java-Based Program Development)
+
+## 8. Database Development Lifecycle
 
 The **Database Development Lifecycle** is a structured process used to design and build high-quality databases in a 
 systematic and efficient way. It breaks database development into distinct phases, each with specific goals and 
@@ -129,7 +255,7 @@ The Database Development Lifecycle typically consists of four fundamental phases
 
 
 
-### Business Rules
+## 9. Business Rules
 
 Specific statements that define or constrain business data and operations. They often originate from 
 requirement list.
@@ -163,7 +289,7 @@ Once these rules are defined, the next step is to **model the database** to impl
 
 
 
-### Data Model: Entity–Relationship (ER) Model
+## 10. Data Model: Entity–Relationship (ER) Model
 
 A **data model** is a conceptual tool used to represent complex real-world data structures in a simplified, often **graphical**, form.
 
@@ -200,32 +326,43 @@ Data modeling is an **iterative** process:
 logical structure of the database.
 
 
-## Relational Databases and Basic SQL
+## 11. Relational Databases and Basic SQL
 
-- **Relational Database**: Organizes data into **tables** (rows = records, columns = attributes).
-- Relationships established using **keys**:
+The **relational model** organizes data into **tables (relations)** consisting of **rows (tuples)** and **columns
+(attributes)**.
+
+It is based on solid mathematical foundations (set theory and predicate logic) and is the most widely used data model
+in database systems.
+
+Relationships established using **keys**:
   - **Primary Key** → unique identifier of a row.
   - **Foreign Key** → links rows between tables.
-- **SQL (Structured Query Language)** is the standard language for relational databases.
+
+**SQL (Structured Query Language)** is the standard language for relational databases.
 
 
+### Terminology
 
-### **Setting Up the Working Environment**
+<img src="../resources/images/table-structure.png" >
 
-To work with SQL databases efficiently, a proper working environment is required.
+- **Relation**:  
+  A table composed of rows and columns.
 
-#### **Installing PostgreSQL**
-PostgreSQL is an open-source and powerful relational database management system.
-- **Download Link**: [Download PostgreSQL](https://www.postgresql.org/download)
-- Supports Windows, macOS, and Linux.
-- Complies with SQL standards and offers extensive plugin support.
+- **Tuple**:  
+  A single row in a table representing one record.
 
-#### **Installing pgAdmin**
-pgAdmin is the most commonly used graphical management tool for PostgreSQL.
-- It is distributed along with PostgreSQL.
-- Provides a user-friendly interface for managing databases, executing queries, and visualizing schemas.
+- **Attribute**:  
+  A column in a table representing a specific data field.
 
-#### **Importing and Exporting Sample Databases**
+- **Domain**:  
+  The set of valid values that an attribute can take (e.g., integers, dates, predefined ranges).
+
+
+### Setting Up the Working Environment
+
+To work with relational databases efficiently, a proper working environment is required.
+
+#### Importing and Exporting Sample Database
 
 * **Northwind Sample Database**
   - A well-known example database that represents the data structure of a trading company.
@@ -233,7 +370,22 @@ pgAdmin is the most commonly used graphical management tool for PostgreSQL.
   - [Download](../resources/dbs/northwind.backup)
 
 
-### Basic SQL
+### Basic Structured Query Language (SQL)
+
+SQL is the standard language for managing and querying relational databases.
+
+SQL is used to interact with relational database management systems (RDBMS).
+
+SQL functions can be divided into two main categories:
+
+**1. Data Definition Language (DDL)** – Structural Commands
+DDL includes commands that define and modify database structures:
+- Defining, altering, and deleting database objects such as **database, table, view, function, etc.**.
+
+**2. Data Manipulation Language (DML)** – Data Processing Commands
+DML includes commands that manipulate data within tables:
+- Inserting, deleting, updating, and retrieving(querying) **data**.
+
 
 
 | Command             | Description                             |
@@ -281,7 +433,7 @@ CREATE TABLE products (
 
 #### SELECT
 
-Retrieves data from one or more tables.
+The **SELECT** statement is used to retrieve data from the database (searching/listing).
 
 ```sql
 SELECT * FROM "customers" WHERE "Country"='Spain' OR "Country"='Türkiye'
@@ -289,8 +441,22 @@ ORDER BY "CustomerID";
 ```
 
 
+
+In the relational model, meaningful data is distributed across related tables to avoid redundancy.
+
+To retrieve meaningful information, data from these tables must often be combined using **SQL JOIN** operations.
+
+**JOIN operations** are used to combine rows from two or more tables based on a related column.
+
+
 **INNER JOIN**
-Returns only the records that have matching values in both tables.
+
+An **INNER JOIN** returns only the rows that have **matching values in both tables**.
+
+* A row will appear in the result **only if the related row exists in the other table**.
+* If a row in one table does **not** have a corresponding row in the other table, it **does not appear in the result**.
+
+
 - Only products with a valid `CategoryID` in the **Categories** table are included.
 - Any product with a `NULL` `CategoryID` is excluded.
 
@@ -302,8 +468,11 @@ INNER JOIN "categories" ON "products"."CategoryID" = "categories"."CategoryID";
 
 #### INSERT INTO
 
+>***Data integrity constraints are enforced when insert, update, and delete statements are executed. If a data
+integrity violation occurs, the operation is aborted, ensuring that data remains consistent and accurate.***
+
+
 Add new records to a table.
-- **Data integrity constraints** are enforced during the insertion process.
 - It is possible to insert values into only specific columns.
 - Columns that are not explicitly assigned a value will be set to **NULL** (empty).
 
@@ -314,10 +483,9 @@ VALUES ('X1', 'ABC', 'Jane', 'Address1', 'Astana', 'Kazakhstan');
 ```
 
 
-#### **UPDATE**
+#### UPDATE
 
 The **UPDATE** statement is used to modify existing records in a table.
-- **Data integrity constraints** are enforced during the update process.
 - The `WHERE` clause is used to specify which records should be updated.
 - If the `WHERE` clause is **not** included, **all rows** in the table are updated.
 
@@ -330,10 +498,9 @@ WHERE "CustomerID" = '1';
 
 ```
 
-#### **DELETE**
+#### DELETE
 
 The **DELETE** statement is used to remove one or more records from a table.
-- **Data integrity constraints** are enforced during the deletion process.
 - The `WHERE` clause specifies which records should be deleted.
 - If the `WHERE` clause is **not** included, **all records** in the table are deleted.
 
@@ -344,17 +511,23 @@ WHERE "CustomerID" = '1';
 ```
 
 
-## NoSQL Databases
+## 12. NoSQL Databases
 - **NoSQL** (AKA Not Only SQL) databases are  designed for scalability, flexibility, and high-performance.
 - They are capable of handling large-scale, unstructured, semi-structured, and rapidly changing data.
 
 ### Comparison with Relational DB:
 
-![](../resources/sql-vs-nosql.png)
+![](../resources/images/relational-model-vs-nosql-big-picture.png)
 
 
+>**Vertical scaling is limited by the maximum physical capacity of a single machine, whereas horizontal scaling is
+> theoretically limitless because you can infinitely add more standard servers to a distributed cluster.**
+>
 
 ### Main Types of NoSQL Databases
+
+<img src="../resources/images/nosql-data-models.png" width="80%">
+
 
 1. **Document-Oriented Databases**
 - Store data as documents (usually in JSON or BSON format).
@@ -434,82 +607,72 @@ WHERE "CustomerID" = '1';
     - Fraud detection and knowledge graphs
 
 
-### MongoDB NoSQL Database
+### 1.3 MongoDB NoSQL Database
 
-MongoDB is a popular NoSQL database that stores data in a flexible, document-oriented format instead of the traditional 
-table-and-row structure used by relational databases. Data is organized into collections, and each collection contains 
-documents represented in BSON (Binary JSON). Because documents can have varying structures, MongoDB is schema-less, 
+MongoDB is a popular NoSQL database that stores data in a flexible, document-oriented format instead of the traditional
+table-and-row structure used by relational databases. Data is organized into collections, and each collection contains
+documents represented in BSON (Binary JSON). Because documents can have varying structures, MongoDB is schema-less,
 allowing applications to evolve without modifying fixed table definitions.
 
-One of MongoDB’s key strengths is its ability to handle large volumes of unstructured or semi-structured data while 
-maintaining high performance. It offers rich querying capabilities, indexing, and aggregation tools similar to SQL 
-features but designed for flexible document data. MongoDB also provides automatic generation of a unique _id field 
+<img src="../resources/images/mongodb-structure.png" width="80%">
+
+
+One of MongoDB’s key strengths is its ability to handle large volumes of unstructured or semi-structured data while
+maintaining high performance. It offers rich querying capabilities, indexing, and aggregation tools similar to SQL
+features but designed for flexible document data. MongoDB also provides automatic generation of a unique _id field
 for each document, acting like a primary key.
 
-MongoDB is designed for scalability and reliability. It supports replication for high availability and sharding for 
-horizontal scaling across multiple servers, making it suitable for modern distributed systems. Thanks to its 
-flexibility, scalability, and ease of use, MongoDB is widely used in web applications, real-time analytics, IoT 
+MongoDB is designed for scalability and reliability. It supports replication for high availability and sharding for
+horizontal scaling across multiple servers, making it suitable for modern distributed systems. Thanks to its
+flexibility, scalability, and ease of use, MongoDB is widely used in web applications, real-time analytics, IoT
 systems, and any environment where data structure can change over time.
 
-In MongoDB, a cluster refers to a group of interconnected servers (nodes) that work together as a single unified 
-database system, providing scalability, redundancy, and high availability.
+A cluster is a group of interconnected servers (nodes) that work
+together as a single unified database system, providing:
+- Scalability
+- Redundancy
+- High availability
 
-1) A replica set (cluster) provides high availability by copying the same data across multiple servers. In a replica set, read 
-performance can also be improved by directing read operations to the nearest replica node.
-```text
-               +----------------------+
-               |     Client App       |
-               +-----------+----------+
-                           |
-                           v
-                 +--------------------+
-                 |     PRIMARY        |
-                 |  (Read & Write)    |
-                 +----+-----------+---+
-                      |           |
-        --------------+           +--------------
-        |                                      |
-        v                                      v
-+--------------------+               +--------------------+
-|   SECONDARY 1      |               |   SECONDARY 2      |
-|  (Read / Failover) |               |  (Read / Failover) |
-+--------------------+               +--------------------+
+<img src="../resources/images/mongodb-cluster.png" width="80%">
 
-SECONDARIES replicate data **from the PRIMARY**
-If PRIMARY fails → one SECONDARY becomes PRIMARY
-```
+---
 
-2) Sharding (with sharding cluster) splits big data across multiple servers (shards). The mongos router directs client 
-requests to the correct shard.
-     
-```text
+#### Two Key Structures in a Cluster
 
-                               Config Servers
-                              ┌──────┬──────┬──────┐
-                              │  C1  │  C2  │  C3  │
-                              └──────┴──────┴──────┘
-                                    ↑
-                              ┌─────────────┐
-        Clients → → → → → → → │   MONGOS    │ ← Query Router
-                              └─────────────┘
-                                    ↓
-        ┌─────────────┬────────────────┬───────────────┬
-        │             │                │               │
-┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
-│   SHARD A   │ │   SHARD B   │ │   SHARD C   │ │   SHARD D   │
-│  (Replica   │ │  (Replica   │ │  (Replica   │ │  (Replica   │
-│    Set)     │ │    Set)     │ │    Set)     │ │    Set)     │
-│ ┌─────────┐ │ │ ┌─────────┐ │ │ ┌─────────┐ │ │ ┌─────────┐ │
-│ │ Primary │ │ │ │ Primary │ │ │ │ Primary │ │ │ │ Primary │ │
-│ ├─────────┤ │ │ ├─────────┤ │ │ ├─────────┤ │ │ ├─────────┤ │
-│ │Secondary│ │ │ │Secondary│ │ │ │Secondary│ │ │ │Secondary│ │
-│ ├─────────┤ │ │ ├─────────┤ │ │ ├─────────┤ │ │ ├─────────┤ │
-│ │Secondary│ │ │ │Secondary│ │ │ │Secondary│ │ │ │Secondary│ │
-│ └─────────┘ │ │ └─────────┘ │ │ └─────────┘ │ │ └─────────┘ │
-└─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘
+1) **Replica Set**
 
-```
+Provides  redundancy and high availability.
 
+The same data is copied across multiple nodes.
+
+<img src="../resources/images/mongodb-replicaset.png" width="80%">
+
+
+
+- One **Primary** node handles all writes
+- One or more **Secondary** nodes replicate data from the primary
+- If the primary fails, a secondary is **automatically promoted** to primary
+
+>**In a replica set, read performance can also be improved by directing read operations to the nearest replica node.**
+
+---
+
+2) **Sharding**
+
+Provides **horizontal scalability**.
+
+Large datasets are split and distributed across multiple (shards).
+
+<img src="../resources/images/mongodb-sharding.png" width="80%">
+
+
+- Data is divided into **shards** — each shard holds a portion of the data
+- A **shard key** determines how data is distributed
+- A **mongos router** directs queries to the correct shard
+
+
+
+---
 
 **Example**
 
@@ -559,7 +722,7 @@ In replication, all nodes have EXACT same documents.
 **Replica Set Rule:** Every node stores **all documents**.
 
 ```
-In sharding, the data is partitioned and distributed across multiple shards, so each shard stores only a portion of the 
+In sharding, the data is partitioned and distributed across multiple shards, so each shard stores only a portion of the
 overall dataset, not the full copy.
 Each shard is itself normally a Replica Set, so each shard’s data is also replicated internally.
 
@@ -611,11 +774,14 @@ Shard 2 → IDs 6–10
 ```
 
 
-## Using a Programming Language to Interact With a Database
+
+## 13. Using a Programming Language to Interact With a Database
 
 Modern applications often need to store, retrieve, and manipulate data dynamically.
 To perform these database operations from within an application, database drivers are essential.
 These drivers act as a bridge between the programming language and the database management system (DBMS).
+
+<img src="../resources/images/db-driver.png" width="80%">
 
 ### Database Drivers – Core Functions
 Database drivers typically provide the following core capabilities:
@@ -624,6 +790,82 @@ Database drivers typically provide the following core capabilities:
 - **Retrieving results** and processing query outputs.
 - **Managing transactions** to ensure data consistency.
 - **Closing the connection** after operations are completed.
+
+
+
+### Initializing A New Project Using IntelliJ IDEA for Java-Based Program Development
+
+
+To develop a Java program, an IDE and JDK are required.
+
+**IntelliJ IDEA**
+- Popular IDE for Java based development.
+- Download Link: [IntelliJ](https://www.jetbrains.com/idea/download)
+- Install and start IntelliJ IDEA
+- File -> New -> Project -> Java
+  - give a name, choose a location
+  - Build system: **Maven**
+  - JDK -> choose a proper JDK, download if not exist
+  - check "add sample code" option
+
+
+#### Loading Database Driver Into The Project Environment
+
+**Load the drivers** using maven package manager.
+
+`pom.xml`
+
+```xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cc.ku</groupId>
+    <artifactId>java-projects</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+  
+  
+
+    <dependencies>
+        <!-- postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.8</version>
+        </dependency>
+      
+        <!-- mongodb -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-bom</artifactId>
+            <version>5.6.0</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>5.6.0</version>
+        </dependency>
+    </dependencies>
+  
+  
+</project>
+
+
+```
+
+
+
+
 
 
 ### Database Operations with Java and PostgreSQL
@@ -640,7 +882,7 @@ It provides:
 
 The **PostgreSQL JDBC driver** implements this API and allows Java programs to work directly with PostgreSQL databases.
 
-You can download the PostgreSQL JDBC driver from:  
+**Load the drivers** using maven package manager as described in the previous subsection or by using the link:
  [https://jdbc.postgresql.org/download/](https://jdbc.postgresql.org/download/)
 
 
@@ -686,7 +928,8 @@ You can use MongoDB Cloud (https://account.mongodb.com/account/login
 link: https://www.mongodb.com/try/download/community
 
 #### Example Workflow (Conceptual)
-1. **Load the driver** using maven package manager.
+1. **Load the drivers** using maven package manager as described in the previous subsection.
+
 
 `pom.xml`
 ```xml
