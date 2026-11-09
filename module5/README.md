@@ -183,7 +183,6 @@ To practice throughout this course, install/register/configure the following too
 - Complies with SQL standards and supports Linux, macOS, and Windows.
 - Download Link: [Download PostgreSQL](https://www.postgresql.org/download/) any version that can
   be installed without issues.
-* For setting up the working environment, refer to Module 4.
 
 ---
 
@@ -199,7 +198,9 @@ models.
 
 ### MongoDB (for NoSQL DB Operations)
 
-* https://www.mongodb.com/products/platform/cloud
+You can use MongoDB Cloud (https://account.mongodb.com/account/login
+) without installation, or install MongoDB on your computer from the following
+link: https://www.mongodb.com/try/download/community
 
 ---
 
