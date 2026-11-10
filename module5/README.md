@@ -83,9 +83,11 @@ In summary:
 ## 2. Data and Information
 
 - Raw facts that have not been processed or given meaning are referred to as **data**.
-- When data is processed, organized, or analyzed, it is transformed into meaningful **information**.
+- When data is processed, organized, or interpreted, it is transformed into meaningful **information**.
 - **Information** represents the meaning derived from data and provides context.
 - Context is obtained by associating data with other related data.
+
+<img src="../resources/images/data-information.png">
 
 **Example:**
 
@@ -105,8 +107,7 @@ we provide **context**, allowing us to understand its meaning as information.
   protection** of data.
 
 
-***Database Management Systems (DBMSs) are specialized software systems that manage data and enable its transformation
-into meaningful information.***
+***Database Management Systems (DBMSs) are specialized software systems that also help transform data into meaningful information.***
 
 
 ## 3. Database System
@@ -895,17 +896,32 @@ communicate with the database.
 4. **Process the results** returned by the query.
 5. **Close** the statement and connection to free resources.
 
-
-***The Repository Pattern abstracts the logic of data access and storage from the business logic of an application.
-It provides a clean separation between the domain layer and the data access layer.
-Repositories act as mediators between the business logic and the data source (e.g., database, API, or file).
-This abstraction improves maintainability, testability, and supports dependency inversion.***
+***The Repository Pattern separates business logic from data access by acting as a bridge between the service/domain layer and
+the data source (database, API, or file). 
+This abstraction improves maintainability, testability, and supports DIP and OCP.***
 
 
 **Code Example**
 
+
+**Define a new role**
+
+The following credentials will be used for all database-related operations throughout the course.
+
+username: lectureuser
+password: lecturepassword
+
 ```sql
-CREATE DATABASE ecommercedb;
+CREATE ROLE lectureuser WITH
+  LOGIN
+  PASSWORD 'lecturepassword'
+  SUPERUSER
+  CREATEDB
+  CREATEROLE;
+```
+
+```sql
+CREATE DATABASE inventorydb owner lectureuser;
 ```
 
 ```sql
@@ -986,7 +1002,7 @@ a connection string (URL(socket address), username, and password).
 
 **Code Example**
 
-* Define `ecommercedb.products` collection.
+* Define `inventorydb.products` collection.
 
 ![DB Class Diagram](../resources/db-class-diagram.png)
 
@@ -997,9 +1013,9 @@ a connection string (URL(socket address), username, and password).
 ***
 ## Hands-on Exercise
 
-1. Define the `ecommercedb` database and `products` table in `PostgreSQL`, using the SQL statements provided above the 
+1. Define the `inventorydb` database and `products` table in `PostgreSQL`, using the SQL statements provided above the 
 Class Diagram.
-2. Define `ecommercedb.products` collection in `MongoDB`.
+2. Define `inventorydb.products` collection in `MongoDB`.
 3. Initialize a new project with Maven support.
 4. Include the necessary database drivers for PostgreSQL and MongoDB operations.
 5. Define a package named `cc.ku.ict.module5.exercises.exercise1`.
