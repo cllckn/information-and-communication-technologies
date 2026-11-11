@@ -2,7 +2,7 @@
 
 You are expected to develop the following application:
 
-![DB Class Diagram](../../../resources/db-class-diagram.png)
+![DB Class Diagram](../../resources/db-class-diagram.png)
 
 
 ## Tasks
