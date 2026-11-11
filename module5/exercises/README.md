@@ -57,11 +57,12 @@ link: https://www.mongodb.com/try/download/community
    - JDK -> choose a proper JDK, download if not exist
    - check "add sample code" option
 
+---
 
-4. Load Database Drivers Into The Project Environment
+4. Load database drivers into the project environment
 
 
-**Load the drivers** using maven package manager.
+**Load the drivers** using maven package manager. Add relevant packages into the `pom.xml` file.
 
 `pom.xml`
 
@@ -113,9 +114,15 @@ link: https://www.mongodb.com/try/download/community
 
 ```
 
+---
+
 5. Define a package named `ku.ict.module5.exercises.exercise1` and download the application in `~/module5/repository` here.
 
+---
+
 6. Run the application for both PostgreSQL and MongoDB support.
+
+---
 
 7. Debug your application. Your debugging should include:
 
@@ -123,6 +130,7 @@ link: https://www.mongodb.com/try/download/community
 - Use of **Step Over**, **Step Into**, and **Step Out**
 - Inspection of variables using the **Variables panel** or **Watches**
 
+---
 
 8. Define `findByName(String name)` and `findByPrice(double price)` methods in the product repository and modify
    the `ClientService` accordingly to test these methods.
