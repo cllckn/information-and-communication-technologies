@@ -1,51 +1,53 @@
 # Module 6: Web Applications, Web Services, and Basic User Interaction
 
 <!-- TOC -->
-* [Module 6: Web Applications, Web Services, and Basic User Interaction](#module-7-web-applications-web-services-and-basic-user-interaction)
-  * [Fundamentals Of Web Applications And Web Services](#fundamentals-of-web-applications-and-web-services)
-    * [Client Server Architecture](#client-server-architecture)
-    * [Three-tier Web Architecture](#three-tier-web-architecture)
-    * [UML Deployment Diagram](#uml-deployment-diagram)
-    * [Web Application Architecture - Synchronous Communication](#web-application-architecture---synchronous-communication)
-    * [Web Application Architecture - Asynchronous Communication](#web-application-architecture---asynchronous-communication)
-    * [Scalable Web Application Architecture](#scalable-web-application-architecture)
-    * [Service-Oriented Architecture (SOA)](#service-oriented-architecture-soa)
-    * [Microservice Architecture](#microservice-architecture)
-  * [Introduction to Node.js](#introduction-to-nodejs)
-    * [Node.js](#nodejs)
-    * [NPM (Node Package Manager)](#npm-node-package-manager)
-    * [Node.js & npm Installation](#nodejs--npm-installation)
-    * [Sequential and Event-Driven Programming Models](#sequential-and-event-driven-programming-models)
+* [Module 6: Web Applications, Web Services, and Basic User Interaction](#module-6-web-applications-web-services-and-basic-user-interaction)
+  * [1. Fundamentals Of Web Applications And Web Services](#1-fundamentals-of-web-applications-and-web-services)
+    * [1.1 Client Server Architecture](#11-client-server-architecture)
+    * [1.2 Three-tier Web Architecture](#12-three-tier-web-architecture)
+    * [1.3 UML Deployment Diagram](#13-uml-deployment-diagram)
+    * [1.4 Web Application Architecture - Synchronous Communication](#14-web-application-architecture---synchronous-communication)
+    * [1.5 Web Application Architecture - Asynchronous Communication](#15-web-application-architecture---asynchronous-communication)
+    * [1.6 Scalable Web Application Architecture](#16-scalable-web-application-architecture)
+    * [1.7 Service-Oriented Architecture (SOA)](#17-service-oriented-architecture-soa)
+      * [Microservice Architecture](#microservice-architecture)
+      * [API Communication Protocols](#api-communication-protocols)
+  * [2. Introduction to Node.js](#2-introduction-to-nodejs)
+    * [2.1 Node.js](#21-nodejs)
+    * [2.2 NPM (Node Package Manager)](#22-npm-node-package-manager)
+    * [2.3 Node.js & npm Installation](#23-nodejs--npm-installation)
+    * [2.4 Sequential and Event-Driven Programming Models](#24-sequential-and-event-driven-programming-models)
       * [Traditional blocking(sequential/synchronous) operation in Node.js](#traditional-blockingsequentialsynchronous-operation-in-nodejs)
-    * [Non-blocking (asynchronous) operations in Node.js](#non-blocking-asynchronous-operations-in-nodejs)
+    * [2.5 Non-blocking (asynchronous) operations in Node.js](#25-non-blocking-asynchronous-operations-in-nodejs)
     * [Basic JSON Operations](#basic-json-operations)
-  * [Developing Web Applications Using HTML,CSS, JS, and Node.js](#developing-web-applications-using-htmlcss-js-and-nodejs)
-    * [HTML (HyperText Markup Language)](#html-hypertext-markup-language)
-    * [CSS (Cascading Style Sheets)](#css-cascading-style-sheets)
-    * [JavaScript](#javascript)
-    * [jQuery and Basic Form Operations for User Interaction](#jquery-and-basic-form-operations-for-user-interaction)
-      * [Handling Form Input Fields](#handling-form-input-fields)
-  * [Developing RESTful APIs](#developing-restful-apis)
-    * [What is a RESTful API?](#what-is-a-restful-api)
-    * [Route definition in Express.js](#route-definition-in-expressjs)
-    * [HTTP Status Codes](#http-status-codes)
-    * [Response Formats](#response-formats)
-    * [A simple Node.js-based RESTful API](#a-simple-nodejs-based-restful-api)
-    * [REST Clients - Testing REST api using cURL and HTTP Client](#rest-clients---testing-rest-api-using-curl-and-http-client)
+  * [3. Developing Web Applications Using HTML,CSS, JS, and Node.js](#3-developing-web-applications-using-htmlcss-js-and-nodejs)
+    * [3.1 HTML (HyperText Markup Language)](#31-html-hypertext-markup-language)
+    * [3.2 CSS (Cascading Style Sheets)](#32-css-cascading-style-sheets)
+    * [3.3 JavaScript](#33-javascript)
+    * [3.4 Basic DOM Manipulation and Event Handling with JavaScript](#34-basic-dom-manipulation-and-event-handling-with-javascript)
+  * [4. Developing RESTful APIs](#4-developing-restful-apis)
+    * [4.1 What is a RESTful API?](#41-what-is-a-restful-api)
+    * [4.2 HTTP Status Codes](#42-http-status-codes)
+    * [4.3 Response Formats](#43-response-formats)
+    * [4.4 Route definition in Express.js](#44-route-definition-in-expressjs)
+    * [4.5 A simple Node.js-based RESTful API](#45-a-simple-nodejs-based-restful-api)
+    * [4.6 REST Clients - Testing REST api using cURL and HTTP Client](#46-rest-clients---testing-rest-api-using-curl-and-http-client)
       * [curl](#curl)
-      * [HTTP Client](#http-client)
+      * [Jetbrains HTTP Client](#jetbrains-http-client)
   * [Hands-on Exercise 1](#hands-on-exercise-1)
-  * [Converting a Simple RESTful API into a Web Application](#converting-a-simple-restful-api-into-a-web-application)
+  * [5. Converting a Simple RESTful API into a Web Application](#5-converting-a-simple-restful-api-into-a-web-application)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
   * [Hands-on Exercise 3](#hands-on-exercise-3)
-  * [Interconnecting Web Services](#interconnecting-web-services)
-  * [Database Integration](#database-integration)
+  * [6. Interconnecting Web Services](#6-interconnecting-web-services)
+  * [7. Database Integration](#7-database-integration)
   * [Hands-on Exercise 4](#hands-on-exercise-4)
-  * [Deployment of Node.js Application to a Remote Server](#deployment-of-nodejs-application-to-a-remote-server)
+  * [8. Deployment of Node.js Application to a Remote Server](#8-deployment-of-nodejs-application-to-a-remote-server)
     * [Running Node.js Applications as Services with PM2](#running-nodejs-applications-as-services-with-pm2)
 <!-- TOC -->
 
-## Fundamentals Of Web Applications And Web Services
+---
+
+## 1. Fundamentals Of Web Applications And Web Services
 
 There are several services on the Internet, and the **Web (World Wide Web)** is one of the most widely used.
 
@@ -73,7 +75,9 @@ A URL typically consists of:
 
 **Applications can identify and send requests to a resource using the URL.**
 
-### Client Server Architecture
+---
+
+### 1.1 Client Server Architecture
 
 A **client–server architecture** divides an application into two main components:
 - The **client**, which **initiates requests** (e.g., a web browser or mobile app).
@@ -86,8 +90,9 @@ This design centralizes data and logic on the server, making systems easier to m
 
 <img src="../resources/client-server.png" width="700" alt="client server architecture">
 
-### Three-tier Web Architecture
+---
 
+### 1.2 Three-tier Web Architecture
 
 The **Three-Tier Web Architecture** is a software architecture pattern that separates an application into three logical layers:
 
@@ -117,8 +122,9 @@ The **Three-Tier Web Architecture** is a software architecture pattern that sepa
 Three-Tier Web Architecture
 
 ```
+---
 
-### UML Deployment Diagram
+### 1.3 UML Deployment Diagram
 
 A UML Deployment Diagram provides information regarding the deployment of software products
 (artifacts/components) onto nodes (such as devices, operating systems, virtual machines, etc.). 
@@ -127,8 +133,10 @@ It illustrates the physical topology where the software is deployed.
 <img src="../resources/deployment-diagram.png" width="400">
 
 
+---
 
-### Web Application Architecture - Synchronous Communication
+
+### 1.4 Web Application Architecture - Synchronous Communication
 
 In **synchronous communication**, the client sends a request and **waits** for the server to respond before continuing.
 - Commonly implemented using **HTTP** (e.g., RESTful APIs).
@@ -138,8 +146,9 @@ In **synchronous communication**, the client sends a request and **waits** for t
 
 ![Web Application Architecture](../resources/web-application-architecture-synchronous.png)
 
+---
 
-### Web Application Architecture - Asynchronous Communication
+### 1.5 Web Application Architecture - Asynchronous Communication
 
 In **asynchronous communication**, the client sends a request and continues executing without waiting for a response.
 - Often implemented using **message queues**, **WebSockets**, or **AJAX**.
@@ -149,7 +158,7 @@ In **asynchronous communication**, the client sends a request and continues exec
 ![Web Application Architecture](../resources/web-application-architecture-asynchronous.png)
 
 
-### Scalable Web Application Architecture
+### 1.6 Scalable Web Application Architecture
 
 A **scalable architecture** is designed to handle increasing workloads efficiently by adding more resources.  
 It typically involves:
@@ -162,8 +171,9 @@ Scalability ensures consistent performance as user demand grows.
 
 ![Web Application Architecture](../resources/scalable-web-architecture.png)
 
+---
 
-### Service-Oriented Architecture (SOA)
+### 1.7 Service-Oriented Architecture (SOA)
 
 **Service-Oriented Architecture (SOA)** is an architectural pattern in which software components are structured as 
 independent services.
@@ -196,58 +206,78 @@ In this diagram:
 * Communication between web services can be achieved using HTTP-based protocols such as REST and SOAP, remote procedure 
 call (RPC) frameworks like gRPC or XML-RPC, or asynchronous messaging systems such as Apache Kafka or RabbitMQ.
 
-### Microservice Architecture
+#### Microservice Architecture
 
 **Microservice Architecture** is a modern derivative (or evolution) of Service-Oriented Architecture (SOA).
 
-It is an architectural pattern where an application is composed of small, independent services 
-that communicate over a network. 
+It is an architectural pattern where an application is composed of small, independent services
+that communicate over a network.
 
-Each service is responsible for a specific business capability and can be developed, 
+Each service is responsible for a specific business capability and can be developed,
 deployed, and scaled independently.
 
-**Key Characteristics of Microservice Architecture:**
-- **Decentralization**: Each service has its own database and business logic.
-- **Independence**: Services can be developed and deployed independently.
-- **Scalability**: Services can be scaled individually based on demand.
-- **Resilience**: Failure in one service does not necessarily affect the entire system.
-- **Technology Diversity**: Different services can use different technologies and programming languages.
-
-![Web Application Architecture](../resources/micro-service-architecture.png)
 
 
+#### API Communication Protocols
+
+**RESTful APIs**
+
+- Based on **REST (Representational State Transfer)** principles.
+- Uses standard **HTTP methods** (GET, POST, PUT, DELETE).
+- Data format: **JSON**, sometimes XML.
+- Stateless, lightweight, and widely used for web applications.
+
+**SOAP (Simple Object Access Protocol)**
+
+- A **protocol** for exchanging structured information in web services.
+- Uses **XML** for message format.
+- Operates over multiple transport protocols (HTTP, SMTP, etc.).
+- Supports **WS-Security** for enterprise-level security.
+
+**XML-RPC (XML Remote Procedure Call)**
+
+- A protocol that allows remote function execution using **XML over HTTP**.
+- Simpler than SOAP but less flexible than REST.
+- Mainly used for legacy systems requiring XML-based communication.
+
+**gRPC (Google Remote Procedure Call)**
+
+- A **high-performance** framework developed by Google.
+- Uses **Protocol Buffers (protobufs)** for efficient, compact data serialization.
+- Supports **bidirectional streaming** and **multiplexing**.
+- Ideal for **microservices** and **high-speed communication** across distributed systems.
 
 
-## Introduction to Node.js
+## 2. Introduction to Node.js
 
-### Node.js
+### 2.1 Node.js
 
 Node.js is an open-source, cross-platform runtime environment that allows you to run JavaScript code on the server side.
 It uses the V8 JavaScript engine, which is also used by Google Chrome, to execute code outside of a web browser.
 
 Key Features of Node.js:
 
-    Asynchronous and Event-Driven: Node.js uses an event-driven, non-blocking I/O model, making it efficient and 
-    suitable for real-time applications.
-    
-    Single-Threaded: Despite being single-threaded, Node.js can handle many connections concurrently thanks to 
-    its event loop.
-    
-    NPM (Node Package Manager): Node.js comes with NPM, which is the largest ecosystem of open-source libraries 
-    in the world.
-    
-    Scalability: Node.js is designed to build scalable network applications.
+* Asynchronous and Event-Driven: Node.js uses an event-driven, non-blocking I/O model, making it efficient and 
+suitable for real-time applications.
+
+* Single-Threaded: Despite being single-threaded, Node.js can handle many connections concurrently thanks to 
+its event loop.
+
+* NPM (Node Package Manager): Node.js comes with NPM, which is the largest ecosystem of open-source libraries 
+in the world.
+
+* Scalability: Node.js is designed to build scalable network applications.
 
 
 Use Cases:
 
-    Web Servers: Building fast and scalable web servers.
-    APIs: Creating RESTful APIs for web and mobile applications.
-    Real-Time Applications: Developing chat applications, online gaming, and collaborative tools.
+* Web Servers: Building fast and scalable web servers.
+* APIs: Creating RESTful APIs for web and mobile applications.
+* Real-Time Applications: Developing chat applications, online gaming, and collaborative tools.
 
-**For the details of Node.js, refer to https://www.w3schools.com/nodejs/**
+---
 
-### NPM (Node Package Manager)
+### 2.2 NPM (Node Package Manager)
 It is a package manager for JavaScript, and it is the default package manager for Node.js.
 
 It allows developers to install, share, and manage dependencies (libraries and tools) for their projects.
@@ -263,14 +293,16 @@ It allows developers to install, share, and manage dependencies (libraries and t
   - npm update: Update all installed packages to their latest versions.
   - npm run: Run a script defined in the package.json file.
 
-### Node.js & npm Installation
+---
+
+### 2.3 Node.js & npm Installation
 
 **Setting Up the Development Environment**
 
 
 * Download Node.js from here (https://nodejs.org/en/download) and install it properly.
 
-* Set up Intellij for Node.js based development (or install WebStorm)
+* Install WebStorm or set up Intellij for Node.js based development
   - IntelliJ IDEA -> Preferences -> Plugins -> Node.js (OSX, Linux)
   - IntelliJ IDEA -> File -> Settings -> Plugins -> Node.js (Windows)
     
@@ -286,7 +318,9 @@ It allows developers to install, share, and manage dependencies (libraries and t
 * Run the app:
   - node hello-world.js
 
-### Sequential and Event-Driven Programming Models
+---
+
+### 2.4 Sequential and Event-Driven Programming Models
 
 Traditional programming languages often follow a sequential (blocking) model, where each statement executes one after 
 another, and the program waits for each operation to complete before continuing.
@@ -323,8 +357,9 @@ try {
 console.log('End');
 
 ```
+---
 
-### Non-blocking (asynchronous) operations in Node.js
+### 2.5 Non-blocking (asynchronous) operations in Node.js
 
 * Event Loop Example
 
@@ -367,89 +402,7 @@ executed after the operation is completed.
 5. "end" is printed to the console (synchronous).
 6. The event loop handles setTimeout, setTimeout, and fs.readFile callbacks after the main script execution is completed.
 
-**Node.js Event Loop Demonstration**
-
-```plaintext
-+-----------------------------+
-|        Start Script         |
-+-----------------------------+
-            │
-            ▼
-+-----------------------------+
-|  console.log('Start')       |
-+-----------------------------+
-            │
-            ▼
-+-----------------------------+
-|  setTimeout() registered    |
-|  (Moves to Timer Queue)     |
-+-----------------------------+
-            │
-            ▼
-+-----------------------------+
-|  setTimeout() registered    |
-|  (Moves to Timer Queue)     |
-+-----------------------------+
-            │
-            ▼
-+-----------------------------+
-|  fs.readFile() registered   |
-|  (Moves to Thread Pool)     |
-+-----------------------------+
-            │
-            ▼
-+-----------------------------+
-|  console.log('End')         |
-+-----------------------------+
-            │
-            ▼
-+-----------------------------+
-|  Event Loop Checks Queues   |
-+-----------------------------+
-       │             │
-       ▼             ▼
-+----------------+  +----------------+  +----------------+
-|  setTimeout()  |  |  setTimeout()  |  |  fs.readFile()  |
-| (Timer Queue)  |  | (Timer Queue)  |  | (I/O Queue)     |
-+----------------+  +----------------+  +----------------+
-       │1                     │2                 │3
-       ▼                      ▼                  ▼
-+--------------------------------------------------+
-|  The execution of callbacks begins in sequence.  |
-+--------------------------------------------------+
-```
-
-* Event Loop Example for Simulator: https://jsflow.info
-
-**Code Example**
-```javascript
-//const fs = require('fs');
-
-// Writing messages to the console
-console.log('Start');
-
-// Wait 2 sec (asynchronous / non-blocking)
-setTimeout(() => {
-    console.log('Message 1');
-}, 2000);
-
-// Wait 10 ms (asynchronous / non-blocking)
-setTimeout(() => {
-    console.log('Message 2');
-}, 10);
-
-// Simulated asynchronous file read
-console.log('Start reading file...');
-
-setTimeout(() => {
-    const fakeData = 'Sample data from file simulation.';
-    console.log('File content:', fakeData);
-}, 1000); // simulate 1-second file read delay
-
-console.log('Reading initiated...');
-
-console.log('End');
-```
+---
 
 ### Basic JSON Operations
 
@@ -501,9 +454,7 @@ console.log("\nUpdated JSON file saved.");
 
 
 
-
-
-## Developing Web Applications Using HTML,CSS, JS, and Node.js
+## 3. Developing Web Applications Using HTML,CSS, JS, and Node.js
 
 **Code Example: A Simple Web Server**
 
@@ -544,268 +495,147 @@ Hello World !
 </body>
 </html>
 ```
-### HTML (HyperText Markup Language)
+---
 
-    HTML (HyperText Markup Language) is the standard language for crafting web pages. 
-    
-    It structures content using elements like headings, paragraphs, links, images, and forms. 
-    
-    Browsers interpret HTML to display web pages visually. 
-    
-    It works together with CSS for styling and JavaScript for interactivity.
+### 3.1 HTML (HyperText Markup Language)
 
-**For the details of HTML, refer to https://www.w3schools.com/html/**
+- HTML (HyperText Markup Language) is the standard markup language used to structure content on web pages.
+- It organizes content using elements such as headings, paragraphs, links, images, tables, and forms.
+- Web browsers parse HTML documents and use the resulting Document Object Model (DOM) to represent the structure of web content.
+- HTML works together with CSS for styling and JavaScript for interactivity and dynamic functionality.
 
-### CSS (Cascading Style Sheets)
+**For details about HTML, refer to:** [MDN – HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 
-    CSS (Cascading Style Sheets) is used to define the appearance of HTML elements. 
-    
-    CSS is used to control the layout, colors, fonts, spacing, and responsiveness of web pages to ensure a consistent 
-    and attractive design across different devices and screen sizes.
+---
 
-**For the details of CSS, refer to https://www.w3schools.com/css/**
+### 3.2 CSS (Cascading Style Sheets)
 
-### JavaScript
+- CSS (Cascading Style Sheets) is a style sheet language used to control the presentation of HTML documents.
+- CSS defines the appearance and layout of web pages, including colors, fonts, spacing, positioning, and responsive layouts.
+- It enables developers to build consistent and adaptable designs that work across different devices and screen sizes.
 
-    JavaScript is a programming language used to make web pages more interactive and dynamic. 
-    
-    It allows developers to manipulate HTML and CSS, handle events like clicks or keyboard input, and fetch data 
-    from servers without reloading the page. 
+**For details about CSS, refer to:** [MDN – CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
-**For the details of JavaScript, refer to https://www.w3schools.com/js/**
+---
 
+### 3.3 JavaScript
 
+- JavaScript is a general-purpose programming language widely used to add interactivity and dynamic functionality to web pages.
+- In web browsers, JavaScript can manipulate the HTML Document Object Model (DOM), modify CSS styles, and handle events such as mouse clicks and keyboard input.
+- It also enables asynchronous communication with servers, allowing web pages to retrieve and update data without requiring a full page reload.
+- JavaScript is also used outside web browsers, particularly for server-side development with environments such as Node.js.
 
-### jQuery and Basic Form Operations for User Interaction
+**For details about JavaScript, refer to:** [MDN – JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-**What is jQuery?**
+---
 
-jQuery is a fast, small, and feature-rich JavaScript library designed to simplify:
-- HTML DOM traversal and manipulation
-- Event handling
-- Animations
-- AJAX interactions
+### 3.4 Basic DOM Manipulation and Event Handling with JavaScript
 
-**Why Use jQuery?**
+* querySelector() selects the first element- returns the first matching element similar to css.
+  - #id – Selects an element by its ID.
+  - .class – Selects the first element with the specified class.
+  - tag – Selects the first element with the specified HTML tag.
+* querySelectorAll() returns all matching elements.
 
-- **Simplifies JavaScript code** – Reduces the need for writing long vanilla JavaScript functions.
-- **Cross-browser compatibility** – Works across different browsers without issues.
-- **Powerful event handling** – Allows easy manipulation of events like clicks, keypresses, and form submissions.
-- **AJAX support** – Enables smooth data loading without refreshing the page.
+> The DOM (Document Object Model) is a programming interface that represents an HTML or XML document as a tree of 
+> objects, allowing languages like JavaScript to read and manipulate the page's structure, content, and styles.
 
-**Adding jQuery to a Web Page**
+**Code Example: Handling Form Input Fields**
 
-You can include jQuery in your project via a **CDN**:
-
-`<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>`
-
-or download and reference it locally:
-
-`<script src="js/jquery.min.js"></script>`
-
-
-
-**Basic jQuery Syntax**
-
-jQuery follows a simple syntax:
-
-`$(selector).action();`
-
-- **`$`** – The jQuery function.
-- **`selector`** – Selects an HTML element (e.g., `#id`, `.class`, `tag`).
-- **`action()`** – The operation to perform (e.g., `hide()`, `show()`, `click()`).
-
-**For the following jQuery code snippets, you are required to use a Node.js-based web application.
-You must embed these code snippets into a HTML file.**
-
-
-**Code Example: Hiding a Paragraph on Click**
-
-/part1/public/jquery/index1.html
-
-1. Add a button and a paragraph in your HTML.
-2. Use jQuery to hide the paragraph when the button is clicked.
-
+/part1/public/dom-manipulation/index.html
 
 ```html
+
 <!DOCTYPE html>
 <html lang="en">
-        <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <!--    This meta tag ensures that the web page adjusts its layout to the device's screen width, providing a 
+  responsive display on mobile devices, tablets, and desktops.-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Manipulation with JavaScript</title>
 </head>
 <body>
 
-  <button id="hide-btn">Hide</button>
-  <p id="text">This is a paragraph.</p>
+<h2>Basic DOM Manipulation and Event Handling</h2>
 
-  <script>
-    // It ensures the jQuery statements run after the HTML document (DOM) is fully loaded and ready.
-    // jQuery shortcut for $(document).ready()
-    $(function () {
+<!-- 1. Hide an HTML element -->
+<button id="hide-btn">Hide</button>
+<p id="text">This is a paragraph.</p>
 
-      // Attach a click event listener to the button with id="hide-btn":
-      // When the user clicks the button, jQuery triggers the anonymous callback function registered in the 
-      // on("click", ...) handler. This callback runs immediately and executes $("#text").hide(), which hides the 
-      // selected element from the page.
-      $("#hide-btn").on("click", function () {
+<hr>
 
-        // When the button is clicked, hide the element with id="text"
-        $("#text").hide();
-      });
-    });
-  </script>
+<!-- 2. Get input value and display a message -->
+<input type="text" id="name-input" placeholder="Enter your name">
+<button type="button" id="get-name-btn">Get Name</button>
+<p id="output">Output</p>
 
-</body>
-</html>
+<hr>
 
-```
+<!-- 3. Change CSS styles using JavaScript -->
+<button id="style-btn">Change Text Color</button>
+<p id="style-text">JavaScript can modify CSS styles.</p>
 
+<hr>
 
-#### Handling Form Input Fields
-
-You can get and set values in form fields using `.val()`:
-
-**Code Example: /part1/public/jquery/index2.html**
-
-1. Form an input field, a button, and a paragraph element.
-2. When the button is clicked, retrieve the value entered the input field.
-3. Dynamically display the value inside the paragraph element.
-
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-        <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-
-    <input type="text" id="name" placeholder="Enter your name">
-    <button id="get-name">Get Name</button>
-    <p id="output">Output</p>
-
-    <script>
-      // It ensures the jQuery statements run after the HTML document (DOM) is fully loaded and ready.
-      // jQuery shortcut for $(document).ready()
-      $(function () {
-        // Attach a click event listener to the button with id="get-name":
-        $("#get-name").on("click", function () {
-          const name = $("#name").val();
-          $("#output").text("Hello, " + name);
-        })
-      });
-    </script>
-
-</body>
-</html>
-
-```
-
-**Form Events Handling**
-
-jQuery provides event handlers for form elements, such as:
-
-- `focus()` – When an input field is focused.
-- `blur()` – When an input field loses focus.
-- `change()` – When the value of an input field changes.
-- `submit()` – When a form is submitted.
-
-**Code Example: Form Submission Handling**
-
-Embed this JS code into /part1/public/jquery/index2.html.
-
-```javascript
+<!-- 4. Handle form submission -->
 <form id="user-form">
-    <input type="text" id="username" placeholder="Enter username" required>
-    <input type="password" id="password" placeholder="Enter password" required>
-    <button type="submit">Submit </button>
+  <input type="text" id="username" placeholder="Enter username" required>
+  <input type="password" id="password" placeholder="Enter password" required>
+  <button type="submit">Submit</button>
 </form>
 
 <p id="message"></p>
 
 <script>
-  $(function () {
-    $("#user-form").on("submit", function (event) {
-      event.preventDefault(); // Prevents page reload
-      const username = $("#username").val();
-      $("#message").text("Form submitted! Welcome, " + username);
-    })
-});
-</script>
 
-```
-
-
-**Enabling and Disabling Form Fields**
-
-Use `.prop()` to enable or disable input fields dynamically.
-
-**Code Example**
-
-Embed this JS code into /part1/public/jquery/index2.html.
-
-```javascript
-<input type="text" id="email" disabled>
-<button id="enable-btn">Enable Input</button>
-<button id="disable-btn">Disable Input</button>
-
-<script>
-  $(function () {
-    $("#enable-btn").on("click", function () {
-      $("#email").prop("disabled", false);
-    })
-        
-    $("#disable-btn").on("click", function () {
-      $("#email").prop("disabled", true);
-    })
+  // 1. Hide an HTML element
+  document.querySelector("#hide-btn").addEventListener("click", function () {
+    document.querySelector("#text").hidden = true;
   });
-</script>
-```
-
-**Real-time Input Validation**
-
-Validate user input dynamically using the `.keyup()` event.
-
-**Code Example**
 
 
-Embed this JS code into /part1/public/jquery/index2.html.
+  // 2. Get input value and display a message
+  document.querySelector("#get-name-btn").addEventListener("click", function () {
+    const name = document.querySelector("#name-input").value;
 
-
-```javascript
-
-<input type="text" id="phone" placeholder="Enter phone number">
-<p id="validation-msg"></p>
-
-<script>
-  $(function () {    
-    $("#phone").on("keyup", function () {
-      const input = $(this).val();
-      if (/^\d{10}$/.test(input)) {
-        $("#validation-msg").text("Valid number").css("color", "green");
-      } else {
-        $("#validation-msg").text("Invalid number").css("color", "red");
-      }
-    })
+    document.querySelector("#output").textContent = "Hello, " + name;
   });
+
+
+  // 3. Change CSS styles using JavaScript
+  document.querySelector("#style-btn").addEventListener("click", function () {
+    const paragraph = document.querySelector("#style-text");
+
+    paragraph.style.color = "blue";
+    paragraph.style.fontSize = "20px";
+    paragraph.style.fontWeight = "bold";
+  });
+
+
+  // 4. Handle form submission
+  document.querySelector("#user-form").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const username = document.querySelector("#username").value;
+
+    document.querySelector("#message").textContent =
+            "Form submitted! Welcome, " + username;
+  });
+
 </script>
+
+</body>
+</html>
+
+
 ```
 
 
-**For the details of JQuery, refer to https://api.jquery.com/** or **https://www.w3schools.com/jquery**
 
+## 4. Developing RESTful APIs
 
-
-
-
-
-## Developing RESTful APIs
-
-### What is a RESTful API?
+### 4.1 What is a RESTful API?
 
 REST (Representational State Transfer) is an architectural style (or a set of principles) for designing networked applications.
 
@@ -813,6 +643,7 @@ RESTful refers to web services that adhere to the principles of REST (Representa
 
 RESTful is an approach for building scalable, stateless web APIs that use standard HTTP methods and principles.
 
+<img src="../resources/images/RESTful-anatomy.png" width="80%" alt="RESTful anatomy"></img>
 
 **Key Characteristics**
 
@@ -845,32 +676,11 @@ RESTful is an approach for building scalable, stateless web APIs that use standa
 - **PUT /heating-system/state {"power":"on", "temperature":"22"}** : Full state replacement
 - **PATCH /heating-system/state {"power":"off"}**: Partially update
 
-***In RESTful APIs, a URI (path) must identify a resource, while the HTTP method defines the action performed on that resource.***
+>***In RESTful APIs, a URI (path) must identify a resource, while the HTTP method defines the action performed on that resource.***
 
+---
 
-### Route definition in Express.js
-
-A **route** in Express.js defines an endpoint where clients send requests to interact with the service.
-
-Each route consists of:
-
-1. **An HTTP method** (GET, POST, etc.)
-2. **A URL pattern** (e.g., `/api/customers/:id`)
-3. **A callback function / route handler ** to handle the request
-
-Example of a simple route in Express.js:
-
-**Code Example**
-
-```javascript
-app.get("/api/customers", (req, res) => {
-    res.json({ message: "List of customers" });
-});
-```
-
-
-
-### HTTP Status Codes
+### 4.2 HTTP Status Codes
 HTTP Status Codes are 3-digit numbers returned by web servers to indicate the status of a requested HTTP operation 
 (successful, failed, not found, etc.).
 
@@ -888,7 +698,7 @@ Here are some common status codes and their meanings:
 
 ---
 
-### Response Formats
+### 4.3 Response Formats
 APIs typically return data in one of the following formats:
 
 1) **JSON (JavaScript Object Notation)**
@@ -911,10 +721,45 @@ APIs typically return data in one of the following formats:
 </user>
 ```
 
+---
 
-### A simple Node.js-based RESTful API
+### 4.4 Route definition in Express.js
 
-**Code Example: /part2/restful-server.js**
+A **route** in Express.js defines an endpoint where clients send requests to interact with the service.
+
+<img src="../resources/images/express-route-structure.png" alt="Express.js Route Structure Structure" width="70%"></img>
+
+Each route consists of:
+
+1. **An HTTP method** (GET, POST, etc.)
+2. **A URL pattern** (e.g., `/api/customers/:id`)
+3. **A callback function / route handler ** to handle the request
+
+Example of a simple route in Express.js:
+
+**Code Example**
+
+```javascript
+app.get("/api/customers", (req, res) => {
+    res.json({ message: "List of customers" });
+});
+```
+
+**Execution Flow**
+
+When a request enters your Express application, it follows this sequence:
+
+1) The server receives an incoming HTTP request.
+2) Express scans your defined routes from top to bottom.
+3) It looks for a match involving both the Method AND the Path.
+4) Once matched, it executes the handler function.
+5) The handler sends a response, "closing" the request-response cycle.
+
+---
+
+### 4.5 A simple Node.js-based RESTful API
+
+**Code Example: /part2/simple-restful/server.js**
 
 ```javascript
 // ───────────────────────────────────────────────────────────────
@@ -1048,30 +893,9 @@ app.listen(PORT, () => {
 
 ```
 
-**Endpoints (Routes) of the developed API**
+---
 
-        GET http://localhost:3000/api/products
-
-        GET http://localhost:3000/api/products/1
-
-        POST http://localhost:3000/api/products
-        Content-Type: application/json
-        {
-        "name": "HDD",
-        "price": 299.99
-        }
-
-        PUT http://localhost:3000/api/products/2
-        Content-Type: application/json
-        {
-        "name": "SSD",
-        "price": 550.00
-        }
-    
-        DELETE http://localhost:3000/api/products/1
-
-
-### REST Clients - Testing REST api using cURL and HTTP Client
+### 4.6 REST Clients - Testing REST api using cURL and HTTP Client
 
 
 #### curl
@@ -1131,9 +955,9 @@ curl -X DELETE http://localhost:3000/api/products/1
 
 ```
 
-#### HTTP Client
+#### Jetbrains HTTP Client
 
-**Code Example: /part2/restful-api-test.http**
+**Code Example: /part2/simple-restful/restful-api-test.http**
 
 ```http request
 ###Retrieve all products
@@ -1141,7 +965,6 @@ GET http://localhost:3000/api/products
 
 
 ### Find product by id
-# curl -X GET http://localhost:3000/api/products
 GET http://localhost:3000/api/products/2
 
 
@@ -1171,7 +994,6 @@ Content-Type: application/json
 ###
 
 
-# curl -X DELETE http://localhost:3000/api/products/1
 DELETE http://localhost:3000/api/products/1
 
 
@@ -1180,7 +1002,6 @@ GET http://localhost:4000/api/products
 
 
 ### Retrieve all products
-#GET http://191.101.2.182:3005/api/products
 GET http://localhost:3000/api/products
 
 
@@ -1193,9 +1014,9 @@ GET http://localhost:3000/api/products
 
 ***
 
+---
 
-
-## Converting a Simple RESTful API into a Web Application
+## 5. Converting a Simple RESTful API into a Web Application
 
 
 This section explains how to convert the existing **REST API** into a **web application** by developing web pages that 
@@ -1216,11 +1037,11 @@ The web application will provide:
 5. **Enhance user experience** with jQuery effects.
 
 
-**Step 1: Modify the API** (`/part2/restful-server.js`)
+**Step 1: Modify the API** (`/part2/simple-restful/server.js`)
 
 We will slightly modify the existing API to serve **static HTML files** in addition to handling RESTful requests.
 
-**Code Example: /part2/web-server.js**
+**Code Example: /part2/web-server/server.js**
 
 ```javascript
 // ───────────────────────────────────────────────────────────────
@@ -1228,7 +1049,7 @@ We will slightly modify the existing API to serve **static HTML files** in addit
 // ───────────────────────────────────────────────────────────────
 const express = require("express"); // Import the Express.js framework
 const path = require("path"); // Import the built-in Node.js 'path' module
-const cors = require("cors"); // Import CORS
+//const cors = require("cors"); // Import CORS
 
 // ───────────────────────────────────────────────────────────────
 // Configuration & Constants
@@ -1241,7 +1062,7 @@ const PORT = 3000; // Define the port number where the server will listen
 // ───────────────────────────────────────────────────────────────
 app.use(express.json());// Middleware to parse JSON request bodies
 app.use(express.static(path.join(__dirname, 'public'))); // Middleware to serve static files (HTML, CSS, JS) from the 'public' folder
-app.use(cors()); // Enable CORS for all routes
+//app.use(cors()); // Enable CORS for all routes
 // The browser blocks cross-origin requests unless the server explicitly allows them.
 // Cross-Origin means that the protocol, domain, or port is different between the frontend and backend.
 // The frontend is running on localhost:3000, and when it sends a request to the service running on localhost:4000,
@@ -1361,28 +1182,52 @@ app.listen(PORT, () => {
 
 **Step 2: Develop Frontend Web Pages**
 
-Inside a folder named public/, add an index.html file. This will be the main page where users
-can view, add, update, and delete products using jQuery.
+Add the following `index.html` file into the `public` folder. This will be the main page where users
+can perform view, add, update, and delete functions on the products object.
 
-**Code Example: /part2/public/index.html**
+**Code Example: /part2/web-server/public/index.html**
 
 ```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Management</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; }
-    table { width: 50%; margin: auto; border-collapse: collapse; }
-    th, td { border: 1px solid black; padding: 10px; }
-    .error { color: red; display: none; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    table {
+      width: 50%;
+      margin: auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+    }
+
+    .error {
+      color: red;
+      display: none;
+    }
+
+    .error.visible {
+      display: block;
+    }
   </style>
 </head>
+
 <body>
+
 <h2>Product List</h2>
+
 <!-- Table to display products -->
 <table>
   <thead>
@@ -1393,92 +1238,221 @@ can view, add, update, and delete products using jQuery.
     <th>Actions</th>
   </tr>
   </thead>
-  <tbody id="product-list"></tbody> <!-- Products will be dynamically inserted here -->
+
+  <!-- Product rows will be dynamically inserted here -->
+  <tbody id="product-list"></tbody>
 </table>
 
 <h2>Add Product</h2>
+
 <!-- Form to add a new product -->
 <form id="add-product-form">
   <input type="text" id="name" placeholder="Product Name" required>
-  <input type="number" id="price" placeholder="Price" required>
+
+  <input type="number" id="price" placeholder="Price"
+         min="0.01" step="any" required>
+
   <button type="submit">Add Product</button>
 </form>
-<p class="error" id="error-msg">Invalid input</p> <!-- Error message for validation -->
+
+<!-- Error message for input validation -->
+<p class="error" id="error-msg" aria-live="polite">
+  Invalid input. Please enter a valid product name and price.
+</p>
+
 
 <script>
-  // It ensures the jQuery statements run after the HTML document (DOM) is fully loaded and ready.
-  // jQuery shortcut for $(document).ready()
-  $(function () {
-    // Function to load products asynchronously using AJAX (GET request)
-    function loadProducts() {
-      $.get("http://localhost:3000/api/products", function(products){
-        //$.get("http://1192.27.2.2:3000/api/products", function(products){ // cross-origin
-        $("#product-list").empty(); // Clear the existing list
-        products.forEach(product => {
-          $("#product-list").append(`
-                            <tr>
-                                <td>${product.id}</td>
-                                <td>${product.name}</td>
-                                <td>${product.price}</td>
-                                <td>
-                                    <button class="delete-btn" data-id="${product.id}">Delete</button>
-                                </td>
-                            </tr>
-                        `);
-        });
-      });
-    }
 
-    // Attaches a submit event listener to the form.
-    // When the form is submitted (for example, by clicking the submit button or pressing Enter), jQuery triggers
-    // the anonymous callback function to handle the submission.
-    // Handle form submission to add a new product (AJAX POST request)
-    $("#add-product-form").on("submit", function(event) {
-      event.preventDefault(); // Prevent default form submission
-      var name = $("#name").val().trim(); // Get product name
-      var price = parseFloat($("#price").val().trim()); // Get product price
+  // API endpoint
+  const API_URL = "http://localhost:8080/api/products";
 
-      // Validate input: Ensure name is not empty and price is valid
-      if (!name || isNaN(price) || price <= 0) {
-        $("#error-msg").fadeIn().delay(5000).fadeOut();
-        return;
+
+  // Function to display an error message
+  function showError(message) {
+    const errorElement = document.querySelector("#error-msg");
+
+    errorElement.textContent = message;
+    errorElement.classList.add("visible");
+
+    setTimeout(function () {
+      errorElement.classList.remove("visible");
+    }, 5000);
+  }
+
+
+  // 1. Load products from the server (HTTP GET)
+  async function loadProducts() {
+
+    try {
+      // Send an asynchronous GET request to the API
+      const response = await fetch(API_URL);
+
+      // Check whether the HTTP request was successful
+      if (!response.ok) {
+        throw new Error("Failed to load products.");
       }
 
-      // Asynchronous request to add a product
-      $.post({
-        url: "/api/products",
-        contentType: "application/json", // Ensure JSON is sent correctly
-        data: JSON.stringify({ name, price }),
-        success: function(response) {
-          loadProducts(); // Refresh product list after adding
-          console.log("Product added:", response);
-          $("#name").val(""); // Clear input fields
-          $("#price").val("");
-        },
-        error: function(xhr) {
-          console.error("Error:", xhr.responseText);
-        }
-      });
-    });
+      // Convert the JSON response into a JavaScript object
+      const products = await response.json();
 
-    // Attaches a click event listener to the table body with id product-list.
-    // When a .delete-btn inside it is clicked, jQuery triggers the anonymous callback function to handle the delete operation.
-    // Handle product deletion (AJAX DELETE request)
-    $("#product-list").on("click", ".delete-btn", function() {
-      var id = $(this).data("id");
-      // Perform the deletion logic here
-      $.ajax({
-        url: `/api/products/${id}`,
-        type: "DELETE",
-        success: function() {
-          loadProducts();
-        }
-      });
-    });
+      // Select the table body
+      const productList = document.querySelector("#product-list");
 
-    loadProducts(); // Initial load of products (asynchronous)
-  });
+      // Clear the existing product rows
+      productList.replaceChildren();
+
+      // Iterate through the products returned by the server
+      products.forEach(function (product) {
+
+        // Create a new table row
+        const row = document.createElement("tr");
+
+        // Create table cells
+        const idCell = document.createElement("td");
+        const nameCell = document.createElement("td");
+        const priceCell = document.createElement("td");
+        const actionCell = document.createElement("td");
+
+        // Set cell contents
+        idCell.textContent = product.id;
+        nameCell.textContent = product.name;
+        priceCell.textContent = product.price;
+
+        // Create a delete button
+        const deleteButton = document.createElement("button");
+
+        deleteButton.textContent = "Delete";
+        deleteButton.type = "button";
+        deleteButton.classList.add("delete-btn");
+
+        // Store the product ID in a data attribute
+        deleteButton.dataset.id = product.id;
+
+        // Add the delete button to its table cell
+        actionCell.appendChild(deleteButton);
+
+        // Add cells to the table row
+        row.append(
+                idCell,
+                nameCell,
+                priceCell,
+                actionCell
+        );
+
+        // Add the row to the table body
+        productList.appendChild(row);
+      });
+
+    } catch (error) {
+      console.error("Error loading products:", error);
+    }
+  }
+
+
+  // 2. Add a new product (HTTP POST)
+  document.querySelector("#add-product-form")
+          .addEventListener("submit", async function (event) {
+
+            // Prevent the default form submission and page reload
+            event.preventDefault();
+
+            // Get values from input fields
+            const name = document.querySelector("#name").value.trim();
+
+            const price = Number(
+                    document.querySelector("#price").value
+            );
+
+            // Validate input values
+            if (!name || !Number.isFinite(price) || price <= 0) {
+              showError("Invalid input. Please check the product name and price.");
+              return;
+            }
+
+            try {
+              // Send an asynchronous POST request to the API
+              const response = await fetch(API_URL, {
+
+                method: "POST",
+
+                headers: {
+                  "Content-Type": "application/json"
+                },
+
+                // Convert the JavaScript object into a JSON string
+                body: JSON.stringify({
+                  name: name,
+                  price: price
+                })
+              });
+
+              // Check whether the request was successful
+              if (!response.ok) {
+                throw new Error("Failed to add product.");
+              }
+
+              const result = await response.json();
+
+              console.log("Product added:", result);
+
+              // Clear input fields
+              document.querySelector("#name").value = "";
+              document.querySelector("#price").value = "";
+
+              // Refresh the product list
+              loadProducts();
+
+            } catch (error) {
+              console.error("Error adding product:", error);
+              showError("Unable to add the product. Please try again.");
+            }
+          });
+
+
+  // 3. Delete a product (HTTP DELETE)
+  document.querySelector("#product-list")
+          .addEventListener("click", async function (event) {
+
+            // Check whether the clicked element is a delete button
+            const deleteButton = event.target.closest(".delete-btn");
+
+            // Ignore clicks on other elements
+            if (!deleteButton) {
+              return;
+            }
+
+            // Get the product ID from the button's data attribute
+            const id = deleteButton.dataset.id;
+
+            try {
+              // Send an asynchronous DELETE request to the API
+              const response = await fetch(
+                      `${API_URL}/${encodeURIComponent(id)}`,
+                      {
+                        method: "DELETE"
+                      }
+              );
+
+              // Check whether the request was successful
+              if (!response.ok) {
+                throw new Error("Failed to delete product.");
+              }
+
+              // Refresh the product list after deletion
+              loadProducts();
+
+            } catch (error) {
+              console.error("Error deleting product:", error);
+              showError("Unable to delete the product.");
+            }
+          });
+
+
+  // Initial load of products when the page is ready
+  loadProducts();
+
 </script>
+
 </body>
 </html>
 
@@ -1493,7 +1467,7 @@ can view, add, update, and delete products using jQuery.
 
 **Step 3: Add search and update functionalities to the web app**
 
-**Code Example: Modify the following route in /part2/web-server.js**
+**Code Example: Modify the following route in /part2/web-server/server.js**
 
 ```javascript
 // GET all products
@@ -1513,24 +1487,47 @@ app.get("/api/products", (req, res) => {
 
 ```
 
-**Code Example: /part2/public/index1.html**
+**Code Example: /part2/web-server/public/index1.html**
 
 ```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Management</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; }
-    table { width: 50%; margin: auto; border-collapse: collapse; }
-    th, td { border: 1px solid black; padding: 10px; }
-    .error { color: red; display: none; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    table {
+      width: 50%;
+      margin: auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+    }
+
+    .error {
+      color: red;
+      display: none;
+    }
+
+    .error.visible {
+      display: block;
+    }
   </style>
 </head>
+
 <body>
+
 <h2>Product List</h2>
 
 <!-- Live Search Input -->
@@ -1547,143 +1544,421 @@ app.get("/api/products", (req, res) => {
     <th>Actions</th>
   </tr>
   </thead>
+
+  <!-- Product rows will be dynamically inserted here -->
   <tbody id="product-list"></tbody>
 </table>
 
+
 <h2>Add Product</h2>
+
+<!-- Form to add a new product -->
 <form id="add-product-form">
   <input type="text" id="name" placeholder="Product Name" required>
-  <input type="number" id="price" placeholder="Price" required>
+
+  <input type="number" id="price" placeholder="Price"
+         min="0.01" step="any" required>
+
   <button type="submit">Add Product</button>
 </form>
+
 <p class="error" id="error-msg">Invalid input</p>
 
-<div id="updateform" hidden="true">
+
+<!-- Update Product Form (initially hidden) -->
+<div id="updateform" hidden>
+
   <h2>Update Product</h2>
+
   <form id="update-product-form">
-    <input type="number" id="update-id" placeholder="Product ID" readonly required>
-    <input type="text" id="update-name" placeholder="New Name">
-    <input type="number" id="update-price" placeholder="New Price">
+
+    <input type="number" id="update-id"
+           placeholder="Product ID" readonly required>
+
+    <input type="text" id="update-name"
+           placeholder="New Name">
+
+    <input type="number" id="update-price"
+           placeholder="New Price" min="0.01" step="any">
+
     <button type="submit">Update Product</button>
+
   </form>
+
   <p class="error" id="update-error-msg">Invalid input</p>
+
 </div>
+
+
 <script>
 
-  $(function () { // It ensures the jQuery statements run after the HTML document (DOM) is fully loaded and ready.
-    let debounceTimer;
-    alert("test")
-    function loadProducts(query = "") {
-      const url = query ? `/api/products?name=${query}` : '/api/products';
-      $.get(url, function(products){
-        $("#product-list").empty();
-        if (products.length === 0) {
-          $("#search-error").show();
-        } else {
-          $("#search-error").hide();
-          products.forEach(product => {
-            $("#product-list").append(`
-                                <tr>
-                                    <td>${product.id}</td>
-                                    <td>${product.name}</td>
-                                    <td>${product.price}</td>
-                                    <td>
-                                        <button class="edit-btn" data-id="${product.id}">Edit</button>
-                                        <button class="delete-btn" data-id="${product.id}">Delete</button>
-                                    </td>
-                                </tr>
-                            `);
-          });
-        }
+  // API endpoint
+  const API_URL = "/api/products";
+
+  // Variables for live search
+  let debounceTimer;
+  let currentSearch = "";
+
+
+  // Function to display error messages
+  function showError(elementId, message) {
+
+    const errorElement = document.querySelector(elementId);
+
+    errorElement.textContent = message;
+    errorElement.classList.add("visible");
+
+    setTimeout(function () {
+      errorElement.classList.remove("visible");
+    }, 5000);
+  }
+
+
+  // 1. Load and search products (HTTP GET)
+  async function loadProducts(query = "") {
+
+    currentSearch = query;
+
+    console.log(currentSearch);
+
+    try {
+
+      // Construct the API URL with an optional search parameter
+      const url = query
+              ? `${API_URL}?${new URLSearchParams({ name: query })}`
+              : API_URL;
+
+      // Send an asynchronous GET request
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error("Failed to load products.");
+      }
+
+      // Convert JSON response into a JavaScript object
+      const products = await response.json();
+
+      // Select the table body
+      const productList = document.querySelector("#product-list");
+
+      // Clear existing product rows
+      productList.replaceChildren();
+
+      // Check whether any products were returned
+      if (products.length === 0) {
+
+        document.querySelector("#search-error")
+                .classList.add("visible");
+
+        return;
+
+      } else {
+
+        document.querySelector("#search-error")
+                .classList.remove("visible");
+      }
+
+
+      // Iterate through the products
+      products.forEach(function (product) {
+
+        // Create a table row
+        const row = document.createElement("tr");
+
+        // Create table cells
+        const idCell = document.createElement("td");
+        const nameCell = document.createElement("td");
+        const priceCell = document.createElement("td");
+        const actionCell = document.createElement("td");
+
+        // Set cell contents
+        idCell.textContent = product.id;
+        nameCell.textContent = product.name;
+        priceCell.textContent = product.price;
+
+
+        // Create Edit button
+        const editButton = document.createElement("button");
+
+        editButton.textContent = "Edit";
+        editButton.type = "button";
+        editButton.classList.add("edit-btn");
+        editButton.dataset.id = product.id;
+
+
+        // Create Delete button
+        const deleteButton = document.createElement("button");
+
+        deleteButton.textContent = "Delete";
+        deleteButton.type = "button";
+        deleteButton.classList.add("delete-btn");
+        deleteButton.dataset.id = product.id;
+
+
+        // Add buttons to the action cell
+        actionCell.append(editButton, deleteButton);
+
+        // Add cells to the row
+        row.append(idCell, nameCell, priceCell, actionCell);
+
+        // Add row to the table
+        productList.appendChild(row);
+
       });
+
+    } catch (error) {
+
+      console.error("Error loading products:", error);
+
     }
-
-    $("#add-product-form").on("submit", function(event) {
-      event.preventDefault();
-      let name = $("#name").val().trim();
-      let price = parseFloat($("#price").val().trim());
-
-      if (!name || isNaN(price) || price <= 0) {
-        $("#error-msg").fadeIn().delay(5000).fadeOut();
-        return;
-      }
-
-      $.post({
-        url: "/api/products",
-        contentType: "application/json",
-        data: JSON.stringify({ name, price }),
-        success: function() {
-          loadProducts();
-          $("#name, #price").val("");
-        }
-      });
-    });
-
-    $("#product-list").on("click", ".delete-btn", function() {
-      let id = $(this).data("id");
-      $.ajax({
-        url: `/api/products/${id}`,
-        type: "DELETE",
-        success: function() {
-          loadProducts();
-        }
-      });
-    });
+  }
 
 
-    //$("#search"):This is a jQuery selector that selects an HTML element with the id of search.
-    // The .on() method is used to attach an event handler to the selected element(s).
-    // "keyup" is the event type being listened for. The keyup event is triggered when a keyboard key is released after being pressed.
-    // function() { ... } is the callback function that will be executed when the keyup event occurs.
 
-    $("#search").on("keyup", function() { // attaches a "keyup" event listener to the search input field (#search).
-      // jQuery triggers the anonymous callback function whenever the user releases a key (keyup event).
-      clearTimeout(debounceTimer); //Clears any previously set timer (debounceTimer) to prevent 
-      // multiple requests being sent in quick succession.
-      let query = $(this).val().trim();
-      debounceTimer = setTimeout(() => { //Sets a delay of 300 milliseconds before calling loadProducts(query).
-        loadProducts(query);
-      }, 300);
-    });
+  // 2. Add a new product (HTTP POST)
+  document.querySelector("#add-product-form")
+          .addEventListener("submit", async function (event) {
 
-    $("#update-product-form").on("submit", function(event) {
-      event.preventDefault();
-      let id = parseInt($("#update-id").val().trim());
-      let name = $("#update-name").val().trim();
-      let price = parseFloat($("#update-price").val().trim());
+            event.preventDefault();
 
-      if (isNaN(id) || id <= 0 || (!name && isNaN(price))) {
-        $("#update-error-msg").fadeIn().delay(5000).fadeOut();
-        return;
-      }
+            // Get input values
+            const name = document.querySelector("#name").value.trim();
 
-      $.ajax({
-        url: `/api/products/${id}`,
-        type: "PUT",
-        contentType: "application/json",
-        data: JSON.stringify({ name, price }),
-        success: function() {
-          loadProducts();
-          $("#update-id, #update-name, #update-price").val("");
-        }
-      });
-    });
+            const price = Number(
+                    document.querySelector("#price").value
+            );
 
-    // Attaches a click event listener to the table body with id product-list.
-    // When a .edit-btn inside it is clicked, jQuery triggers the anonymous callback function to handle the update operation.
-    $("#product-list").on("click", ".edit-btn", function() {
-      let id = $(this).data("id");
-      $("#updateform").fadeIn(2000);
-      $.get(`/api/products/${id}`, function(product) {
-        $("#update-id").val(product.id);
-        $("#update-name").val(product.name);
-        $("#update-price").val(product.price);
-      });
-    });
+            // Validate input
+            if (!name || !Number.isFinite(price) || price <= 0) {
 
-    loadProducts();
-  });
+              showError("#error-msg", "Invalid product name or price.");
+              return;
+            }
+
+            try {
+
+              // Send POST request to the API
+              const response = await fetch(API_URL, {
+
+                method: "POST",
+
+                headers: {
+                  "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({ name, price })
+
+              });
+
+              if (!response.ok) {
+                throw new Error("Failed to add product.");
+              }
+
+              // Clear input fields
+              document.querySelector("#name").value = "";
+              document.querySelector("#price").value = "";
+
+              // Refresh the product list
+              await loadProducts(currentSearch);
+
+            } catch (error) {
+
+              console.error("Error adding product:", error);
+
+              showError("#error-msg", "Unable to add the product.");
+
+            }
+          });
+
+
+
+  // 3. Live Search with Debouncing
+  document.querySelector("#search")
+          .addEventListener("input", function () {
+
+            // Cancel the previously scheduled search
+            clearTimeout(debounceTimer);
+
+            // Get the current search value
+            const query = this.value.trim();
+
+            // Wait 300 milliseconds before sending the request
+            debounceTimer = setTimeout(function () {
+
+              loadProducts(query);
+
+            }, 300);
+
+          });
+
+
+
+  // 4. Delete a product (HTTP DELETE)
+  // Event delegation: one listener handles dynamically generated buttons
+  document.querySelector("#product-list")
+          .addEventListener("click", async function (event) {
+
+            // Identify the clicked Delete button
+            const button = event.target.closest(".delete-btn");
+
+            if (!button) return;
+
+            // Get product ID from the data attribute
+            const id = button.dataset.id;
+
+            try {
+
+              // Send DELETE request
+              const response = await fetch(
+                      `${API_URL}/${encodeURIComponent(id)}`,
+                      {
+                        method: "DELETE"
+                      }
+              );
+
+              if (!response.ok) {
+                throw new Error("Failed to delete product.");
+              }
+
+              // Refresh the product list
+              await loadProducts(currentSearch);
+
+            } catch (error) {
+
+              console.error("Error deleting product:", error);
+
+            }
+          });
+
+
+
+  // 5. Edit a product (HTTP GET)
+  document.querySelector("#product-list")
+          .addEventListener("click", async function (event) {
+
+            // Identify the clicked Edit button
+            const button = event.target.closest(".edit-btn");
+
+            if (!button) return;
+
+            // Get product ID
+            const id = button.dataset.id;
+
+            try {
+
+              // Retrieve the selected product from the server
+              const response = await fetch(
+                      `${API_URL}/${encodeURIComponent(id)}`
+              );
+
+              if (!response.ok) {
+                throw new Error("Failed to retrieve product.");
+              }
+
+              const product = await response.json();
+
+              // Display the update form
+              document.querySelector("#updateform").hidden = false;
+
+              // Populate the form with existing product information
+              document.querySelector("#update-id").value = product.id;
+              document.querySelector("#update-name").value = product.name;
+              document.querySelector("#update-price").value = product.price;
+
+            } catch (error) {
+
+              console.error("Error retrieving product:", error);
+
+            }
+          });
+
+
+
+  // 6. Update a product (HTTP PATCH)
+  document.querySelector("#update-product-form")
+          .addEventListener("submit", async function (event) {
+
+            event.preventDefault();
+
+            // Get product ID
+            const id = document.querySelector("#update-id").value;
+
+            // Get updated values
+            const name = document.querySelector("#update-name").value.trim();
+
+            const priceInput = document.querySelector("#update-price").value;
+
+            // Validate input
+            if (!name && !priceInput) {
+
+              showError("#update-error-msg", "Enter at least one field to update.");
+              return;
+            }
+
+            // Prepare the data to be updated
+            const updatedData = {};
+
+            if (name) {
+              updatedData.name = name;
+            }
+
+            if (priceInput) {
+
+              const price = Number(priceInput);
+
+              if (!Number.isFinite(price) || price <= 0) {
+
+                showError("#update-error-msg", "Enter a valid price.");
+                return;
+              }
+
+              updatedData.price = price;
+            }
+
+            try {
+
+              // Send PATCH request to update selected fields
+              const response = await fetch(
+                      `${API_URL}/${encodeURIComponent(id)}`,
+                      {
+                        method: "PATCH",
+
+                        headers: {
+                          "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify(updatedData)
+                      }
+              );
+
+              if (!response.ok) {
+                throw new Error("Failed to update product.");
+              }
+
+              // Clear and hide the update form
+              document.querySelector("#update-product-form").reset();
+
+              document.querySelector("#updateform").hidden = true;
+
+              // Refresh the product list
+              await loadProducts(currentSearch);
+
+            } catch (error) {
+
+              console.error("Error updating product:", error);
+
+              showError("#update-error-msg", "Unable to update the product.");
+
+            }
+          });
+
+
+
+  // Initial load of products
+  loadProducts();
+
 </script>
+
 </body>
 </html>
 
@@ -1696,9 +1971,9 @@ app.get("/api/products", (req, res) => {
 ***
 
 
+---
 
-
-## Interconnecting Web Services
+## 6. Interconnecting Web Services
 
 **Service-Oriented Architecture (SOA)** is an architectural pattern in which software components are structured as
 independent services.
@@ -1721,7 +1996,7 @@ independent services.
                             +--------------------------+
                              
 ```
-* Run the Service B /part2/restful-server.js
+* Run the Service B /part2/simple-restful/server.js
 * Send requests to this service with the following RESTful client service (Service A)
 
 **Code Example: /part2/restful-client-service.js**
@@ -1766,9 +2041,9 @@ app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 ```
 
+---
 
-
-## Database Integration
+## 7. Database Integration
 
 Modern applications often need to store, retrieve, and manipulate data dynamically.
 To perform these database operations from within an application, database drivers are essential.
@@ -1806,8 +2081,8 @@ const app = express();
 // PostgreSQL database connections for efficient query execution in a Node.js application.
 
 const pool = new Pool({
-  user: 'postgres',
-  password: 'LecturePassword',
+  user: 'lectureuser',
+  password: 'lecturepassword',
   host: 'localhost',
   port: 5432,
   database: 'testdb',
@@ -1966,8 +2241,9 @@ app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`)
 
 ***
 
+---
 
-## Deployment of Node.js Application to a Remote Server
+## 8. Deployment of Node.js Application to a Remote Server
 
     Intellij -> Tools -> Deployment -> Configuration 
     Provide protocol -> sftp, socket address -> 192.2.2.1:22, credentials ->username:password
