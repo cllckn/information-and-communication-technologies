@@ -88,7 +88,6 @@ The course will cover the following topics:
 * Fundamentals of Web Applications and Web Services
 * Introduction to Node.js
 * Developing Web Applications Using HTML,CSS, JS, and Node.js
-* jQuery and Basic Form Operations for User Interaction
 * Developing RESTful APIs
 * Database Integration
 * Hands-on Exercises
