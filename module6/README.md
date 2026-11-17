@@ -19,7 +19,7 @@
     * [2.4 Sequential and Event-Driven Programming Models](#24-sequential-and-event-driven-programming-models)
       * [Traditional blocking(sequential/synchronous) operation in Node.js](#traditional-blockingsequentialsynchronous-operation-in-nodejs)
     * [2.5 Non-blocking (asynchronous) operations in Node.js](#25-non-blocking-asynchronous-operations-in-nodejs)
-    * [Basic JSON Operations](#basic-json-operations)
+    * [2.6 Basic JSON Operations](#26-basic-json-operations)
   * [3. Developing Web Applications Using HTML,CSS, JS, and Node.js](#3-developing-web-applications-using-htmlcss-js-and-nodejs)
     * [3.1 HTML (HyperText Markup Language)](#31-html-hypertext-markup-language)
     * [3.2 CSS (Cascading Style Sheets)](#32-css-cascading-style-sheets)
@@ -404,7 +404,7 @@ executed after the operation is completed.
 
 ---
 
-### Basic JSON Operations
+### 2.6 Basic JSON Operations
 
 **Code Example: /part1/json.js**
 
@@ -421,7 +421,8 @@ const product = {
 };
 
 // Convert JSON to string and write it to a file
-fs.writeFileSync('product.json', JSON.stringify(product, null, 2));
+fs.writeFileSync('product.json', JSON.stringify(product, null, 2)); //JSON.stringify(product, null, 2) converts 
+// the product object into a human-readable, pretty-printed JSON string.
 console.log("JSON file has been stored successfully.");
 
 // Read JSON data from the file
@@ -474,7 +475,10 @@ const app = express(); // Initialize an Express application
 const PORT = 3000; // Define the port number where the server will listen
 
 // Middleware to serve static files (HTML, CSS, JS) from the 'public' folder.
-app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(express.static(path.join(__dirname, 'public')));
+//Registers static-file middleware.
+//Makes files inside the public directory accessible directly through HTTP requests.
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
