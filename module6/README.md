@@ -631,8 +631,6 @@ Hello World !
 
 </body>
 </html>
-
-
 ```
 
 
@@ -778,11 +776,10 @@ const app = express(); // Initialize an Express application
 const PORT = 3000; // Define the port number where the server will listen
 
 // ───────────────────────────────────────────────────────────────
-// Middleware: JSON Parser
+// Middleware
 // ───────────────────────────────────────────────────────────────
-// Middleware to parse JSON request bodies
-app.use(express.json());
-
+app.use(express.json()); // Parse JSON request bodies
+app.use(express.static("public")); // Serve the frontend files (HTML, CSS, JS) from the "public" folder
 
 // ───────────────────────────────────────────────────────────────
 // In-memory database: JSON array for products
@@ -791,11 +788,19 @@ let products = [
   { id: 1, name: "SSD", price: 999.99 },
   { id: 2, name: "RAM", price: 499.99 },
 ];
+let nextId = 3; // Ids are never reused, even after a product is deleted
+
+// ───────────────────────────────────────────────────────────────
+// Validation helpers
+// ───────────────────────────────────────────────────────────────
+const isValidName = (value) => typeof value === "string" && value.trim() !== "";
+const isValidPrice = (value) => typeof value === "number" && Number.isFinite(value) && value >= 0;
 
 // ───────────────────────────────────────────────────────────────
 // Define Routes
 // ───────────────────────────────────────────────────────────────
 // Routes are the connection points (end points - addresses) in a web service where clients send requests to interact with the service.
+
 // GET all products
 app.get("/api/products", (req, res) => {
   res.json(products); // Respond with the list of all products
@@ -803,90 +808,92 @@ app.get("/api/products", (req, res) => {
 
 // GET a single product by ID
 app.get("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p.id === parseInt(req.params.id)); // Find the product by ID
+  const product = products.find((p) => p.id === Number(req.params.id)); // Find the product by ID. Number(req.params.id) converts the id from the URL into a number.
   if (!product) return res.status(404).json({ error: "Product not found" }); // If not found, respond with 404
   res.json(product); // Respond with the found product
 });
 
 // POST - Add a new product
 app.post("/api/products", (req, res) => {
-  const { name, price } = req.body; // Extract name and price from the request body
-  if (!name || !price) return res.status(400).json({ error: "Invalid input" }); // Validate input
+  const { name, price } = req.body ?? {}; // Extract name and price from the request body. "??" returns its right side only when the left side is null or undefined:
 
-  const newProduct = { id: products.length + 1, name, price }; // Add a new product with a unique ID
+  // Validate input (a price of 0 is allowed)
+  if (!isValidName(name) || !isValidPrice(price)) {
+    return res.status(400).json({
+      error: "name (non-empty string) and price (non-negative number) are required",
+    });
+  }
+
+  const newProduct = { id: nextId++, name: name.trim(), price }; // Add a new product with a unique ID
   products.push(newProduct); // Add the new product to the list
   res.status(201).json(newProduct); // Respond with the added product
 });
 
-
-// PUT - Replace a Product Record (full replacement)
+// PUT - Replace a product (all mutable fields are required)
 app.put("/api/products/:id", (req, res) => {
-  // 1. Destructure and extract all fields from the request body.
-  // Assuming 'name', 'price' are the mutable fields.
-  const { name, price } = req.body;
+  const product = products.find((p) => p.id === Number(req.params.id)); // Find the product by ID
+  if (!product) return res.status(404).json({ error: "Product not found" });
 
-  // 2. Validate the Request Body (Required for PUT)
-  // Check if all required fields are present.
-  // Note: Unlike the original code, we do NOT use '|| product.name'
-  // because PUT must overwrite all fields, or fail.
-  if (!name || price == null ) {
+  const { name, price } = req.body ?? {};
+
+  // Unlike PATCH, PUT must receive every mutable field
+  if (!isValidName(name) || !isValidPrice(price)) {
     return res.status(400).json({
-      error: "PUT /products requires ALL mutable fields (name, price) for full replacement."
+      error: "name (non-empty string) and price (non-negative number) are required",
     });
   }
 
-  // 3. Find the Product
-  const product = products.find((p) => p.id === parseInt(req.params.id));
-  if (!product) {
-    return res.status(404).json({ error: "Product not found" });
-  }
-
-  // 4. Update/Replace: Directly assign ALL new values.
-  product.name = name;
+  product.name = name.trim(); // The id always comes from the URL, never from the body
   product.price = price;
-
-  // 5. Respond with the fully updated product
-  res.json(product);
+  res.json(product); // Respond with the replaced product
 });
 
-// PATCH - Modify a product (partial or full replacement)
+// PATCH - Partially update a product (only the provided fields change)
 app.patch("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p.id === parseInt(req.params.id)); // Find the product by ID
-  if (!product) return res.status(404).json({ error: "Product not found" }); // If not found, respond with 404
+  const product = products.find((p) => p.id === Number(req.params.id)); // Find the product by ID
+  if (!product) return res.status(404).json({ error: "Product not found" });
 
-  const { name, price } = req.body; // Extract name and price from the request body
-  product.name = name || product.name; // Update the product name if provided
-  product.price = price || product.price; // Update the product price if provided
+  const { name, price } = req.body ?? {};
+
+  // Validate only the fields that were sent (undefined means "not provided")
+  if (name !== undefined && !isValidName(name)) {
+    return res.status(400).json({ error: "name must be a non-empty string" });
+  }
+  if (price !== undefined && !isValidPrice(price)) {
+    return res.status(400).json({ error: "price must be a non-negative number" });
+  }
+
+  if (name !== undefined) product.name = name.trim();
+  if (price !== undefined) product.price = price;
   res.json(product); // Respond with the updated product
 });
 
 // DELETE - Remove a product
 app.delete("/api/products/:id", (req, res) => {
-  const productIdToDelete = parseInt(req.params.id);
+  const index = products.findIndex((p) => p.id === Number(req.params.id));
+  if (index === -1) return res.status(404).json({ error: "Product not found" });
 
-  // 1. Store the initial count of products
-  const initialLength = products.length;
-
-  // 2. Filter the array, creating a new array without the specified product ID
-  products = products.filter((p) => p.id !== productIdToDelete);
-
-  // 3. Store the final count of products
-  const finalLength = products.length;
-
-  if (finalLength < initialLength) {
-    // The product was found and successfully deleted (the array length decreased).
-
-    // REST Best Practice: 204 No Content for a successful DELETE with no response body.
-    res.status(204).end();
-  } else {
-    // The product was NOT found (the array length remained the same).
-
-    // REST Best Practice: 404 Not Found indicates the resource doesn't exist.
-    res.status(404).json({
-      error: `Product with ID ${productIdToDelete} not found.`
-    });
-  }
+  products.splice(index, 1); // Removes one element from the products array, starting at position index.
+  res.status(204).end(); // REST best practice: 204 No Content for a successful DELETE
 });
+
+// ───────────────────────────────────────────────────────────────
+// Error handling
+// ───────────────────────────────────────────────────────────────
+// Unknown /api routes: respond with JSON instead of Express's default HTML page
+app.use("/api", (req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
+
+// Errors thrown by middleware (for example, malformed JSON in the request body)
+app.use((err, req, res, next) => {
+  if (err.type === "entity.parse.failed") {
+    return res.status(400).json({ error: "Invalid JSON" });
+  }
+  console.error(err);
+  res.status(500).json({ error: "Internal server error" });
+});
+
 
 // ───────────────────────────────────────────────────────────────
 // Start Express HTTP Server
@@ -1019,26 +1026,34 @@ GET http://localhost:3000/api/products
 ***
 
 ---
-
 ## 5. Converting a Simple RESTful API into a Web Application
 
-
-This section explains how to convert the existing **REST API** into a **web application** by developing web pages that 
-allow users to interact with the API using **jQuery**.
+This section explains how to convert the existing **REST API** into a **web application** by developing web pages 
+(frontend) that let users interact with the API. To focus on the interaction between frontend and backend, 
+the frontend uses plain **HTML, CSS, and vanilla JavaScript** (no libraries or frameworks).
 
 The web application will provide:
 - A **product list** fetched from the API.
 - A **form to add new products**.
-- Options to **update and delete products** dynamically.
-- jQuery-based **AJAX requests** to communicate with the API.
-
+- Options to **update and delete products** dynamically, without reloading the page.
+- Requests to the API made with the browser's built-in **`fetch()`** API (AJAX).
 
 **Steps to Convert the API into a Web Application**
-1. **Retain the existing REST API** as the backend, and add the statement to serve static files.
-2. **Develop frontend web pages** to interact with the API.
-3. **Use jQuery** to fetch, display, add, update, and delete products.
-4. **Implement event handling** using jQuery to interact with the API.
-5. **Enhance user experience** with jQuery effects.
+1. **Keep the existing REST API** as the backend, and make it serve static files (the HTML, CSS, and JavaScript). 
+In Express, for example: `app.use(express.static("public"));`
+2. **Develop the frontend web pages** that interact with the API.
+3. **Use `fetch()`** to get, display, add, update, and delete products.
+4. **Handle events** (such as button clicks and form submissions) with `addEventListener()` and call the API from the handlers.
+5. **Improve the user experience**, for example with CSS transitions and by showing or hiding elements with classes.
+
+**How user actions map to API requests**
+
+| Action | HTTP method | Example endpoint |
+|---|---|---|
+| Show the product list | `GET` | `/api/products` |
+| Add a product | `POST` | `/api/products` |
+| Update a product | `PUT` or `PATCH` | `/api/products/:id` |
+| Delete a product | `DELETE` | `/api/products/:id` |
 
 
 **Step 1: Modify the API** (`/part2/simple-restful/server.js`)
@@ -1199,266 +1214,188 @@ can perform view, add, update, and delete functions on the products object.
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Management</title>
-
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    table {
-      width: 50%;
-      margin: auto;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      border: 1px solid black;
-      padding: 10px;
-    }
-
-    .error {
-      color: red;
-      display: none;
-    }
-
-    .error.visible {
-      display: block;
-    }
+    body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+    table { width: 50%; margin: auto; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+    .error { color: red; display: none; margin: 10px 0; }
+    .error.visible { display: block; }
+    button { margin: 0 4px; cursor: pointer; }
   </style>
 </head>
-
 <body>
 
 <h2>Product List</h2>
+<input type="text" id="search" placeholder="Search by name">
+<p class="error" id="search-error">No products found</p>
 
-<!-- Table to display products -->
 <table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-
-  <!-- Product rows will be dynamically inserted here -->
+  <thead><tr><th>ID</th><th>Name</th><th>Price</th><th>Actions</th></tr></thead>
   <tbody id="product-list"></tbody>
 </table>
 
 <h2>Add Product</h2>
-
-<!-- Form to add a new product -->
 <form id="add-product-form">
   <input type="text" id="name" placeholder="Product Name" required>
-
-  <input type="number" id="price" placeholder="Price"
-         min="0.01" step="any" required>
-
+  <input type="number" id="price" placeholder="Price" min="0.01" step="any" required>
   <button type="submit">Add Product</button>
 </form>
+<p class="error" id="error-msg"></p>
 
-<!-- Error message for input validation -->
-<p class="error" id="error-msg" aria-live="polite">
-  Invalid input. Please enter a valid product name and price.
-</p>
-
+<div id="updateform" hidden>
+  <h2>Update Product</h2>
+  <form id="update-product-form">
+    <input type="number" id="update-id" readonly required>
+    <input type="text" id="update-name" placeholder="New Name">
+    <input type="number" id="update-price" placeholder="New Price" min="0.01" step="any">
+    <button type="submit">Update Product</button>
+  </form>
+  <p class="error" id="update-error-msg"></p>
+</div>
 
 <script>
+  const API_URL = "/api/products";
+  let currentSearch = "";
+  let debounceTimer;
 
-  // API endpoint
-  const API_URL = "http://localhost:8080/api/products";
+  const showError = (id, msg) => {
+    const el = document.getElementById(id);
+    el.textContent = msg;
+    el.classList.add("visible");
+    setTimeout(() => el.classList.remove("visible"), 5000);
+  };
 
+  // Fetches and renders products, handling empty search states
+  const loadProducts = async (query = "") => {
+    currentSearch = query;
+    try {
+      const url = query ? `${API_URL}?name=${encodeURIComponent(query)}` : API_URL;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Failed to load");
+      const products = await res.json();
 
-  // Function to display an error message
-  function showError(message) {
-    const errorElement = document.querySelector("#error-msg");
+      // Toggle "No products found" message based on array length
+      document.getElementById("search-error").classList.toggle("visible", products.length === 0);
 
-    errorElement.textContent = message;
-    errorElement.classList.add("visible");
+      // Render rows efficiently using template literals
+      document.getElementById("product-list").innerHTML = products.map(p => `
+          <tr>
+            <td>${p.id}</td>
+            <td>${p.name}</td>
+            <td>${p.price}</td>
+            <td>
+              <button class="edit-btn" data-id="${p.id}">Edit</button>
+              <button class="delete-btn" data-id="${p.id}">Delete</button>
+            </td>
+          </tr>
+        `).join('');
+    } catch (err) {
+      console.error("Error loading products:", err);
+    }
+  };
 
-    setTimeout(function () {
-      errorElement.classList.remove("visible");
-    }, 5000);
-  }
+  // Add Product
+  document.getElementById("add-product-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const price = Number(document.getElementById("price").value);
 
-
-  // 1. Load products from the server (HTTP GET)
-  async function loadProducts() {
+    if (!name || !Number.isFinite(price) || price <= 0) {
+      return showError("error-msg", "Invalid product name or price.");
+    }
 
     try {
-      // Send an asynchronous GET request to the API
-      const response = await fetch(API_URL);
-
-      // Check whether the HTTP request was successful
-      if (!response.ok) {
-        throw new Error("Failed to load products.");
-      }
-
-      // Convert the JSON response into a JavaScript object
-      const products = await response.json();
-
-      // Select the table body
-      const productList = document.querySelector("#product-list");
-
-      // Clear the existing product rows
-      productList.replaceChildren();
-
-      // Iterate through the products returned by the server
-      products.forEach(function (product) {
-
-        // Create a new table row
-        const row = document.createElement("tr");
-
-        // Create table cells
-        const idCell = document.createElement("td");
-        const nameCell = document.createElement("td");
-        const priceCell = document.createElement("td");
-        const actionCell = document.createElement("td");
-
-        // Set cell contents
-        idCell.textContent = product.id;
-        nameCell.textContent = product.name;
-        priceCell.textContent = product.price;
-
-        // Create a delete button
-        const deleteButton = document.createElement("button");
-
-        deleteButton.textContent = "Delete";
-        deleteButton.type = "button";
-        deleteButton.classList.add("delete-btn");
-
-        // Store the product ID in a data attribute
-        deleteButton.dataset.id = product.id;
-
-        // Add the delete button to its table cell
-        actionCell.appendChild(deleteButton);
-
-        // Add cells to the table row
-        row.append(
-                idCell,
-                nameCell,
-                priceCell,
-                actionCell
-        );
-
-        // Add the row to the table body
-        productList.appendChild(row);
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, price })
       });
-
-    } catch (error) {
-      console.error("Error loading products:", error);
+      if (!res.ok) throw new Error("Failed to add");
+      e.target.reset();
+      loadProducts(currentSearch);
+    } catch (err) {
+      showError("error-msg", "Unable to add product.");
     }
-  }
+  });
 
+  // Live Search with Debouncing
+  document.getElementById("search").addEventListener("input", (e) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => loadProducts(e.target.value.trim()), 300);
+  });
 
-  // 2. Add a new product (HTTP POST)
-  document.querySelector("#add-product-form")
-          .addEventListener("submit", async function (event) {
+  // Combined Event Delegation for Edit and Delete actions
+  document.getElementById("product-list").addEventListener("click", async (e) => {
+    // Matches either button class, ignoring clicks elsewhere in the table
+    const btn = e.target.closest(".edit-btn, .delete-btn");
+    if (!btn) return;
 
-            // Prevent the default form submission and page reload
-            event.preventDefault();
+    const id = btn.dataset.id;
 
-            // Get values from input fields
-            const name = document.querySelector("#name").value.trim();
+    if (btn.classList.contains("delete-btn")) {
+      try {
+        const res = await fetch(`${API_URL}/${encodeURIComponent(id)}`, { method: "DELETE" });
+        if (!res.ok) throw new Error("Failed to delete");
+        loadProducts(currentSearch);
+      } catch (err) {
+        console.error("Delete error:", err);
+      }
+    }
+    else if (btn.classList.contains("edit-btn")) {
+      try {
+        const res = await fetch(`${API_URL}/${encodeURIComponent(id)}`);
+        if (!res.ok) throw new Error("Failed to retrieve");
+        const product = await res.json();
 
-            const price = Number(
-                    document.querySelector("#price").value
-            );
+        document.getElementById("update-id").value = product.id;
+        document.getElementById("update-name").value = product.name;
+        document.getElementById("update-price").value = product.price;
+        document.getElementById("updateform").hidden = false;
+      } catch (err) {
+        console.error("Edit error:", err);
+      }
+    }
+  });
 
-            // Validate input values
-            if (!name || !Number.isFinite(price) || price <= 0) {
-              showError("Invalid input. Please check the product name and price.");
-              return;
-            }
+  // Update Product
+  document.getElementById("update-product-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const id = document.getElementById("update-id").value;
+    const name = document.getElementById("update-name").value.trim();
+    const priceVal = document.getElementById("update-price").value;
+    const price = priceVal ? Number(priceVal) : null;
 
-            try {
-              // Send an asynchronous POST request to the API
-              const response = await fetch(API_URL, {
+    if (!name && !priceVal) return showError("update-error-msg", "Enter at least one field to update.");
+    if (priceVal && (!Number.isFinite(price) || price <= 0)) {
+      return showError("update-error-msg", "Enter a valid price.");
+    }
 
-                method: "POST",
+    // Build payload dynamically, only including provided fields
+    const updatedData = {};
+    if (name) updatedData.name = name;
+    if (priceVal) updatedData.price = price;
 
-                headers: {
-                  "Content-Type": "application/json"
-                },
+    try {
+      const res = await fetch(`${API_URL}/${encodeURIComponent(id)}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedData)
+      });
+      if (!res.ok) throw new Error("Failed to update");
 
-                // Convert the JavaScript object into a JSON string
-                body: JSON.stringify({
-                  name: name,
-                  price: price
-                })
-              });
+      document.getElementById("updateform").hidden = true;
+      e.target.reset();
+      loadProducts(currentSearch);
+    } catch (err) {
+      showError("update-error-msg", "Unable to update product.");
+    }
+  });
 
-              // Check whether the request was successful
-              if (!response.ok) {
-                throw new Error("Failed to add product.");
-              }
-
-              const result = await response.json();
-
-              console.log("Product added:", result);
-
-              // Clear input fields
-              document.querySelector("#name").value = "";
-              document.querySelector("#price").value = "";
-
-              // Refresh the product list
-              loadProducts();
-
-            } catch (error) {
-              console.error("Error adding product:", error);
-              showError("Unable to add the product. Please try again.");
-            }
-          });
-
-
-  // 3. Delete a product (HTTP DELETE)
-  document.querySelector("#product-list")
-          .addEventListener("click", async function (event) {
-
-            // Check whether the clicked element is a delete button
-            const deleteButton = event.target.closest(".delete-btn");
-
-            // Ignore clicks on other elements
-            if (!deleteButton) {
-              return;
-            }
-
-            // Get the product ID from the button's data attribute
-            const id = deleteButton.dataset.id;
-
-            try {
-              // Send an asynchronous DELETE request to the API
-              const response = await fetch(
-                      `${API_URL}/${encodeURIComponent(id)}`,
-                      {
-                        method: "DELETE"
-                      }
-              );
-
-              // Check whether the request was successful
-              if (!response.ok) {
-                throw new Error("Failed to delete product.");
-              }
-
-              // Refresh the product list after deletion
-              loadProducts();
-
-            } catch (error) {
-              console.error("Error deleting product:", error);
-              showError("Unable to delete the product.");
-            }
-          });
-
-
-  // Initial load of products when the page is ready
-  loadProducts();
-
+  loadProducts(); // Initial render
 </script>
-
 </body>
 </html>
+
 
 ```
 
@@ -1495,476 +1432,7 @@ app.get("/api/products", (req, res) => {
 
 ```html
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Management</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-
-    table {
-      width: 50%;
-      margin: auto;
-      border-collapse: collapse;
-    }
-
-    th, td {
-      border: 1px solid black;
-      padding: 10px;
-    }
-
-    .error {
-      color: red;
-      display: none;
-    }
-
-    .error.visible {
-      display: block;
-    }
-  </style>
-</head>
-
-<body>
-
-<h2>Product List</h2>
-
-<!-- Live Search Input -->
-<input type="text" id="search" placeholder="Search by name">
-<p class="error" id="search-error">No products found</p>
-
-<!-- Table to display products -->
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-
-  <!-- Product rows will be dynamically inserted here -->
-  <tbody id="product-list"></tbody>
-</table>
-
-
-<h2>Add Product</h2>
-
-<!-- Form to add a new product -->
-<form id="add-product-form">
-  <input type="text" id="name" placeholder="Product Name" required>
-
-  <input type="number" id="price" placeholder="Price"
-         min="0.01" step="any" required>
-
-  <button type="submit">Add Product</button>
-</form>
-
-<p class="error" id="error-msg">Invalid input</p>
-
-
-<!-- Update Product Form (initially hidden) -->
-<div id="updateform" hidden>
-
-  <h2>Update Product</h2>
-
-  <form id="update-product-form">
-
-    <input type="number" id="update-id"
-           placeholder="Product ID" readonly required>
-
-    <input type="text" id="update-name"
-           placeholder="New Name">
-
-    <input type="number" id="update-price"
-           placeholder="New Price" min="0.01" step="any">
-
-    <button type="submit">Update Product</button>
-
-  </form>
-
-  <p class="error" id="update-error-msg">Invalid input</p>
-
-</div>
-
-
-<script>
-
-  // API endpoint
-  const API_URL = "/api/products";
-
-  // Variables for live search
-  let debounceTimer;
-  let currentSearch = "";
-
-
-  // Function to display error messages
-  function showError(elementId, message) {
-
-    const errorElement = document.querySelector(elementId);
-
-    errorElement.textContent = message;
-    errorElement.classList.add("visible");
-
-    setTimeout(function () {
-      errorElement.classList.remove("visible");
-    }, 5000);
-  }
-
-
-  // 1. Load and search products (HTTP GET)
-  async function loadProducts(query = "") {
-
-    currentSearch = query;
-
-    console.log(currentSearch);
-
-    try {
-
-      // Construct the API URL with an optional search parameter
-      const url = query
-              ? `${API_URL}?${new URLSearchParams({ name: query })}`
-              : API_URL;
-
-      // Send an asynchronous GET request
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error("Failed to load products.");
-      }
-
-      // Convert JSON response into a JavaScript object
-      const products = await response.json();
-
-      // Select the table body
-      const productList = document.querySelector("#product-list");
-
-      // Clear existing product rows
-      productList.replaceChildren();
-
-      // Check whether any products were returned
-      if (products.length === 0) {
-
-        document.querySelector("#search-error")
-                .classList.add("visible");
-
-        return;
-
-      } else {
-
-        document.querySelector("#search-error")
-                .classList.remove("visible");
-      }
-
-
-      // Iterate through the products
-      products.forEach(function (product) {
-
-        // Create a table row
-        const row = document.createElement("tr");
-
-        // Create table cells
-        const idCell = document.createElement("td");
-        const nameCell = document.createElement("td");
-        const priceCell = document.createElement("td");
-        const actionCell = document.createElement("td");
-
-        // Set cell contents
-        idCell.textContent = product.id;
-        nameCell.textContent = product.name;
-        priceCell.textContent = product.price;
-
-
-        // Create Edit button
-        const editButton = document.createElement("button");
-
-        editButton.textContent = "Edit";
-        editButton.type = "button";
-        editButton.classList.add("edit-btn");
-        editButton.dataset.id = product.id;
-
-
-        // Create Delete button
-        const deleteButton = document.createElement("button");
-
-        deleteButton.textContent = "Delete";
-        deleteButton.type = "button";
-        deleteButton.classList.add("delete-btn");
-        deleteButton.dataset.id = product.id;
-
-
-        // Add buttons to the action cell
-        actionCell.append(editButton, deleteButton);
-
-        // Add cells to the row
-        row.append(idCell, nameCell, priceCell, actionCell);
-
-        // Add row to the table
-        productList.appendChild(row);
-
-      });
-
-    } catch (error) {
-
-      console.error("Error loading products:", error);
-
-    }
-  }
-
-
-
-  // 2. Add a new product (HTTP POST)
-  document.querySelector("#add-product-form")
-          .addEventListener("submit", async function (event) {
-
-            event.preventDefault();
-
-            // Get input values
-            const name = document.querySelector("#name").value.trim();
-
-            const price = Number(
-                    document.querySelector("#price").value
-            );
-
-            // Validate input
-            if (!name || !Number.isFinite(price) || price <= 0) {
-
-              showError("#error-msg", "Invalid product name or price.");
-              return;
-            }
-
-            try {
-
-              // Send POST request to the API
-              const response = await fetch(API_URL, {
-
-                method: "POST",
-
-                headers: {
-                  "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({ name, price })
-
-              });
-
-              if (!response.ok) {
-                throw new Error("Failed to add product.");
-              }
-
-              // Clear input fields
-              document.querySelector("#name").value = "";
-              document.querySelector("#price").value = "";
-
-              // Refresh the product list
-              await loadProducts(currentSearch);
-
-            } catch (error) {
-
-              console.error("Error adding product:", error);
-
-              showError("#error-msg", "Unable to add the product.");
-
-            }
-          });
-
-
-
-  // 3. Live Search with Debouncing
-  document.querySelector("#search")
-          .addEventListener("input", function () {
-
-            // Cancel the previously scheduled search
-            clearTimeout(debounceTimer);
-
-            // Get the current search value
-            const query = this.value.trim();
-
-            // Wait 300 milliseconds before sending the request
-            debounceTimer = setTimeout(function () {
-
-              loadProducts(query);
-
-            }, 300);
-
-          });
-
-
-
-  // 4. Delete a product (HTTP DELETE)
-  // Event delegation: one listener handles dynamically generated buttons
-  document.querySelector("#product-list")
-          .addEventListener("click", async function (event) {
-
-            // Identify the clicked Delete button
-            const button = event.target.closest(".delete-btn");
-
-            if (!button) return;
-
-            // Get product ID from the data attribute
-            const id = button.dataset.id;
-
-            try {
-
-              // Send DELETE request
-              const response = await fetch(
-                      `${API_URL}/${encodeURIComponent(id)}`,
-                      {
-                        method: "DELETE"
-                      }
-              );
-
-              if (!response.ok) {
-                throw new Error("Failed to delete product.");
-              }
-
-              // Refresh the product list
-              await loadProducts(currentSearch);
-
-            } catch (error) {
-
-              console.error("Error deleting product:", error);
-
-            }
-          });
-
-
-
-  // 5. Edit a product (HTTP GET)
-  document.querySelector("#product-list")
-          .addEventListener("click", async function (event) {
-
-            // Identify the clicked Edit button
-            const button = event.target.closest(".edit-btn");
-
-            if (!button) return;
-
-            // Get product ID
-            const id = button.dataset.id;
-
-            try {
-
-              // Retrieve the selected product from the server
-              const response = await fetch(
-                      `${API_URL}/${encodeURIComponent(id)}`
-              );
-
-              if (!response.ok) {
-                throw new Error("Failed to retrieve product.");
-              }
-
-              const product = await response.json();
-
-              // Display the update form
-              document.querySelector("#updateform").hidden = false;
-
-              // Populate the form with existing product information
-              document.querySelector("#update-id").value = product.id;
-              document.querySelector("#update-name").value = product.name;
-              document.querySelector("#update-price").value = product.price;
-
-            } catch (error) {
-
-              console.error("Error retrieving product:", error);
-
-            }
-          });
-
-
-
-  // 6. Update a product (HTTP PATCH)
-  document.querySelector("#update-product-form")
-          .addEventListener("submit", async function (event) {
-
-            event.preventDefault();
-
-            // Get product ID
-            const id = document.querySelector("#update-id").value;
-
-            // Get updated values
-            const name = document.querySelector("#update-name").value.trim();
-
-            const priceInput = document.querySelector("#update-price").value;
-
-            // Validate input
-            if (!name && !priceInput) {
-
-              showError("#update-error-msg", "Enter at least one field to update.");
-              return;
-            }
-
-            // Prepare the data to be updated
-            const updatedData = {};
-
-            if (name) {
-              updatedData.name = name;
-            }
-
-            if (priceInput) {
-
-              const price = Number(priceInput);
-
-              if (!Number.isFinite(price) || price <= 0) {
-
-                showError("#update-error-msg", "Enter a valid price.");
-                return;
-              }
-
-              updatedData.price = price;
-            }
-
-            try {
-
-              // Send PATCH request to update selected fields
-              const response = await fetch(
-                      `${API_URL}/${encodeURIComponent(id)}`,
-                      {
-                        method: "PATCH",
-
-                        headers: {
-                          "Content-Type": "application/json"
-                        },
-
-                        body: JSON.stringify(updatedData)
-                      }
-              );
-
-              if (!response.ok) {
-                throw new Error("Failed to update product.");
-              }
-
-              // Clear and hide the update form
-              document.querySelector("#update-product-form").reset();
-
-              document.querySelector("#updateform").hidden = true;
-
-              // Refresh the product list
-              await loadProducts(currentSearch);
-
-            } catch (error) {
-
-              console.error("Error updating product:", error);
-
-              showError("#update-error-msg", "Unable to update the product.");
-
-            }
-          });
-
-
-
-  // Initial load of products
-  loadProducts();
-
-</script>
-
-</body>
-</html>
 
 ```
 
@@ -2272,7 +1740,7 @@ pm2 stop id/name
 
 pm2 delete id/name
 
-pm2 save # Freeze a process list on reboot via
+pm2 save # Freeze a process list on reboot
 
 pm2 startup  #This command will generate a script that you can copy and paste into your terminal to enable PM2 to start on boot.
  
