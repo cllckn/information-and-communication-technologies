@@ -1068,7 +1068,7 @@ We will slightly modify the existing API to serve **static HTML files** in addit
 // ───────────────────────────────────────────────────────────────
 const express = require("express"); // Import the Express.js framework
 const path = require("path"); // Import the built-in Node.js 'path' module
-//const cors = require("cors"); // Import CORS
+//const cors = require("cors"); // Import CORS (npm install cors)
 
 // ───────────────────────────────────────────────────────────────
 // Configuration & Constants
@@ -1079,13 +1079,16 @@ const PORT = 3000; // Define the port number where the server will listen
 // ───────────────────────────────────────────────────────────────
 // Middlewares
 // ───────────────────────────────────────────────────────────────
-app.use(express.json());// Middleware to parse JSON request bodies
-app.use(express.static(path.join(__dirname, 'public'))); // Middleware to serve static files (HTML, CSS, JS) from the 'public' folder
+app.use(express.json()); // Middleware to parse JSON request bodies
+app.use(express.static(path.join(__dirname, "public"))); // Middleware to serve static files (HTML, CSS, JS) from the 'public' folder
+
 //app.use(cors()); // Enable CORS for all routes
-// The browser blocks cross-origin requests unless the server explicitly allows them.
-// Cross-Origin means that the protocol, domain, or port is different between the frontend and backend.
-// The frontend is running on localhost:3000, and when it sends a request to the service running on localhost:4000,
-// it is considered a cross-origin request.
+// An origin is the combination of protocol, domain, and port. A request is cross-origin
+// if any of them differs between the page and the service it calls.
+// For example, a frontend on localhost:3000 calling a service on localhost:4000 is cross-origin,
+// and the browser will not let the page read the response unless the server allows it (CORS).
+// In this project the frontend is served by this same server (same origin),
+// so CORS is NOT needed. Enable it only if the frontend is hosted on a different origin.
 
 // ───────────────────────────────────────────────────────────────
 // In-memory database: JSON array for products
@@ -1094,11 +1097,19 @@ let products = [
   { id: 1, name: "SSD", price: 999.99 },
   { id: 2, name: "RAM", price: 499.99 },
 ];
+let nextId = 3; // Ids are never reused, even after a product is deleted
+
+// ───────────────────────────────────────────────────────────────
+// Validation helpers
+// ───────────────────────────────────────────────────────────────
+const isValidName = (value) => typeof value === "string" && value.trim() !== "";
+const isValidPrice = (value) => typeof value === "number" && Number.isFinite(value) && value >= 0;
 
 // ───────────────────────────────────────────────────────────────
 // Define Routes
 // ───────────────────────────────────────────────────────────────
 // Routes are the connection points (end points - addresses) in a web service where clients send requests to interact with the service.
+
 // GET all products
 app.get("/api/products", (req, res) => {
   res.json(products); // Respond with the list of all products
@@ -1106,88 +1117,90 @@ app.get("/api/products", (req, res) => {
 
 // GET a single product by ID
 app.get("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p.id === parseInt(req.params.id)); // Find the product by ID
+  const product = products.find((p) => p.id === Number(req.params.id)); // Find the product by ID
   if (!product) return res.status(404).json({ error: "Product not found" }); // If not found, respond with 404
   res.json(product); // Respond with the found product
 });
 
 // POST - Add a new product
 app.post("/api/products", (req, res) => {
-  const { name, price } = req.body; // Extract name and price from the request body
-  if (!name || !price) return res.status(400).json({ error: "Invalid input" }); // Validate input
+  const { name, price } = req.body ?? {}; // Extract name and price from the request body
 
-  const newProduct = { id: products.length + 1, name, price }; // Add a new product with a unique ID
+  // Validate input (a price of 0 is allowed)
+  if (!isValidName(name) || !isValidPrice(price)) {
+    return res.status(400).json({
+      error: "name (non-empty string) and price (non-negative number) are required",
+    });
+  }
+
+  const newProduct = { id: nextId++, name: name.trim(), price }; // Add a new product with a unique ID
   products.push(newProduct); // Add the new product to the list
   res.status(201).json(newProduct); // Respond with the added product
 });
 
-// PUT - Replace a Product Record (full replacement)
+// PUT - Replace a product (all mutable fields are required)
 app.put("/api/products/:id", (req, res) => {
-  // 1. Destructure and extract all fields from the request body.
-  // Assuming 'name', 'price' are the mutable fields.
-  const { name, price } = req.body;
+  const product = products.find((p) => p.id === Number(req.params.id)); // Find the product by ID
+  if (!product) return res.status(404).json({ error: "Product not found" });
 
-  // 2. Validate the Request Body (Required for PUT)
-  // Check if all required fields are present.
-  // Note: Unlike the original code, we do NOT use '|| product.name'
-  // because PUT must overwrite all fields, or fail.
-  if (!name || price == null ) {
+  const { name, price } = req.body ?? {};
+
+  // Unlike PATCH, PUT must receive every mutable field
+  if (!isValidName(name) || !isValidPrice(price)) {
     return res.status(400).json({
-      error: "PUT /products requires ALL mutable fields (name, price) for full replacement."
+      error: "name (non-empty string) and price (non-negative number) are required",
     });
   }
 
-  // 3. Find the Product
-  const product = products.find((p) => p.id === parseInt(req.params.id));
-  if (!product) {
-    return res.status(404).json({ error: "Product not found" });
-  }
-
-  // 4. Update/Replace: Directly assign ALL new values.
-  product.name = name;
+  product.name = name.trim(); // The id always comes from the URL, never from the body
   product.price = price;
-
-  // 5. Respond with the fully updated product
-  res.json(product);
+  res.json(product); // Respond with the replaced product
 });
 
-// PATCH - Modify a product (partial or full replacement)
+// PATCH - Partially update a product (only the provided fields change)
 app.patch("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p.id === parseInt(req.params.id)); // Find the product by ID
-  if (!product) return res.status(404).json({ error: "Product not found" }); // If not found, respond with 404
+  const product = products.find((p) => p.id === Number(req.params.id)); // Find the product by ID
+  if (!product) return res.status(404).json({ error: "Product not found" });
 
-  const { name, price } = req.body; // Extract name and price from the request body
-  product.name = name || product.name; // Update the product name if provided
-  product.price = price || product.price; // Update the product price if provided
+  const { name, price } = req.body ?? {};
+
+  // Validate only the fields that were sent (undefined means "not provided")
+  if (name !== undefined && !isValidName(name)) {
+    return res.status(400).json({ error: "name must be a non-empty string" });
+  }
+  if (price !== undefined && !isValidPrice(price)) {
+    return res.status(400).json({ error: "price must be a non-negative number" });
+  }
+
+  if (name !== undefined) product.name = name.trim();
+  if (price !== undefined) product.price = price;
   res.json(product); // Respond with the updated product
 });
 
 // DELETE - Remove a product
 app.delete("/api/products/:id", (req, res) => {
-  const productIdToDelete = parseInt(req.params.id);
+  const index = products.findIndex((p) => p.id === Number(req.params.id));
+  if (index === -1) return res.status(404).json({ error: "Product not found" });
 
-  // 1. Store the initial count of products
-  const initialLength = products.length;
+  products.splice(index, 1); // Remove the product from the array
+  res.status(204).end(); // REST best practice: 204 No Content for a successful DELETE
+});
 
-  // 2. Filter the array, creating a new array without the specified product ID
-  products = products.filter((p) => p.id !== productIdToDelete);
+// ───────────────────────────────────────────────────────────────
+// Error handling
+// ───────────────────────────────────────────────────────────────
+// Unknown /api routes: respond with JSON instead of Express's default HTML page
+app.use("/api", (req, res) => {
+  res.status(404).json({ error: "Route not found" });
+});
 
-  // 3. Store the final count of products
-  const finalLength = products.length;
-
-  if (finalLength < initialLength) {
-    // The product was found and successfully deleted (the array length decreased).
-
-    // REST Best Practice: 204 No Content for a successful DELETE with no response body.
-    res.status(204).end();
-  } else {
-    // The product was NOT found (the array length remained the same).
-
-    // REST Best Practice: 404 Not Found indicates the resource doesn't exist.
-    res.status(404).json({
-      error: `Product with ID ${productIdToDelete} not found.`
-    });
+// Errors thrown by middleware (for example, malformed JSON in the request body)
+app.use((err, req, res, next) => {
+  if (err.type === "entity.parse.failed") {
+    return res.status(400).json({ error: "Invalid JSON" });
   }
+  console.error(err);
+  res.status(500).json({ error: "Internal server error" });
 });
 
 // ───────────────────────────────────────────────────────────────
@@ -1205,6 +1218,157 @@ Add the following `index.html` file into the `public` folder. This will be the m
 can perform view, add, update, and delete functions on the products object.
 
 **Code Example: /part2/web-server/public/index.html**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+    table { width: 50%; margin: auto; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+    .error { color: red; display: none; }
+    .error.visible { display: block; }
+  </style>
+</head>
+<body>
+
+<h2>Product List</h2>
+<table>
+  <thead><tr><th>ID</th><th>Name</th><th>Price</th><th>Actions</th></tr></thead>
+  <tbody id="product-list"></tbody>
+</table>
+
+<h2>Add Product</h2>
+<form id="add-product-form">
+  <input type="text" id="name" placeholder="Product Name" required>
+  <input type="number" id="price" placeholder="Price" min="0.01" step="any" required>
+  <button type="submit">Add Product</button>
+</form>
+<p class="error" id="error-msg" aria-live="polite"></p>
+
+<script>
+  const API_URL = "http://localhost:3000/api/products";
+  const errorMsg = document.getElementById("error-msg");
+
+  // Shows error and auto-hides it after 5 seconds
+  const showError = (msg) => {
+    errorMsg.textContent = msg;
+    errorMsg.classList.add("visible");
+    setTimeout(() => errorMsg.classList.remove("visible"), 5000);
+  };
+
+  // Fetches data and renders it efficiently using template literals
+  const loadProducts = async () => {
+    try {
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error("Failed to load");
+      const products = await res.json();
+
+      // Maps array to HTML strings and injects at once.
+      document.getElementById("product-list").innerHTML = products.map(p => `
+                    <tr>
+                        <td>${p.id}</td>
+                        <td>${p.name}</td>
+                        <td>${p.price}</td>
+                        <td><button class="delete-btn" data-id="${p.id}">Delete</button></td>
+                    </tr>
+                `).join('');
+    } catch (err) {
+      console.error("Error loading products:", err);
+    }
+  };
+
+  // Form submission handler
+  document.getElementById("add-product-form").addEventListener("submit", async (e) => {
+    e.preventDefault(); // Stops page reload on form submit
+
+    const nameInput = document.getElementById("name");
+    const priceInput = document.getElementById("price");
+    const name = nameInput.value.trim();
+    const price = Number(priceInput.value);
+
+    // Robust validation: Number.isFinite ensures it's a real number, rejecting NaN or Infinity.
+    if (!name || !Number.isFinite(price) || price <= 0) {
+      showError("Invalid input. Please check product name and price.");
+      return;
+    }
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, price }) // Shorthand object property syntax
+      });
+      if (!res.ok) throw new Error("Failed to add");
+
+      nameInput.value = priceInput.value = ""; // Reset form
+      loadProducts(); // Refresh UI
+    } catch (err) {
+      console.error("Error adding product:", err);
+      showError("Unable to add product. Please try again.");
+    }
+  });
+
+  // Event Delegation: Attaches ONE listener to the table parent, not one per button.
+  document.getElementById("product-list").addEventListener("click", async (e) => {
+    // Finds the closest ancestor with the .delete-btn class (handles clicks on inner elements)
+    const btn = e.target.closest(".delete-btn");
+    if (!btn) return; // Ignore clicks outside delete buttons
+
+    try {
+      // Encodes ID to prevent URL breaking or injection if the ID contains special characters
+      const res = await fetch(`${API_URL}/${encodeURIComponent(btn.dataset.id)}`, {
+        method: "DELETE"
+      });
+      if (!res.ok) throw new Error("Failed to delete");
+      loadProducts(); // Refresh UI
+    } catch (err) {
+      console.error("Error deleting product:", err);
+      showError("Unable to delete product.");
+    }
+  });
+
+  loadProducts(); // Initial render
+</script>
+</body>
+</html>
+
+```
+
+***
+## [Hands-on Exercise 2](./exercises/README.md)
+
+***
+
+
+
+**Step 3: Add search and update functionalities to the web app**
+
+**Code Example: Modify the following route in /part2/web-server/server.js**
+
+```javascript
+// GET all products
+app.get("/api/products", (req, res) => {
+  // Accesses the name parameter from the query string in an Express.js request object.
+  const query = req.query.name?.toLowerCase() || "";
+
+  if (query) {
+    const filteredProducts = products.filter(product =>
+            product.name.toLowerCase().includes(query)
+    );
+    return res.json(filteredProducts);
+  }
+
+  res.json(products);
+});
+
+```
+
+**Code Example: /part2/web-server/public/index1.html**
 
 ```html
 
@@ -1396,44 +1560,6 @@ can perform view, add, update, and delete functions on the products object.
 </body>
 </html>
 
-
-```
-
-***
-## [Hands-on Exercise 2](./exercises/README.md)
-
-***
-
-
-
-**Step 3: Add search and update functionalities to the web app**
-
-**Code Example: Modify the following route in /part2/web-server/server.js**
-
-```javascript
-// GET all products
-app.get("/api/products", (req, res) => {
-  // Accesses the name parameter from the query string in an Express.js request object.
-  const query = req.query.name?.toLowerCase() || "";
-
-  if (query) {
-    const filteredProducts = products.filter(product =>
-            product.name.toLowerCase().includes(query)
-    );
-    return res.json(filteredProducts);
-  }
-
-  res.json(products);
-});
-
-```
-
-**Code Example: /part2/web-server/public/index1.html**
-
-```html
-
-
-
 ```
 
 
@@ -1534,6 +1660,12 @@ CREATE TABLE products (
     price NUMERIC(10, 2) NOT NULL
 );
 
+
+insert into products (name, price)
+values ('SSD',300),
+       ('RAM',500),
+       ('CPU',4000);
+
 ```
 **Code Example: A simple REST API with CRUD operations**
 
@@ -1542,170 +1674,217 @@ CREATE TABLE products (
 ```javascript
 //npm install express pg
 //Import necessary modules
+//npm install express pg
+// Import necessary modules
 
-const express = require("express");
-const { Pool } = require("pg"); // import pg (node-postgres) library (db driver)
+const express = require('express');
+const { Pool } = require('pg'); // import pg (node-postgres) library (db driver)
 
 const app = express();
 
 // Initialize a new PostgreSQL connection pool
 // Pool is a class from the pg (node-postgres) library that instantiate and manages a pool of
 // PostgreSQL database connections for efficient query execution in a Node.js application.
+// The values below are demo values. In real projects read them from environment variables
+// (never commit passwords to source control).
 
 const pool = new Pool({
   user: 'lectureuser',
   password: 'lecturepassword',
   host: 'localhost',
   port: 5432,
-  database: 'testdb',
+  database: 'testdb'
 });
 
-/*const pool = new Pool({
-    connectionString: "postgresql://postgres:LecturePassword@localhost:5432/testdb",
-});*/
-
+// An idle connection can fail (for example, when the database restarts).
+// Without this handler the unhandled 'error' event would crash the whole server.
+pool.on('error', (err) => console.error('Unexpected PostgreSQL pool error:', err.message));
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
+// ------------------------ Helpers ------------------------
+const isValidName = (value) => typeof value === 'string' && value.trim() !== '';
+const isValidPrice = (value) => typeof value === 'number' && Number.isFinite(value) && value >= 0;
+
+// Converts the :id URL parameter into a number, or null if it is not a valid integer id.
+// Without this check, a request like /api/products/abc would reach PostgreSQL, which
+// rejects it with a type error and the client would receive a misleading 500 response.
+const parseId = (value) => (/^\d+$/.test(value) && Number(value) <= 2147483647 ? Number(value) : null);
+
+// Logs the real error on the server and sends a generic message to the client.
+const sendDbError = (res, err) => {
+  console.error(err);
+  res.status(500).json({ error: 'Database error' });
+};
+
 // ------------------------ GET all products ------------------------
-app.get("/api/products", async (req, res) => {
+app.get('/api/products', async (req, res) => {
   try {
     // Fetch all products from the database
-    const result = await pool.query("SELECT * FROM products ORDER BY id ASC");
+    const result = await pool.query('SELECT * FROM products ORDER BY id ASC');
 
     // Respond with JSON data
     res.json(result.rows);
   } catch (err) {
-    res.status(500).json({ error: "Database error" }); // Handle errors
+    sendDbError(res, err); // Handle errors
   }
 });
 
 // ------------------------ GET a single product by ID ------------------------
-app.get("/api/products/:id", async (req, res) => {
+app.get('/api/products/:id', async (req, res) => {
   try {
-    const { id } = req.params; // Extract product ID from URL
+    const id = parseId(req.params.id); // Extract and validate product ID from URL
+    if (id === null) return res.status(404).json({ error: 'Product not found' });
 
     // Query database for the given product ID
-    const result = await pool.query("SELECT * FROM products WHERE id = $1", [id]);
+    const result = await pool.query('SELECT * FROM products WHERE id = $1', [id]);
     //$1 is placeholders for parameterized queries, preventing SQL injection.
 
     if (result.rows.length === 0)
-      return res.status(404).json({ error: "Product not found" });
+      return res.status(404).json({ error: 'Product not found' });
 
     // Respond with the found product
     res.json(result.rows[0]);
   } catch (err) {
-    res.status(500).json({ error: "Database error" });
+    sendDbError(res, err);
   }
 });
 
 // ------------------------ POST - Add a new product ------------------------
-app.post("/api/products", async (req, res) => {
+app.post('/api/products', async (req, res) => {
   try {
-    const { name, price } = req.body; // Extract product details from request body
+    const { name, price } = req.body ?? {}; // Extract product details from request body
 
-    // Validate input (ensure name and price are provided)
-    if (!name || !price)
-      return res.status(400).json({ error: "Invalid input" });
+    // Validate input (a price of 0 is allowed)
+    if (!isValidName(name) || !isValidPrice(price))
+      return res.status(400).json({
+        error: 'name (non-empty string) and price (non-negative number) are required'
+      });
 
     // Insert new product into the database
     const result = await pool.query(         //executes the query asynchronously using the PostgreSQL connection pool.
-            "INSERT INTO products (name, price) VALUES ($1, $2) RETURNING *", //$1, $2 are placeholders for parameterized
+            'INSERT INTO products (name, price) VALUES ($1, $2) RETURNING *', //$1, $2 are placeholders for parameterized
             // queries, preventing SQL injection. // RETURNING * makes PostgreSQL return the newly inserted row.
-            [name, price] //name, price] is an array of values that replaces $1 and $2 in the query.
+            [name.trim(), price] //[name, price] is an array of values that replaces $1 and $2 in the query.
     );
 
     // Respond with the newly added product
     res.status(201).json(result.rows[0]);
   } catch (err) {
-    res.status(500).json({ error: "Database error" });
+    sendDbError(res, err);
   }
 });
 
 // ------------------------ PUT - Update a product ------------------------
 // FULL update (replace the entire product)
-app.put("/api/products/:id", async (req, res) => {
+app.put('/api/products/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-    const { name, price } = req.body;
+    const id = parseId(req.params.id);
+    if (id === null) return res.status(404).json({ error: 'Product not found' });
 
-    // Validate required fields
-    if (!name || !price) {
-      return res.status(400).json({ error: "All fields are required for PUT" });
+    const { name, price } = req.body ?? {};
+    // Extract name and price from the request body. "??" returns its right side only when the left side is null or undefined:
+
+
+    // Validate required fields (PUT must receive every mutable field)
+    if (!isValidName(name) || !isValidPrice(price)) {
+      return res.status(400).json({
+        error: 'name (non-empty string) and price (non-negative number) are required for PUT'
+      });
     }
 
     const result = await pool.query(
-            "UPDATE products SET name = $1, price = $2 WHERE id = $3 RETURNING *",
-            [name, price, id]
+            'UPDATE products SET name = $1, price = $2 WHERE id = $3 RETURNING *',
+            [name.trim(), price, id]
     );
 
     if (result.rows.length === 0)
-      return res.status(404).json({ error: "Product not found" });
+      return res.status(404).json({ error: 'Product not found' });
 
     res.json(result.rows[0]);
 
   } catch (err) {
-    res.status(500).json({ error: "Database error" });
+    sendDbError(res, err);
   }
 });
 
 
-// ------------------------ PUT - Modify a product ------------------------
+// ------------------------ PATCH - Modify a product ------------------------
 // PARTIAL update (only provided fields)
-app.patch("/api/products/:id", async (req, res) => {
+app.patch('/api/products/:id', async (req, res) => {
   try {
-    const { id } = req.params;
-    const { name, price } = req.body;
+    const id = parseId(req.params.id);
+    if (id === null) return res.status(404).json({ error: 'Product not found' });
 
+    const { name, price } = req.body ?? {};
+
+    // Validate only the fields that were sent (undefined means "not provided")
+    if (name === undefined && price === undefined)
+      return res.status(400).json({ error: 'Provide name and/or price' });
+    if (name !== undefined && !isValidName(name))
+      return res.status(400).json({ error: 'name must be a non-empty string' });
+    if (price !== undefined && !isValidPrice(price))
+      return res.status(400).json({ error: 'price must be a non-negative number' });
+
+    // COALESCE($1, name) means: use the new value, or keep the current one if $1 is NULL
     const result = await pool.query(
             `UPDATE products
        SET name  = COALESCE($1, name),
            price = COALESCE($2, price)
        WHERE id = $3
        RETURNING *`,
-            [name, price, id]
+            [name === undefined ? null : name.trim(), price ?? null, id]
     );
 
     if (result.rows.length === 0)
-      return res.status(404).json({ error: "Product not found" });
+      return res.status(404).json({ error: 'Product not found' });
 
     res.json(result.rows[0]);
 
   } catch (err) {
-    res.status(500).json({ error: "Database error" });
+    sendDbError(res, err);
   }
 });
 
 
 // ------------------------ DELETE - Remove a product ------------------------
-app.delete("/api/products/:id", async (req, res) => {
+app.delete('/api/products/:id', async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = parseId(req.params.id);
+    if (id === null) return res.status(404).json({ error: 'Product not found' });
 
-    // Delete the product from the database and use RETURNING * to check if any row was affected
-    const result = await pool.query("DELETE FROM products WHERE id = $1 RETURNING *", [id]);
+    // Delete the product from the database
+    const result = await pool.query('DELETE FROM products WHERE id = $1 RETURNING *', [id]);
 
-    if (result.rows.length === 0) {
-      // 1. Resource Not Found: If the database reports no rows were deleted
-      // (because the ID didn't exist), return 404.
-      return res.status(404).json({ error: "Product not found" });
-    }
+    if (result.rows.length === 0)
+      return res.status(404).json({ error: 'Product not found' });
 
-    // 2. Successful Deletion: If a row was deleted, return 204 No Content.
-    // This is the RESTful standard for a successful DELETE that sends no body data.
+    // REST best practice: 204 No Content for a successful DELETE
     res.status(204).end();
   } catch (err) {
-    // 3. Server Error: For database connection or query execution errors.
-    console.error(err); // Log the error for debugging
-    res.status(500).json({ error: "Database error during deletion" });
+    sendDbError(res, err);
   }
+});
+
+// ------------------------ Error handling ------------------------
+// Unknown /api routes: respond with JSON instead of Express's default HTML page
+app.use('/api', (req, res) => {
+  res.status(404).json({ error: 'Route not found' });
+});
+
+// Errors thrown by middleware (for example, malformed JSON in the request body)
+app.use((err, req, res, next) => {
+  if (err.type === 'entity.parse.failed') {
+    return res.status(400).json({ error: 'Invalid JSON' });
+  }
+  console.error(err);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 // ------------------------ Start server ------------------------
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
-
 ```
 
 ***
