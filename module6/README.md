@@ -37,11 +37,10 @@
   * [Hands-on Exercise 1](#hands-on-exercise-1)
   * [5. Converting a Simple RESTful API into a Web Application](#5-converting-a-simple-restful-api-into-a-web-application)
   * [Hands-on Exercise 2](#hands-on-exercise-2)
-  * [Hands-on Exercise 3](#hands-on-exercise-3)
   * [6. Interconnecting Web Services](#6-interconnecting-web-services)
   * [7. Database Integration](#7-database-integration)
-  * [Hands-on Exercise 4](#hands-on-exercise-4)
   * [8. Deployment of Node.js Application to a Remote Server](#8-deployment-of-nodejs-application-to-a-remote-server)
+    * [Webstorm/IntelliJ configuration](#webstormintellij-configuration)
     * [Running Node.js Applications as Services with PM2](#running-nodejs-applications-as-services-with-pm2)
 <!-- TOC -->
 
@@ -1563,11 +1562,6 @@ app.get("/api/products", (req, res) => {
 ```
 
 
-***
-## [Hands-on Exercise 3](./exercises/README.md)
-
-***
-
 
 ---
 
@@ -1887,18 +1881,16 @@ const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 ```
 
-***
-## [Hands-on Exercise 4](./exercises/README.md)
-
-***
 
 ---
 
 ## 8. Deployment of Node.js Application to a Remote Server
 
-    Intellij -> Tools -> Deployment -> Configuration 
-    Provide protocol -> sftp, socket address -> 192.2.2.1:22, credentials ->username:password
-    Right Click -> Deploy
+### Webstorm/IntelliJ configuration
+
+* Tools -> Deployment -> Configuration 
+* Provide protocol -> sftp, socket address -> 192.2.2.1:22, credentials ->username:password
+* Right Click -> Deploy
 
 ### Running Node.js Applications as Services with PM2
 PM2 is a widely used, open-source, production-grade process manager for Node.js (Python) applications. 
