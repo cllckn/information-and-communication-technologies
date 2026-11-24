@@ -61,25 +61,30 @@ These tasks are for students to implement at home:
 - Add validation for **email format** and **phone number** before adding a customer.
 - Implement a **search feature** (`GET /api/customers?city=Astana`) to filter customers by city.
 
+
+
 ---
+
+
+
 
 
 
 # **Hands-On Exercise 2: Extending REST API to a Web Application**
 
 ## **Objective**
-In this exercise, you will extend the REST API developed in **Hands-On Exercise 1**, which manages **customer data**,
-by developing a **web application** with **jQuery-based web pages** to perform **CRUD (Create, Read, Update, Delete) operations**.
 
-Each customer should have:
-- `id` (integer)
-- `name` (string)
-- `email` (string)
-- `phone` (string)
-- `city` (string)
+In this exercise, you will extend the REST API developed in **Hands-On Exercise 1** that manages **customer data**,
+by converting it into a **web application** with frontend to perform **CRUD (Create, Read, Update, Delete) operations**.
 
 
-**Use **jQuery AJAX** to handle the API interactions.**
+Before starting, make sure the RESTful service from Hands-on Exercise 1 is running on your computer. Modify the service
+by following the instructions below.
+
+
+
+**Use **Java Script fetch()** to handle the API interactions.**
+
 
 
 ## **Task 1: Develop the Customer List Page**
@@ -100,46 +105,14 @@ This page contains a **form to add a new customer**.
 - Send the input data to the REST API.
 - Ensure the customer is added and update the displayed list accordingly.
 
----
-
-## **Task 3: Implement Delete Customer Page**
-
----
 
 
-## **Task 5: Test and Verify**
+## **Task 3: Test and Verify**
 - Open the web pages and check if the data loads correctly.
 - Perform add and delete operations.
 - Verify the API responses to ensure proper functionality.
 - Test the API using cURL or http client.
 
+### **Additional Challenges (Optional)**
 
-
-
-
-
-
-# **Hands-on Exercise 3**
-
-Add search and update functions for the developed app in Exercise 2.
-
-
-
-# **Hands-on Exercise 4:  REST API Development With Database Support**
-
-Integrate PostgreSQL into the application developed in hands-on exercise 3.
-
-You are required to initialize a new database and define the regarding table.
-
-```sql
-CREATE DATABASE customerdb;
-
-CREATE TABLE customers (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(100),
-  email VARCHAR(100),
-  phone VARCHAR(30),
-  city VARCHAR(50)
-);
-```
-
+- Add search and update functions for the developed application.
