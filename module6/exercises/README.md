@@ -68,8 +68,6 @@ These tasks are for students to implement at home:
 
 
 
-
-
 # **Hands-On Exercise 2: Extending REST API to a Web Application**
 
 ## **Objective**
@@ -78,13 +76,17 @@ In this exercise, you will extend the REST API developed in **Hands-On Exercise 
 by converting it into a **web application** with frontend to perform **CRUD (Create, Read, Update, Delete) operations**.
 
 
-Before starting, make sure the RESTful service from Hands-on Exercise 1 is running on your computer. Modify the service
-by following the instructions below.
+Before starting: 
+* Copy the project folder from the GitHub lecture repository (Hands-on Exercise 1 - module6/exercises/exercise1) to your computer.
+* Make sure the RESTful service  is running on your computer.
 
+Modify the service by following the instructions below. 
+
+Use the frontend developed in Module 6, Section 5, 'Converting a Simple RESTful API into a Web Application,' 
+as the foundation.
 
 
 **Use **Java Script fetch()** to handle the API interactions.**
-
 
 
 ## **Task 1: Develop the Customer List Page**
@@ -116,3 +118,11 @@ This page contains a **form to add a new customer**.
 ### **Additional Challenges (Optional)**
 
 - Add search and update functions for the developed application.
+
+
+
+
+
+
+
+
